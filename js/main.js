@@ -91,13 +91,13 @@ $(document).ready(function(){
         current_st.hide();
                 
         if(type_user==="person"){
-          console.log("person");
-          var next_st=current_st.siblings(".person");
+          var removeStep=current_st.siblings(".business");
         } else if(type_user==="business"){
-          console.log("business");
-          var next_st=current_st.siblings(".business")
+          var removeStep=current_st.siblings(".person");
         }
-        next_st.show();
+        removeStep.remove();
+
+        current_st.next().show()
         
       })
   
