@@ -41,7 +41,7 @@ $(document).ready(function(){
         .html(percentuale+"%");   
     }
   
-
+// da richiamare quando metteremo il timer
     function setClock(){
       let timer = 5;
       let clock=$(".clock");
