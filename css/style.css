@@ -11,3 +11,60 @@
  .progress{
     display: none;
 }
+
+.info, .info2{
+    width: 550px;
+    height: 350px;
+    background-color: white;
+    border: 1px solid black;
+    z-index: 999;
+    position: absolute;
+    padding: 20px;
+    display: none;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 5px rgba(0,0,0,0,4);
+  }
+
+  .glyphicon{
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .info div p{
+    margin-bottom: 10px;
+  }
+  
+  .info2 div p{
+    margin-bottom: 10px;
+  }
+
+  
+  #impresa, #personaFisica{
+    display: inline;
+  }
+
+  .scelta{
+      display: flex;
+      justify-content: space-around;
+      position: relative;
+  }
+
+  .scegli img{
+      height: 200px;
+      width: auto;
+  }
+
+  .question{
+      text-align: center;
+  }
+
+
+  .head{
+      text-align: center;
+  }
+
+  .logo{
+    margin: 0 auto;
+  }
