@@ -87,17 +87,18 @@ $(document).ready(function(){
       $(".type-user").on("click", function(){
         let type=$(this).attr("data-typeUser");
         type_user=type;
-        current_step=$(this).closest("fieldset");
-        current_step.hide();
-        //
-        console.log(current_step);
+        let current_st=$(this).closest("fieldset");
+        current_st.hide();
+                
         if(type_user==="person"){
-          next_step=current_step.siblings(".person");
+          console.log("person");
+          var next_st=current_st.siblings(".person");
         } else if(type_user==="business"){
-          next_step=current_step.siblings(".business")
+          console.log("business");
+          var next_st=current_st.siblings(".business")
         }
+        next_st.show();
         
-        console.log(next_step);
       })
   
   });
