@@ -89,7 +89,15 @@ $(document).ready(function(){
         type_user=type;
         current_step=$(this).closest("fieldset");
         current_step.hide();
+        //
+        console.log(current_step);
+        if(type_user==="person"){
+          next_step=current_step.siblings(".person");
+        } else if(type_user==="business"){
+          next_step=current_step.siblings(".business")
+        }
         
+        console.log(next_step);
       })
   
   });
