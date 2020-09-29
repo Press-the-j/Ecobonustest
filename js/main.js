@@ -99,6 +99,7 @@ $(document).ready(function(){
 
         current_st.next().show()
         
-      })
+        console.log(next_step);
+      });
   
   });
