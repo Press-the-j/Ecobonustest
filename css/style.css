@@ -1,0 +1,13 @@
+/* nascondo tutti i fieldset ad eccezione del primo */
+
+ /* fieldset:not(:first-of-type) {
+    display: none;
+  }  */
+
+  .progress-bar{
+    background-color: orange;
+}
+
+ fieldset, .progress{
+    display: none;
+}

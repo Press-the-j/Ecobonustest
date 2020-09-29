@@ -1,0 +1,270 @@
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form Eco Bonus</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Bootstrap Plugins -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <!-- custom js -->
+    <script src="js/main.js" charset="utf-8"></script>
+
+<main class="container">
+
+    <!-- Pagina accettazione -->
+    <section>
+        <div class="head">
+            <img src="img/logo-ectm.png" alt="immagine superbonus">
+            <h1>SUPERBONUS 110&#37;</h1>
+          </div>
+          </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <div>
+                <input type="checkbox" id="privacy">
+                <label for="privacy">Accetta la nostra <a class="link" href="">Privacy policy</a></label>
+            </div>
+            <div>
+                <input type="checkbox" id="privacy" >
+                <label for="privacy">Rimani aggiornato sulle nostre offerte <a class="link" href="">Marketing</a></label>
+            </div>
+            <input type="button" name="continua" class="continua" value="continua" disabled />
+    </section>
+    <!-- Pagina scelta persona fisica o impresa -->
+    <section></section>
+    <!-- Barra di Progresso -->
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+
+      <form class="" novalidate action=""  method="post">
+          <!--Registrazione persona fisica-->
+      <fieldset>
+        <h2>Registrazione persona fisica</h2>
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Nome">
+        </div>
+        <div class="form-group">
+            <label for="date">Compleanno</label>
+            <input type="date" class="form-control" id="date" name="date" placeholder="Compleanno">
+        </div>
+        <div class="form-group">
+            <label for="genere">Sesso</label>
+            <select class="form-control" name="genere" id="genere">
+            <option value="maschio">Maschio</option>
+            <option value="maschio">Femmina</option>
+            <option value="maschio">Indefinito</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="tel">Telefono</label>
+            <input type="tel" class="form-control" id="tel" name="tel" placeholder="Telefono">
+        </div>  
+            <input type="button" name="next" class="next btn btn-info" value="Next" />
+      </fieldset>
+      <fieldset>
+        <h2>Registrazione impresa</h2>
+        <div class="form-group">
+            <label for="rag">Ragione sociale</label>
+            <input type="text" class="form-control" id="rag" name="rag" placeholder="Ragione sociale">
+        </div>
+        <div class="form-group">
+            <label for="pi">Partita iva</label>
+            <input type="number" class="form-control" id="pi" name="pi" placeholder="Partita iva">
+        </div>
+        <div class="form-group">
+            <label for="sede">Sede legale</label>
+            <input type="number" class="form-control" id="sede" name="sede" placeholder="Sede legale">
+        </div>
+        <div class="form-group">
+            <label for="sede">Referente</label>
+            <input type="number" class="form-control" id="referente" name="referente" placeholder="Referente">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="tel">Telefono</label>
+            <input type="tel" class="form-control" id="tel" name="tel" placeholder="Telefono">
+        </div>
+            <input type="button" name="previous" class="previous btn btn-default" value="Previous" />  
+            <input type="button" name="next" class="next btn btn-info" value="Next" />
+      </fieldset>
+        <!-- popup mappa-->
+      <!-- <fieldset>
+        <h2> Pagina con la search e la mappa</h2>
+        <div class="form-group">
+        <label for="search">Indirizzo</label>
+        <input type="search" class="form-control" name="cerca" id="cerca" placeholder="cerca indirizzo"><input type="submit">
+        </div>
+        <div class="form-group">
+        <label for="lName">Via</label>
+        <input type="text" class="form-control" name="via" id="via" placeholder="via">
+        </div>
+        <div class="form-group">
+            <label for="cap">Cap</label>
+            <input type="text" class="form-control" name="cap" id="cap" placeholder="cap">
+        </div>
+        <div class="form-group">
+            <label for="città">Città</label>
+            <input type="text" class="form-control" name="città" id="città" placeholder="città">
+        </div>
+        <div class="form-group">
+            <label for="provincia">Provincia</label>
+            <input type="text" class="form-control" name="provincia" id="provincia" placeholder="provincia">
+        </div>
+        <div class="form-group">
+            <label for="paese">Paese</label>
+            <input type="text" class="form-control" name="paese" id="paese" placeholder="paese">
+        </div>
+        <div>
+            <p>mappa di prova</p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2971.1747532241898!2d12.47676011541854!3d41.86758647922304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13258a818dcc8c4b%3A0x2c5922ad134ead1d!2sVia%20Ostiense%2C%2092%2C%2000154%20Roma%20RM!5e0!3m2!1sit!2sit!4v1601027648693!5m2!1sit!2sit" width="600" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div> 
+        <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
+        <input type="button" name="next" class="next btn btn-info" value="Next" />
+      </fieldset> -->
+      <!-- Terza pagina -->
+      
+      <fieldset>
+        <h2>Raccolta dati immobile impresa</h2>
+        <div class="form-group">
+            <label for="dove">Dove si trova?</label>
+            <input type="text" class="form-control" name="dove" id="dove" placeholder="Dove si trova?">
+        </div>
+        <div class="form-group"></div>
+            <label for="tipo">Tipologia</label>
+            <select name="tipo" id="tipo" class="form-control">
+                <option>Villa unifamiliare</option>
+                <option>Villa plurifamiliare</option>
+                <option>Villetta a schiera</option>
+            </select>
+        </div>
+        <div class="form-group"></div>
+            <label for="stato">Stato Immobile</label>
+            <select name="stato" id="stato" class="form-control">
+                <option>Nuovo/In Costruzione</option>
+                <option>Buono/Abitabile</option>
+                <option>Da ristrutturare</option>
+            </select>
+        </div>
+        <div class="form-group"></div>
+            <label for="clima">Climatizzazione invernale</label>
+            <select name="clima" id="clima" class="form-control">
+                <option>Impianto autonomo</option>
+                <option>Impianto centralizzato</option>
+            </select>
+        </div>
+        <div class="form-group"></div>
+            <label for="ener">Efficienza Energetica</label>
+            <select name="ener" id="ener" class="form-control">
+                <option>A,A+,A1-A4</option>
+                <option>B,C,D</option>
+                <option>E,F,G</option>
+            </select>
+        </div>
+        <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
+        <input type="button" name="next" class="next btn btn-info" value="Next" />
+      </fieldset>
+      
+      <fieldset>
+        <h2>Raccolta dati immobile persona fisica</h2>
+        <div class="form-group">
+            <label for="dove">Dove si trova?</label>
+            <input type="text" class="form-control" name="dove" id="dove" placeholder="Dove si trova?">
+        </div>
+        <div class="form-group"></div>
+            <label for="tipo">Tipologia</label>
+            <select name="tipo" id="tipo" class="form-control">
+                <option>Villa unifamiliare</option>
+                <option>Villa plurifamiliare</option>
+                <option>Villetta a schiera</option>
+            </select>
+        </div>
+        <div class="form-group"></div>
+            <label for="stato">Stato Immobile</label>
+            <select name="stato" id="stato" class="form-control">
+                <option>Nuovo/In Costruzione</option>
+                <option>Buono/Abitabile</option>
+                <option>Da ristrutturare</option>
+            </select>
+        </div>
+        <div class="form-group"></div>
+            <label for="clima">Climatizzazione invernale</label>
+            <select name="clima" id="clima" class="form-control">
+                <option>Impianto autonomo</option>
+                <option>Impianto centralizzato</option>
+            </select>
+        </div>
+        <div class="form-group"></div>
+            <label for="ener">Efficienza Energetica</label>
+            <select name="ener" id="ener" class="form-control">
+                <option>A,A+,A1-A4</option>
+                <option>B,C,D</option>
+                <option>E,F,G</option>
+            </select>
+        </div>
+        <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
+        <input type="button" name="next" class="next btn btn-info" value="Next" />
+      </fieldset>
+
+      <fieldset>
+        <h2>Checkbox</h2>
+        <h4>Proprietà e detenzione dell’immobile</h4>
+        <p>Domenico, con quale titolo possiedi o detieni l'immobile?</p>
+        <div class="form-group">
+            <div class="checkbox">
+                <label><input type="checkbox" value=""> Proprietario o nudo proprietario dell’immobile</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" value="">Inquilino, locatario, comodatario dell’immobile e ha già
+                    ricevuto autorizzazione dal Proprietario ad effettuare i
+                    relativi interventi</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" value="">Convivente di fatto di cui all’articolo 1, commi 36 e 37
+                    della legge n. 76 del 2016</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" value="">Coniuge separato assegnatario dell’immobile intestato
+                    all’altro coniuge</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" value="">Convivente di fatto di cui all’articolo 1, commi 36 e 37
+                    della legge n. 76 del 2016</label>
+              </div>
+        </div>
+        <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
+        <input type="button" name="next" class="next btn btn-info" value="Next" />
+      </fieldset>
+        <!-- Quinta pagina -->
+      <fieldset>
+        <h2>Step 5</h2>
+        <div class="form-group">
+        <label for="mob">Mobile Number</label>
+        <input type="text" class="form-control" id="mob" placeholder="Mobile Number">
+        </div>
+        <div class="form-group">
+        <label for="address">Address</label>
+        <textarea  class="form-control" name="address" placeholder="Communication Address"></textarea>
+        </div>
+        <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
+        <input type="submit" name="submit" class="submit btn btn-success" value="Submit"/>
+      </fieldset>
+      </form>
+</main>
+</body>
+</html>
