@@ -44,6 +44,23 @@ $(document).ready(function(){
         .css("width",percentuale+"%")
         .html(percentuale+"%");   
     }
+    setClock()
+
+    function setClock(){
+      let timer = 5;
+      //let clock=$(".clock");
+      //clock.text(timer);
+      let myTimer=setInterval(function(){
+        timer--;
+        console.log(timer);
+        //clock.text(timer)
+        if(timer==0){
+          console.log("finito");
+          clearInterval(myTimer);
+        }
+      }, 1000)
+    }
+
   
   
   });
