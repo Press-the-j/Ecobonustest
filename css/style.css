@@ -1,6 +1,6 @@
 /* nascondo tutti i fieldset ad eccezione del primo */
 
- /* fieldset:not(:first-of-type) {
+  /* fieldset:not(:first-of-type) {
     display: none;
   }  */
 
@@ -10,4 +10,4 @@
 
  fieldset, .progress{
     display: none;
-}
+} 
