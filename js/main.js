@@ -1,4 +1,8 @@
 $(document).ready(function(){
+  var current = 1;
+  var current_step,next_step,steps, type_user;
+  
+
 
     $("#privacy").on("change", function(){
       if ($(this).is(':checked')){
@@ -8,9 +12,7 @@ $(document).ready(function(){
       }
     });
 
-    var current = 1;
-    var current_step,next_step,steps;
-  
+    
     steps = $("fieldset").length;
   
     $(".next").click(function(){
