@@ -20,7 +20,7 @@
 <main class="container">
 
     <!-- Pagina accettazione -->
-    <section class="logo">
+    <section   class="logo">
 
         <div class="head">
             <img src="img/logo-ectm.png" alt="immagine superbonus">
@@ -49,19 +49,19 @@
         </fieldset>
 
 
-        <fieldset>
+        <fieldset class="test">
           <section class="scelta">
             <div class="scegli">
               <img class="img-responsive" src="img/placeholder.png" alt="immagine impresa">
               <div class="question">
-                <button>Sei un&#39;impresa&#63;</button>
+                <div class="type-user" data-typeUser="buisness">Sei un&#39;impresa&#63;</div>
                 <span id="impresa" class="glyphicon glyphicon-question-sign"></span>
               </div>
             </div>
               <div class="scegli">
                 <img class="img-responsive" src="img/placeholder.png" alt="immagine impresa">
               <div class="question">
-                <button>Sei una persona fisica&#63;</button>
+                <div class="type-user" data-typeUser="person"> Sei una persona fisica&#63;</div>
                 <span id="personaFisica" class="glyphicon glyphicon-question-sign"></span>
               </div>
             </div>
@@ -97,7 +97,7 @@
         </fieldset>
             
           <!--Registrazione persona fisica-->
-      <fieldset>
+      <fieldset data-typeUserPage="person">
         <h2>Registrazione persona fisica</h2>
         <div class="form-group">
             <label for="name">Nome</label>
@@ -190,7 +190,7 @@
       </fieldset> -->
       <!-- Terza pagina -->
       
-      <fieldset>
+      <fieldset data-typeUserPage="business">
         <h2>Raccolta dati immobile impresa</h2>
         <div class="form-group">
             <label for="dove">Dove si trova?</label>

@@ -82,5 +82,14 @@ $(document).ready(function(){
       }
     
       info(); 
+
+
+      $(".type-user").on("click", function(){
+        let type=$(this).attr("data-typeUser");
+        type_user=type;
+        current_step=$(this).closest("fieldset");
+        current_step.hide();
+        
+      })
   
   });
