@@ -56,5 +56,29 @@ $(document).ready(function(){
     }
 
   
+
+    function info(){
+
+        // parte info impresa
+        $( "#impresa" ).click(function() {
+          $(".info").fadeIn();
+        });
+    
+        $( ".chiudiInfo" ).click(function() {
+          $(".info").fadeOut();
+        });
+    
+       // parte info persona fisica
+       $( "#personaFisica" ).click(function() {
+        $(".info2").fadeIn();
+      });
+    
+      $( ".chiudiInfo2" ).click(function() {
+        $(".info2").fadeOut();
+      });
+       
+      }
+    
+      info(); 
   
   });
