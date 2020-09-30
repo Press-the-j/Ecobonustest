@@ -15,9 +15,11 @@ $(document).ready(function(){
     
     steps = $("fieldset").length;
   
-    $(".next").click(function(){
+    $(".next").click(function(e){
       current_step = $(this).parent();
+      console.log(current_step);
       next_step = $(this).parent().next();
+      console.log(next_step);
       next_step.show();
       current_step.hide();
       setProgressBar(++current);
@@ -104,7 +106,7 @@ $(document).ready(function(){
 
         current_st.next().show()
         
-        console.log(next_step);
+        
       });
       
       $(".choose-category").on('change', function(){

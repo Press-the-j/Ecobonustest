@@ -389,12 +389,79 @@
         <input type="button" name="next" class="next category-real-estate-btn btn btn-info" value="Next" />
       </fieldset>
 
-      <fieldset data-count-page="7">
+      <fieldset class="test"data-count-page="7">
         <strong>Estraneità all'attività imprenditoriale</strong><span class="glyphicon glyphicon-question-sign"></span>
         <p>Il beneficiario dell'intervento è una persona fisica che agisce in veste di privato e quindi estraneo ad attività imprenditoriale e/o professionale?</p>
-        <button class="btn btn-primary">No</button>
-        <button class="btn btn-primary">Si</button>
+        <div class="btn next btn-primary">No</div>
+        <div class="btn next btn-primary">Si</div>
       </fieldset>
+      <fieldset data-count-page="8">
+        <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
+        <p>Rientri all'interno di quale delle seguenti categorie?</p>
+        <div class="form-group">
+          <div class="checkbox">
+              <label><input type="checkbox" value="">condomini in possesso di una delibera assembleare valida che autorizza all'effettuazione dell'intervento</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="">Persone fisiche, al di fuori dell'esercizion di attività di impresa, arti e professioni</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="">Istituti autonomi case popolari(IACP), comunque denominati, nonchè dagli enti aventi le stesse finalità sociali dei predetti Istituti, istituiti nella forma di società che rispondono ai rquisiti della legislazione europea in</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="">Cooperative di abitazione a proprietà indivisa. La detrazione spetta per interventi realizzati su immobili dalle stesse posseduti e assegnati in godimenti ai propri soci</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="">Enti del terzo Settore(Onlus, organizzazioni di volontariato, associazioni di promozione sociale)</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="">Associazioni e società sportive dilettantistiche, limitatamente ai lavori destinati ai soli immobili o parti di immobili adibiti a spogliatoi</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="">Nessuna delle precedenti</label>
+          </div>
+      </div>
+      </fieldset>
+      <fieldset data-count-page="9" >
+        <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
+        <p>Nel periodo tra il 1 luglio 2020 e il 31 dicembre 2021 hai sostenuto/sosterrai una spesa relativa ad uno dei seguenti interventi trainanti?(sono possibili più risposte)</p>
+        <div class="form-group">
+          <!-- ricordati di dare classe flexalle checkbox -->
+          <div class="checkbox">
+              <label><input type="checkbox" value="">INTERVENTI ANTISISMICI di cui ai commi da 1-bis a 1-septies dell'articolo 16 del decreto-legge n. 63 del 2013, anche comprensivo di interventi di DEMOLIZIONE E RICOSTRUZIONE di cui all'articolo 3. Co. 1 lett. d) del DPR 380/2001</label><span class="glyphicon glyphicon-question-sign"></span>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="">RIQUALIFICAZIONE ENERGETICA: sostituzione degli IMPIANTI DI CLIMATIZZAZIONE INVERNALE ESISTENTI con impianti per il riscaldamento, il raffrescamento o la fornitura di acqua</label><span class="glyphicon glyphicon-question-sign"></span>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="">INTERVENTI c.d TRAINATI</label><span class="glyphicon glyphicon-question-sign"></span>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="">nessuna delle precedenti</label><span class="glyphicon glyphicon-question-sign"></span>
+          </div>
+          <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
+          <input type="button" name="next" class="next btn btn-success" value="Continua"/>
+        </div>
+      </fieldset>
+      <fieldset data-count-page="10" class="sismic-intervention">
+        <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
+        <p>l'unità immobiliare su cui hai effettuato / effettuari l'intervento è situata nelle zone sismiche 1,2 e 3 di cui all'ordinanza del Presidente del Consiglio dei ministri n.3274 del 20 marzo 2003?</p>
+        <p>Confermi l'indirizzo dell'immobile?</p>
+        <input type="text" placeholder="Search...">
+        <div class="map"></div>
+      </fieldset>
+      <fieldset>
+        <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
+        <p>Gli immobili su cui effettuare l'intervento trainato sono sottoposti alla tutela disciplinatadal codice dei beni culturali e del paesaggio o per effetto di regolamenti edilizi, urbanistici e ambientali e pertanto sugli stessi non possono essere realizzati interventi trainanti?</p>
+        <button class="btn next btn-primary">No</button>
+        <button class="btn next btn-primary">Si</button>
+      </fieldset>
+      <fieldset>
+        <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
+        <p>Hai gà usufruito di interventi per l'efficientamento energetico su almeno altre 2 unità immobiliari?(non rientrano nel computo delle 2 unità immobiliari gli interventi effettuati sulle parti comuni del condominio)</p>
+        <button class="btn next btn-primary">No</button>
+        <button class="btn next btn-primary">Si</button>
+      </fieldset>  
     </form>
     </div>
   </div>
