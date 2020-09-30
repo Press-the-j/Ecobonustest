@@ -24,6 +24,7 @@ $(document).ready(function(){
       current_step.hide();
       setProgressBar(++current);
       $(".progress").css("display","block");
+     
     });
   
     $(".previous").click(function(){
@@ -108,19 +109,26 @@ $(document).ready(function(){
         removeStep.remove();
 
         current_st.next().show()
-<<<<<<< HEAD
-        
-        
-=======
         setProgressBar(++current);
         console.log(next_step);
->>>>>>> c61d8ecffe0342a6382f28e4abefcd340467f320
       });
       
       $(".choose-category").on('change', function(){
         let selectedCategory= $(this).children("option:selected").val();
-        $(".category-real-estate").removeClass("active");
+        $(".sub-category").removeClass("active");
         $(".category-"+selectedCategory).addClass("active");
         $(".category-real-estate-btn").addClass("active");
       })
+
+      $(".category-user .checkbox input").on('click', function(){
+        current_step=$(this).closest('fieldset');
+        next_step=current_step.next();
+        current_step.hide();
+        next_step.show();
+      })
+
+      /* $(".sismic-intervantion").on("click", function(){
+        let parent=$(this).closest('fieldset').get();
+
+      }) */
   });

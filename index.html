@@ -305,6 +305,7 @@
         </div>
         <div class="form-group category-real-estate active">
           <select class="form-control choose-category" >
+            <option value="">Scegli una categoria catastale</option>
             <option value="a">A: alloggi e uffici privati</option>
             <option value="b">B: scuole, uffici privati e ospedali</option>
             <option value="c">C: attività commerciali o artigianali che appartengono ai privati</option>
@@ -362,7 +363,7 @@
             <option >D/7: fabbricati costruiti o adattati per </option>
           </select>
         </div>
-        <div class="form-group category-real-estate category-e">
+        <div class="form-group sub-category category-real-estate category-e">
           <select class="form-control" >
             <option >E/1: stazioni per servizi aerei, marittimi, terrestri e di trasporto</option>
             <option >E/2: ponti comunali e provinciali a pedaggio</option>
@@ -398,7 +399,7 @@
       <fieldset data-count-page="8">
         <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
         <p>Rientri all'interno di quale delle seguenti categorie?</p>
-        <div class="form-group">
+        <div class="form-group category-user">
           <div class="checkbox">
               <label><input type="checkbox" value="">condomini in possesso di una delibera assembleare valida che autorizza all'effettuazione dell'intervento</label>
           </div>
@@ -422,13 +423,13 @@
           </div>
       </div>
       </fieldset>
-      <fieldset data-count-page="9" >
+      <fieldset class="intervantion-qualification" data-count-page="9" >
         <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
         <p>Nel periodo tra il 1 luglio 2020 e il 31 dicembre 2021 hai sostenuto/sosterrai una spesa relativa ad uno dei seguenti interventi trainanti?(sono possibili più risposte)</p>
         <div class="form-group">
           <!-- ricordati di dare classe flexalle checkbox -->
           <div class="checkbox">
-              <label><input type="checkbox" value="">INTERVENTI ANTISISMICI di cui ai commi da 1-bis a 1-septies dell'articolo 16 del decreto-legge n. 63 del 2013, anche comprensivo di interventi di DEMOLIZIONE E RICOSTRUZIONE di cui all'articolo 3. Co. 1 lett. d) del DPR 380/2001</label><span class="glyphicon glyphicon-question-sign"></span>
+              <label><input class="sismic-intervantion-check" type="checkbox" value="">INTERVENTI ANTISISMICI di cui ai commi da 1-bis a 1-septies dell'articolo 16 del decreto-legge n. 63 del 2013, anche comprensivo di interventi di DEMOLIZIONE E RICOSTRUZIONE di cui all'articolo 3. Co. 1 lett. d) del DPR 380/2001</label><span class="glyphicon glyphicon-question-sign"></span>
           </div>
           <div class="checkbox">
             <label><input type="checkbox" value="">RIQUALIFICAZIONE ENERGETICA: sostituzione degli IMPIANTI DI CLIMATIZZAZIONE INVERNALE ESISTENTI con impianti per il riscaldamento, il raffrescamento o la fornitura di acqua</label><span class="glyphicon glyphicon-question-sign"></span>
@@ -439,9 +440,9 @@
           <div class="checkbox">
             <label><input type="checkbox" value="">nessuna delle precedenti</label><span class="glyphicon glyphicon-question-sign"></span>
           </div>
-          <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
-          <input type="button" name="next" class="next btn btn-success" value="Continua"/>
         </div>
+        <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
+        <input type="button" name="next" class="next btn btn-success" value="Continua"/>
       </fieldset>
       <fieldset data-count-page="10" class="sismic-intervention">
         <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
@@ -449,18 +450,21 @@
         <p>Confermi l'indirizzo dell'immobile?</p>
         <input type="text" placeholder="Search...">
         <div class="map"></div>
+        <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
+        <input type="button" name="next" class="next btn btn-success" value="Continua"/>
       </fieldset>
       <fieldset>
         <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
         <p>Gli immobili su cui effettuare l'intervento trainato sono sottoposti alla tutela disciplinatadal codice dei beni culturali e del paesaggio o per effetto di regolamenti edilizi, urbanistici e ambientali e pertanto sugli stessi non possono essere realizzati interventi trainanti?</p>
-        <button class="btn next btn-primary">No</button>
-        <button class="btn next btn-primary">Si</button>
+        <input type="button" class="previous btn btn-default" value="No" />
+        <input type="button" class="next btn btn-success" value="Si"/>
+        
       </fieldset>
       <fieldset>
         <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
         <p>Hai gà usufruito di interventi per l'efficientamento energetico su almeno altre 2 unità immobiliari?(non rientrano nel computo delle 2 unità immobiliari gli interventi effettuati sulle parti comuni del condominio)</p>
-        <button class="btn next btn-primary">No</button>
-        <button class="btn next btn-primary">Si</button>
+        <input type="button" class="previous btn btn-default" value="No" />
+        <input type="button" class="next btn btn-success" value="Si"/>
       </fieldset>  
     </form>
     </div>
