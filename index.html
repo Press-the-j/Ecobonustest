@@ -21,7 +21,7 @@
     <!-- Pagina accettazione -->
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <section   class="logo">
+      <section class="logo">
         <div class="head">
           <img src="img/logo-ectm.png" alt="immagine superbonus">
           <h1>SUPERBONUS 110&#37;</h1>
@@ -33,7 +33,7 @@
     </div>
 
     <form id="formComp" class="" novalidate action=""  method="post">
-      <fieldset class="checkboxes">
+      <fieldset data-count-page="1" class="checkboxes">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem. Lorem. Lorem. Lorem.</p>
         <div class="form-group">
           <input type="checkbox" id="privacy">
@@ -45,7 +45,7 @@
         </div>
           <input type="button" name="continua" class="continua next" value="continua" disabled />
       </fieldset>
-      <fieldset class="test">
+      <fieldset data-count-page="2" class="scegliTipo">
         <section class="scelta">
           <div class="scegli">
             <img class="img-responsive" src="img/placeholder.png" alt="immagine impresa">
@@ -93,7 +93,7 @@
         </fieldset>
             
           <!--Registrazione persona fisica-->
-      <fieldset class="person">
+      <fieldset data-count-page="3_personaFisica" class="person">
         <h2>Registrazione persona fisica</h2>
         <div class="form-group">
             <label for="name">Nome</label>
@@ -121,7 +121,7 @@
         </div>  
             <input type="button" name="next" class="next btn btn-info" value="Next" />
       </fieldset>
-      <fieldset class="business">
+      <fieldset data-count-page="3_impresa" class="business">
         <h2>Registrazione impresa</h2>
         <div class="form-group">
             <label for="rag">Ragione sociale</label>
@@ -151,7 +151,7 @@
             <input type="button" name="next" class="next btn btn-info" value="Next" />
       </fieldset>
         <!-- popup mappa-->
-      <!-- <fieldset>
+        <!-- <fieldset>
         <h2> Pagina con la search e la mappa</h2>
         <div class="form-group">
         <label for="search">Indirizzo</label>
@@ -184,9 +184,9 @@
         <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
         <input type="button" name="next" class="next btn btn-info" value="Next" />
       </fieldset> -->
-      <!-- Terza pagina -->
       
-      <fieldset class="business">
+      
+      <fieldset data-count-page="4_impresa" class="business">
         <h2>Raccolta dati immobile impresa</h2>
         <div class="form-group">
             <label for="dove">Dove si trova?</label>
@@ -227,7 +227,7 @@
         <input type="button" name="next" class="next btn btn-info" value="Next" />
       </fieldset>
       
-      <fieldset class="person">
+      <fieldset data-count-page="4_personaFisica" class="person">
         <h2>Raccolta dati immobile persona fisica</h2>
         <div class="form-group">
             <label for="dove">Dove si trova?</label>
@@ -268,7 +268,7 @@
         <input type="button" name="next" class="next btn btn-info" value="Next" />
       </fieldset>
 
-      <fieldset>
+      <fieldset data-count-page="5">
         <h2>Checkbox</h2>
         <h4>Proprietà e detenzione dell’immobile</h4>
         <p>Domenico, con quale titolo possiedi o detieni l'immobile?</p>
@@ -297,7 +297,7 @@
         <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
         <input type="button" name="next" class="next btn btn-info" value="Next" />
       </fieldset>
-        <!-- Quinta pagina -->
+
       <fieldset>
         <h2>Step 5</h2>
         <div class="form-group">

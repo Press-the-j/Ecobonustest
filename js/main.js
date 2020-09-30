@@ -21,6 +21,9 @@ $(document).ready(function(){
       next_step.show();
       current_step.hide();
       setProgressBar(++current);
+      
+      
+
     });
   
     $(".previous").click(function(){
@@ -42,6 +45,8 @@ $(document).ready(function(){
         .css("width",percentuale+"%")
         .html(percentuale+"%");   
     }
+
+
   
 // da richiamare quando metteremo il timer
     function setClock(){
