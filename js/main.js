@@ -58,9 +58,12 @@ $(document).ready(function(){
       myTimer=setInterval(function(event){
         timer--;
         clock.text(timer)
+        if(timer<=9){
+          $(".zero").text("0");
+        }
         if(timer==0){
           clearInterval(myTimer);
-          //location.reload();
+          location.reload();
         }
       }, 1000)
     }
