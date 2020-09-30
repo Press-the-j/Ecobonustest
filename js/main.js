@@ -1,6 +1,6 @@
 $(document).ready(function(){
   var current = 1;
-  var current_step,next_step,steps, type_user;
+  var current_step,next_step,steps, type_user, myTimer;
   
 
 
@@ -23,7 +23,8 @@ $(document).ready(function(){
       next_step.show();
       current_step.hide();
       setProgressBar(++current);
-      $(".progress , .clock").css("display","block");
+      $(".progress").css("display","block");
+      setClock();
     });
   
     $(".previous").click(function(){
@@ -49,10 +50,12 @@ $(document).ready(function(){
 
 // da richiamare quando metteremo il timer
     function setClock(){
+      clearInterval(myTimer)
+      $(".clock").css("display", "block")
       let timer = 30;
       let clock=$(".clock_second");
       clock.text(timer);
-      let myTimer=setInterval(function(){
+      myTimer=setInterval(function(event){
         timer--;
         clock.text(timer)
         if(timer==0){
@@ -62,7 +65,7 @@ $(document).ready(function(){
       }, 1000)
     }
 
-    setClock();
+    
 
   
 
@@ -105,6 +108,7 @@ $(document).ready(function(){
         removeStep.remove();
 
         current_st.next().show()
+        setClock();
         setProgressBar(++current);
         console.log(next_step);
       });
