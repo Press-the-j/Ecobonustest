@@ -97,3 +97,12 @@
   .category-real-estate-btn.active{
     display: block;
   }
+
+  .pop-up-overlay{
+    display:none;
+    background-color: rgba(0, 0,0,0.4);
+    position: absolute;
+    z-index:200;
+    width: 100vw;
+    height: 100vh;
+  }

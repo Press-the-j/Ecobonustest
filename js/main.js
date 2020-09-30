@@ -60,7 +60,7 @@ $(document).ready(function(){
         clock.text(timer)
         if(timer==0){
           clearInterval(myTimer);
-          location.reload();
+          //location.reload();
         }
       }, 1000)
     }
