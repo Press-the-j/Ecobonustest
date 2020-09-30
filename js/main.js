@@ -23,12 +23,7 @@ $(document).ready(function(){
       next_step.show();
       current_step.hide();
       setProgressBar(++current);
-<<<<<<< HEAD
-      $(".progress").css("display","block");
-     
-=======
       $(".progress , .clock").css("display","block");
->>>>>>> dffc9a86e9d9cd9092433c5caf1c267c3d8ddbc7
     });
   
     $(".previous").click(function(){
