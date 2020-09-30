@@ -13,7 +13,7 @@ $(document).ready(function(){
     });
 
     
-    steps = $("fieldset").length;
+    steps = $("fieldset").length -1;
   
     $(".next").click(function(){
       current_step = $(this).parent();
@@ -21,9 +21,7 @@ $(document).ready(function(){
       next_step.show();
       current_step.hide();
       setProgressBar(++current);
-      
-      
-
+      $(".progress").css("display","block");
     });
   
     $(".previous").click(function(){
@@ -46,7 +44,12 @@ $(document).ready(function(){
         .html(percentuale+"%");   
     }
 
-
+    // $('[data-count-page="1"]').on("change", function(){
+    //   if ($(this).is(':hidden')){
+    //     $(".progress").css("display","block");
+    //     alert("funge");
+    //   }
+    //   });
   
 // da richiamare quando metteremo il timer
     function setClock(){
@@ -103,7 +106,7 @@ $(document).ready(function(){
         removeStep.remove();
 
         current_st.next().show()
-        
+        setProgressBar(++current);
         console.log(next_step);
       });
       
