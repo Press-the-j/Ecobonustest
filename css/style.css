@@ -1,4 +1,4 @@
-/* nascondo tutti i fieldset ad eccezione del primo */
+/* /* nascondo tutti i fieldset ad eccezione del primo */
 
    #formComp fieldset:not(:first-of-type) {
     display: none;
@@ -67,4 +67,22 @@
 
   .logo{
     margin: 0 auto;
+  }
+
+  /* Select per categoria immobile */
+
+  .category-real-estate{
+    display: none;
+  }
+
+  .category-real-estate.active{
+    display:block;
+  }
+
+  .category-real-estate-btn{
+    display:none;
+  }
+
+  .category-real-estate-btn.active{
+    display: block;
   }

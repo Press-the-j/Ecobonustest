@@ -106,5 +106,11 @@ $(document).ready(function(){
         
         console.log(next_step);
       });
-  
+      
+      $(".choose-category").on('change', function(){
+        let selectedCategory= $(this).children("option:selected").val();
+        $(".category-real-estate").removeClass("active");
+        $(".category-"+selectedCategory).addClass("active");
+        $(".category-real-estate-btn").addClass("active");
+      })
   });
