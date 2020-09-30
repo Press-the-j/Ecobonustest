@@ -23,8 +23,12 @@ $(document).ready(function(){
       next_step.show();
       current_step.hide();
       setProgressBar(++current);
+<<<<<<< HEAD
       $(".progress").css("display","block");
      
+=======
+      $(".progress , .clock").css("display","block");
+>>>>>>> dffc9a86e9d9cd9092433c5caf1c267c3d8ddbc7
     });
   
     $(".previous").click(function(){
@@ -47,26 +51,23 @@ $(document).ready(function(){
         .html(percentuale+"%");   
     }
 
-    // $('[data-count-page="1"]').on("change", function(){
-    //   if ($(this).is(':hidden')){
-    //     $(".progress").css("display","block");
-    //     alert("funge");
-    //   }
-    //   });
-  
+
 // da richiamare quando metteremo il timer
     function setClock(){
-      let timer = 5;
-      let clock=$(".clock");
+      let timer = 30;
+      let clock=$(".clock_second");
       clock.text(timer);
       let myTimer=setInterval(function(){
         timer--;
         clock.text(timer)
         if(timer==0){
           clearInterval(myTimer);
+          location.reload();
         }
       }, 1000)
     }
+
+    setClock();
 
   
 

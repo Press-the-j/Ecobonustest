@@ -8,9 +8,18 @@
     background-color: orange;
 }
 
- .progress{
+ .progress, .clock{
     display: none;
 } 
+
+.clock{
+  text-align: right;
+  z-index: 999;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  font-size: 28px;
+}
 
 .info, .info2{
     width: 550px;
@@ -63,10 +72,12 @@
 
   .head{
       text-align: center;
+      position: relative;
   }
 
   .logo{
     margin: 0 auto;
+    
   }
 
   /* Select per categoria immobile */
