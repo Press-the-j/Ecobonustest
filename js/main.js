@@ -70,10 +70,11 @@ $(document).ready(function(){
       clock.text(timer);
       myTimer=setInterval(function(event){
         timer--;
-        clock.text(timer)
         if(timer<=9){
-          $(".zero").text("0");
-        }
+          timer = "0" + timer;
+        } 
+        clock.text(timer)
+               
         if(timer==0){
           clearInterval(myTimer);
           //location.reload();
@@ -126,7 +127,7 @@ $(document).ready(function(){
         remove_step.remove();
 
         current_st.next().show()
-        // setClock();
+        setClock();
         setProgressBar(++current);
       });
       
