@@ -182,11 +182,11 @@
             <div class="form-group">
               <label for="rag">Ragione sociale</label>
               <input type="text" class="form-control fieldset-input" id="rag" name="rag" placeholder="Ragione sociale"
-                data-toggle="modal" data-target="#business-name" data-whatever="@mdo">
+                data-toggle="modal" data-target="#business-name" data-whatever="@mdo" data-receive-from="company-name">
             </div>
             <div class="form-group">
               <label for="pi">Partita iva</label>
-              <input type="number" class="form-control fieldset-input" id="pi" name="pi" placeholder="Partita iva">
+              <input type="number" class="form-control fieldset-input" id="pi" name="pi" placeholder="Partita iva" data-receive-from="p-iva">
             </div>
             <div class="form-group">
               <label for="sede">Sede legale</label>
@@ -216,8 +216,8 @@
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
-                      <label for="ragione-sociale" class="control-label">Ragione Sociale</label>
-                      <input type="text" class="form-control" id="ragione-sociale">
+                      <label for="company-name" class="control-label">Ragione Sociale</label>
+                      <input type="text" class="form-control" id="company-name">
                     </div>
                     <div class="form-group">
                       <p>
@@ -226,15 +226,15 @@
                         sottostante provvederemo a inserire parte delle
                         informazioni societarie per te.
                       </p>
-                      <label for="recipient-lname" class="control-label">Inserisci la partita iva</label>
-                      <input type="text" class="form-control" id="recipient-lname">
+                      <label for="p-iva" class="control-label">Inserisci la partita iva</label>
+                      <input type="text" class="form-control" id="p-iva">
                     </div>
 
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
-                    <button class="saveBtnBusiness" type="button" class="btn btn-primary"
+                    <button class="save-pop-up" type="button" class="btn btn-primary"
                       data-dismiss="modal">Salva</button>
                   </div>
                 </div>

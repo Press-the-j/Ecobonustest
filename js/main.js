@@ -207,10 +207,9 @@ $(document).ready(function(){
         console.log(pop_up_input);
         for(let i=0; i<pop_up_input.length; i++){
           let id_pop_up_input=pop_up_input[i].getAttribute('id');
-          /* console.log(id_pop_up_input);
-          console.log($(`fieldset[data-count-page=${fieldset_id}] input[data-receive-from=${id_pop_up_input}]`)); */
           if($(`fieldset[data-count-page=${fieldset_id}] input[data-receive-from=${id_pop_up_input}]`).length){
            let inputText=pop_up_input[i].value;
+           console.log(id_pop_up_input);
            $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
           }
         }
