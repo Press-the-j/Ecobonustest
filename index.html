@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="img/Favicon.png" type="image/png" sizes="48x48">
 
 </head>
 
@@ -300,8 +301,12 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="clima">Climatizzazione Invernale</label>
-              <input type="text" class="form-control" name="clima" id="clima" placeholder="Climatizzazione invernale" data-toggle="modal" data-target="#climaModalBusiness" data-whatever="@mdo">
+              <label for="involucroImpresa">Tipologia involucro</label>
+              <input type="text" class="form-control" name="clima" id="involucroImpresa" placeholder="Tipologia Involucro" data-toggle="modal" data-target="#InvolucroModalBusiness" data-whatever="@mdo">
+            </div>
+            <div class="form-group">
+              <label for="clima">Involucro opaco</label>
+              <input type="text" class="form-control" name="clima" id="clima" placeholder="Involucro opaco" data-toggle="modal" data-target="#climaModalBusiness" data-whatever="@mdo">
               </select>
             </div>
             <div class="form-group">
@@ -360,7 +365,40 @@
                 </div>
               </div>
             </div>
+            <div class="modal fade" id="involucroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
 
+                    <div class="form-group">
+                      <label for="ragione-sociale" class="control-label">Ragione Sociale</label>
+                      <input type="text" class="form-control" id="ragione-sociale">
+                    </div>
+                    <div class="form-group">
+                      <p>
+                        RICERCA LA TUA SOCIETA'
+                        Inserendo la partita iva all'interno del campo
+                        sottostante provvederemo a inserire parte delle
+                        informazioni societarie per te.
+                      </p>
+                      <label for="recipient-lname" class="control-label">Inserisci la partita iva</label>
+                      <input type="text" class="form-control" id="recipient-lname">
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                      data-dismiss="modal">Annulla</button>
+                    <button class="saveBtnBusiness" type="button" class="btn btn-primary"
+                      data-dismiss="modal">Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </fieldset>
 
           <fieldset data-count-page="6" class="person">
