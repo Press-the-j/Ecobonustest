@@ -117,129 +117,130 @@
           </fieldset>
 
           <!--Registrazione persona fisica-->
-      <fieldset data-count-page="3" class="person">
-        
-        <h2>Registrazione persona fisica</h2>
-        <div class="form-group">
-            <label for="name">Nome</label>
-            <input data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" type="text" class="form-control" id="name" name="name" placeholder="Nome">
-        </div>
-        <div class="form-group">
-            <label for="date">Compleanno</label>
-            <input type="date" class="form-control" id="date" name="date" placeholder="Compleanno">
-        </div>
-        <div class="form-group">
-            <label for="genere">Sesso</label>
-            <select class="form-control" name="genere" id="genere">
-            <option value="maschio">Maschio</option>
-            <option value="maschio">Femmina</option>
-            <option value="maschio">Indefinito</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-        </div>
-        <div class="form-group">
-            <label for="tel">Telefono</label>
-            <input type="tel" class="form-control" id="tel" name="tel" placeholder="Telefono">
-        </div>  
-        <input type="button" name="previous" class="previous-reg btn btn-default" value="Previous" />
-        <input type="button" name="next" class="next btn btn-info" value="Next" />
+          <fieldset data-count-page="3" class="person">
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
-              </div>
-              <div class="modal-body">
+            <h2>Registrazione persona fisica</h2>
+            <div class="form-group">
+              <label for="name">Nome</label>
+              <input data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" type="text"
+                class="form-control" id="name" name="name" placeholder="Nome">
+            </div>
+            <div class="form-group">
+              <label for="date">Compleanno</label>
+              <input type="date" class="form-control" id="date" name="date" placeholder="Compleanno">
+            </div>
+            <div class="form-group">
+              <label for="genere">Sesso</label>
+              <select class="form-control" name="genere" id="genere">
+                <option value="maschio">Maschio</option>
+                <option value="maschio">Femmina</option>
+                <option value="maschio">Indefinito</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <label for="tel">Telefono</label>
+              <input type="tel" class="form-control" id="tel" name="tel" placeholder="Telefono">
+            </div>
+            <input type="button" name="previous" class="previous-reg btn btn-default" value="Previous" />
+            <input type="button" name="next" class="next btn btn-info" value="Next" />
 
-                <div class="form-group">
-                  <label for="recipient-name" class="control-label">Nome:</label>
-                  <input type="text" class="form-control" id="recipient-name">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="form-group">
+                      <label for="recipient-name" class="control-label">Nome:</label>
+                      <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                      <label for="recipient-lname" class="control-label">Cognome:</label>
+                      <input type="text" class="form-control" id="recipient-lname">
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                      data-dismiss="modal">Annulla</button>
+                    <button class="saveBtn" type="button" class="btn btn-primary" data-dismiss="modal">Salva</button>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="recipient-lname" class="control-label">Cognome:</label>
-                  <input type="text" class="form-control" id="recipient-lname">
-                </div>
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"
-                  data-dismiss="modal">Annulla</button>
-                <button class="saveBtn" type="button" class="btn btn-primary" data-dismiss="modal">Salva</button>
               </div>
             </div>
-          </div>
-        </div>
-      </fieldset>
-      <fieldset data-count-page="4" class="business">
-        <h2>Registrazione impresa</h2>
-        <div class="form-group">
-          <label for="rag">Ragione sociale</label>
-          <input type="text" class="form-control" id="rag" name="rag" placeholder="Ragione sociale"
-            data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-        </div>
-        <div class="form-group">
-          <label for="pi">Partita iva</label>
-          <input type="number" class="form-control" id="pi" name="pi" placeholder="Partita iva">
-        </div>
-        <div class="form-group">
-          <label for="sede">Sede legale</label>
-          <input type="number" class="form-control" id="sede" name="sede" placeholder="Sede legale">
-        </div>
-        <div class="form-group">
-          <label for="sede">Referente</label>
-          <input type="number" class="form-control" id="referente" name="referente" placeholder="Referente">
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-        </div>
-        <div class="form-group">
-          <label for="tel">Telefono</label>
-          <input type="tel" class="form-control" id="tel" name="tel" placeholder="Telefono">
-        </div>
-        <input type="button" name="previous" class="previous-reg btn btn-default" value="Previous" />
-        <input type="button" name="next" class="next btn btn-info" value="Next" />
+          </fieldset>
+          <fieldset data-count-page="4" class="business">
+            <h2>Registrazione impresa</h2>
+            <div class="form-group">
+              <label for="rag">Ragione sociale</label>
+              <input type="text" class="form-control" id="rag" name="rag" placeholder="Ragione sociale"
+                data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+            </div>
+            <div class="form-group">
+              <label for="pi">Partita iva</label>
+              <input type="number" class="form-control" id="pi" name="pi" placeholder="Partita iva">
+            </div>
+            <div class="form-group">
+              <label for="sede">Sede legale</label>
+              <input type="number" class="form-control" id="sede" name="sede" placeholder="Sede legale">
+            </div>
+            <div class="form-group">
+              <label for="sede">Referente</label>
+              <input type="number" class="form-control" id="referente" name="referente" placeholder="Referente">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <label for="tel">Telefono</label>
+              <input type="tel" class="form-control" id="tel" name="tel" placeholder="Telefono">
+            </div>
+            <input type="button" name="previous" class="previous-reg btn btn-default" value="Previous" />
+            <input type="button" name="next" class="next btn btn-info" value="Next" />
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
-              </div>
-              <div class="modal-body">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
 
-                <div class="form-group">
-                  <label for="ragione-sociale" class="control-label">Ragione Sociale</label>
-                  <input type="text" class="form-control" id="ragione-sociale">
+                    <div class="form-group">
+                      <label for="ragione-sociale" class="control-label">Ragione Sociale</label>
+                      <input type="text" class="form-control" id="ragione-sociale">
+                    </div>
+                    <div class="form-group">
+                      <p>
+                        RICERCA LA TUA SOCIETA'
+                        Inserendo la partita iva all'interno del campo
+                        sottostante provvederemo a inserire parte delle
+                        informazioni societarie per te.
+                      </p>
+                      <label for="recipient-lname" class="control-label">Inserisci la partita iva</label>
+                      <input type="text" class="form-control" id="recipient-lname">
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                      data-dismiss="modal">Annulla</button>
+                    <button class="saveBtnBusiness" type="button" class="btn btn-primary"
+                      data-dismiss="modal">Salva</button>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <p>
-                    RICERCA LA TUA SOCIETA'
-                    Inserendo la partita iva all'interno del campo
-                    sottostante provvederemo a inserire parte delle
-                    informazioni societarie per te.
-                  </p>
-                  <label for="recipient-lname" class="control-label">Inserisci la partita iva</label>
-                  <input type="text" class="form-control" id="recipient-lname">
-                </div>
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"
-                  data-dismiss="modal">Annulla</button>
-                <button class="saveBtnBusiness" type="button" class="btn btn-primary"
-                  data-dismiss="modal">Salva</button>
               </div>
             </div>
-          </div>
-        </div>
-      </fieldset>
+          </fieldset>
           <!-- popup mappa-->
           <!-- <fieldset>
         <h2> Pagina con la search e la mappa</h2>
