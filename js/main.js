@@ -15,7 +15,7 @@ $(document).ready(function(){
     
     steps = $("fieldset").length -1;
   
-    $(".next").click(function(e){
+    $(".next").on('click',function(e){
       current_step = $(this).parent();
       console.log(current_step);
       next_step = $(this).parent().next();
@@ -26,7 +26,7 @@ $(document).ready(function(){
       setClock();
     });
   
-    $(".previous").click(function(){
+    $(".previous").on('click',function(){
       current_step = $(this).parent();
       next_step = $(this).parent().prev();
       next_step.show();
@@ -35,7 +35,16 @@ $(document).ready(function(){
     });
     
     $(".previous-reg").on('click', function(){
-      console.log(clone_step[0].getAttribute("data-count-page"));
+      current_step = $(this).parent();
+      next_step = $(this).parent().prev();
+      next_step.show();
+      current_step.hide();
+      setProgressBar(--current);
+      clone_step.forEach(element => {
+        let el_page=element.getAttribute("data-count-page") -1;
+        ($("fieldset[data-count-page='"+ el_page + "']")).after(element)
+      });
+     
     })
     setProgressBar(current);
   
