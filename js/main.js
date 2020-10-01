@@ -198,6 +198,25 @@ $(document).ready(function(){
        }
         
       })
+
+      $(".save-pop-up").on('click', function(){
+        let fieldset_id=$(this).closest("fieldset").attr("data-count-page")
+        console.log(fieldset_id);
+
+        let pop_up_input =$(this).closest('.modal').find('input').get();
+        console.log(pop_up_input);
+        for(let i=0; i<pop_up_input.length; i++){
+          let id_pop_up_input=pop_up_input[i].getAttribute('id');
+          /* console.log(id_pop_up_input);
+          console.log($(`fieldset[data-count-page=${fieldset_id}] input[data-receive-from=${id_pop_up_input}]`)); */
+          if($(`fieldset[data-count-page=${fieldset_id}] input[data-receive-from=${id_pop_up_input}]`).length){
+           let inputText=pop_up_input[i].value;
+           $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
+          }
+        }
+        
+      })
+
       /* $(".sismic-intervantion").on("click", function(){
         let parent=$(this).closest('fieldset').get();
 

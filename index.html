@@ -176,37 +176,37 @@
               </div>
             </div>
           </fieldset>
-          <fieldset data-count-page="4" class="business">
+          <fieldset data-count-page="4" class="business test">
             <h2>Registrazione impresa</h2>
             <div class="form-group">
               <label for="rag">Ragione sociale</label>
-              <input type="text" class="form-control" id="rag" name="rag" placeholder="Ragione sociale"
-                data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+              <input type="text" class="form-control fieldset-input" id="rag" name="rag" placeholder="Ragione sociale"
+                data-toggle="modal" data-target="#business-name" data-whatever="@mdo">
             </div>
             <div class="form-group">
               <label for="pi">Partita iva</label>
-              <input type="number" class="form-control" id="pi" name="pi" placeholder="Partita iva">
+              <input type="number" class="form-control fieldset-input" id="pi" name="pi" placeholder="Partita iva">
             </div>
             <div class="form-group">
               <label for="sede">Sede legale</label>
-              <input type="number" class="form-control" id="sede" name="sede" placeholder="Sede legale">
+              <input type="text" class="form-control fieldset-input" id="sede" name="sede" placeholder="Sede legale" data-toggle="modal" data-target="#registered-office" data-whatever="@mdo" data-receive-from="address-registered-office">
             </div>
             <div class="form-group">
               <label for="sede">Referente</label>
-              <input type="number" class="form-control" id="referente" name="referente" placeholder="Referente">
+              <input type="number" class="form-control fieldset-input" id="referente" name="referente" placeholder="Referente">
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+              <input type="email" class="form-control fieldset-input" id="email" name="email" placeholder="Email">
             </div>
             <div class="form-group">
               <label for="tel">Telefono</label>
-              <input type="tel" class="form-control" id="tel" name="tel" placeholder="Telefono">
+              <input type="tel" class="form-control fieldset-input" id="tel" name="tel" placeholder="Telefono">
             </div>
             <input type="button" name="previous" class="previous-reg btn btn-default" value="Previous" />
             <input type="button" name="next" class="next btn btn-info" value="Next" />
-
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <!--  popup ragione sociale -->
+            <div class="modal fade" id="business-name" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -214,7 +214,6 @@
                         aria-hidden="true">&times;</span></button>
                   </div>
                   <div class="modal-body">
-
                     <div class="form-group">
                       <label for="ragione-sociale" class="control-label">Ragione Sociale</label>
                       <input type="text" class="form-control" id="ragione-sociale">
@@ -240,6 +239,42 @@
                 </div>
               </div>
             </div>
+            <!-- popup sede legale -->
+            <div class="modal fade" id="registered-office" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="address-registered-office" class="control-label">Indirizzo</label>
+                      <input type="text" class="form-control" id="address-registered-office">
+                    </div>
+                    <div class="form-group">
+                      <label for="street-registered-office" class="control-label">Via</label>
+                      <input type="text" class="form-control" id="street-registered-office">
+                    </div>
+                    <div class="form-group">
+                      <label for="postal-code-registered-office" class="control-label">CAP</label>
+                      <input type="text" class="form-control" id="postal-code-registered-office">
+                    </div>
+                    <div class="form-group">
+                      <label for="city-registered-office" class="control-label">Città</label>
+                      <input type="text" class="form-control" id="city-registered-office">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                      data-dismiss="modal">Annulla</button>
+                    <button class="save-registered-office save-pop-up" type="button" class="btn btn-primary"
+                      data-dismiss="modal">Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
           </fieldset>
           <!-- popup mappa-->
           <!-- <fieldset>
