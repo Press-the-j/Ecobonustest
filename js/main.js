@@ -167,21 +167,24 @@ $(document).ready(function(){
       // modale su click bottone per nome e cognome
       $(".saveBtn").on('click', function(){
 
-        valueName = $('#recipient-name').val();
-        valueLName = $('#recipient-lname').val();
-       if ( valueName.trim() || valueLName.trim()){
-
-        $('#name').val(valueName + " " + valueLName);
+        let valueName = $('#recipient-name').val();
+        let valueLName = $('#recipient-lname').val();
+        let trimName = $.trim(valueName);
+        let trimLName = $.trim(valueLName);
+       if ( valueName.trim() || valueLName.trim() && countClick !== 1){
+        $('#name').attr('data-toggle', 'hide');
+        $('#name').val($.trim(trimName) + " " + $.trim(trimLName));
        }
-        
+       let countClick = 1;
       })
 
       $(".saveBtnBusiness").on('click', function(){
 
-        valueRag = $('#ragione-sociale').val();
+        let valueRag = $('#ragione-sociale').val();
+        let trimValueRag = $.trim(valueRag);
        if ( valueRag.trim() || valueLName.trim()){
-
-        $('#rag').val(valueRag);
+        $('#rag').attr('data-toggle', 'hide');
+        $('#rag').val($.trim(trimValueRag));
        }
         
       })
