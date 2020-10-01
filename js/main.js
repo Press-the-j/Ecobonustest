@@ -120,12 +120,10 @@ $(document).ready(function(){
         } else if(type_user==="business"){
           var remove_step=current_st.siblings(".person")
         }
-        
-        clone_step= remove_step.clone(true).get();
-        remove_step.remove();
-        current_st.next().show();
-        console.log(current_st.nextAll('.show:first').show());
-        setClock();
+        removeStep.remove();
+
+        current_st.next().show()
+        // setClock();
         setProgressBar(++current);
       });
       
@@ -150,6 +148,27 @@ $(document).ready(function(){
 
       })
 
+      // modale su click bottone per nome e cognome
+      $(".saveBtn").on('click', function(){
+
+        valueName = $('#recipient-name').val();
+        valueLName = $('#recipient-lname').val();
+       if ( valueName.trim() || valueLName.trim()){
+
+        $('#name').val(valueName + " " + valueLName);
+       }
+        
+      })
+
+      $(".saveBtnBusiness").on('click', function(){
+
+        valueRag = $('#ragione-sociale').val();
+       if ( valueRag.trim() || valueLName.trim()){
+
+        $('#rag').val(valueRag);
+       }
+        
+      })
       /* $(".sismic-intervantion").on("click", function(){
         let parent=$(this).closest('fieldset').get();
 
