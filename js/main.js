@@ -130,8 +130,14 @@ $(document).ready(function(){
         setProgressBar(++current);
       });
       
+       /* validazione select */
       $(".choose-category").on('change', function(){
-        let selectedCategory= $(this).children("option:selected").val();
+        let selectedCategory= $(this).val();
+        if(selectedCategory !=="none"){
+          $(".category-real-estate").siblings(".next").prop("disabled", false)
+        } else {
+          $(".category-real-estate").siblings(".next").prop("disabled", true)
+        }
         $(".sub-category").removeClass("active");
         $(".category-"+selectedCategory).addClass("active");
         $(".category-real-estate-btn").addClass("active");
@@ -163,6 +169,8 @@ $(document).ready(function(){
           $(".intervention-trainant").siblings(".next").prop("disabled", true);
         }
       })
+
+     
 
       // modale su click bottone per nome e cognome
       $(".saveBtn").on('click', function(){
