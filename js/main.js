@@ -35,6 +35,7 @@ $(document).ready(function(){
     });
     
     $(".previous-reg").on('click', function(){
+    
       current_step = $(this).parent();
       next_step = $(this).parent().prev();
       next_step.show();
@@ -120,7 +121,7 @@ $(document).ready(function(){
           var remove_step=current_st.siblings(".person")
         }
         
-        clone_step= remove_step.clone().get();
+        clone_step= remove_step.clone(true).get();
         remove_step.remove();
         current_st.next().show();
         console.log(current_st.nextAll('.show:first').show());
@@ -135,11 +136,18 @@ $(document).ready(function(){
         $(".category-real-estate-btn").addClass("active");
       })
 
-      $(".category-user .checkbox input").on('click', function(){
-        current_step=$(this).closest('fieldset');
-        next_step=current_step.next();
-        current_step.hide();
-        next_step.show();
+      $(".owner-title input").on('click', function(){
+        $(".owner-title input").prop('checked', false);
+        $(this).prop('checked', true);
+        $(".next").prop("disabled", false);
+      })
+
+      $(".category-user input").on('click', function(){
+        $(".category-user input").prop('checked', false);
+        $(this).prop('checked', true);
+        $(".next").prop("disabled", false);
+        
+
       })
 
       /* $(".sismic-intervantion").on("click", function(){

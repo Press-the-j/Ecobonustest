@@ -306,33 +306,32 @@
       </fieldset>
 
       <fieldset data-count-page="7">
-        <h2>Checkbox</h2>
         <h4>Proprietà e detenzione dell’immobile</h4>
         <p>Domenico, con quale titolo possiedi o detieni l'immobile?</p>
-        <div class="form-group">
+        <div class="form-group owner-title">
             <div class="checkbox">
-                <label><input type="checkbox" value=""> Proprietario o nudo proprietario dell’immobile</label>
+                <label><input type="checkbox"  value=""> Proprietario o nudo proprietario dell’immobile</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="">Inquilino, locatario, comodatario dell’immobile e ha già
+              <label><input type="checkbox" value="" c>Inquilino, locatario, comodatario dell’immobile e ha già
                   ricevuto autorizzazione dal Proprietario ad effettuare i
                   relativi interventi</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="">Convivente di fatto di cui all’articolo 1, commi 36 e 37
+              <label><input check="false" type="checkbox" cvalue="">Convivente di fatto di cui all’articolo 1, commi 36 e 37
                   della legge n. 76 del 2016</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="">Coniuge separato assegnatario dell’immobile intestato
+              <label><input type="checkbox" value="" c>Coniuge separato assegnatario dell’immobile intestato
                   all’altro coniuge</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="">Convivente di fatto di cui all’articolo 1, commi 36 e 37
+              <label><input type="checkbox" value="" c>Convivente di fatto di cui all’articolo 1, commi 36 e 37
                   della legge n. 76 del 2016</label>
             </div>
         </div>
         <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
-        <input type="button" name="next" class="next btn btn-info" value="Next" />
+        <input type="button" name="next" class="next btn btn-info" value="Next" disabled/>
       </fieldset>
 
       <fieldset data-count-page="8">
@@ -341,7 +340,7 @@
           <p>qual'è la categoria catastale del tuo immobile?</p>
         </div>
         <div class="form-group category-real-estate active">
-          <select class="form-control choose-category" >
+          <select class="form-control choose-category" autocomplete="false" >
             <option value="">Scegli una categoria catastale</option>
             <option value="a">A: alloggi e uffici privati</option>
             <option value="b">B: scuole, uffici privati e ospedali</option>
@@ -424,7 +423,8 @@
             <option >F/7: infrastrutture di reti pubbliche di comunicazione </option>
           </select>
         </div>
-        <input type="button" name="next" class="next category-real-estate-btn btn btn-info" value="Next" />
+        <input type="button" name="previous" class="previous btn btn-default" value="Previous" />  
+        <input type="button" name="next" class="next btn btn-info" value="Next" />
       </fieldset>
 
       <fieldset class="test"data-count-page="9">
@@ -458,7 +458,9 @@
           <div class="checkbox">
             <label><input type="checkbox" value="">Nessuna delle precedenti</label>
           </div>
-      </div>
+        </div>
+        <input type="button" name="previous" class="previous btn btn-default" value="Previous" />  
+        <input type="button" name="next" class="next btn btn-info" value="Next" disabled />
       </fieldset>
       <fieldset class="intervantion-qualification" data-count-page="11" >
         <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>

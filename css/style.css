@@ -90,13 +90,6 @@
     display:block;
   }
 
-  .category-real-estate-btn{
-    display:none;
-  }
-
-  .category-real-estate-btn.active{
-    display: block;
-  }
 
   /* pop-up dei form */
 
