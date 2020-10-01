@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="img/Favicon.png" type="image/png" sizes="48x48">
 
 </head>
 
@@ -335,10 +336,12 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="clima">Climatizzazione invernale</label>
-              <select name="clima" id="clima" class="form-control">
-                <option>Impianto autonomo</option>
-                <option>Impianto centralizzato</option>
+              <label for="involucroImpresa">Tipologia involucro</label>
+              <input type="text" class="form-control" name="clima" id="involucroImpresa" placeholder="Tipologia Involucro" data-toggle="modal" data-target="#InvolucroModalBusiness" data-whatever="@mdo">
+            </div>
+            <div class="form-group">
+              <label for="clima">Involucro opaco</label>
+              <input type="text" class="form-control" name="clima" id="clima" placeholder="Involucro opaco" data-toggle="modal" data-target="#climaModalBusiness" data-whatever="@mdo">
               </select>
             </div>
             <div class="form-group">
@@ -351,6 +354,86 @@
             </div>
             <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
             <input type="button" name="next" class="next btn btn-info" value="Next" />
+
+            <div class="modal fade" id="climaModalBusiness" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="form-group">
+                      <label for="tipoRisc">Tipologia generazione riscaldamento</label>
+                        <select name="tipoRisc" id="tipoRisc" class="form-control">
+                          <option>Impianto autonomo</option>
+                          <option>Impianto centralizzato</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="caldaie">Tipologia generatore</label>
+                        <select name="caldaie" id="caldaie" class="form-control">
+                          <option>Caldaie tradizionali</option>
+                          <option>Caldaie a condensazione</option>
+                          <option>Caldaie a legna</option>
+                          <option>Caldaie a pompa di calore</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="radiatore"></label>
+                        <select name="radiatore" id="radiatore" class="form-control">
+                          <option>Radiatore</option>
+                          <option>Ventilconvettore</option>
+                          <option>Sistema radiante ad area - pavimento o soffitto -</option>
+                          <option>Unità per il condizionamento dell'aria (Split) - compar</option>
+                        </select>
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                      data-dismiss="modal">Annulla</button>
+                    <button class="saveBtnBusiness" type="button" class="btn btn-primary"
+                      data-dismiss="modal">Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="involucroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="form-group">
+                      <label for="ragione-sociale" class="control-label">Ragione Sociale</label>
+                      <input type="text" class="form-control" id="ragione-sociale">
+                    </div>
+                    <div class="form-group">
+                      <p>
+                        RICERCA LA TUA SOCIETA'
+                        Inserendo la partita iva all'interno del campo
+                        sottostante provvederemo a inserire parte delle
+                        informazioni societarie per te.
+                      </p>
+                      <label for="recipient-lname" class="control-label">Inserisci la partita iva</label>
+                      <input type="text" class="form-control" id="recipient-lname">
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                      data-dismiss="modal">Annulla</button>
+                    <button class="saveBtnBusiness" type="button" class="btn btn-primary"
+                      data-dismiss="modal">Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </fieldset>
 
           <fieldset data-count-page="6" class="person">
@@ -376,10 +459,8 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="clima">Climatizzazione invernale</label>
-              <select name="clima" id="clima" class="form-control">
-                <option>Impianto autonomo</option>
-                <option>Impianto centralizzato</option>
+              <label for="climaPerson">Climatizzazione Invernale</label>
+              <input type="text" class="form-control" name="clima" id="climaPerson" placeholder="Climatizzazione invernale" data-toggle="modal" data-target="#climaModalPerson" data-whatever="@mdo">
               </select>
             </div>
             <div class="form-group">
@@ -392,6 +473,53 @@
             </div>
             <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
             <input type="button" name="next" class="next btn btn-info" value="Next" />
+            
+            <div class="modal fade" id="climaModalPerson" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="form-group">
+                      <label for="tipoRisc">Tipologia generazione riscaldamento</label>
+                        <select name="tipoRisc" id="tipoRisc" class="form-control">
+                          <option>Impianto autonomo</option>
+                          <option>Impianto centralizzato</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="caldaie">Tipologia generatore</label>
+                        <select name="caldaie" id="caldaie" class="form-control">
+                          <option>Caldaie tradizionali</option>
+                          <option>Caldaie a condensazione</option>
+                          <option>Caldaie a legna</option>
+                          <option>Caldaie a pompa di calore</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="radiatore"></label>
+                        <select name="radiatore" id="radiatore" class="form-control">
+                          <option>Radiatore</option>
+                          <option>Ventilconvettore</option>
+                          <option>Sistema radiante ad area - pavimento o soffitto -</option>
+                          <option>Unità per il condizionamento dell'aria (Split) - compar</option>
+                        </select>
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                      data-dismiss="modal">Annulla</button>
+                    <button class="saveBtnBusiness" type="button" class="btn btn-primary"
+                      data-dismiss="modal">Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </fieldset>
 
           <fieldset data-count-page="7">
@@ -422,6 +550,7 @@
             </div>
             <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
             <input type="button" name="next" class="next btn btn-info" value="Next" disabled />
+
           </fieldset>
 
           <fieldset data-count-page="8">
