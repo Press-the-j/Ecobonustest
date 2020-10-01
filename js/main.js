@@ -137,18 +137,31 @@ $(document).ready(function(){
         $(".category-real-estate-btn").addClass("active");
       })
 
+      /*  validazioni checkbox*/
       $(".owner-title input").on('click', function(){
         $(".owner-title input").prop('checked', false);
         $(this).prop('checked', true);
-        $(".next").prop("disabled", false);
+        $(".owner-title").siblings(".next").prop("disabled", false);
       })
 
       $(".category-user input").on('click', function(){
         $(".category-user input").prop('checked', false);
         $(this).prop('checked', true);
-        $(".next").prop("disabled", false);
-        
+        $(".category-user").siblings(".next").prop("disabled", false);
+      })
 
+      $(".intervention-trainant input").on('click', function(){
+        if($(".none-check").is(":checked") && $(this).hasClass("none-check")){
+          $(".intervention-trainant input").prop('checked', false);
+          $(".none-check").prop('checked',true)
+        } else if($(".none-check").is(":checked") && !$(this).hasClass("none-check")){
+          $(".none-check").prop('checked',false)
+        }
+        if($(".intervention-trainant input:checked").length){
+          $(".intervention-trainant").siblings(".next").prop("disabled", false);
+        } else {
+          $(".intervention-trainant").siblings(".next").prop("disabled", true);
+        }
       })
 
       // modale su click bottone per nome e cognome
