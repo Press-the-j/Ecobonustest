@@ -117,6 +117,7 @@
           </fieldset>
 
           <!--Registrazione persona fisica-->
+<<<<<<< HEAD
           <fieldset data-count-page="3" class="person">
 
             <h2>Registrazione persona fisica</h2>
@@ -146,6 +147,36 @@
               <input type="tel" class="form-control" id="tel" name="tel" placeholder="Telefono">
             </div>
             <input type="button" name="previous" class="previous-reg btn btn-info" value="Next" />
+=======
+      <fieldset data-count-page="3" class="person">
+        
+        <h2>Registrazione persona fisica</h2>
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" type="text" class="form-control" id="name" name="name" placeholder="Nome">
+        </div>
+        <div class="form-group">
+            <label for="date">Compleanno</label>
+            <input type="date" class="form-control" id="date" name="date" placeholder="Compleanno">
+        </div>
+        <div class="form-group">
+            <label for="genere">Sesso</label>
+            <select class="form-control" name="genere" id="genere">
+            <option value="maschio">Maschio</option>
+            <option value="maschio">Femmina</option>
+            <option value="maschio">Indefinito</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="tel">Telefono</label>
+            <input type="tel" class="form-control" id="tel" name="tel" placeholder="Telefono">
+        </div>  
+            <input type="button" name="previous" class="previous-reg btn btn-default" value="Previous" />
+>>>>>>> d394ea833c7ac672c12c8f5461cf139bab7639aa
             <input type="button" name="next" class="next btn btn-info" value="Next" />
 
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
