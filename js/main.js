@@ -121,7 +121,7 @@ $(document).ready(function(){
         } else if(type_user==="business"){
           var remove_step=current_st.siblings(".person")
         }
-        console.log(remove_step);
+        
         clone_step=remove_step.clone(true).get()
         remove_step.remove();
 
