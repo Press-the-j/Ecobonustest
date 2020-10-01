@@ -120,8 +120,10 @@ $(document).ready(function(){
         } else if(type_user==="business"){
           var remove_step=current_st.siblings(".person")
         }
-        removeStep.remove();
+        clone_step=remove_step.clone()
+        remove_step.remove();
 
+        console.log(current_st.next());
         current_st.next().show()
         // setClock();
         setProgressBar(++current);
