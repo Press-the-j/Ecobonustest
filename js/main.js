@@ -1,6 +1,6 @@
 $(document).ready(function(){
   var current = 1;
-  var current_step,next_step,steps, type_user, myTimer,cloneStep;
+  var current_step,next_step,steps, type_user, myTimer,clone_step;
   
 
 
@@ -41,6 +41,7 @@ $(document).ready(function(){
       next_step.show();
       current_step.hide();
       setProgressBar(--current);
+      console.log(clone_step);
       clone_step.forEach(element => {
         let el_page=element.getAttribute("data-count-page") -1;
         ($("fieldset[data-count-page='"+ el_page + "']")).after(element)
@@ -120,10 +121,10 @@ $(document).ready(function(){
         } else if(type_user==="business"){
           var remove_step=current_st.siblings(".person")
         }
-        clone_step=remove_step.clone()
+        console.log(remove_step);
+        clone_step=remove_step.clone(true).get()
         remove_step.remove();
 
-        console.log(current_st.next());
         current_st.next().show()
         // setClock();
         setProgressBar(++current);
