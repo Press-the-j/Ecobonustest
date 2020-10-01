@@ -96,7 +96,7 @@
         </fieldset>
             
           <!--Registrazione persona fisica-->
-      <fieldset data-count-page="3_personaFisica" class="person">
+      <fieldset data-count-page="3" class="person">
         
         <h2>Registrazione persona fisica</h2>
         <div class="form-group">
@@ -126,7 +126,9 @@
         <div class="form-group">
             <label for="tel">Telefono</label>
             <input type="tel" class="form-control" id="tel" name="tel" placeholder="Telefono">
-        </div>  
+        </div>
+
+        <input type="button" name="previous" class="previous-reg btn btn-info" value="Next" />
         <input type="button" name="next" class="next btn btn-info" value="Next" />
           
 
@@ -156,7 +158,7 @@
         </div>
 
       </fieldset>
-      <fieldset data-count-page="3_impresa" class="business">
+      <fieldset data-count-page="4" class="business">
         <h2>Registrazione impresa</h2>
         <div class="form-group">
             <label for="rag">Ragione sociale</label>
@@ -182,7 +184,7 @@
             <label for="tel">Telefono</label>
             <input type="tel" class="form-control" id="tel" name="tel" placeholder="Telefono">
         </div>
-            <input type="button" name="previous" class="previous btn btn-default" value="Previous" />  
+            <input type="button" name="previous" class="previous-reg btn btn-default" value="Previous" />  
             <input type="button" name="next" class="next btn btn-info" value="Next" />
       </fieldset>
         <!-- popup mappa-->
@@ -221,7 +223,7 @@
       </fieldset> -->
       
       
-      <fieldset data-count-page="4_impresa" class="business">
+      <fieldset data-count-page="5" class="business">
         <h2>Raccolta dati immobile impresa</h2>
         <div class="form-group">
             <label for="dove">Dove si trova?</label>
@@ -262,7 +264,7 @@
         <input type="button" name="next" class="next btn btn-info" value="Next" />
       </fieldset>
       
-      <fieldset data-count-page="4_personaFisica" class="person">
+      <fieldset data-count-page="6" class="person">
         <h2>Raccolta dati immobile persona fisica</h2>
         <div class="form-group">
             <label for="dove">Dove si trova?</label>
@@ -303,7 +305,7 @@
         <input type="button" name="next" class="next btn btn-info" value="Next" />
       </fieldset>
 
-      <fieldset data-count-page="5">
+      <fieldset data-count-page="7">
         <h2>Checkbox</h2>
         <h4>Proprietà e detenzione dell’immobile</h4>
         <p>Domenico, con quale titolo possiedi o detieni l'immobile?</p>
@@ -333,7 +335,7 @@
         <input type="button" name="next" class="next btn btn-info" value="Next" />
       </fieldset>
 
-      <fieldset data-count-page="6">
+      <fieldset data-count-page="8">
         <div class="title-select">
           <strong>Categoria catastale dell'immobile</strong><span class="glyphicon glyphicon-question-sign"></span>
           <p>qual'è la categoria catastale del tuo immobile?</p>
@@ -425,13 +427,13 @@
         <input type="button" name="next" class="next category-real-estate-btn btn btn-info" value="Next" />
       </fieldset>
 
-      <fieldset class="test"data-count-page="7">
+      <fieldset class="test"data-count-page="9">
         <strong>Estraneità all'attività imprenditoriale</strong><span class="glyphicon glyphicon-question-sign"></span>
         <p>Il beneficiario dell'intervento è una persona fisica che agisce in veste di privato e quindi estraneo ad attività imprenditoriale e/o professionale?</p>
         <div class="btn next btn-primary">No</div>
         <div class="btn next btn-primary">Si</div>
       </fieldset>
-      <fieldset data-count-page="8">
+      <fieldset data-count-page="10">
         <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
         <p>Rientri all'interno di quale delle seguenti categorie?</p>
         <div class="form-group category-user">
@@ -458,7 +460,7 @@
           </div>
       </div>
       </fieldset>
-      <fieldset class="intervantion-qualification" data-count-page="9" >
+      <fieldset class="intervantion-qualification" data-count-page="11" >
         <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
         <p>Nel periodo tra il 1 luglio 2020 e il 31 dicembre 2021 hai sostenuto/sosterrai una spesa relativa ad uno dei seguenti interventi trainanti?(sono possibili più risposte)</p>
         <div class="form-group">
@@ -479,7 +481,7 @@
         <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
         <input type="button" name="next" class="next btn btn-success" value="Continua"/>
       </fieldset>
-      <fieldset data-count-page="10" class="sismic-intervention">
+      <fieldset data-count-page="12" class="sismic-intervention">
         <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
         <p>l'unità immobiliare su cui hai effettuato / effettuari l'intervento è situata nelle zone sismiche 1,2 e 3 di cui all'ordinanza del Presidente del Consiglio dei ministri n.3274 del 20 marzo 2003?</p>
         <p>Confermi l'indirizzo dell'immobile?</p>
@@ -488,14 +490,14 @@
         <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
         <input type="button" name="next" class="next btn btn-success" value="Continua"/>
       </fieldset>
-      <fieldset>
+      <fieldset data-count-page="13">
         <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
         <p>Gli immobili su cui effettuare l'intervento trainato sono sottoposti alla tutela disciplinatadal codice dei beni culturali e del paesaggio o per effetto di regolamenti edilizi, urbanistici e ambientali e pertanto sugli stessi non possono essere realizzati interventi trainanti?</p>
         <input type="button" class="previous btn btn-default" value="No" />
         <input type="button" class="next btn btn-success" value="Si"/>
         
       </fieldset>
-      <fieldset>
+      <fieldset data-count-page="14">
         <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
         <p>Hai gà usufruito di interventi per l'efficientamento energetico su almeno altre 2 unità immobiliari?(non rientrano nel computo delle 2 unità immobiliari gli interventi effettuati sulle parti comuni del condominio)</p>
         <input type="button" class="previous btn btn-default" value="No" />

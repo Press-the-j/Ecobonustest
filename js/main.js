@@ -1,6 +1,6 @@
 $(document).ready(function(){
   var current = 1;
-  var current_step,next_step,steps, type_user, myTimer;
+  var current_step,next_step,steps, type_user, myTimer,cloneStep;
   
 
 
@@ -19,7 +19,6 @@ $(document).ready(function(){
       current_step = $(this).parent();
       console.log(current_step);
       next_step = $(this).parent().next();
-      console.log(next_step);
       next_step.show();
       current_step.hide();
       setProgressBar(++current);
@@ -34,7 +33,10 @@ $(document).ready(function(){
       current_step.hide();
       setProgressBar(--current);
     });
-  
+    
+    $(".previous-reg").on('click', function(){
+      console.log(clone_step[0].getAttribute("data-count-page"));
+    })
     setProgressBar(current);
   
     // barra di progresso, cambio percentuale
@@ -63,7 +65,7 @@ $(document).ready(function(){
         }
         if(timer==0){
           clearInterval(myTimer);
-          location.reload();
+          //location.reload();
         }
       }, 1000)
     }
@@ -104,16 +106,17 @@ $(document).ready(function(){
         current_st.hide();
                 
         if(type_user==="person"){
-          var removeStep=current_st.siblings(".business");
+          var remove_step=current_st.siblings(".business")
         } else if(type_user==="business"){
-          var removeStep=current_st.siblings(".person");
+          var remove_step=current_st.siblings(".person")
         }
-        removeStep.remove();
-
-        current_st.next().show()
+        
+        clone_step= remove_step.clone().get();
+        remove_step.remove();
+        current_st.next().show();
+        console.log(current_st.nextAll('.show:first').show());
         setClock();
         setProgressBar(++current);
-        console.log(next_step);
       });
       
       $(".choose-category").on('change', function(){
