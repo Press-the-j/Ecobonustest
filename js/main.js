@@ -60,6 +60,7 @@ $(document).ready(function(){
         .html(percentuale+"%");   
     }
 
+//test
 
 // da richiamare quando metteremo il timer
     function setClock(){
