@@ -25,6 +25,11 @@ body {
     display: none;
 }
 
+@font-face {
+    font-family: "fontClock";
+    src: url("../fonts/TickingTimebombBB.ttf");
+}
+
 .clock {
     text-align: right;
     z-index: 999;
@@ -33,6 +38,7 @@ body {
     top: 8px;
     font-size: 28px;
     color: #46eeaa;
+    font-family: fontClock;
 }
 
 .info,
@@ -251,4 +257,5 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    margin-bottom: 20px;
 }
