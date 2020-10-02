@@ -465,11 +465,18 @@
             <div class="form-group">
               <label for="
               winter-air-conditioning">Climatizzazione Invernale</label>
+<<<<<<< HEAD
               <input class="form-control input-control" type="text" id="winter-air-conditioning" data-toggle="modal"
                 data-target="#winter-air-conditioning-popup" placeholder="Climatizzazione invernale"
                 data-receive-from="">
+=======
+              <input class="form-control input-control" type="text" id="winter-air-conditioning" data-toggle="modal" data-target="#winter-air-conditioning-popup" placeholder="Climatizzazione invernale" data-receive-from="generation-heating-input">
+>>>>>>> 637cf770830c02629ff67c2f7e69a451204b1f01
               <small class="error"></small>
+              <input type="hidden" data-receive-from="generator-type-input" class="input-control">
+              <input type="hidden" class="input-control" data-receive-from="terminal-type-input">
             </div>
+
             <div class="form-group">
               <label for="opaque-casing">Involucro opaco</label>
               <input type="text" class="form-control input-control" name="clima" id="opaque-casing"
@@ -506,18 +513,19 @@
                         aria-hidden="true">&times;</span></button>
                   </div>
                   <div class="modal-body">
-
                     <div class="form-group">
                       <label for="generation-heating" class="control-label">Tipologia generazione riscaldamento</label>
-                      <select class="form-control select-control" name="" id="generation-heating">
+                      <select class="form-control select-control send-val" name="" id="generation-heating">
                         <option style="display:none">Tipologia generazione riscaldamento</option>
                         <option value="">Impianto autonomo</option>
                         <option value="">Impianto centralizzato</option>
                       </select>
+                      <small class="error"></small>
                     </div>
+                    <input type="hidden" class="popup-control" data-error="generation-heating" id="generation-heating-input">
                     <div class="form-group">
                       <label for="generator-type" class="control-label">Tipologia generatore</label>
-                      <select class="form-control select-control" name="" id="generator-type">
+                      <select class="form-control select-control send-val" name="" id="generator-type">
                         <option style="display:none">Tipologia generatore</option>
                         <option value="">Caldaie tradizionali</option>
                         <option value="">Caldaie a condensazione</option>
@@ -525,23 +533,27 @@
                         <option value="">Caldaie a biomassa</option>
                         <option value="">Caldaie a pompa di calore</option>
                       </select>
+                      <small class="error"></small>
                     </div>
+                    <input data-error="generator-type" class="popup-control" type="hidden" id="generator-type-input">
                     <div class="form-group">
-                      <label for="terminal-type" class="control-label">Tipologia generatore</label>
-                      <select class="form-control select-control" name="" id="terminal-type">
+                      <label for="terminal-type" class="control-label">Tipologia terminale emissione</label>
+                      <select class="form-control select-control send-val" name="" id="terminal-type">
                         <option style="display:none">Tipologia terminale emissione</option>
                         <option value="">Radiatore</option>
                         <option value="">Ventilconvettore</option>
                         <option value="">Sistema radiante ad area -pavimento o soffitto-</option>
                         <option value="">Unità per il condizionamento dell'aria(Split)</option>
                       </select>
+                      <small class="error"></small>
                     </div>
+                    <input type="hidden" class="popup-control" data-error="terminal-type" id="terminal-type-input">
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
-                    <button class="saveBtnBusiness" type="button" class="btn btn-primary"
-                      data-dismiss="modal">Salva</button>
+                    <button class="save-pop-up" type="button" class="btn btn-primary"
+                      >Salva</button>
                   </div>
                 </div>
               </div>
@@ -567,6 +579,7 @@
                         <option value="">Parete a cassa vuota con mattoni forati</option>
                         <option value="">Altro</option>
                       </select>
+                      <small class=".error"></small>
                     </div>
                     <div class="form-group">
                       <label for="coat">Le pareti sono gia state isolate mediante cappotto?</label>

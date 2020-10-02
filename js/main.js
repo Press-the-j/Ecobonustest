@@ -179,6 +179,7 @@ $(document).ready(function(){
       })
 
       //! funzione di controllo per sbloccare next al completamento di tutti gli inputin pagina
+        //? dare classe input-control agli input che devono essere controllati
       function controlInput(countPage){
         let inputs = $(`fieldset[data-count-page=${countPage}] .input-control`).get()
         let emptyInput=false
@@ -195,25 +196,70 @@ $(document).ready(function(){
         }
         return true
       }
-     
-     
-      
-      /* //!funzione per inserire automaticamente i dati dei pop up negli input */
-      $(".save-pop-up").on('click', function(){
-        let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
-        console.log(fieldset_count_page);
-
-        let pop_up_input =$(this).closest('.modal').find('input').get();
-        console.log(pop_up_input);
-        for(let i=0; i<pop_up_input.length; i++){
-          let id_pop_up_input=pop_up_input[i].getAttribute('id');
-          if($(`fieldset[data-count-page=${fieldset_count_page}] input[data-receive-from=${id_pop_up_input}]`).length){
-           let inputText=pop_up_input[i].value;
-           console.log(id_pop_up_input);
-           $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
-          }
-        }
+     //! funzione di controllo dei pop-up, che blocca il salvataggio dei dati negli input se non viene selezionato tutto
+        //? dare classe popup-control agli input che devono essere controllati all'interno del popup
         
+     function controlPopup(popupId){
+      let inputs=$(`#${popupId} .popup-control`).get();
+      let emptyInput=false;
+      inputs.forEach(element => {
+        if(element.value.length==0){
+          
+          let dataError=element.getAttribute('data-error');
+          emptyInput=true
+          let errorBox=$(`#${dataError}`).siblings('.error')
+          console.log(errorBox);
+          let label=$(`#${dataError}`).siblings('label').text()
+          console.log(label);
+          errorBox.text(`${label} deve essere compilato `);
+        }
+      })
+      if(emptyInput){
+        return false
+      }
+      return true
+     }
+      
+      //!funzione per inserire automaticamente i dati dei pop up negli input
+        //? dare classe save-pop-up al bottone salva
+        //? settare negli input in pagina il data-receive-from uguale all'id del pop up di cui salvare i dati
+      $(".save-pop-up").on('click', function(e){
+        let pop_up=$(this).closest('.modal').attr('id');
+        let control=controlPopup(pop_up);
+        console.log(control);
+        if(!control){
+          e.preventDefault()
+        } else {
+          $(this).closest('.modal').find('.close').click()
+          let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
+          let pop_up_input =$(this).closest('.modal').find('input').get();
+          console.log(pop_up_input);
+          
+          for(let i=0; i<pop_up_input.length; i++){
+            let id_pop_up_input=pop_up_input[i].getAttribute('id');
+            console.log(id_pop_up_input);
+            if($(`fieldset[data-count-page=${fieldset_count_page}] input[data-receive-from=${id_pop_up_input}]`).length){
+              console.log(pop_up_input[i].value);
+              let inputText=pop_up_input[i].value;
+              console.log(inputText);
+              console.log(id_pop_up_input);
+              $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
+            }
+          }
+        }   
+        
+        
+        
+      })
+
+      $(".send-val").on("change", function(){
+        $(this).siblings(".error").text('')
+        let valSelect=$(this).find("option:selected").text();
+        let idSelect=$(this).attr('id');
+        let hiddenInput=$(`#${idSelect}-input`).get();
+        hiddenInput[0].value=valSelect
+        console.log(hiddenInput[0].value);
+        //hiddenInput.val(valSelect)
       })
 
       /* $(".sismic-intervantion").on("click", function(){
