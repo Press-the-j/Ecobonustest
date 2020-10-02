@@ -1,6 +1,14 @@
 /* /* nascondo tutti i fieldset ad eccezione del primo */
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 body{
   font-family: 'Lato', sans-serif;
+  color: #2c3036;
+  background-color: #EBECF0;
 }
 
    #formComp fieldset:not(:first-of-type) {
@@ -78,6 +86,15 @@ body{
       position: relative;
   }
 
+  .head img{
+    height: 220px;
+    width: 220px;
+    border-radius: 34px;
+background: linear-gradient(145deg, #ffffff, #d9dadd);
+box-shadow:  33px 33px 96px #c3c4c6, 
+             -33px -33px 96px #ffffff;
+  }
+
   /* Select per categoria immobile */
 
   .category-real-estate{
@@ -89,8 +106,7 @@ body{
   }
 
 input[type="button"], button{
-background-color: rgb(70,238,170);
-background: linear-gradient(180deg, rgba(70,238,170,1) 0%, rgba(111,214,255,1) 100%);
+background-color: #46eeaa;
 outline: 0;
 border: none;
 border-radius: 50px;
@@ -101,6 +117,7 @@ font-weight: bold;
 -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.12);
 -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.12);
 box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.12);
+cursor: pointer;
 }
 
 .continua{
@@ -108,4 +125,85 @@ box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.12);
   margin: 0 auto;
 }
 
-/* switch */
+/* inizio switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .2s;
+  transition: .2s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+
+}
+
+input:checked + .slider {
+  background-color: #46eeaa;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #46eeaa;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.flexCenter{
+  display: flex;
+}
+
+label.switch{
+  margin-right: 8px;
+}
+
+/* fine toggle switch */
+
+.container{
+  margin-top: 100px;
+}
+
+a{
+  color: #2c3036;
+  font-weight: bold;
+}
+
+a:hover{
+  color: #2c3036;
+}
+
+.continua:hover{
+  border-radius: 50px;
+  background: linear-gradient(145deg, #3fd699, #4bffb6);
+}
