@@ -68,18 +68,60 @@
                 <img class="img-responsive" src="img/placeholder.png" alt="immagine impresa">
                 <div class="question">
                   <div class="type-user" data-typeUser="business">Sei un&#39;impresa&#63;</div>
-                  <span id="impresa" class="glyphicon glyphicon-question-sign"></span>
+                  <span data-toggle="modal" data-target="#business-infos"id="impresa" class="glyphicon glyphicon-question-sign"></span>
                 </div>
               </div>
               <div class="scegli">
                 <img class="img-responsive" src="img/placeholder.png" alt="immagine impresa">
                 <div class="question">
                   <div class="type-user" data-typeUser="person"> Sei una persona fisica&#63;</div>
-                  <span id="personaFisica" class="glyphicon glyphicon-question-sign"></span>
+                  <span data-toggle="modal" data-target="#person-infos" id="personaFisica" class="glyphicon glyphicon-question-sign"></span>
                 </div>
               </div>
             </section>
-            <section class="info">
+            <!-- pop up info impresa-->
+            <div class="modal fade" id="business-infos" tabindex="-1" role="dialog" aria-labelledby="">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Sei un'impresa?</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur       adipisicing elit. Dolor corporis molestiae distinctio debitis
+                      aperiam repellendus est, aliquam fugit reiciendis, quam dolorum? Eum earum facilis reiciendis eos
+                      omnis aspernatur consequuntur nulla.
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- pop up info persona fisica -->
+            <div class="modal fade" id="person-infos" tabindex="-1" role="dialog" aria-labelledby="">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Sei una persona fisica?</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur       adipisicing elit. Dolor corporis molestiae distinctio debitis
+                      aperiam repellendus est, aliquam fugit reiciendis, quam dolorum? Eum earum facilis reiciendis eos
+                      omnis aspernatur consequuntur nulla.
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <section class="info">
               <div class="chiudiInfo"><span class="glyphicon glyphicon-remove"></span></div>
               <div>
                 <h3>
@@ -114,7 +156,7 @@
                   omnis aspernatur consequuntur nulla.
                 </p>
               </div>
-            </section>
+            </section> -->
           </fieldset>
 
           <!--Registrazione persona fisica-->
@@ -177,35 +219,35 @@
               </div>
             </div>
           </fieldset>
-          <fieldset data-count-page="4" class="business test">
+          <fieldset data-count-page="4" class="business">
             <h2>Registrazione impresa</h2>
             <div class="form-group">
               <label for="rag">Ragione sociale</label>
-              <input type="text" class="form-control fieldset-input" id="rag" name="rag" placeholder="Ragione sociale"
+              <input type="text" class="form-control fieldset-input input-control" id="rag" name="rag" placeholder="Ragione sociale"
                 data-toggle="modal" data-target="#business-name" data-whatever="@mdo" data-receive-from="company-name">
             </div>
             <div class="form-group">
               <label for="pi">Partita iva</label>
-              <input type="number" class="form-control fieldset-input" id="pi" name="pi" placeholder="Partita iva" data-receive-from="p-iva">
+              <input type="number" class="form-control fieldset-input input-control" id="pi" name="pi" placeholder="Partita iva" data-receive-from="p-iva">
             </div>
             <div class="form-group">
               <label for="sede">Sede legale</label>
-              <input type="text" class="form-control fieldset-input" id="sede" name="sede" placeholder="Sede legale" data-toggle="modal" data-target="#registered-office" data-whatever="@mdo" data-receive-from="address-registered-office">
+              <input type="text" class="form-control fieldset-input input-control" id="sede" name="sede" placeholder="Sede legale" data-toggle="modal" data-target="#registered-office" data-whatever="@mdo" data-receive-from="address-registered-office">
             </div>
             <div class="form-group">
               <label for="sede">Referente</label>
-              <input type="number" class="form-control fieldset-input" id="referente" name="referente" placeholder="Referente">
+              <input data-toggle="modal" data-target="#referent-registration" type="text" class="form-control fieldset-input input-control" id="referente" name="referente" placeholder="Referente" data-receive-from="name-referent-registration">
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" class="form-control fieldset-input" id="email" name="email" placeholder="Email">
+              <input data-toggle="modal" data-target="#referent-registration" type="email" class="form-control fieldset-input input-control" id="email" name="email" placeholder="Email" data-receive-from="email-referent-registration">
             </div>
             <div class="form-group">
               <label for="tel">Telefono</label>
-              <input type="tel" class="form-control fieldset-input" id="tel" name="tel" placeholder="Telefono">
+              <input data-toggle="modal" data-target="#referent-registration" type="tel" class="form-control fieldset-input input-control" id="tel" name="tel" placeholder="Telefono" data-receive-from="number-referent-registration">
             </div>
             <input type="button" name="previous" class="previous-reg btn btn-default" value="Previous" />
-            <input type="button" name="next" class="next btn btn-info" value="Next" />
+            <input type="button" name="next" class="next btn btn-info" value="Next" disabled/>
             <!--  popup ragione sociale -->
             <div class="modal fade" id="business-name" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
               <div class="modal-dialog" role="document">
@@ -246,7 +288,7 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
+                    aria-hidden="true">&times;</span></button>
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
@@ -269,13 +311,43 @@
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
-                    <button class="save-registered-office save-pop-up" type="button" class="btn btn-primary"
+                    <button class="save-pop-up" type="button" class="btn btn-primary"
                       data-dismiss="modal">Salva</button>
                   </div>
                 </div>
               </div>
             </div>
-            
+            <!-- pop up referente -->
+            <div class="modal fade" id="referent-registration" tabindex="-1" role="dialog" aria-labelledby="">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="address-registered-office" class="control-label">Referente</label>
+                      <input type="text" class="form-control" id="name-referent-registration">
+                    </div>
+                    <div class="form-group">
+                      <label for="street-registered-office" class="control-label">Email</label>
+                      <input type="text" class="form-control" id="email-referent-registration">
+                    </div>
+                    <div class="form-group">
+                      <label for="postal-code-registered-office" class="control-label">Telefono</label>
+                      <input type="text" class="form-control" id="number-referent-registration">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                      data-dismiss="modal">Annulla</button>
+                    <button class=" save-pop-up" type="button" class="btn btn-primary"
+                      data-dismiss="modal">Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </fieldset>
           <!-- popup mappa-->
           <!-- <fieldset>

@@ -132,7 +132,7 @@ $(document).ready(function(){
         setProgressBar(++current);
       });
       
-       /* validazione select */
+       /* //!validazione select */
       $(".choose-category").on('change', function(){
         let selectedCategory= $(this).val();
         if(selectedCategory !=="none"){
@@ -145,7 +145,7 @@ $(document).ready(function(){
         $(".category-real-estate-btn").addClass("active");
       })
 
-      /*  validazioni checkbox*/
+      /* //! validazioni checkbox*/
       $(".owner-title input").on('click', function(){
         $(".owner-title input").prop('checked', false);
         $(this).prop('checked', true);
@@ -172,48 +172,43 @@ $(document).ready(function(){
         }
       })
 
+      //! funzione di controllo per sbloccare next al completamento di tutti gli inputin pagina
+      function controlInput(countPage){
+        let inputs = $(`fieldset[data-count-page=${countPage}] .input-control`).get()
+        let emptyInput=false
+        inputs.forEach(element => {
+          console.log(element.value.length);
+          if(element.value.length==0){
+            emptyInput=true
+          }
+        })
+        if(emptyInput){
+          return false
+        }
+        return true
+      }
      
 
-      // modale su click bottone per nome e cognome
-      $(".saveBtn").on('click', function(){
-
-        let valueName = $('#recipient-name').val();
-        let valueLName = $('#recipient-lname').val();
-        let trimName = $.trim(valueName);
-        let trimLName = $.trim(valueLName);
-       if ( valueName.trim() || valueLName.trim() && countClick !== 1){
-        $('#name').attr('data-toggle', 'hide');
-        $('#name').val($.trim(trimName) + " " + $.trim(trimLName));
-       }
-       let countClick = 1;
-      })
-
-      $(".saveBtnBusiness").on('click', function(){
-
-        let valueRag = $('#ragione-sociale').val();
-        let trimValueRag = $.trim(valueRag);
-       if ( valueRag.trim() || valueLName.trim()){
-        $('#rag').attr('data-toggle', 'hide');
-        $('#rag').val($.trim(trimValueRag));
-       }
-        
-      })
-
+      
+      /* //!funzione per inserire automaticamente i dati dei pop up negli input */
       $(".save-pop-up").on('click', function(){
-        let fieldset_id=$(this).closest("fieldset").attr("data-count-page")
-        console.log(fieldset_id);
+        let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
+        console.log(fieldset_count_page);
 
         let pop_up_input =$(this).closest('.modal').find('input').get();
         console.log(pop_up_input);
         for(let i=0; i<pop_up_input.length; i++){
           let id_pop_up_input=pop_up_input[i].getAttribute('id');
-          if($(`fieldset[data-count-page=${fieldset_id}] input[data-receive-from=${id_pop_up_input}]`).length){
+          if($(`fieldset[data-count-page=${fieldset_count_page}] input[data-receive-from=${id_pop_up_input}]`).length){
            let inputText=pop_up_input[i].value;
            console.log(id_pop_up_input);
            $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
           }
         }
-        
+        let control =controlInput(fieldset_count_page);
+        if (control==true){
+          
+        }
       })
 
       /* $(".sismic-intervantion").on("click", function(){
