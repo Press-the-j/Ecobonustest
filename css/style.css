@@ -8,6 +8,7 @@
 body{
   font-family: 'Lato', sans-serif;
   color: #2c3036;
+  background-color: #EBECF0;
 }
 
    #formComp fieldset:not(:first-of-type) {
@@ -85,6 +86,15 @@ body{
       position: relative;
   }
 
+  .head img{
+    height: 220px;
+    width: 220px;
+    border-radius: 34px;
+background: linear-gradient(145deg, #ffffff, #d9dadd);
+box-shadow:  33px 33px 96px #c3c4c6, 
+             -33px -33px 96px #ffffff;
+  }
+
   /* Select per categoria immobile */
 
   .category-real-estate{
@@ -96,8 +106,7 @@ body{
   }
 
 input[type="button"], button{
-background-color: rgb(70,238,170);
-background: linear-gradient(180deg, rgba(70,238,170,1) 0%, rgba(111,214,255,1) 100%);
+background-color: #46eeaa;
 outline: 0;
 border: none;
 border-radius: 50px;
@@ -181,6 +190,10 @@ label.switch{
 
 /* fine toggle switch */
 
+.container{
+  margin-top: 100px;
+}
+
 a{
   color: #2c3036;
   font-weight: bold;
@@ -188,4 +201,9 @@ a{
 
 a:hover{
   color: #2c3036;
+}
+
+.continua:hover{
+  border-radius: 50px;
+  background: linear-gradient(145deg, #3fd699, #4bffb6);
 }
