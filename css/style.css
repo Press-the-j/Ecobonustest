@@ -69,11 +69,7 @@ body{
       display: flex;
       justify-content: space-around;
       position: relative;
-  }
-
-  .scegli img{
-      height: 200px;
-      width: auto;
+      flex-wrap: wrap;
   }
 
   .question{
@@ -90,8 +86,8 @@ body{
     height: 220px;
     width: 220px;
     border-radius: 34px;
-background: linear-gradient(145deg, #ffffff, #d9dadd);
-box-shadow:  33px 33px 96px #c3c4c6, 
+    background: linear-gradient(145deg, #ffffff, #d9dadd);
+    box-shadow:  33px 33px 96px #c3c4c6, 
              -33px -33px 96px #ffffff;
   }
 
@@ -123,6 +119,7 @@ cursor: pointer;
 .continua{
   display: block;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 /* inizio switch */
@@ -210,3 +207,10 @@ a:hover{
 .type-user{
   margin-top: 10px;
 }
+
+.imageType{
+  height: 100px;
+  width: auto;
+  text-align: center;
+}
+
