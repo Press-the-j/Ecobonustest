@@ -16,7 +16,7 @@ body{
   }  
 
   .progress-bar{
-    background-color: orange;
+    background-color: #46eeaa;
 }
 
  .progress, .clock{
@@ -203,7 +203,10 @@ a:hover{
   color: #2c3036;
 }
 
-.continua:hover{
+.continua:hover, .type-user:hover{
   border-radius: 50px;
   background: linear-gradient(145deg, #3fd699, #4bffb6);
+}
+.type-user{
+  margin-top: 10px;
 }
