@@ -1,3 +1,5 @@
+
+
 $(document).ready(function(){
   var current = 1;
   var current_step,next_step,steps, type_user, myTimer,clone_step;
@@ -17,13 +19,17 @@ $(document).ready(function(){
   
     $(".next").on('click',function(e){
       current_step = $(this).parent();
-      console.log(current_step);
-      next_step = $(this).parent().next();
-      next_step.show();
-      current_step.hide();
-      setProgressBar(++current);
-      $(".progress").css("display","block");
-      setClock();
+      let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
+      let control=controlInput(fieldset_count_page);
+      //if(control){
+        next_step = $(this).parent().next();
+        next_step.show();
+        current_step.hide();
+        setProgressBar(++current);
+        $(".progress").css("display","block");
+        setClock();
+        $('.error').text('')
+      //}
     });
   
     $(".previous").on('click',function(){
@@ -177,9 +183,11 @@ $(document).ready(function(){
         let inputs = $(`fieldset[data-count-page=${countPage}] .input-control`).get()
         let emptyInput=false
         inputs.forEach(element => {
-          console.log(element.value.length);
           if(element.value.length==0){
             emptyInput=true
+            let errorBox=element.nextElementSibling
+            let label=element.previousElementSibling.innerHTML
+            errorBox.innerHTML=`${label} deve essere compilato `;
           }
         })
         if(emptyInput){
@@ -188,7 +196,7 @@ $(document).ready(function(){
         return true
       }
      
-
+     
       
       /* //!funzione per inserire automaticamente i dati dei pop up negli input */
       $(".save-pop-up").on('click', function(){
@@ -205,10 +213,7 @@ $(document).ready(function(){
            $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
           }
         }
-        let control =controlInput(fieldset_count_page);
-        if (control==true){
-          
-        }
+        
       })
 
       /* $(".sismic-intervantion").on("click", function(){

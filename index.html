@@ -167,26 +167,31 @@
               <label for="name">Nome</label>
               <input data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" type="text"
                 class="form-control" id="name" name="name" placeholder="Nome">
+              <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="date">Compleanno</label>
               <input type="date" class="form-control" id="date" name="date" placeholder="Compleanno">
+              <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="genere">Sesso</label>
-              <select class="form-control" name="genere" id="genere">
+              <select class="form-control select-control" name="genere" id="genere">
                 <option value="maschio">Maschio</option>
                 <option value="maschio">Femmina</option>
                 <option value="maschio">Indefinito</option>
               </select>
+              <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="email">Email</label>
               <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+              <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="tel">Telefono</label>
               <input type="tel" class="form-control" id="tel" name="tel" placeholder="Telefono">
+              <small class="error"></small>
             </div>
             <input type="button" name="previous" class="previous-reg btn btn-default" value="Previous" />
             <input type="button" name="next" class="next btn btn-info" value="Next" />
@@ -225,29 +230,35 @@
               <label for="rag">Ragione sociale</label>
               <input type="text" class="form-control fieldset-input input-control" id="rag" name="rag" placeholder="Ragione sociale"
                 data-toggle="modal" data-target="#business-name" data-whatever="@mdo" data-receive-from="company-name">
+              <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="pi">Partita iva</label>
-              <input type="number" class="form-control fieldset-input input-control" id="pi" name="pi" placeholder="Partita iva" data-receive-from="p-iva">
+              <input type="number" class="form-control fieldset-input input-control" id="pi" name="pi" placeholder="Partita iva" data-toggle="modal" data-target="#business-name" data-whatever="@mdo" data-receive-from="p-iva">
+              <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="sede">Sede legale</label>
               <input type="text" class="form-control fieldset-input input-control" id="sede" name="sede" placeholder="Sede legale" data-toggle="modal" data-target="#registered-office" data-whatever="@mdo" data-receive-from="address-registered-office">
+              <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="sede">Referente</label>
               <input data-toggle="modal" data-target="#referent-registration" type="text" class="form-control fieldset-input input-control" id="referente" name="referente" placeholder="Referente" data-receive-from="name-referent-registration">
+              <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="email">Email</label>
               <input data-toggle="modal" data-target="#referent-registration" type="email" class="form-control fieldset-input input-control" id="email" name="email" placeholder="Email" data-receive-from="email-referent-registration">
+              <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="tel">Telefono</label>
               <input data-toggle="modal" data-target="#referent-registration" type="tel" class="form-control fieldset-input input-control" id="tel" name="tel" placeholder="Telefono" data-receive-from="number-referent-registration">
+              <small class="error"></small>
             </div>
             <input type="button" name="previous" class="previous-reg btn btn-default" value="Previous" />
-            <input type="button" name="next" class="next btn btn-info" value="Next" disabled/>
+            <input type="button" name="next" class="next btn btn-info" value="Next" />
             <!--  popup ragione sociale -->
             <div class="modal fade" id="business-name" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
               <div class="modal-dialog" role="document">
@@ -390,44 +401,76 @@
             <div class="form-group">
               <label for="dove">Dove si trova?</label>
               <input type="text" class="form-control" name="dove" id="dove" placeholder="Dove si trova?">
+              <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="tipo">Tipologia</label>
-              <select name="tipo" id="tipo" class="form-control">
+              <select name="tipo" id="tipo" class="form-control select-control">
                 <option>Villa unifamiliare</option>
                 <option>Villa plurifamiliare</option>
                 <option>Villetta a schiera</option>
               </select>
+              <small class="error"></small>
+            </div>
+            <div class="form-group">
+              <label for="square-meters">Superficie</label>
+              <select name="square-meters" id="square-meters" class="form-control select-control">
+                <option style="display:none">Dimensione superficie</option>
+                <option>30-50mq</option>
+                <option>50-70mq</option>
+                <option>70-90mq</option>
+                <option>90-120mq</option>
+                <option>120-150mq</option>
+                <option>150-180mq</option>
+                <option>180-210mq</option>
+              </select>
+              <small class="error"></small>
+            </div>
+            <div class="form-group">
+              <label for="locals">Locali</label>
+              <input type="text" class="form-control input-control" name="locals" id="locals" placeholder="Numero locali">
+              <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="stato">Stato Immobile</label>
-              <select name="stato" id="stato" class="form-control">
+              <select name="stato" id="stato" class="form-control select-control">
+                <option style="display:none">Stato immobile</option>
                 <option>Nuovo/In Costruzione</option>
                 <option>Buono/Abitabile</option>
                 <option>Da ristrutturare</option>
               </select>
+              <small class="error"></small>
             </div>
             <div class="form-group">
-              <label for="involucroImpresa">Tipologia involucro</label>
-              <input type="text" class="form-control" name="clima" id="involucroImpresa" placeholder="Tipologia Involucro" data-toggle="modal" data-target="#InvolucroModalBusiness" data-whatever="@mdo">
+              <label for="
+              winter-air-conditioning">Climatizzazione Invernale</label>
+              <input class="form-control input-control" type="text" id="winter-air-conditioning" placeholder="Climatizzazione invernale" data-receive-from="">
+              <small class="error"></small>
             </div>
             <div class="form-group">
-              <label for="clima">Involucro opaco</label>
-              <input type="text" class="form-control" name="clima" id="clima" placeholder="Involucro opaco" data-toggle="modal" data-target="#climaModalBusiness" data-whatever="@mdo">
-              </select>
+              <label for="opaque-casing">Involucro opaco</label>
+              <input type="text" class="form-control input-control" name="clima" id="opaque-casing" placeholder="Tipologia Involucro" data-toggle="modal" data-target="#opaque-casing-popup" data-whatever="@mdo">
+              <small class="error"></small>
+            </div>
+            <div class="form-group">
+              <label for="transparent-casing">Involucro trasparente</label>
+              <input type="text" class="form-control input-control" name="transparent-casing" id="transparent-casing" placeholder="Involucro opaco" data-toggle="modal" data-target="#" data-whatever="@mdo">
+              <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="ener">Efficienza Energetica</label>
-              <select name="ener" id="ener" class="form-control">
+              <select name="ener" id="ener" class="form-control select-control">
+                <option style="display:none">Efficienza energetica</option>
                 <option>A,A+,A1-A4</option>
                 <option>B,C,D</option>
                 <option>E,F,G</option>
               </select>
+              <small class="error"></small>
             </div>
             <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
             <input type="button" name="next" class="next btn btn-info" value="Next" />
-
-            <div class="modal fade" id="climaModalBusiness" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <!-- pop up per involucro opaco -->
+            <div class="modal fade" id="opaque-casing-popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -437,65 +480,20 @@
                   <div class="modal-body">
 
                     <div class="form-group">
-                      <label for="tipoRisc">Tipologia generazione riscaldamento</label>
-                        <select name="tipoRisc" id="tipoRisc" class="form-control">
-                          <option>Impianto autonomo</option>
-                          <option>Impianto centralizzato</option>
-                        </select>
+                      <label for="external-walls" class="control-label">Pareti verso l'esterno</label>
+                      <select class="form-control select-control" name="" id="external-walls">
+                        <option style="display:none">Tipo di parete verso l'esterno</option>
+                        <option value="">Muratura di mattoni pieni intonacati sulle due facce</option>
+                        <option value="">Muratura di mattoni semipieni o tufo</option>
+                        <option value="">Pannelli prefabbricati in calcestruzzo</option>
+                        <option value="">Parete a cassa vuota con mattoni forati</option>
+                        <option value="">Altro</option>
+                      </select>
                     </div>
                     <div class="form-group">
-                      <label for="caldaie">Tipologia generatore</label>
-                        <select name="caldaie" id="caldaie" class="form-control">
-                          <option>Caldaie tradizionali</option>
-                          <option>Caldaie a condensazione</option>
-                          <option>Caldaie a legna</option>
-                          <option>Caldaie a pompa di calore</option>
-                        </select>
+                     <label for="coat">Le pareti sono gia state isolate mediante cappotto?</label>
+                     <input type="checkbox" id="coat">
                     </div>
-                    <div class="form-group">
-                      <label for="radiatore"></label>
-                        <select name="radiatore" id="radiatore" class="form-control">
-                          <option>Radiatore</option>
-                          <option>Ventilconvettore</option>
-                          <option>Sistema radiante ad area - pavimento o soffitto -</option>
-                          <option>Unità per il condizionamento dell'aria (Split) - compar</option>
-                        </select>
-                    </div>
-
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"
-                      data-dismiss="modal">Annulla</button>
-                    <button class="saveBtnBusiness" type="button" class="btn btn-primary"
-                      data-dismiss="modal">Salva</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="modal fade" id="involucroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                  </div>
-                  <div class="modal-body">
-
-                    <div class="form-group">
-                      <label for="ragione-sociale" class="control-label">Ragione Sociale</label>
-                      <input type="text" class="form-control" id="ragione-sociale">
-                    </div>
-                    <div class="form-group">
-                      <p>
-                        RICERCA LA TUA SOCIETA'
-                        Inserendo la partita iva all'interno del campo
-                        sottostante provvederemo a inserire parte delle
-                        informazioni societarie per te.
-                      </p>
-                      <label for="recipient-lname" class="control-label">Inserisci la partita iva</label>
-                      <input type="text" class="form-control" id="recipient-lname">
-                    </div>
-
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"
