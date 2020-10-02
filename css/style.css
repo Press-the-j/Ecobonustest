@@ -17,6 +17,7 @@ body{
 
   .progress-bar{
     background-color: #46eeaa;
+    border-radius: 10px;
 }
 
  .progress, .clock{
@@ -206,11 +207,20 @@ a:hover{
 }
 .type-user{
   margin-top: 10px;
+  margin-right: 10px;
 }
 
 .imageType{
-  height: 100px;
-  width: auto;
-  text-align: center;
+  height: 140px;
+  width: 140px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 12px;
+background: linear-gradient(315deg, #d9dadd, #ffffff);
+box-shadow:  -5px -5px 10px #e0e1e4, 
+             5px 5px 10px #ffffff;
 }
 
+.question{
+  cursor: pointer;
+}

@@ -63,7 +63,7 @@ $(document).ready(function(){
       percentuale = percentuale.toFixed();
       $(".progress-bar")
         .css("width",percentuale+"%")
-        .html(percentuale+"%");   
+        // .html(percentuale+"%");   
     }
 
 //test
