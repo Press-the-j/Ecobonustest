@@ -395,17 +395,17 @@
       </fieldset> -->
 
 
-          <fieldset data-count-page="5" class="business">
+          <fieldset data-count-page="5" class="">
             <h2>Raccolta dati immobile impresa</h2>
             <div class="form-group">
               <label for="dove">Dove si trova?</label>
-              <input type="text" class="form-control" name="dove" id="dove" placeholder="Dove si trova?">
+              <input type="text" class="form-control input-control" name="dove" id="dove" placeholder="Dove si trova?">
               <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="tipo">Tipologia</label>
               <select name="tipo" id="tipo" class="form-control select-control">
-                <option style="display:none">Tipologia immobile</option>
+                <option style="display:none" value="none">Tipologia immobile</option>
                 <option>Villa unifamiliare</option>
                 <option>Villa plurifamiliare</option>
                 <option>Villetta a schiera</option>
@@ -415,7 +415,7 @@
             <div class="form-group">
               <label for="square-meters">Superficie</label>
               <select name="square-meters" id="square-meters" class="form-control select-control">
-                <option style="display:none">Dimensione superficie</option>
+                <option style="display:none" value="none">Dimensione superficie</option>
                 <option>30-50mq</option>
                 <option>50-70mq</option>
                 <option>70-90mq</option>
@@ -434,7 +434,7 @@
             <div class="form-group">
               <label for="stato">Stato Immobile</label>
               <select name="stato" id="stato" class="form-control select-control">
-                <option style="display:none">Stato immobile</option>
+                <option style="display:none" value="none">Stato immobile</option>
                 <option>Nuovo/In Costruzione</option>
                 <option>Buono/Abitabile</option>
                 <option>Da ristrutturare</option>
@@ -446,24 +446,25 @@
               winter-air-conditioning">Climatizzazione Invernale</label>
               <input class="form-control input-control" type="text" id="winter-air-conditioning" data-toggle="modal" data-target="#winter-air-conditioning-popup" placeholder="Climatizzazione invernale" data-receive-from="generation-heating-input">
               <small class="error"></small>
-              <input type="hidden" data-receive-from="generator-type-input" class="input-control">
-              <input type="hidden" class="input-control" data-receive-from="terminal-type-input">
+              <input type="hidden" data-receive-from="generator-type-input" class="">
+              <input type="hidden" class="" data-receive-from="terminal-type-input">
             </div>
 
             <div class="form-group">
               <label for="opaque-casing">Involucro opaco</label>
-              <input type="text" class="form-control input-control" name="clima" id="opaque-casing" placeholder="Tipologia Involucro" data-toggle="modal" data-target="#opaque-casing-popup" data-whatever="@mdo">
+              <input type="text" class="form-control input-control" name="clima" id="opaque-casing" placeholder="Tipologia Involucro" data-toggle="modal" data-target="#opaque-casing-popup" data-whatever="@mdo" data-receive-from="external-walls-input">
               <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="transparent-casing">Involucro trasparente</label>
-              <input type="text" class="form-control input-control" name="transparent-casing" id="transparent-casing" placeholder="Involucro opaco" data-toggle="modal" data-target="#transparent-casing-popup" data-whatever="@mdo">
+              <input type="text" class="form-control input-control" name="transparent-casing" id="transparent-casing" placeholder="Involucro opaco" data-toggle="modal" data-target="#transparent-casing-popup" data-whatever="@mdo" data-receive-from="frame-type-input">
               <small class="error"></small>
+              <input type="hidden" data-receive-from="glass-type-input" class="">
             </div>
             <div class="form-group">
               <label for="energy-efficiency">Efficienza Energetica</label>
               <select name="energy-efficiency" id="energy-efficiency" class="form-control select-control">
-                <option style="display:none">Efficienza energetica</option>
+                <option style="display:none" value="none">Efficienza energetica</option>
                 <option>A,A+,A1-A4</option>
                 <option>B,C,D</option>
                 <option>E,F,G</option>
@@ -538,7 +539,7 @@
 
                     <div class="form-group">
                       <label for="external-walls" class="control-label">Pareti verso l'esterno</label>
-                      <select class="form-control select-control" name="" id="external-walls">
+                      <select class="form-control select-control send-val" name="" id="external-walls">
                         <option style="display:none">Tipo di parete verso l'esterno</option>
                         <option value="">Muratura di mattoni pieni intonacati sulle due facce</option>
                         <option value="">Muratura di mattoni semipieni o tufo</option>
@@ -546,8 +547,9 @@
                         <option value="">Parete a cassa vuota con mattoni forati</option>
                         <option value="">Altro</option>
                       </select>
-                      <small class=".error"></small>
+                      <small class="error"></small>
                     </div>
+                    <input type="hidden" class="popup-control" data-error="external-walls" id="external-walls-input">
                     <div class="form-group">
                      <label for="coat">Le pareti sono gia state isolate mediante cappotto?</label>
                      <input type="checkbox" id="coat">
@@ -556,8 +558,7 @@
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
-                    <button class="saveBtnBusiness" type="button" class="btn btn-primary"
-                      data-dismiss="modal">Salva</button>
+                    <button class="save-pop-up" type="button" class="btn btn-primary">Salva</button>
                   </div>
                 </div>
               </div>
@@ -574,7 +575,7 @@
 
                     <div class="form-group">
                       <label for="frame-type" class="control-label">Tipologia telaio infisso</label>
-                      <select class="form-control select-control" name="" id="frame-type">
+                      <select class="form-control send-val" name="" id="frame-type">
                         <option style="display:none">Tipologia telaio</option>
                         <option value="">Telaio in legno</option>
                         <option value="">Telaio in PVC</option>
@@ -582,10 +583,12 @@
                         <option value="">Telaio in alluminio + legno</option>
                         <option value="">Telaio in alluminio a giunto aperto</option>
                       </select>
+                      <small class="error"></small>
                     </div>
+                    <input type="hidden" class="popup-control" data-error="frame-type" id="frame-type-input">
                     <div class="form-group">
                       <label for="glass-type" class="control-label">Tipologia vetro infisso</label>
-                      <select class="form-control select-control" name="" id="glass-type">
+                      <select class="form-control send-val" name="" id="glass-type">
                         <option style="display:none">Tipologia vetro</option>
                         <option value="">Vetro Singolo</option>
                         <option value="">Vetrocamera</option>
@@ -593,20 +596,22 @@
                         <option value="">Triplo vetro</option>
                         <option value="">Triplo vetro basso-emissivo</option>
                       </select>
+                      <small class="error"></small>
                     </div>
                   </div>
+                  <input type="hidden" class="popup-control" data-error="glass-type" id="glass-type-input">
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
-                    <button class="saveBtnBusiness" type="button" class="btn btn-primary"
-                      data-dismiss="modal">Salva</button>
+                    <button class="save-pop-up" type="button" class="btn btn-primary"
+                      >Salva</button>
                   </div>
                 </div>
               </div>
             </div>
             
           </fieldset>
-
+<!-- 
           <fieldset data-count-page="6" class="person">
             <h2>Raccolta dati immobile persona fisica</h2>
             <div class="form-group">
@@ -691,9 +696,9 @@
               </div>
             </div>
 
-          </fieldset>
+          </fieldset> -->
 
-          <fieldset data-count-page="7">
+          <fieldset data-count-page="6">
             <h4>Proprietà e detenzione dell’immobile</h4>
             <p>Domenico, con quale titolo possiedi o detieni l'immobile?</p>
             <div class="form-group owner-title">
@@ -724,7 +729,7 @@
 
           </fieldset>
 
-          <fieldset data-count-page="8">
+          <fieldset data-count-page="7">
             <div class="title-select">
               <strong>Categoria catastale dell'immobile</strong><span class="glyphicon glyphicon-question-sign"></span>
               <p>qual'è la categoria catastale del tuo immobile?</p>
@@ -817,7 +822,7 @@
             <input type="button" name="next" class="next btn btn-info" value="Next" disabled />
           </fieldset>
 
-          <fieldset class="test" data-count-page="9">
+          <fieldset class="test" data-count-page="8">
             <strong>Estraneità all'attività imprenditoriale</strong><span
               class="glyphicon glyphicon-question-sign"></span>
             <p>Il beneficiario dell'intervento è una persona fisica che agisce in veste di privato e quindi estraneo ad
@@ -825,7 +830,7 @@
             <div class="btn next btn-primary">No</div>
             <div class="btn next btn-primary">Si</div>
           </fieldset>
-          <fieldset data-count-page="10">
+          <fieldset data-count-page="9">
             <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
             <p>Rientri all'interno di quale delle seguenti categorie?</p>
             <div class="form-group category-user">
@@ -862,7 +867,7 @@
             <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
             <input type="button" name="next" class="next btn btn-info" value="Next" disabled />
           </fieldset>
-          <fieldset class="intervantion-qualification" data-count-page="11">
+          <fieldset class="intervantion-qualification" data-count-page="10">
             <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
             <p>Nel periodo tra il 1 luglio 2020 e il 31 dicembre 2021 hai sostenuto/sosterrai una spesa relativa ad uno
               dei seguenti interventi trainanti?(sono possibili più risposte)</p>
@@ -891,7 +896,7 @@
             <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
             <input type="button" name="next" class="next btn btn-success" value="Continua" disabled />
           </fieldset>
-          <fieldset data-count-page="12" class="sismic-intervention">
+          <fieldset data-count-page="11" class="sismic-intervention">
             <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
             <p>l'unità immobiliare su cui hai effettuato / effettuari l'intervento è situata nelle zone sismiche 1,2 e 3
               di cui all'ordinanza del Presidente del Consiglio dei ministri n.3274 del 20 marzo 2003?</p>
@@ -901,7 +906,7 @@
             <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
             <input type="button" name="next" class="next btn btn-success" value="Continua" />
           </fieldset>
-          <fieldset data-count-page="13">
+          <fieldset data-count-page="12">
             <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
             <p>Gli immobili su cui effettuare l'intervento trainato sono sottoposti alla tutela disciplinatadal codice
               dei beni culturali e del paesaggio o per effetto di regolamenti edilizi, urbanistici e ambientali e
@@ -910,7 +915,7 @@
             <input type="button" class="next btn btn-success" value="Si" />
 
           </fieldset>
-          <fieldset data-count-page="14">
+          <fieldset data-count-page="13">
             <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
             <p>Hai gà usufruito di interventi per l'efficientamento energetico su almeno altre 2 unità immobiliari?(non
               rientrano nel computo delle 2 unità immobiliari gli interventi effettuati sulle parti comuni del

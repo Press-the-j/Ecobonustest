@@ -21,7 +21,7 @@ $(document).ready(function(){
       current_step = $(this).parent();
       let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
       let control=controlInput(fieldset_count_page);
-      //if(control){
+      if(control){
         next_step = $(this).parent().next();
         next_step.show();
         current_step.hide();
@@ -29,7 +29,7 @@ $(document).ready(function(){
         $(".progress").css("display","block");
         setClock();
         $('.error').text('')
-      //}
+      }
     });
   
     $(".previous").on('click',function(){
@@ -182,6 +182,7 @@ $(document).ready(function(){
         //? dare classe input-control agli input che devono essere controllati
       function controlInput(countPage){
         let inputs = $(`fieldset[data-count-page=${countPage}] .input-control`).get()
+        let select=$(`fieldset[data-count-page=${countPage}] .select-control`).get()
         let emptyInput=false
         inputs.forEach(element => {
           if(element.value.length==0){
@@ -191,6 +192,15 @@ $(document).ready(function(){
             errorBox.innerHTML=`${label} deve essere compilato `;
           }
         })
+        select.forEach(element => {
+          if(element.value=="none"){
+            console.log(element);
+            emptyInput=true
+            let errorBox=element.nextElementSibling
+            let label=element.previousElementSibling.innerHTML
+            errorBox.innerHTML=`${label} deve essere compilato `;
+          }
+        });
         if(emptyInput){
           return false
         }
@@ -208,9 +218,7 @@ $(document).ready(function(){
           let dataError=element.getAttribute('data-error');
           emptyInput=true
           let errorBox=$(`#${dataError}`).siblings('.error')
-          console.log(errorBox);
           let label=$(`#${dataError}`).siblings('label').text()
-          console.log(label);
           errorBox.text(`${label} deve essere compilato `);
         }
       })
