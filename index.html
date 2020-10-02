@@ -411,6 +411,7 @@
             <div class="form-group">
               <label for="tipo">Tipologia</label>
               <select name="tipo" id="tipo" class="form-control select-control">
+                <option style="display:none">Tipologia immobile</option>
                 <option>Villa unifamiliare</option>
                 <option>Villa plurifamiliare</option>
                 <option>Villetta a schiera</option>
@@ -449,7 +450,7 @@
             <div class="form-group">
               <label for="
               winter-air-conditioning">Climatizzazione Invernale</label>
-              <input class="form-control input-control" type="text" id="winter-air-conditioning" placeholder="Climatizzazione invernale" data-receive-from="">
+              <input class="form-control input-control" type="text" id="winter-air-conditioning" data-toggle="modal" data-target="#winter-air-conditioning-popup" placeholder="Climatizzazione invernale" data-receive-from="">
               <small class="error"></small>
             </div>
             <div class="form-group">
@@ -459,12 +460,12 @@
             </div>
             <div class="form-group">
               <label for="transparent-casing">Involucro trasparente</label>
-              <input type="text" class="form-control input-control" name="transparent-casing" id="transparent-casing" placeholder="Involucro opaco" data-toggle="modal" data-target="#" data-whatever="@mdo">
+              <input type="text" class="form-control input-control" name="transparent-casing" id="transparent-casing" placeholder="Involucro opaco" data-toggle="modal" data-target="#transparent-casing-popup" data-whatever="@mdo">
               <small class="error"></small>
             </div>
             <div class="form-group">
-              <label for="ener">Efficienza Energetica</label>
-              <select name="ener" id="ener" class="form-control select-control">
+              <label for="energy-efficiency">Efficienza Energetica</label>
+              <select name="energy-efficiency" id="energy-efficiency" class="form-control select-control">
                 <option style="display:none">Efficienza energetica</option>
                 <option>A,A+,A1-A4</option>
                 <option>B,C,D</option>
@@ -474,6 +475,55 @@
             </div>
             <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
             <input type="button" name="next" class="next btn btn-info" value="Next" />
+            <!-- pop up climatizzazione invernale -->
+            <div class="modal fade" id="winter-air-conditioning-popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="form-group">
+                      <label for="generation-heating" class="control-label">Tipologia generazione riscaldamento</label>
+                      <select class="form-control select-control" name="" id="generation-heating">
+                        <option style="display:none">Tipologia generazione riscaldamento</option>
+                        <option value="">Impianto autonomo</option>
+                        <option value="">Impianto centralizzato</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="generator-type" class="control-label">Tipologia generatore</label>
+                      <select class="form-control select-control" name="" id="generator-type">
+                        <option style="display:none">Tipologia generatore</option>
+                        <option value="">Caldaie tradizionali</option>
+                        <option value="">Caldaie a condensazione</option>
+                        <option value="">Caldaie a legna</option>
+                        <option value="">Caldaie a biomassa</option>
+                        <option value="">Caldaie a pompa di calore</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="terminal-type" class="control-label">Tipologia generatore</label>
+                      <select class="form-control select-control" name="" id="terminal-type">
+                        <option style="display:none">Tipologia terminale emissione</option>
+                        <option value="">Radiatore</option>
+                        <option value="">Ventilconvettore</option>
+                        <option value="">Sistema radiante ad area -pavimento o soffitto-</option>
+                        <option value="">Unità per il condizionamento dell'aria(Split)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                      data-dismiss="modal">Annulla</button>
+                    <button class="saveBtnBusiness" type="button" class="btn btn-primary"
+                      data-dismiss="modal">Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <!-- pop up per involucro opaco -->
             <div class="modal fade" id="opaque-casing-popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
               <div class="modal-dialog" role="document">
@@ -509,6 +559,49 @@
                 </div>
               </div>
             </div>
+            <!-- pop up involucro trasparente -->
+            <div class="modal fade" id="transparent-casing-popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="form-group">
+                      <label for="frame-type" class="control-label">Tipologia telaio infisso</label>
+                      <select class="form-control select-control" name="" id="frame-type">
+                        <option style="display:none">Tipologia telaio</option>
+                        <option value="">Telaio in legno</option>
+                        <option value="">Telaio in PVC</option>
+                        <option value="">Telaio in alluminio a taglio termico</option>
+                        <option value="">Telaio in alluminio + legno</option>
+                        <option value="">Telaio in alluminio a giunto aperto</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="glass-type" class="control-label">Tipologia vetro infisso</label>
+                      <select class="form-control select-control" name="" id="glass-type">
+                        <option style="display:none">Tipologia vetro</option>
+                        <option value="">Vetro Singolo</option>
+                        <option value="">Vetrocamera</option>
+                        <option value="">Vetrocamera basso-emissivo</option>
+                        <option value="">Triplo vetro</option>
+                        <option value="">Triplo vetro basso-emissivo</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                      data-dismiss="modal">Annulla</button>
+                    <button class="saveBtnBusiness" type="button" class="btn btn-primary"
+                      data-dismiss="modal">Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
           </fieldset>
 
           <fieldset data-count-page="6" class="person">
