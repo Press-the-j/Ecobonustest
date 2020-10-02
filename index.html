@@ -28,8 +28,7 @@
   <main class="container">
     <!-- Pagina accettazione -->
     <div class="row">
-      <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-10
-        <section class="logo">
+      <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1" >
           <div class="head">
             <img src="img/Logo_Ectm_Trasp.svg" alt="immagine superbonus">
             <h1>SUPERBONUS 110&#37;</h1>
@@ -38,7 +37,6 @@
               00:<span class="zero"></span><span class="clock_second"></span>
             </div>
           </div>
-        </section>
         <!-- Barra di Progresso -->
         <div class="progress">
           <div class="progress-bar progress-bar active" role="progressbar" aria-valuemin="0"
@@ -70,18 +68,14 @@
           <fieldset data-count-page="2" class="scegliTipo">
             <section class="scelta">
               <div class="scegli">
-                <img class="img-responsive" src="img/Icona-Azienda.svg" alt="immagine impresa">
-                <div class="question">
+                  <img class="imageType img-responsive" src="img/Icona-Azienda.svg" alt="immagine impresa">
                   <input type="button" value="Sei un&#39;impresa &#63;" class="type-user" data-typeUser="business"/>
-                  <span data-toggle="modal" data-target="#business-infos"id="impresa" class="glyphicon glyphicon-question-sign"></span>
-                </div>
+                  <span data-toggle="modal" data-target="#business-infos"id="impresa" ><img src="img/Punto-Interrogativo.svg" class="question" alt="Punto_Interrogativo"></span>
               </div>
               <div class="scegli">
-                <img class="img-responsive" src="img/Icona-persona- Fisica.svg" alt="immagine impresa">
-                <div class="question">
+                  <img class="imageType img-responsive" src="img/Icona-persona- Fisica.svg" alt="immagine impresa">
                   <input type="button" value="Sei una persona fisica &#63;" class="type-user" data-typeUser="person"/>
-                  <span data-toggle="modal" data-target="#person-infos" id="personaFisica" class="glyphicon glyphicon-question-sign"></span>
-                </div>
+                  <span data-toggle="modal" data-target="#person-infos" id="personaFisica"><img class="question" src="img/Punto-Interrogativo.svg" alt="Punto_Interrogativo"></span>
               </div>
             </section>
             <!-- pop up info impresa-->
