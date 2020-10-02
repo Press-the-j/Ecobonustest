@@ -18,6 +18,8 @@
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"
     integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
     crossorigin="anonymous"></script>
+  <!-- algolia places -->
+  <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
   <!-- Bootstrap Plugins -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
     integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
@@ -41,7 +43,7 @@
         <div class="progress">
           <div class="progress-bar progress-bar active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-        <form id="formComp" class="" novalidate action="" method="post">
+        <form id="formComp" class="" novalidate action="" method="post" autocomplete="off">
           <fieldset data-count-page="1" class="checkboxes">
             <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
               labore et
@@ -323,12 +325,13 @@
                   <div class="modal-body">
                     <div class="form-group">
                       <label for="address-registered-office" class="control-label">Indirizzo</label>
-                      <input type="text" class="form-control" id="address-registered-office">
+                      <input type="search" class="form-control" id="address-registered-office"  
+                      required autocorrect="off" spellcheck="false" autocomplete="off">
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="street-registered-office" class="control-label">Via</label>
                       <input type="text" class="form-control" id="street-registered-office">
-                    </div>
+                    </div> -->
                     <div class="form-group">
                       <label for="postal-code-registered-office" class="control-label">CAP</label>
                       <input type="text" class="form-control" id="postal-code-registered-office">
@@ -337,6 +340,7 @@
                       <label for="city-registered-office" class="control-label">Città</label>
                       <input type="text" class="form-control" id="city-registered-office">
                     </div>
+                    <div class="map"></div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"

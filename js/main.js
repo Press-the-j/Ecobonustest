@@ -4,7 +4,19 @@ $(document).ready(function(){
   var current = 1;
   var current_step,next_step,steps, type_user, myTimer,clone_step;
   
+    var placesAutocomplete = places({
+      appId: 'pl7QEUHBIWGV',
+      apiKey: 'bc57f2fb92b40eb8a458abd86c2b3402',
+      container: document.querySelector('#address-registered-office')
+    });
 
+    $('input').attr('autocomplete', 'off');
+
+    placesAutocomplete.on('change', function resultSelected(e) {
+      
+      document.querySelector('#city-registered-office').value = e.suggestion.city || '';
+      document.querySelector('#postal-code-registered-office').value = e.suggestion.postcode || '';
+    })
 
     $("#privacy").on("change", function(){
       if ($(this).is(':checked')){

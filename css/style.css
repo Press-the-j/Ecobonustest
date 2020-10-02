@@ -11,6 +11,10 @@ body {
     background-color: #ebecf0;
 }
 
+
+.ap-input-icon{
+  display: none;
+}
 #formComp fieldset:not(:first-of-type) {
     display: none;
 }
