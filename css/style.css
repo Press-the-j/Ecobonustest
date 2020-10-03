@@ -11,9 +11,8 @@ body {
     background-color: #ebecf0;
 }
 
-
-.ap-input-icon{
-  display: none;
+.ap-input-icon {
+    display: none;
 }
 #formComp fieldset:not(:first-of-type) {
     display: none;
@@ -86,6 +85,10 @@ body {
     flex-wrap: wrap;
 }
 
+.scegli .type-user {
+    background-color: #46eeaa;
+}
+
 .question {
     text-align: center;
 }
@@ -117,6 +120,7 @@ body {
     display: block;
     margin: 0 auto;
     cursor: pointer;
+    box-shadow: -19px -19px 38px #2a8f66, 19px 19px 38px #62ffee;
 }
 
 /* inizio switch */
