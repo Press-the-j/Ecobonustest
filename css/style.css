@@ -245,16 +245,6 @@ button {
     cursor: pointer;
 }
 
-.previous-reg {
-    background-color: #edeef2;
-    color: black;
-    box-shadow: 5px 5px 4px #828384, -5px -5px 4px #ffffff;
-}
-
-.previous-reg:hover {
-    background-color: #e3e4e7;
-}
-
 .next {
     background-color: #46eeaa;
     color: #fff;
@@ -265,6 +255,21 @@ button {
     background: linear-gradient(145deg, #3fd699, #4bffb6);
     color: #fff;
 }
+
+.previous-reg, .next.nope {
+    background-color: #edeef2;
+    background: none;
+    color: black;
+}
+
+.previous-reg{
+  box-shadow: 5px 5px 4px #828384, -5px -5px 4px #ffffff;
+}
+
+.previous-reg:hover, .next.nope:hover {
+    background-color: #e3e4e7;
+}
+
 
 .bottoni {
     display: flex;

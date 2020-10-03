@@ -39,8 +39,8 @@ $(document).ready(function(){
     });
   
     $(".previous").on('click',function(){
-      current_step = $(this).parent();
-      next_step = $(this).parent().prev();
+      current_step = $(this).closest('fieldset');
+      next_step = $(this).closest('fieldset').prev();
       next_step.show();
       current_step.hide();
       setProgressBar(--current);
@@ -53,7 +53,7 @@ $(document).ready(function(){
       next_step.show();
       current_step.hide();
       setProgressBar(--current);
-      console.log(clone_step);
+      console.log(next_step);
       clone_step.forEach(element => {
         let el_page=element.getAttribute("data-count-page") -1;
         ($("fieldset[data-count-page='"+ el_page + "']")).after(element)
@@ -71,8 +71,6 @@ $(document).ready(function(){
         .css("width",percentuale+"%")
         // .html(percentuale+"%");   
     }
-
-//test
 
 // da richiamare quando metteremo il timer
     function setClock(){
@@ -99,29 +97,7 @@ $(document).ready(function(){
 
   
 
-    function info(){
 
-        // parte info impresa
-        $( "#impresa" ).click(function() {
-          $(".info").fadeIn();
-        });
-    
-        $( ".chiudiInfo" ).click(function() {
-          $(".info").fadeOut();
-        });
-    
-       // parte info persona fisica
-       $( "#personaFisica" ).click(function() {
-        $(".info2").fadeIn();
-      });
-    
-      $( ".chiudiInfo2" ).click(function() {
-        $(".info2").fadeOut();
-      });
-       
-      }
-    
-      info(); 
 
 
       $(".type-user").on("click", function(){
@@ -148,9 +124,9 @@ $(document).ready(function(){
       $(".choose-category").on('change', function(){
         let selectedCategory= $(this).val();
         if(selectedCategory !=="none"){
-          $(".category-real-estate").siblings(".next").prop("disabled", false)
+          $(".category-real-estate").siblings('.bottoni').find(".next").prop("disabled", false)
         } else {
-          $(".category-real-estate").siblings(".next").prop("disabled", true)
+          $(".category-real-estate").siblings('.bottoni').find(".next").prop("disabled", true)
         }
         $(".sub-category").removeClass("active");
         $(".category-"+selectedCategory).addClass("active");
@@ -161,13 +137,13 @@ $(document).ready(function(){
       $(".owner-title input").on('click', function(){
         $(".owner-title input").prop('checked', false);
         $(this).prop('checked', true);
-        $(".owner-title").siblings(".next").prop("disabled", false);
+        $(".owner-title").siblings('.bottoni').find(".next").prop("disabled", false);
       })
 
       $(".category-user input").on('click', function(){
         $(".category-user input").prop('checked', false);
         $(this).prop('checked', true);
-        $(".category-user").siblings(".next").prop("disabled", false);
+        $(".category-user").siblings('.bottoni').find(".next").prop("disabled", false);
       })
 
       $(".intervention-trainant input").on('click', function(){
@@ -178,9 +154,9 @@ $(document).ready(function(){
           $(".none-check").prop('checked',false)
         }
         if($(".intervention-trainant input:checked").length){
-          $(".intervention-trainant").siblings(".next").prop("disabled", false);
+          $(".intervention-trainant").siblings('.bottoni').find(".next").prop("disabled", false);
         } else {
-          $(".intervention-trainant").siblings(".next").prop("disabled", true);
+          $(".intervention-trainant").siblings('.bottoni').find(".next").prop("disabled", true);
         }
       })
 
@@ -202,6 +178,13 @@ $(document).ready(function(){
             let dateArr=$('#date').val().split('-');
             if(dateArr[0]<1900 || dateArr[0]>thisYear){
               emptyInput=true
+            }
+          }else if(element.getAttribute('type')=="email"){
+            var regEmail=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            console.log(element.value);
+            if(!regEmail.test(element.value)){
+              emptyInput=true;
+              errorBox.innerHTML='Formato email non valido'
             }
           }else {
             //? se gli input sono stati riempiti dai pop up, il messaggio di errore viene cancellato
