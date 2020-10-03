@@ -25,7 +25,7 @@ $(document).ready(function(){
       current_step = $(this).closest('fieldset');
       let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
       let control=controlInput(fieldset_count_page);
-      //if(control){
+      if(control){
         console.log('passo i controlli');
         next_step = $(this).closest('fieldset').next();
         console.log(next_step);
@@ -35,7 +35,7 @@ $(document).ready(function(){
         $(".progress").css("display","block");
         setClock();
         $('.error').text('')
-      //}
+      }
     });
   
     $(".previous").on('click',function(){
@@ -191,16 +191,27 @@ $(document).ready(function(){
         let select=$(`fieldset[data-count-page=${countPage}] .select-control`).get()
         let emptyInput=false
         inputs.forEach(element => {
+          var errorBox=element.nextElementSibling
+          var label=element.previousElementSibling.innerHTML
           if(element.value.length==0){
             emptyInput=true
-            let errorBox=element.nextElementSibling
-            let label=element.previousElementSibling.innerHTML
             errorBox.innerHTML=`${label} deve essere compilato `;
+          } else if(element.getAttribute('type')=="date") {
+            let date = new Date();
+            let thisYear = date.getFullYear();
+            let dateArr=$('#date').val().split('-');
+            if(dateArr[0]<1900 || dateArr[0]>thisYear){
+              emptyInput=true
+            }
+          }else {
+            //? se gli input sono stati riempiti dai pop up, il messaggio di errore viene cancellato
+            if(errorBox.innerHTML.length!=0){
+              errorBox.innerHTML=''
+            }
           }
         })
         select.forEach(element => {
           if(element.value=="none"){
-            console.log(element);
             emptyInput=true
             let errorBox=element.nextElementSibling
             let label=element.previousElementSibling.innerHTML
@@ -213,6 +224,7 @@ $(document).ready(function(){
         return true
       }
 
+
      
      //! funzione di controllo dei pop-up, che blocca il salvataggio dei dati negli input se non viene selezionato tutto
         //? dare classe popup-control agli input che devono essere controllati all'interno del popup
@@ -222,14 +234,17 @@ $(document).ready(function(){
       let emptyInput=false;
       inputs.forEach(element => {
         if(element.value.length==0){
-          
-          let dataError=element.getAttribute('data-error');
+          if(element.classList.contains('input-popup-control')){
+            var dataError=element.getAttribute('id')
+          } else {
+            var dataError=element.getAttribute('data-error');
+          }
           emptyInput=true
           let errorBox=$(`#${dataError}`).siblings('.error')
           let label=$(`#${dataError}`).siblings('label').text()
           errorBox.text(`${label} deve essere compilato `);
-        }
-      })
+        } 
+        })
       if(emptyInput){
         return false
       }
@@ -250,6 +265,7 @@ $(document).ready(function(){
           let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
           let pop_up_input =$(this).closest('.modal').find('input').get();
           console.log(pop_up_input);
+          console.log(controlInput(fieldset_count_page));
           
           for(let i=0; i<pop_up_input.length; i++){
             let id_pop_up_input=pop_up_input[i].getAttribute('id');
@@ -262,21 +278,19 @@ $(document).ready(function(){
               $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
             }
           }
+          controlInput(fieldset_count_page)
         }   
       })
       //! funzione che scrive il valore della option selezionata all'interno dei pop-up, in input nascosti su cui poi fare i dovuti controlli
         //?dare classe send-val alla select
         //? dare lo stesso id delle select all'input, aggiungendo "-input"
       $(".send-val").on("change", function(){
-       
           $(this).siblings(".error").text('')
           let valSelect=$(this).find("option:selected").text();
           let idSelect=$(this).attr('id');
           let hiddenInput=$(`#${idSelect}-input`).get();
           hiddenInput[0].value=valSelect
           console.log(hiddenInput[0].value);
-  
-        
         //hiddenInput.val(valSelect)
       })
 
@@ -294,7 +308,7 @@ $(document).ready(function(){
           console.log($('#complete-name').val());
       })
       //! pulisco gli errorBox quando i campi vengono compilati
-        //? quando la select cambia pulisco lo span
+        //? quando la select cambia pulisco lo span di errore
       $('.select-control').on('change', function(){
         let errorBox=$(this).siblings('.error');
         if(errorBox.length !=0){
@@ -313,8 +327,15 @@ $(document).ready(function(){
         } else {
           errorBox.text('')
         }
-    
       })
+
+      //? alchange delle input che non si riempiono tramite popup, vadoa cancellare il messaggio di errore
+    $('.input-control').not('[type="date"]').on('change', function(){
+      var errorBox=$(this).siblings('.error')
+      if (errorBox.text().length !=0){
+        errorBox.text('')
+      }
+    })
 
       //! chiamata ad Algolia per la mappa della sede legale
         //? autocompletamento dell'input di ricerca
