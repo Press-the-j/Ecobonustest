@@ -297,24 +297,21 @@ input:-webkit-autofill {
 }
 
 /* !stile select */
-/* background: #f5f5f5; */
-/* tolgo arrow standard */
-/* -webkit-appearance: none;
--moz-appearance: none;
-appearance: none; */
-/* ------------------------- */
-/* select.form-control {
+
+select.form-control {
     border-radius: 20px;
-    
-    background: url(https://stackoverflow.com/favicon.ico) 96% / 15% no-repeat
-        #eee;
+    background: grey;
     box-shadow: -10px -10px 20px #fff, 10px 10px 20px #ffffff;
     padding: 5px 35px 5px 5px;
     font-size: 16px;
     border: 1px solid #ccc;
     height: 34px;
-    
-} */
+    /* tolgo arrow standard
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    ------------------------- */
+}
 
 select.form-control option {
     background-color: #f5f5f5;
@@ -324,3 +321,10 @@ select::-ms-expand {
     display: none; /* Hide the default arrow in Internet Explorer 10 and Internet Explorer 11 */
 }
 
+<<<<<<< HEAD
+=======
+/* small sotto gli input per gli errori di validazione */
+.error {
+    color: red;
+}
+>>>>>>> da5a6a754c78f9f5126d0733fa6e4b18f11031ba
