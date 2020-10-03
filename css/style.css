@@ -105,6 +105,12 @@ body {
     background: linear-gradient(145deg, #ffffff, #d9dadd);
     box-shadow: 33px 33px 96px #c3c4c6, -33px -33px 96px #ffffff;
 }
+/* mappa sede legale */
+#map-registered-office{
+  height:300px;
+  z-index:10;
+}
+
 
 /* Select per categoria immobile */
 
