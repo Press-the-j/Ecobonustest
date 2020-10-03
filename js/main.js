@@ -13,7 +13,6 @@ $(document).ready(function(){
     $('input').attr('autocomplete', 'off');
 
     placesAutocomplete.on('change', function resultSelected(e) {
-      
       document.querySelector('#city-registered-office').value = e.suggestion.city || '';
       document.querySelector('#postal-code-registered-office').value = e.suggestion.postcode || '';
     })
@@ -30,18 +29,20 @@ $(document).ready(function(){
     steps = $("fieldset").length -1;
   
     $(".next").on('click',function(e){
-      current_step = $(this).parent();
+      current_step = $(this).closest('fieldset');
       let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
       let control=controlInput(fieldset_count_page);
-      if(control){
-        next_step = $(this).parent().next();
+      //if(control){
+        console.log('passo i controlli');
+        next_step = $(this).closest('fieldset').next();
+        console.log(next_step);
         next_step.show();
         current_step.hide();
         setProgressBar(++current);
         $(".progress").css("display","block");
         setClock();
         $('.error').text('')
-      }
+      //}
     });
   
     $(".previous").on('click',function(){
