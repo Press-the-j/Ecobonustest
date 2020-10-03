@@ -7,7 +7,8 @@
   <title>Form Eco Bonus</title>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet/1/leaflet.css" />
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="img/Favicon.png" type="image/png" sizes="48x48">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
@@ -20,6 +21,9 @@
     crossorigin="anonymous"></script>
   <!-- algolia places -->
   <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+  <!-- leaflet -->
+  
+  <script src="https://cdn.jsdelivr.net/leaflet/1/leaflet.js"></script>
   <!-- Bootstrap Plugins -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
     integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
@@ -32,6 +36,7 @@
     <div class="row">
       <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
         <div class="head">
+          <!-- div id="map-registered-office"></div> -->
           <img src="img/Logo_Ectm_Trasp.svg" alt="immagine superbonus">
           <h1>SUPERBONUS 110&#37;</h1>
           <!-- timer -->
@@ -173,31 +178,32 @@
             <div class="form-group">
               <label for="name">Nome</label>
               <input data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" type="text"
-                class="form-control" id="name" name="name" placeholder="Nome">
+                class="form-control input-control" id="name" name="name" placeholder="Nome" data-receive-from="complete-name">
               <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="date">Compleanno</label>
-              <input type="date" class="form-control" id="date" name="date" placeholder="Compleanno">
+              <input type="date" class="form-control input-control" id="date" name="date" placeholder="Compleanno">
               <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="genere">Sesso</label>
               <select class="form-control select-control" name="genere" id="genere">
-                <option value="maschio">Maschio</option>
-                <option value="maschio">Femmina</option>
-                <option value="maschio">Indefinito</option>
+                <option value="none" style="display:none;">Genere</option>
+                <option value="">Maschio</option>
+                <option value="">Femmina</option>
+                <option value="">Indefinito</option>
               </select>
               <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+              <input type="email" class="form-control input-control" id="email" name="email" placeholder="Email">
               <small class="error"></small>
             </div>
             <div class="form-group">
               <label for="tel">Telefono</label>
-              <input type="tel" class="form-control" id="tel" name="tel" placeholder="Telefono">
+              <input type="tel" class="form-control input-control" id="tel" name="tel" placeholder="Telefono">
               <small class="error"></small>
             </div>
             <div class="bottoni">
@@ -215,19 +221,20 @@
                   <div class="modal-body">
 
                     <div class="form-group">
-                      <label for="recipient-name" class="control-label">Nome:</label>
-                      <input type="text" class="form-control" id="recipient-name">
+                      <label for="name-popup" class="control-label">Nome:</label>
+                      <input type="text" class="form-control  popup-control send-val-name" id="name-popup">
                     </div>
                     <div class="form-group">
-                      <label for="recipient-lname" class="control-label">Cognome:</label>
-                      <input type="text" class="form-control" id="recipient-lname">
+                      <label for="surname-popup" class="control-label">Cognome:</label>
+                      <input type="text" class="form-control  popup-control send-val-name" id="surname-popup">
                     </div>
+                    <input type="hidden" id="complete-name">
 
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
-                    <button class="saveBtn" type="button" class="btn btn-primary" data-dismiss="modal">Salva</button>
+                    <button class="save-pop-up" type="button" class="btn btn-primary" data-dismiss="modal">Salva</button>
                   </div>
                 </div>
               </div>
@@ -330,10 +337,6 @@
                       <input type="search" class="form-control" id="address-registered-office"  
                       required autocorrect="off" spellcheck="false" autocomplete="off">
                     </div>
-                    <!-- <div class="form-group">
-                      <label for="street-registered-office" class="control-label">Via</label>
-                      <input type="text" class="form-control" id="street-registered-office">
-                    </div> -->
                     <div class="form-group">
                       <label for="postal-code-registered-office" class="control-label">CAP</label>
                       <input type="text" class="form-control" id="postal-code-registered-office">
@@ -342,7 +345,9 @@
                       <label for="city-registered-office" class="control-label">Città</label>
                       <input type="text" class="form-control" id="city-registered-office">
                     </div>
-                    <div class="map"></div>
+                    <div>
+                      <div id="map-registered-office"></div>
+                    </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"

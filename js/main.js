@@ -4,18 +4,11 @@ $(document).ready(function(){
   var current = 1;
   var current_step,next_step,steps, type_user, myTimer,clone_step;
   
-    var placesAutocomplete = places({
-      appId: 'pl7QEUHBIWGV',
-      apiKey: 'bc57f2fb92b40eb8a458abd86c2b3402',
-      container: document.querySelector('#address-registered-office')
-    });
+    
 
     $('input').attr('autocomplete', 'off');
 
-    placesAutocomplete.on('change', function resultSelected(e) {
-      document.querySelector('#city-registered-office').value = e.suggestion.city || '';
-      document.querySelector('#postal-code-registered-office').value = e.suggestion.postcode || '';
-    })
+    
 
     $("#privacy").on("change", function(){
       if ($(this).is(':checked')){
@@ -55,8 +48,8 @@ $(document).ready(function(){
     
     $(".previous-reg").on('click', function(){
     
-      current_step = $(this).parent();
-      next_step = $(this).parent().prev();
+      current_step = $(this).closest('fieldset');
+      next_step = $(this).closest('fieldset').prev();
       next_step.show();
       current_step.hide();
       setProgressBar(--current);
@@ -219,6 +212,8 @@ $(document).ready(function(){
         }
         return true
       }
+
+     
      //! funzione di controllo dei pop-up, che blocca il salvataggio dei dati negli input se non viene selezionato tutto
         //? dare classe popup-control agli input che devono essere controllati all'interno del popup
         
@@ -243,7 +238,7 @@ $(document).ready(function(){
       
       //!funzione per inserire automaticamente i dati dei pop up negli input
         //? dare classe save-pop-up al bottone salva
-        //? settare negli input in pagina il data-receive-from uguale all'id del pop up di cui salvare i dati
+        //? settare negli input in pagina il data-receive-from uguale all'id dell'input nel pop up di cui salvare i dati
       $(".save-pop-up").on('click', function(e){
         let pop_up=$(this).closest('.modal').attr('id');
         let control=controlPopup(pop_up);
@@ -268,21 +263,171 @@ $(document).ready(function(){
             }
           }
         }   
-        
-        
-        
       })
-
+      //! funzione che scrive il valore della option selezionata all'interno dei pop-up, in input nascosti su cui poi fare i dovuti controlli
+        //?dare classe send-val alla select
+        //? dare lo stesso id delle select all'input, aggiungendo "-input"
       $(".send-val").on("change", function(){
-        $(this).siblings(".error").text('')
-        let valSelect=$(this).find("option:selected").text();
-        let idSelect=$(this).attr('id');
-        let hiddenInput=$(`#${idSelect}-input`).get();
-        hiddenInput[0].value=valSelect
-        console.log(hiddenInput[0].value);
+       
+          $(this).siblings(".error").text('')
+          let valSelect=$(this).find("option:selected").text();
+          let idSelect=$(this).attr('id');
+          let hiddenInput=$(`#${idSelect}-input`).get();
+          hiddenInput[0].value=valSelect
+          console.log(hiddenInput[0].value);
+  
+        
         //hiddenInput.val(valSelect)
       })
 
+      //! funzione per inserire e pulire input del nome
+      $('.send-val-name').on('keyup', function(){
+        
+          let valName=$('#name-popup').val();
+          let valSurname=$('#surname-popup').val();
+          //let valNameArr=valName.split(' ');
+          //let valSurnameArr=valSurname.split(' ');
+          let name=valName.split(' ').filter(i => i).join(' ');
+          console.log(name);
+          let surname = valSurname.split(' ').filter(i => i).join(' ');
+          $('#complete-name').val(name + ' ' + surname );
+          console.log($('#complete-name').val());
+      })
+      //! pulisco gli errorBox quando i campi vengono compilati
+        //? quando la select cambia pulisco lo span
+      $('.select-control').on('change', function(){
+        let errorBox=$(this).siblings('.error');
+        if(errorBox.length !=0){
+        errorBox.text('')
+        }
+      })
+
+        //? validazione dell'input di tipo date
+      $('#date').on('change', function(){
+        let date = new Date();
+        let thisYear = date.getFullYear();
+        let errorBox = $(this).siblings('.error');
+        let dateArr=$('#date').val().split('-');
+        if(dateArr[0]<1900 || dateArr[0]>thisYear){
+          errorBox.text('Data di nascita non valida')
+        } else {
+          errorBox.text('')
+        }
+    
+      })
+
+      //! chiamata ad Algolia per la mappa della sede legale
+        //? autocompletamento dell'input di ricerca
+        var placesAutocomplete = places({
+          appId: 'pl7QEUHBIWGV',
+          apiKey: 'bc57f2fb92b40eb8a458abd86c2b3402',
+          container: document.querySelector('#address-registered-office')
+        });
+
+        //? autocompleto input della citta e del CAP
+        placesAutocomplete.on('change', function resultSelected(e) {
+          document.querySelector('#city-registered-office').value = e.suggestion.city || '';
+          document.querySelector('#postal-code-registered-office').value = e.suggestion.postcode || '';
+        })
+
+        //? all'apertura del pop up della sede legale renderizzo la mappa
+      $('#sede').on('click', function(){
+        setTimeout(function(){
+         
+            //?renderizzo la mappa
+          var map = L.map('map-registered-office', {
+            scrollWheelZoom:false,
+            zoomControl: false
+          });
+    
+          var osmLayer = new L.TileLayer(
+            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              minZoom: 1,
+              maxZoom: 13,
+              attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+            }
+          );
+    
+          var markers = [];
+          
+          
+            map.invalidateSize()
+            map.setView(new L.LatLng(0, 0),1);
+            map.addLayer(osmLayer);
+          
+          
+    
+        
+    
+          placesAutocomplete.on('suggestions', handleOnSuggestions);
+          placesAutocomplete.on('cursorchanged', handleOnCursorchanged);
+          placesAutocomplete.on('change', handleOnChange);
+          placesAutocomplete.on('clear', handleOnClear);
+        
+          function handleOnSuggestions(e) {
+            markers.forEach(removeMarker);
+            markers = [];
+        
+            if (e.suggestions.length === 0) {
+              map.setView(new L.LatLng(0, 0), 1);
+              return;
+            }
+        
+            e.suggestions.forEach(addMarker);
+            findBestZoom();
+          }
+        
+          function handleOnChange(e) {
+            markers
+              .forEach(function(marker, markerIndex) {
+                if (markerIndex === e.suggestionIndex) {
+                  markers = [marker];
+                  marker.setOpacity(1);
+                  findBestZoom();
+                } else {
+                  removeMarker(marker);
+                }
+              });
+          }
+        
+          function handleOnClear() {
+            map.setView(new L.LatLng(0, 0), 1);
+            markers.forEach(removeMarker);
+          }
+        
+          function handleOnCursorchanged(e) {
+            markers
+              .forEach(function(marker, markerIndex) {
+                if (markerIndex === e.suggestionIndex) {
+                  marker.setOpacity(1);
+                  marker.setZIndexOffset(1000);
+                } else {
+                  marker.setZIndexOffset(0);
+                  marker.setOpacity(0.5);
+                }
+              });
+          }
+        
+          function addMarker(suggestion) {
+            var marker = L.marker(suggestion.latlng, {opacity: .4});
+            marker.addTo(map);
+            markers.push(marker);
+          }
+        
+          function removeMarker(marker) {
+            map.removeLayer(marker);
+          }
+
+          function findBestZoom() {
+            var featureGroup = L.featureGroup(markers);
+            map.fitBounds(featureGroup.getBounds().pad(0.5), {animate: false});
+          }
+        }, 1000)
+     
+      
+    })
+      
+    
       /* $(".sismic-intervantion").on("click", function(){
         let parent=$(this).closest('fieldset').get();
 
