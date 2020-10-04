@@ -34,7 +34,7 @@
   <main class="container">
     <!-- Pagina accettazione -->
     <div class="row">
-      <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
+      <div class=" col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
         <div class="head">
           <!-- div id="map-registered-office"></div> -->
           <img src="img/Logo_Ectm_Trasp.svg" alt="immagine superbonus">
@@ -76,7 +76,7 @@
             <section class="scelta">
               <div class="scegli">
                 <img class="imageType img-responsive" src="img/Icona-Azienda.svg" alt="immagine impresa">
-                <input type="button" value="Sei un&#39;impresa &#63;" class="type-user" data-typeUser="business" />
+                <input type="button" value="Sei un&#39;impresa &#63;" class="type-user" data-typeUser="business"  />
                 <span data-toggle="modal" data-target="#business-infos" id="impresa"><img
                     src="img/Punto-Interrogativo.svg" class="question" alt="Punto_Interrogativo"></span>
               </div>
@@ -140,11 +140,13 @@
 
             <h2>Registrazione persona fisica</h2>
             <div class="form-group">
+              <div class="row-input">
               <label for="name">Nome</label>
-              <input data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" type="text"
-                class="form-control input-control" id="name" name="name" placeholder="Nome"
+              <input data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" type="search"
+                class="form-control input-control" id="name" name="name" 
                 data-receive-from="complete-name">
               <small class="error"></small>
+            </div>
             </div>
             <div class="form-group">
               <label for="date">Compleanno</label>
@@ -160,6 +162,10 @@
                 <option value="">Indefinito</option>
               </select>
               <small class="error"></small>
+            </div>
+            <hr>
+            <div class="info-contatto">
+              <small>informazioni di contatto</small>
             </div>
             <div class="form-group">
               <label for="email">Email</label>
@@ -718,7 +724,7 @@
             <p>Il beneficiario dell'intervento è una persona fisica che agisce in veste di privato e quindi estraneo ad
               attività imprenditoriale e/o professionale?</p>
             <div class="bottoni">
-              <input type="button" class="btn next btn-default" value="No">
+              <input type="button" class="btn nope next btn-default" value="No">
               <input type="button" class="btn next btn-success" value="Si">
             </div>
           </fieldset>
@@ -768,13 +774,13 @@
             <div class="form-group intervention-trainant">
               <!-- ricordati di dare classe flexalle checkbox -->
               <div class="checkbox">
-                <label><input class="sismic-intervantion-check" type="checkbox" value="">INTERVENTI ANTISISMICI di cui
+                <label><input class="sismic-intervention-check" type="checkbox" value="">INTERVENTI ANTISISMICI di cui
                   ai commi da 1-bis a 1-septies dell'articolo 16 del decreto-legge n. 63 del 2013, anche comprensivo di
                   interventi di DEMOLIZIONE E RICOSTRUZIONE di cui all'articolo 3. Co. 1 lett. d) del DPR
                   380/2001</label><span class="glyphicon glyphicon-question-sign"></span>
               </div>
               <div class="checkbox">
-                <label><input type="checkbox" value="sismic-interventation-check">RIQUALIFICAZIONE ENERGETICA: sostituzione degli IMPIANTI DI
+                <label><input type="checkbox" value="">RIQUALIFICAZIONE ENERGETICA: sostituzione degli IMPIANTI DI
                   CLIMATIZZAZIONE INVERNALE ESISTENTI con impianti per il riscaldamento, il raffrescamento o la
                   fornitura di acqua</label><span class="glyphicon glyphicon-question-sign"></span>
               </div>
@@ -797,11 +803,11 @@
             <p>l'unità immobiliare su cui hai effettuato / effettuari l'intervento è situata nelle zone sismiche 1,2 e 3
               di cui all'ordinanza del Presidente del Consiglio dei ministri n.3274 del 20 marzo 2003?</p>
             <p>Confermi l'indirizzo dell'immobile?</p>
-            <input type="text" placeholder="Search...">
-            <div class="map"></div>
+            <input type="search" id="sismic-intervention-search" placeholder="Search..." autocomplete="off">
+            <div id="mapSismic"></div>
             <div class="bottoni">
               <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
-              <input type="button" name="next" class="next btn btn-success" value="Continua" />
+              <input type="button" name="next" class="next nope btn btn-success" value="Continua" />
             </div>
           </fieldset>
           <fieldset data-count-page="12">
@@ -809,17 +815,20 @@
             <p>Gli immobili su cui effettuare l'intervento trainato sono sottoposti alla tutela disciplinatadal codice
               dei beni culturali e del paesaggio o per effetto di regolamenti edilizi, urbanistici e ambientali e
               pertanto sugli stessi non possono essere realizzati interventi trainanti?</p>
-            <input type="button" class="next nope btn btn-default" value="No" />
-            <input type="button" class="next btn btn-success" value="Si" />
-
+            <div class="bottoni">
+              <input type="button" class="previous nope btn btn-default" value="No" />
+              <input type="button" class="next btn btn-success" value="Si" />
+            </div>
           </fieldset>
           <fieldset data-count-page="13">
             <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
             <p>Hai gà usufruito di interventi per l'efficientamento energetico su almeno altre 2 unità immobiliari?(non
               rientrano nel computo delle 2 unità immobiliari gli interventi effettuati sulle parti comuni del
               condominio)</p>
-            <input type="button" class="previous btn btn-default" value="No" />
-            <input type="button" class="next btn btn-success" value="Si" />
+            <div class="bottoni">
+              <input type="button" class="previous nope btn btn-default" value="No" />
+              <input type="button" class="next btn btn-success" value="Si" />
+            </div>
           </fieldset>
         </form>
       </div>

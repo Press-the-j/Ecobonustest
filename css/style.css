@@ -106,7 +106,7 @@ body {
     box-shadow: 33px 33px 96px #c3c4c6, -33px -33px 96px #ffffff;
 }
 /* mappa sede legale */
-#map-registered-office {
+#map-registered-office, /* #mapSismic */ {
     height: 300px;
     z-index: 10;
 }
@@ -256,6 +256,8 @@ button {
     color: #fff;
 }
 
+
+
 .previous-reg, .next.nope {
     background-color: #edeef2;
     background: none;
@@ -274,25 +276,42 @@ button {
 .bottoni {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     margin-bottom: 20px;
+}
+
+.bottoni input{
+  margin-right: 1.5rem;
+  position: relative;
 }
 
 /* !stile degli input  color:#2ad590 */
 
 input.form-control {
-    color: #2ad590;
-    border-radius: 20px;
-    background: #f5f5f5;
-    box-shadow: inset 2px 2px 5px #939393, inset -5px -5px 10px #ffffff;
+  border:none;
+  outline:none !important;  
+  text-align: left;
+  padding: 0 7px;
+  border-radius: 20px;
+  background-color: transparent;
+  box-shadow: none !important;
+  border-color: transparent !important;
+    /* background: #f5f5f5 */;
+    /* box-shadow: inset 2px 2px 5px #939393, inset -5px -5px 10px */ #ffffff;
 }
+
+input.form-control:focus{
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
 
 /* cambia back-ground color degli input anche sull'autocompletamento */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    -webkit-box-shadow: 0 0 0 30px transparent inset !important;
 }
 
 /*cambia text color degli input anche sull'autocompletamento*/
@@ -328,4 +347,73 @@ select::-ms-expand {
 /* small sotto gli input per gli errori di validazione */
 .error {
     color: red;
+}
+
+select.form-control {
+  /* width: 268px; */
+
+
+  border-radius: 20px;
+
+
+  box-shadow: inset 2px 2px 5px #939393, inset -5px -5px 10px #ffffff;
+  background: url("../icon/downarr.png") no-repeat right
+      #f5f5f5;
+  -webkit-appearance: none;
+  background-position-x: 99%;
+}
+
+
+select.form-control option {
+  background-color: #f5f5f5;
+}
+
+
+select::-ms-expand {
+  display: none; /* Hide the default arrow in Internet Explorer 10 and Internet Explorer 11 */
+}
+
+hr {
+  height: 2px;
+  border: 0;
+  width: 33%;
+  margin: auto;
+  border-radius: 2px;
+  box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+}
+
+
+.info-contatto {
+  text-align: center;
+  color: #2c3036;
+}
+
+.nope {    background-color: #edeef2;    background: none;    color: black;
+}
+
+.nope:hover{
+  background-color: #e3e4e7;
+}
+
+label{
+  color: #2ad590;
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 0 !important;
+  font-weight: 700;
+  width: 35%;
+  margin-right: 30px;
+}
+
+.row-input{
+  display: flex;
+   
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 20px;
+    padding: 0px 20px;
+    background: #f5f5f5;
+    box-shadow: inset 7px 7px 6px #ebebeb, 
+            inset -7px -7px 6px #ffffff;
 }

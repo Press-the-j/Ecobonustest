@@ -7,7 +7,7 @@ $(document).ready(function(){
   var type_user; 
   var myTimer;
   var clone_step;
-  var sismicCheck;
+  var sismicIntervention={};
 
   var steps=$("fieldset").length -1; 
   $('input').attr('autocomplete', 'off');
@@ -34,10 +34,26 @@ $(document).ready(function(){
       let control=controlInput(fieldset_count_page);
       //if(control){
         console.log('passo i controlli');
+        
+        if(fieldset_count_page==10){
+          checkSismic(fieldset_count_page)
+          let map = 'mapSismic'
+          //renderMap(placesAutocompleteSismic, map)
+          
+          setTimeout(function(){
+           
+            $('#sismic-intervention-search').val(sismicIntervention.address + " ").keypress()
+           
+          },2000)
+        } else if(fieldset_count_page==5){
+          sismicIntervention["address"]=$("#dove").val()
+          
+        }
+
+
         next_step = $(this).closest('fieldset').next();
-        console.log(next_step);
-        next_step.show();
         current_step.hide();
+        next_step.show();
         setProgressBar(++current);
         $(".progress").css("display","block");
         setClock();
@@ -138,15 +154,25 @@ $(document).ready(function(){
     //! questa è una funzione provvisoria per nascondere o mostrare il fieldset 10 in base alla scelta dell'utente nella precedente checkbox
       //* se l'utente checca l'input con classe sismic- intervention-check, la pagina si deve vedere
 
-      $('.sismic-intervantion-check').on('click', function(){
-        if($(this).is(':checked')) {
-          sismicCheck=true
-          console.log(sismicCheck);
+       function checkSismic(currentStep){
+        if($('.sismic-intervention-check').is(':checked')) {
+         if(sismicIntervention["removed"]){
+          let clone_step=sismicIntervention["clone"]
+          console.log(currentStep);
+         
+          
+          $(`fieldset[data-count-page=${currentStep}]`).after(clone_step);
+         }
+         
         } else {
-          sismicCheck=false
-          console.log(sismicCheck);
+          sismicIntervention["removed"]=true
+          let remove_step=$('.sismic-intervention').clone(true).get()
+          sismicIntervention["clone"]=remove_step[0];
+          console.log(sismicIntervention.clone)
+          $('.sismic-intervention').remove()         
         }
-      })
+      }
+
 
 
     //!validazione select 
@@ -203,8 +229,15 @@ $(document).ready(function(){
         let emptyInput=false
         //? controllo gli input all'interno del fieldset 
         inputs.forEach(element => {
-          var errorBox=element.nextElementSibling
-          var label=element.previousElementSibling.innerHTML
+          if(element.classList.contains('ap-input')){
+            var errorBox=element.parentNode.parentNode.querySelector('.error')
+            console.log(errorBox);
+            var label=element.parentNode.parentNode.querySelector('label')
+            
+          } else {
+            var errorBox=element.parentNode.querySelector('.error').innerHTML
+            var label=element.parentNode.querySelector('label').innerHTML
+          }
           //? una serie di filtri in cui deve passare l'input
             //* controlla se è vuoto 
           if(element.value.length==0){
@@ -368,115 +401,130 @@ $(document).ready(function(){
       var placesAutocomplete = places({
         appId: 'pl7QEUHBIWGV',
         apiKey: 'bc57f2fb92b40eb8a458abd86c2b3402',
-        container: document.querySelector('#address-registered-office')
+        container: document.querySelector('#address-registered-office ')
       });
 
+      var placesAutocompleteSismic = places({
+        appId: 'pl7QEUHBIWGV',
+        apiKey: 'bc57f2fb92b40eb8a458abd86c2b3402',
+        container: document.querySelector('#dove')
+      });
+
+      
+
+      var placesAutocompleteSismic = places({
+        appId: 'pl7QEUHBIWGV',
+        apiKey: 'bc57f2fb92b40eb8a458abd86c2b3402',
+        container: document.querySelector('#sismic-intervention-search')
+      });
       //? autocompleto input della citta e del CAP
       placesAutocomplete.on('change', function resultSelected(e) {
         document.querySelector('#city-registered-office').value = e.suggestion.city || '';
         document.querySelector('#postal-code-registered-office').value = e.suggestion.postcode || '';
       })
 
-        //? all'apertura del pop up della sede legale renderizzo la mappa
+
+
+      //? all'apertura del pop up della sede legale renderizzo la mappa
     $('#sede').on('click', function(){
+      let map = 'map-registered-office'
+      renderMap(placesAutocomplete, map);
+    })
+
+
+    
+    function renderMap(autocomplete, mapToSet){
       setTimeout(function(){
         
-          //?renderizzo la mappa
-        var map = L.map('map-registered-office', {
-          scrollWheelZoom:false,
-          zoomControl: false
-        });
-  
-        var osmLayer = new L.TileLayer(
-          'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            minZoom: 1,
-            maxZoom: 13,
-            attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
-          }
-        );
-  
-        var markers = [];
-        
-        
-          map.invalidateSize()
-          map.setView(new L.LatLng(0, 0),1);
-          map.addLayer(osmLayer);
-        
-        
-  
-      
-  
-        placesAutocomplete.on('suggestions', handleOnSuggestions);
-        placesAutocomplete.on('cursorchanged', handleOnCursorchanged);
-        placesAutocomplete.on('change', handleOnChange);
-        placesAutocomplete.on('clear', handleOnClear);
-      
-        function handleOnSuggestions(e) {
-          markers.forEach(removeMarker);
-          markers = [];
-      
-          if (e.suggestions.length === 0) {
-            map.setView(new L.LatLng(0, 0), 1);
-            return;
-          }
-      
-          e.suggestions.forEach(addMarker);
-          findBestZoom();
+        //?renderizzo la mappa
+      var map = L.map(mapToSet, {
+        scrollWheelZoom:false,
+        zoomControl: false
+      });
+
+      var osmLayer = new L.TileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          minZoom: 1,
+          maxZoom: 13,
+          attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
         }
+      );
+
+      var markers = [];
       
-        function handleOnChange(e) {
-          markers
-            .forEach(function(marker, markerIndex) {
-              if (markerIndex === e.suggestionIndex) {
-                markers = [marker];
-                marker.setOpacity(1);
-                findBestZoom();
-              } else {
-                removeMarker(marker);
-              }
-            });
-        }
       
-        function handleOnClear() {
+        map.invalidateSize()
+        map.setView(new L.LatLng(0, 0),1);
+        map.addLayer(osmLayer);
+      
+      
+
+    
+
+      autocomplete.on('suggestions', handleOnSuggestions);
+      autocomplete.on('cursorchanged', handleOnCursorchanged);
+      autocomplete.on('change', handleOnChange);
+      autocomplete.on('clear', handleOnClear);
+    
+      function handleOnSuggestions(e) {
+        markers.forEach(removeMarker);
+        markers = [];
+    
+        if (e.suggestions.length === 0) {
           map.setView(new L.LatLng(0, 0), 1);
-          markers.forEach(removeMarker);
+          return;
         }
-      
-        function handleOnCursorchanged(e) {
-          markers
-            .forEach(function(marker, markerIndex) {
-              if (markerIndex === e.suggestionIndex) {
-                marker.setOpacity(1);
-                marker.setZIndexOffset(1000);
-              } else {
-                marker.setZIndexOffset(0);
-                marker.setOpacity(0.5);
-              }
-            });
-        }
-      
-        function addMarker(suggestion) {
-          var marker = L.marker(suggestion.latlng, {opacity: .4});
-          marker.addTo(map);
-          markers.push(marker);
-        }
-      
-        function removeMarker(marker) {
-          map.removeLayer(marker);
-        }
-
-        function findBestZoom() {
-          var featureGroup = L.featureGroup(markers);
-          map.fitBounds(featureGroup.getBounds().pad(0.5), {animate: false});
-        }
-      }, 1000)
     
-      
-    })
-      
+        e.suggestions.forEach(addMarker);
+        findBestZoom();
+      }
     
-      /* $(".sismic-intervantion").on("click", function(){
-        let parent=$(this).closest('fieldset').get();
+      function handleOnChange(e) {
+        markers
+          .forEach(function(marker, markerIndex) {
+            if (markerIndex === e.suggestionIndex) {
+              markers = [marker];
+              marker.setOpacity(1);
+              findBestZoom();
+            } else {
+              removeMarker(marker);
+            }
+          });
+      }
+    
+      function handleOnClear() {
+        map.setView(new L.LatLng(0, 0), 1);
+        markers.forEach(removeMarker);
+      }
+    
+      function handleOnCursorchanged(e) {
+        markers
+          .forEach(function(marker, markerIndex) {
+            if (markerIndex === e.suggestionIndex) {
+              marker.setOpacity(1);
+              marker.setZIndexOffset(1000);
+            } else {
+              marker.setZIndexOffset(0);
+              marker.setOpacity(0.5);
+            }
+          });
+      }
+    
+      function addMarker(suggestion) {
+        var marker = L.marker(suggestion.latlng, {opacity: .4});
+        marker.addTo(map);
+        markers.push(marker);
+      }
+    
+      function removeMarker(marker) {
+        map.removeLayer(marker);
+      }
 
-      }) */
+      function findBestZoom() {
+        var featureGroup = L.featureGroup(markers);
+        map.fitBounds(featureGroup.getBounds().pad(0.5), {animate: false});
+      }
+    }, 1000)
+    }
+  
   });
