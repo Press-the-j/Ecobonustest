@@ -2,11 +2,18 @@
 
 $(document).ready(function(){
   var current = 1;
-  var current_step,next_step,steps, type_user, myTimer,clone_step;
-  
-    
+  var current_step;
+  var next_step;
+  var type_user; 
+  var myTimer;
+  var clone_step;
+  var sismicCheck;
 
-    $('input').attr('autocomplete', 'off');
+  var steps=$("fieldset").length -1; 
+  $('input').attr('autocomplete', 'off');
+  
+   
+
 
     
 
@@ -19,7 +26,7 @@ $(document).ready(function(){
     });
 
     
-    steps = $("fieldset").length -1;
+    
   
     $(".next").on('click',function(e){
       current_step = $(this).closest('fieldset');
@@ -58,6 +65,7 @@ $(document).ready(function(){
         let el_page=element.getAttribute("data-count-page") -1;
         ($("fieldset[data-count-page='"+ el_page + "']")).after(element)
       });
+      clone_step=''
      
     })
     setProgressBar(current);
@@ -98,67 +106,88 @@ $(document).ready(function(){
   
 
 
+    //! siamo nel fieldset 2 al momento di scegliere se l'utente è un'impresa o una persona fisica.
+      //todo dare la classe type-user ai bottoni che devono essere cliccati dall'utente durante la scelta
 
+      //todo in caso si volesse poi reinserire le pagine rimosse dalla funzione, alla pagina successiva, al bottone per tornare indietro sostituire la classe previous con previous-reg
 
-    $(".type-user").on("click", function(){
-      let type=$(this).attr("data-typeUser");
-      type_user=type;
-      let current_st=$(this).closest("fieldset");
-      current_st.hide();
-              
-      if(type_user==="person"){
-        var remove_step=current_st.siblings(".business")
-      } else if(type_user==="business"){
-        var remove_step=current_st.siblings(".person")
-      }
+      $(".type-user").on("click", function(){
+        let type=$(this).attr("data-typeUser");
+        let current_step=$(this).closest("fieldset");
+        //? setta la variabile globale type-user in base alla scelta dell'utente
+        type_user=type;
+        
+        //? se l'utente è una persona salvo in una variabile i fieldset per i dati dell'impresa e viceversa
+        if(type_user==="person"){
+          var remove_step=current_step.siblings(".business")
+        } else if(type_user==="business"){
+          var remove_step=current_step.siblings(".person")
+        }
+        //? prima li clona con tutti gli handler, trasformando il risultato in un array di elementi, poi li rimuovo dalla pagina
+          //*nel caso l'utente torni indietro queste pagine verrano reinserite nel DOM, vedere l'handler legato al click sull'elemento con classe previous-reg
+        clone_step=remove_step.clone(true).get()
+        remove_step.remove();
+
+        //? applica la stessa logica del next, andando alla pagina successiva, settando il timer, aumentando la barra di progresso
+        current_step.hide();
+        current_step.next().show()
+        setClock();
+        setProgressBar(++current);
+      });
       
-      clone_step=remove_step.clone(true).get()
-      remove_step.remove();
+    //! questa è una funzione provvisoria per nascondere o mostrare il fieldset 10 in base alla scelta dell'utente nella precedente checkbox
+      //* se l'utente checca l'input con classe sismic- intervention-check, la pagina si deve vedere
 
-      current_st.next().show()
-      setClock();
-      setProgressBar(++current);
-    });
-    
-      /* //!validazione select */
-    $(".choose-category").on('change', function(){
-      let selectedCategory= $(this).val();
-      if(selectedCategory !=="none"){
-        $(".category-real-estate").siblings('.bottoni').find(".next").prop("disabled", false)
-      } else {
-        $(".category-real-estate").siblings('.bottoni').find(".next").prop("disabled", true)
-      }
-      $(".sub-category").removeClass("active");
-      $(".category-"+selectedCategory).addClass("active");
-      $(".category-real-estate-btn").addClass("active");
-    })
+      $('.sismic-intervantion-check').on('click', function(){
+        if($(this).is(':checked')) {
+          sismicCheck=true
+          console.log(sismicCheck);
+        } else {
+          sismicCheck=false
+          console.log(sismicCheck);
+        }
+      })
 
-    /* //! validazioni checkbox*/
-    $(".owner-title input").on('click', function(){
-      $(".owner-title input").prop('checked', false);
-      $(this).prop('checked', true);
-      $(".owner-title").siblings('.bottoni').find(".next").prop("disabled", false);
-    })
 
-    $(".category-user input").on('click', function(){
-      $(".category-user input").prop('checked', false);
-      $(this).prop('checked', true);
-      $(".category-user").siblings('.bottoni').find(".next").prop("disabled", false);
-    })
+    //!validazione select 
+      $(".choose-category").on('change', function(){
+        let selectedCategory= $(this).val();
+        if(selectedCategory !=="none"){
+          $(".category-real-estate").siblings('.bottoni').find(".next").prop("disabled", false)
+        } else {
+          $(".category-real-estate").siblings('.bottoni').find(".next").prop("disabled", true)
+        }
+        $(".sub-category").removeClass("active");
+        $(".category-"+selectedCategory).addClass("active");
+        $(".category-real-estate-btn").addClass("active");
+      })
 
-    $(".intervention-trainant input").on('click', function(){
-      if($(".none-check").is(":checked") && $(this).hasClass("none-check")){
-        $(".intervention-trainant input").prop('checked', false);
-        $(".none-check").prop('checked',true)
-      } else if($(".none-check").is(":checked") && !$(this).hasClass("none-check")){
-        $(".none-check").prop('checked',false)
-      }
-      if($(".intervention-trainant input:checked").length){
-        $(".intervention-trainant").siblings('.bottoni').find(".next").prop("disabled", false);
-      } else {
-        $(".intervention-trainant").siblings('.bottoni').find(".next").prop("disabled", true);
-      }
-    })
+    //! validazioni checkbox*/
+      $(".owner-title input").on('click', function(){
+        $(".owner-title input").prop('checked', false);
+        $(this).prop('checked', true);
+        $(".owner-title").siblings('.bottoni').find(".next").prop("disabled", false);
+      })
+
+      $(".category-user input").on('click', function(){
+        $(".category-user input").prop('checked', false);
+        $(this).prop('checked', true);
+        $(".category-user").siblings('.bottoni').find(".next").prop("disabled", false);
+      })
+
+      $(".intervention-trainant input").on('click', function(){
+        if($(".none-check").is(":checked") && $(this).hasClass("none-check")){
+          $(".intervention-trainant input").prop('checked', false);
+          $(".none-check").prop('checked',true)
+        } else if($(".none-check").is(":checked") && !$(this).hasClass("none-check")){
+          $(".none-check").prop('checked',false)
+        }
+        if($(".intervention-trainant input:checked").length){
+          $(".intervention-trainant").siblings('.bottoni').find(".next").prop("disabled", false);
+        } else {
+          $(".intervention-trainant").siblings('.bottoni').find(".next").prop("disabled", true);
+        }
+      })
 
     //! funzione di controllo per validare gli input e le select in pagina
       //todo dare classe input-control agli input che devono essere controllati, e classe select-control alle select che devono essere controllate
@@ -167,58 +196,58 @@ $(document).ready(function(){
 
       //todo per dirgli che c'è un errore impostare la variabile emptyInput a true
               //!! la funzione ritorna falso, se c'è qualcosa che non va con gli input, e true se è tutto apposto
-    function controlInput(countPage){
-      //? seleziono il fieldset padre tramite il countPage passato 
-      let inputs = $(`fieldset[data-count-page=${countPage}] .input-control`).get()
-      let select=$(`fieldset[data-count-page=${countPage}] .select-control`).get()
-      let emptyInput=false
-      //? controllo gli input all'interno del fieldset 
-      inputs.forEach(element => {
-        var errorBox=element.nextElementSibling
-        var label=element.previousElementSibling.innerHTML
-        //? una serie di filtri in cui deve passare l'input
-          //* controlla se è vuoto 
-        if(element.value.length==0){
-          emptyInput=true
-          errorBox.innerHTML=`${label} deve essere compilato `;
-          //* controlla se è di tipo date 
-        } else if(element.getAttribute('type')=="date") {
-          //* controlla che la data sia minore di quella attuale
-          let date = new Date();
-          let thisYear = date.getFullYear();
-          let dateArr=$('#date').val().split('-');
-          if(dateArr[0]<1900 || dateArr[0]>thisYear){
+      function controlInput(countPage){
+        //? seleziono il fieldset padre tramite il countPage passato 
+        let inputs = $(`fieldset[data-count-page=${countPage}] .input-control`).get()
+        let select=$(`fieldset[data-count-page=${countPage}] .select-control`).get()
+        let emptyInput=false
+        //? controllo gli input all'interno del fieldset 
+        inputs.forEach(element => {
+          var errorBox=element.nextElementSibling
+          var label=element.previousElementSibling.innerHTML
+          //? una serie di filtri in cui deve passare l'input
+            //* controlla se è vuoto 
+          if(element.value.length==0){
             emptyInput=true
+            errorBox.innerHTML=`${label} deve essere compilato `;
+            //* controlla se è di tipo date 
+          } else if(element.getAttribute('type')=="date") {
+            //* controlla che la data sia minore di quella attuale
+            let date = new Date();
+            let thisYear = date.getFullYear();
+            let dateArr=$('#date').val().split('-');
+            if(dateArr[0]<1900 || dateArr[0]>thisYear){
+              emptyInput=true
+            }
+            //* controlla se è di tipo email
+          }else if(element.getAttribute('type')=="email"){
+            //* validazione della mail 
+            var regEmail=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            console.log(element.value);
+            if(!regEmail.test(element.value)){
+              emptyInput=true;
+              errorBox.innerHTML='Formato email non valido'
+            }
+          }else {
+            //* se gli input sono stati riempiti dai pop up, il messaggio di errore viene cancellato
+            if(errorBox.innerHTML.length!=0){
+              errorBox.innerHTML=''
+            }
           }
-          //* controlla se è di tipo email
-        }else if(element.getAttribute('type')=="email"){
-          //* validazione della mail 
-          var regEmail=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          console.log(element.value);
-          if(!regEmail.test(element.value)){
-            emptyInput=true;
-            errorBox.innerHTML='Formato email non valido'
+        })
+        select.forEach(element => {
+          if(element.value=="none"){
+            emptyInput=true
+            let errorBox=element.nextElementSibling
+            let label=element.previousElementSibling.innerHTML
+            errorBox.innerHTML=`${label} deve essere compilato `;
           }
-        }else {
-          //* se gli input sono stati riempiti dai pop up, il messaggio di errore viene cancellato
-          if(errorBox.innerHTML.length!=0){
-            errorBox.innerHTML=''
-          }
+        });
+        if(emptyInput){
+          return false
         }
-      })
-      select.forEach(element => {
-        if(element.value=="none"){
-          emptyInput=true
-          let errorBox=element.nextElementSibling
-          let label=element.previousElementSibling.innerHTML
-          errorBox.innerHTML=`${label} deve essere compilato `;
-        }
-      });
-      if(emptyInput){
-        return false
+        return true
       }
-      return true
-    }
 
 
      
