@@ -32,7 +32,11 @@ $(document).ready(function(){
       current_step = $(this).closest('fieldset');
       let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
       let control=controlInput(fieldset_count_page);
+<<<<<<< HEAD
      // if(control){
+=======
+      //if(control){
+>>>>>>> 6bc3e1abbe7568d6b7f96e10b15c991ba25167ca
         console.log('passo i controlli');
         
         if(fieldset_count_page==10){
@@ -61,7 +65,11 @@ $(document).ready(function(){
         $(".progress").css("display","block");
         setClock();
         $('.error').text('')
+<<<<<<< HEAD
     //  }
+=======
+      //}
+>>>>>>> 6bc3e1abbe7568d6b7f96e10b15c991ba25167ca
     });
   
     $(".previous").on('click',function(){
@@ -306,7 +314,7 @@ $(document).ready(function(){
             var dataError=element.getAttribute('data-error');
           }
           emptyInput=true
-          let errorBox=$(`#${dataError}`).closest('.row-input').siblings('.error')
+          let errorBox=$(`#${dataError}`).siblings('.error')
           let label=$(`#${dataError}`).siblings('label').text()
           errorBox.text(`${label} deve essere compilato `);
         } 
@@ -342,6 +350,7 @@ $(document).ready(function(){
             console.log(inputText);
             console.log(id_pop_up_input);
             $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
+            $(`input[data-receive-from=${id_pop_up_input}`).closest('.row-input').siblings('.error').text('')
           }
         }
         
