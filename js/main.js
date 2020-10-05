@@ -9,7 +9,7 @@ $(document).ready(function(){
   var clone_step;
   var sismicIntervention={};
 
-  var steps=$("fieldset").length -1; 
+  var steps=$("fieldset").length ; 
   $('input').attr('autocomplete', 'off');
   
    
@@ -32,7 +32,7 @@ $(document).ready(function(){
       current_step = $(this).closest('fieldset');
       let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
       let control=controlInput(fieldset_count_page);
-      if(control){
+      //if(control){
         console.log('passo i controlli');
         
         if(fieldset_count_page==10){
@@ -58,7 +58,7 @@ $(document).ready(function(){
         $(".progress").css("display","block");
         setClock();
         $('.error').text('')
-      }
+      //}
     });
   
     $(".previous").on('click',function(){
@@ -301,7 +301,7 @@ $(document).ready(function(){
             var dataError=element.getAttribute('data-error');
           }
           emptyInput=true
-          let errorBox=$(`#${dataError}`).closest('.row-input').siblings('.error')
+          let errorBox=$(`#${dataError}`).siblings('.error')
           let label=$(`#${dataError}`).siblings('label').text()
           errorBox.text(`${label} deve essere compilato `);
         } 
@@ -337,6 +337,7 @@ $(document).ready(function(){
             console.log(inputText);
             console.log(id_pop_up_input);
             $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
+            $(`input[data-receive-from=${id_pop_up_input}`).closest('.row-input').siblings('.error').text('')
           }
         }
         
