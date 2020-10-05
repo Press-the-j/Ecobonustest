@@ -32,7 +32,7 @@ $(document).ready(function(){
       current_step = $(this).closest('fieldset');
       let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
       let control=controlInput(fieldset_count_page);
-      if(control){
+     // if(control){
         console.log('passo i controlli');
         
         if(fieldset_count_page==10){
@@ -48,6 +48,9 @@ $(document).ready(function(){
         } else if(fieldset_count_page==5){
           sismicIntervention["address"]=$("#dove").val()
           
+        } else if(fieldset_count_page==14 ) {
+          $('.clock').css('display' , 'none');
+          clearInterval(myTimer);
         }
 
 
@@ -58,7 +61,7 @@ $(document).ready(function(){
         $(".progress").css("display","block");
         setClock();
         $('.error').text('')
-      }
+    //  }
     });
   
     $(".previous").on('click',function(){
@@ -103,6 +106,7 @@ $(document).ready(function(){
       let timer = 30;
       let clock=$(".clock_second");
       clock.text(timer);
+
       myTimer=setInterval(function(event){
         timer--;
         if(timer<=9){
@@ -114,6 +118,7 @@ $(document).ready(function(){
           clearInterval(myTimer);
           location.reload();
         }
+        
       }, 1000)
     }
 
