@@ -413,11 +413,12 @@ hr {
 }
 
 #aziendale {
+    border: 1px solid rgba(128, 128, 128, 0.263);
     width: 50%;
     margin: 20px auto;
     border-radius: 10px;
     padding: 0 20px;
-    background: url("../icon/downarr.png") no-repeat right #ebecf0;
+    background: url("../icon/downarr.png") no-repeat right #f5f5f5;
     -webkit-appearance: none;
     background-position-x: 99%;
 
