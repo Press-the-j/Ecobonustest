@@ -32,7 +32,7 @@ $(document).ready(function(){
       current_step = $(this).closest('fieldset');
       let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
       let control=controlInput(fieldset_count_page);
-      if(control){
+      //if(control){
         console.log('passo i controlli');
         
         if(fieldset_count_page==10){
@@ -58,7 +58,7 @@ $(document).ready(function(){
         $(".progress").css("display","block");
         setClock();
         $('.error').text('')
-      }
+      //}
     });
   
     $(".previous").on('click',function(){
@@ -323,7 +323,7 @@ $(document).ready(function(){
         let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
         let pop_up_input =$(this).closest('.modal').find('input').get();
         console.log(pop_up_input);
-        console.log(controlInput(fieldset_count_page));
+        
         
         for(let i=0; i<pop_up_input.length; i++){
           let id_pop_up_input=pop_up_input[i].getAttribute('id');
@@ -336,7 +336,7 @@ $(document).ready(function(){
             $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
           }
         }
-        controlInput(fieldset_count_page)
+        
       }   
     })
 
