@@ -9,11 +9,7 @@ $(document).ready(function(){
   var clone_step;
   var sismicIntervention={};
 
-<<<<<<< HEAD
-  var steps=$("fieldset").length ; 
-=======
   var steps=$("fieldset").length -2; 
->>>>>>> 736cce8f18bcf39abd8428bb758599b1a3e0d1d0
   $('input').attr('autocomplete', 'off');
   
    
