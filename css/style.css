@@ -256,22 +256,21 @@ button {
     color: #fff;
 }
 
-
-
-.previous-reg, .next.nope {
+.previous-reg,
+.next.nope {
     background-color: #edeef2;
     background: none;
     color: black;
 }
 
-.previous-reg{
-  box-shadow: 5px 5px 4px #828384, -5px -5px 4px #ffffff;
+.previous-reg {
+    box-shadow: 5px 5px 4px #828384, -5px -5px 4px #ffffff;
 }
 
-.previous-reg:hover, .next.nope:hover {
+.previous-reg:hover,
+.next.nope:hover {
     background-color: #e3e4e7;
 }
-
 
 .bottoni {
     display: flex;
@@ -280,31 +279,30 @@ button {
     margin-bottom: 20px;
 }
 
-.bottoni input{
-  margin-right: 1.5rem;
-  position: relative;
+.bottoni input {
+    margin-right: 1.5rem;
+    position: relative;
 }
 
 /* !stile degli input  color:#2ad590 */
 
 input.form-control {
-  border:none;
-  outline:none !important;  
-  text-align: left;
-  padding: 0 7px;
-  border-radius: 20px;
-  background-color: transparent;
-  box-shadow: none !important;
-  border-color: transparent !important;
-    /* background: #f5f5f5 */;
-    /* box-shadow: inset 2px 2px 5px #939393, inset -5px -5px 10px */ #ffffff;
+    border: none;
+    outline: none !important;
+    text-align: left;
+    padding: 0 7px;
+    border-radius: 20px;
+    background-color: transparent;
+    box-shadow: none !important;
+    border-color: transparent !important;
+    /* background: #f5f5f5 */
+    /* box-shadow: inset 2px 2px 5px #939393, inset -5px -5px 10px  #ffffff;*/
 }
 
-input.form-control:focus{
-  box-shadow: none !important;
-  border-color: transparent !important;
+input.form-control:focus {
+    box-shadow: none !important;
+    border-color: transparent !important;
 }
-
 
 /* cambia back-ground color degli input anche sull'autocompletamento */
 input:-webkit-autofill,
@@ -350,70 +348,78 @@ select::-ms-expand {
 }
 
 select.form-control {
-  /* width: 268px; */
+    /* width: 268px; */
 
+    border-radius: 20px;
 
-  border-radius: 20px;
-
-
-  box-shadow: inset 2px 2px 5px #939393, inset -5px -5px 10px #ffffff;
-  background: url("../icon/downarr.png") no-repeat right
-      #f5f5f5;
-  -webkit-appearance: none;
-  background-position-x: 99%;
+    box-shadow: inset 2px 2px 5px #939393, inset -5px -5px 10px #ffffff;
+    background: url("../icon/downarr.png") no-repeat right #f5f5f5;
+    -webkit-appearance: none;
+    background-position-x: 99%;
 }
-
 
 select.form-control option {
-  background-color: #f5f5f5;
+    background-color: #f5f5f5;
 }
 
-
 select::-ms-expand {
-  display: none; /* Hide the default arrow in Internet Explorer 10 and Internet Explorer 11 */
+    display: none; /* Hide the default arrow in Internet Explorer 10 and Internet Explorer 11 */
 }
 
 hr {
-  height: 2px;
-  border: 0;
-  width: 33%;
-  margin: auto;
-  border-radius: 2px;
-  box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
-  margin-bottom: 20px;
+    height: 2px;
+    border: 0;
+    width: 33%;
+    margin: auto;
+    border-radius: 2px;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
 }
-
 
 .info-contatto {
-  text-align: center;
-  color: #2c3036;
+    text-align: center;
+    color: #2c3036;
 }
 
-.nope {    background-color: #edeef2;    background: none;    color: black;
+.nope {
+    background-color: #edeef2;
+    background: none;
+    color: black;
 }
 
-.nope:hover{
-  background-color: #e3e4e7;
+.nope:hover {
+    background-color: #e3e4e7;
 }
 
-label{
-  color: #2ad590;
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 0 !important;
-  font-weight: 700;
-  width: 35%;
-  margin-right: 30px;
+label {
+    color: #2ad590;
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 0 !important;
+    font-weight: 700;
+    width: 35%;
+    margin-right: 30px;
 }
 
-.row-input{
-  display: flex;
-   
+.row-input {
+    display: flex;
+
     align-items: center;
     justify-content: space-between;
     border-radius: 20px;
     padding: 0px 20px;
     background: #f5f5f5;
-    box-shadow: inset 7px 7px 6px #ebebeb, 
-            inset -7px -7px 6px #ffffff;
+    box-shadow: inset 7px 7px 6px #ebebeb, inset -7px -7px 6px #ffffff;
+}
+
+#aziendale {
+    width: 50%;
+    margin: 20px auto;
+    border-radius: 10px;
+    padding: 0 20px;
+    background: url("../icon/downarr.png") no-repeat right #ebecf0;
+    -webkit-appearance: none;
+    background-position-x: 99%;
+
+    box-shadow: -5px -5px 0px rgb(249, 249, 249), 5px 5px 0px #ebecf0;
 }
