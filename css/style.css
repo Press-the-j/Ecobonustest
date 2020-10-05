@@ -273,16 +273,11 @@ button {
 
 /* bottoni previous e next */
 
-<<<<<<< HEAD
-.next,
-.scegli .type-user {
-=======
 .scegli {
   margin-bottom: 30px;
 }
 
 .next, .scegli .type-user {
->>>>>>> 29a235a9151f53e5429b6254a1d3b542c249ec4a
     background-color: #2ad590;
     color: #fff;
 }
