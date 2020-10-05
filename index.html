@@ -479,11 +479,11 @@
               <small class="error"></small>
             </div>
             <div class="form-group">
-              <div class="row-input">
+              <div class="row-input" data-toggle="modal"
+              data-target="#winter-air-conditioning-popup">
                 <label for="
                 winter-air-conditioning">Climatizzazione Invernale</label>
-                <input class="form-control input-control" type="text" id="winter-air-conditioning" data-toggle="modal"
-                  data-target="#winter-air-conditioning-popup" data-receive-from="generation-heating-input">
+                <input class="form-control input-control" type="text" id="winter-air-conditioning"  data-receive-from="generation-heating-input">
                 <small class="error"></small>
               </div>
               <input type="hidden" data-receive-from="generator-type-input" class="">
@@ -903,6 +903,21 @@
             <div class="bottoni">
               <input type="button" class="previous nope btn btn-default" value="No" />
               <input type="button" class="next btn btn-success" value="Si" />
+            </div>
+          </fieldset>
+          <fieldset data-count-page="14" class="text-center text-uppercase">
+            <strong>ci sono i presupposti normativi per usufruire del superbonus 110%</strong>
+            <div class="code">
+              <span>HG123F</span>
+            </div>
+            <span>il tuo codice pratica</span><br>
+            <span>(è stato trasmesso anche per email)</span>
+            <div class="qr-code">
+              <img src="" alt="">
+            </div>
+            <p>Nella tua casella e-mail abbiamo provato ad inviarti la relazione esplicativa dell'intervento proposto e i documenti di cui necessitiamo per le successive verifiche. rimaniamo atua disposizione per ogni chiarimento!</p>
+            <div class="last-page-footer">
+              <span class="text-center text-uppercase">Alla Prossima</span>
             </div>
           </fieldset>
         </form>
