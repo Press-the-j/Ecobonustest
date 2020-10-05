@@ -9,6 +9,7 @@ body {
     font-family: "Lato", sans-serif;
     color: #2c3036;
     background-color: #ebecf0;
+    font-size: 16px;
 }
 
 .ap-input-icon {
@@ -21,6 +22,15 @@ body {
 .progress-bar {
     background-color: #46eeaa;
     border-radius: 10px;
+}
+
+.progress{
+    width: 535px;
+    margin: 40px auto;
+    height: 14px;
+    -webkit-box-shadow: inset 3px 3px 12px -6px rgba(0,0,0,0.50);
+    -moz-box-shadow: inset 3px 3px 12px -6px rgba(0,0,0,0.50);
+    box-shadow: inset 3px 3px 12px -6px rgba(0,0,0,0.50);
 }
 
 .progress,
@@ -85,10 +95,6 @@ body {
     flex-wrap: wrap;
 }
 
-.scegli .type-user {
-    background-color: #46eeaa;
-}
-
 .question {
     text-align: center;
 }
@@ -99,12 +105,28 @@ body {
 }
 
 .head img {
-    height: 220px;
-    width: 220px;
-    border-radius: 34px;
-    background: linear-gradient(145deg, #ffffff, #d9dadd);
-    box-shadow: 33px 33px 96px #c3c4c6, -33px -33px 96px #ffffff;
+    height: 130px;
+    width: 120px;
+    border-radius: 6px;
+    background: #f1f2f5;
+    box-shadow:  6px 6px 12px #cdced0, 
+             -6px -6px 12px #ffffff;
 }
+
+.head h1{
+
+color: #2c3036;
+font-size: 22px;
+letter-spacing: 1;
+font-weight: bold;
+margin-top: 40px;
+margin-bottom: 60px;
+}
+
+.homeP{
+    margin-bottom: 60px;
+}
+
 /* mappa sede legale */
 #map-registered-office, /* #mapSismic */ {
     height: 300px;
@@ -124,6 +146,7 @@ body {
 .continua {
     display: block;
     margin: 0 auto;
+    margin-top: 60px;
     cursor: pointer;
     box-shadow: -19px -19px 38px #2a8f66, 19px 19px 38px #62ffee;
 }
@@ -153,6 +176,10 @@ body {
     -webkit-transition: 0.2s;
     transition: 0.2s;
     border-radius: 34px;
+    -webkit-box-shadow: inset 3px 3px 12px -6px rgba(0,0,0,0.50);
+    -moz-box-shadow: inset 3px 3px 12px -6px rgba(0,0,0,0.50);
+    box-shadow: inset 3px 3px 12px -6px rgba(0,0,0,0.50);
+
 }
 
 .slider:before {
@@ -170,6 +197,7 @@ body {
 
 input:checked + .slider {
     background-color: #46eeaa;
+    
 }
 
 input:focus + .slider {
@@ -188,6 +216,7 @@ input:checked + .slider:before {
 
 label.switch {
     margin-right: 8px;
+    
 }
 
 /* fine toggle switch */
@@ -213,6 +242,7 @@ a:hover {
 .type-user {
     margin-top: 10px;
     margin-right: 10px;
+
 }
 
 .imageType {
@@ -236,7 +266,7 @@ button {
     outline: 0;
     border: none;
     border-radius: 50px;
-    padding: 10px 28px;
+    padding: 10px 40px;
     text-transform: uppercase;
     font-weight: bold;
     -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.12);
@@ -245,13 +275,15 @@ button {
     cursor: pointer;
 }
 
-.next {
-    background-color: #46eeaa;
+.next, .scegli .type-user {
+    background-color: #2ad590;
     color: #fff;
     box-shadow: 5px 5px 0px #606162, -5px -5px 0px #ffffff;
+    
 }
 
-.next:hover {
+
+.next:hover, .scegli .type-user:hover  {
     background: linear-gradient(145deg, #3fd699, #4bffb6);
     color: #fff;
 }
