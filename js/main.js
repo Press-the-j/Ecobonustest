@@ -282,8 +282,8 @@ $(document).ready(function(){
         return true
       }
 
-
-     
+    /* test */
+    var stocaiz
      //! funzione di controllo dei pop-up, che blocca il salvataggio dei dati negli input se non viene selezionato tutto
         //? dare classe popup-control agli input che devono essere controllati all'interno del popup
       
