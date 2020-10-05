@@ -60,7 +60,7 @@ $(document).ready(function(){
         next_step.show();
         setProgressBar(++current);
         $(".progress").css("display","block");
-        setClock();
+        //setClock();
         $('.error').text('')
       }
     });
@@ -153,7 +153,7 @@ $(document).ready(function(){
         //? applica la stessa logica del next, andando alla pagina successiva, settando il timer, aumentando la barra di progresso
         current_step.hide();
         current_step.next().show()
-        setClock();
+        //setClock();
         setProgressBar(++current);
       });
       
