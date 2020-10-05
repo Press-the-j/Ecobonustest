@@ -32,11 +32,7 @@ $(document).ready(function(){
       current_step = $(this).closest('fieldset');
       let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
       let control=controlInput(fieldset_count_page);
-<<<<<<< HEAD
-     // if(control){
-=======
       //if(control){
->>>>>>> 6bc3e1abbe7568d6b7f96e10b15c991ba25167ca
         console.log('passo i controlli');
         
         if(fieldset_count_page==10){
@@ -52,10 +48,11 @@ $(document).ready(function(){
         } else if(fieldset_count_page==5){
           sismicIntervention["address"]=$("#dove").val()
           
-        } else if(fieldset_count_page==14 ) {
+        } /* else if(fieldset_count_page==13 ) {
+          console.log('ciao');
           $('.clock').css('display' , 'none');
           clearInterval(myTimer);
-        }
+        } */
 
 
         next_step = $(this).closest('fieldset').next();
@@ -65,11 +62,7 @@ $(document).ready(function(){
         $(".progress").css("display","block");
         setClock();
         $('.error').text('')
-<<<<<<< HEAD
-    //  }
-=======
       //}
->>>>>>> 6bc3e1abbe7568d6b7f96e10b15c991ba25167ca
     });
   
     $(".previous").on('click',function(){
