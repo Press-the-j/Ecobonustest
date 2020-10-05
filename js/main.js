@@ -32,7 +32,7 @@ $(document).ready(function(){
       current_step = $(this).closest('fieldset');
       let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
       let control=controlInput(fieldset_count_page);
-      //if(control){
+      if(control){
         console.log('passo i controlli');
         
         if(fieldset_count_page==10){
@@ -58,7 +58,7 @@ $(document).ready(function(){
         $(".progress").css("display","block");
         setClock();
         $('.error').text('')
-      //}
+      }
     });
   
     $(".previous").on('click',function(){
@@ -229,17 +229,19 @@ $(document).ready(function(){
         let emptyInput=false
         //? controllo gli input all'interno del fieldset 
         inputs.forEach(element => {
-          /* if(element.classList.contains('ap-input')){ */
+          if(element.classList.contains('ap-input')){ 
+            var errorBox=element.parentNode.parentNode.parentNode.querySelector('.error')
+            console.log(errorBox);
+            var label=element.parentNode.parentNode.parentNode.querySelector('label').innerHTML
+            
+          } else {
             var errorBox=element.parentNode.parentNode.querySelector('.error')
             console.log(errorBox);
-            var label=element.parentNode.parentNode.querySelector('label').innerHTML
-            
-         /*  } else {
-            var errorBox=element.parentNode.querySelector('.error')
-            var label=element.parentNode.querySelector('label')
-          } */
+            var label=element.parentNode.parentNode.querySelector('label').innerHTML;
+          } 
           //? una serie di filtri in cui deve passare l'input
-            //* controlla se è vuoto 
+            //* controlla se è vuoto
+            console.log(element); 
           if(element.value.length==0){
             emptyInput=true
             errorBox.innerHTML=`${label} deve essere compilato `;
@@ -263,6 +265,7 @@ $(document).ready(function(){
             }
           }else {
             //* se gli input sono stati riempiti dai pop up, il messaggio di errore viene cancellato
+            
             if(errorBox.innerHTML.length!=0){
               errorBox.innerHTML=''
             }
