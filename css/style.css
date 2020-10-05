@@ -396,7 +396,7 @@ hr {
   background-color: #e3e4e7;
 }
 
-label{
+.row-input label{
   color: #2ad590;
   display: inline-block;
   max-width: 100%;
@@ -405,6 +405,7 @@ label{
   width: 35%;
   margin-right: 30px;
 }
+
 
 .row-input{
   display: flex;
