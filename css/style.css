@@ -24,13 +24,13 @@ body {
     border-radius: 10px;
 }
 
-.progress{
+.progress {
     width: 535px;
     margin: 40px auto;
     height: 14px;
-    -webkit-box-shadow: inset 3px 3px 12px -6px rgba(0,0,0,0.50);
-    -moz-box-shadow: inset 3px 3px 12px -6px rgba(0,0,0,0.50);
-    box-shadow: inset 3px 3px 12px -6px rgba(0,0,0,0.50);
+    -webkit-box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
 }
 
 .progress,
@@ -54,8 +54,6 @@ body {
     font-family: fontClock;
 }
 
-
-
 .glyphicon {
     font-size: 24px;
     cursor: pointer;
@@ -69,11 +67,11 @@ body {
     padding: 0 40px;
 }
 
-.btn-type-user-wrap{
-  display: flex;
-  align-items: center;
-  margin-top: 60px;
-  position: relative;
+.btn-type-user-wrap {
+    display: flex;
+    align-items: center;
+    margin-top: 60px;
+    position: relative;
 }
 #impresa,
 #personaFisica {
@@ -85,9 +83,7 @@ body {
     height: 30px;
     position: absolute;
     right: -25px;
-
 }
-
 
 .question {
     text-align: center;
@@ -103,21 +99,19 @@ body {
     width: 120px;
     border-radius: 6px;
     background: #f1f2f5;
-    box-shadow:  6px 6px 12px #cdced0, 
-             -6px -6px 12px #ffffff;
+    box-shadow: 6px 6px 12px #cdced0, -6px -6px 12px #ffffff;
 }
 
-.head h1{
-
-color: #2c3036;
-font-size: 22px;
-letter-spacing: 1;
-font-weight: bold;
-margin-top: 40px;
-margin-bottom: 60px;
+.head h1 {
+    color: #2c3036;
+    font-size: 22px;
+    letter-spacing: 1;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 60px;
 }
 
-.homeP{
+.homeP {
     margin-bottom: 60px;
 }
 
@@ -170,10 +164,9 @@ margin-bottom: 60px;
     -webkit-transition: 0.2s;
     transition: 0.2s;
     border-radius: 34px;
-    -webkit-box-shadow: inset 3px 3px 12px -6px rgba(0,0,0,0.50);
-    -moz-box-shadow: inset 3px 3px 12px -6px rgba(0,0,0,0.50);
-    box-shadow: inset 3px 3px 12px -6px rgba(0,0,0,0.50);
-
+    -webkit-box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
 }
 
 .slider:before {
@@ -191,7 +184,6 @@ margin-bottom: 60px;
 
 input:checked + .slider {
     background-color: #46eeaa;
-    
 }
 
 input:focus + .slider {
@@ -210,7 +202,6 @@ input:checked + .slider:before {
 
 label.switch {
     margin-right: 8px;
-    
 }
 
 /* fine toggle switch */
@@ -258,8 +249,7 @@ button {
     display: inline;
     margin-right: 10px;
     text-transform: none !important;
-    width:230px;
-
+    width: 230px;
 }
 
 .imageType {
@@ -270,7 +260,7 @@ button {
     border-radius: 20px;
     background: #f1f2f5;
     box-shadow: inset 5px 5px 0px #d4d5d8, inset -5px -5px 0px #ffffff;
-    width:200px;
+    width: 200px;
 }
 
 .question {
@@ -283,17 +273,14 @@ button {
 
 /* bottoni previous e next */
 
-
-
-.next, .scegli .type-user {
+.next,
+.scegli .type-user {
     background-color: #2ad590;
     color: #fff;
-    
-    
 }
 
-
-.next:hover, .scegli .type-user:hover  {
+.next:hover,
+.scegli .type-user:hover {
     background: linear-gradient(145deg, #3fd699, #4bffb6);
     color: #fff;
 }
@@ -361,21 +348,6 @@ input:-webkit-autofill {
 
 /* !stile select */
 
-select.form-control {
-    border-radius: 20px;
-    background: grey;
-    box-shadow: -10px -10px 20px #fff, 10px 10px 20px #ffffff;
-    padding: 5px 35px 5px 5px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    height: 34px;
-    /* tolgo arrow standard
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    ------------------------- */
-}
-
 select.form-control option {
     background-color: #f5f5f5;
 }
@@ -390,18 +362,16 @@ select::-ms-expand {
 }
 
 select.form-control {
-    /* width: 268px; */
-
-    border-radius: 20px;
-
-    box-shadow: inset 2px 2px 5px #939393, inset -5px -5px 10px #ffffff;
-    background: url("../icon/downarr.png") no-repeat right #f5f5f5;
+    border: none;
+    -webkit-appearance: none;
+    margin: 20px auto;
+    border-radius: 10px;
+    padding: 0 20px;
+    background: url("../icon/downarr.png") no-repeat right #ebecf0;
     -webkit-appearance: none;
     background-position-x: 99%;
-}
-
-select.form-control option {
-    background-color: #f5f5f5;
+    font-weight: bold;
+    box-shadow: 5px 5px 30px transparent, -5px -5px 10px #ffffff;
 }
 
 select::-ms-expand {
@@ -451,37 +421,23 @@ hr {
     border-radius: 20px;
     padding: 0px 20px;
     background: #f5f5f5;
-    box-shadow: inset 7px 7px 6px #ebebeb, 
-            inset -7px -7px 6px #ffffff;
-}
-
-#aziendale {
-  border: 1px solid rgba(128, 128, 128, 0.263);
-  width: 50%;
-  margin: 20px auto;
-  border-radius: 10px;
-  padding: 0 20px;
-  background: url("../icon/downarr.png") no-repeat right #f5f5f5;
-  -webkit-appearance: none;
-  background-position-x: 99%;
-
-  box-shadow: -5px -5px 0px rgb(249, 249, 249), 5px 5px 0px #ebecf0;
+    box-shadow: inset 7px 7px 6px #ebebeb, inset -7px -7px 6px #ffffff;
 }
 
 button.close {
-  border-radius: 50%;
-  position: relative;
-   height: 20px;
-  display: block;
-  width: 24px;
-  -webkit-box-shadow:2px 2px 6px 1px rgba(0,0,0,1);
-  -moz-box-shadow: 2px 2px 6px 1px rgba(0,0,0,1);
-  box-shadow: 2px 2px 6px 1px rgba(0,0,0,1);
+    border-radius: 50%;
+    position: relative;
+    height: 20px;
+    display: block;
+    width: 24px;
+    -webkit-box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 1);
+    box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 1);
 }
 
 .close span {
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%);
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
 }
