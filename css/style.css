@@ -54,38 +54,11 @@ body {
     font-family: fontClock;
 }
 
-.info,
-.info2 {
-    width: 550px;
-    height: 350px;
-    background-color: white;
-    border: 1px solid black;
-    z-index: 999;
-    position: absolute;
-    padding: 20px;
-    display: none;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0, 4);
-}
+
 
 .glyphicon {
     font-size: 24px;
     cursor: pointer;
-}
-
-.info div p {
-    margin-bottom: 10px;
-}
-
-.info2 div p {
-    margin-bottom: 10px;
-}
-
-#impresa,
-#personaFisica {
-    display: inline;
 }
 
 .scelta {
@@ -94,6 +67,23 @@ body {
     position: relative;
     flex-wrap: wrap;
 }
+
+.btn-type-user-wrap{
+  display: flex;
+  align-items: center;
+  margin-top: 60px;
+}
+#impresa,
+#personaFisica {
+    display: inline-block;
+    border-radius: 50%;
+    background: #f1f2f5;
+    box-shadow: inset 2px 2px 6px #d4d5d8, inset -5px -10px 7px #ffffff;
+    width: 30px;
+    position: relative;
+    height: 30px;
+}
+
 
 .question {
     text-align: center;
@@ -242,6 +232,13 @@ a:hover {
 .type-user {
     margin-top: 10px;
     margin-right: 10px;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+    box-shadow: -19px -19px 38px #2a8f66, 19px 19px 38px #62ffee;
+    padding: 10px 20px;
+    display: inline;
+    margin-right: 10px;
 
 }
 
@@ -257,6 +254,10 @@ a:hover {
 
 .question {
     cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
 }
 
 /* bottoni previous e next */
@@ -278,7 +279,7 @@ button {
 .next, .scegli .type-user {
     background-color: #2ad590;
     color: #fff;
-    box-shadow: 5px 5px 0px #606162, -5px -5px 0px #ffffff;
+    
     
 }
 
