@@ -32,6 +32,7 @@
   <script src="js/main.js" charset="utf-8"></script>
 
   <main class="container">
+    <input type="button" value="">
     <!-- Pagina accettazione -->
     <div class="row">
       <div class=" col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
@@ -50,43 +51,49 @@
         </div>
         <form id="formComp" class="" novalidate action="" method="post" autocomplete="off">
           <fieldset data-count-page="1" class="checkboxes">
-            <p class="homeP">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+            <p class="m-bottom-60">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+              incididunt
+              ut
               labore et
               dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
               ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
               fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
               mollit anim id est laborum. Lorem. Lorem. Lorem. Lorem.</p>
-            <div class="form-group flexCenter">
+            <div class="form-group switch-wrapper">
               <label class="switch" for="privacy">
                 <input type="checkbox" id="privacy">
                 <span class="slider"></span>
               </label>
               <span>Accetta la nostra <a class="link" href="">Privacy policy</a></span>
             </div>
-            <div class="form-group flexCenter">
+            <div class="form-group switch-wrapper">
               <label class="switch" for="marketing">
                 <input type="checkbox" id="marketing">
                 <span class="slider"></span>
               </label>
               <span>Rimani aggiornato sulle nostre offerte <a class="link" href="">Marketing</a></span>
             </div>
-            <input type="button" name="continua" class="continua next " value="continua" disabled />
+            <div class="bottoni m-top-60">
+              <input type="button" name="continua" class="next btn-next" value="continua" disabled />
+            </div>
           </fieldset>
           <fieldset data-count-page="2" class="scegliTipo">
             <section class="scelta">
-              <div class="scegli">
+              <div class="m-bottom-30">
                 <img class="imageType img-responsive" src="img/Icona-Azienda.svg" alt="immagine impresa">
-                  <div class="btn-type-user-wrap">
-                    <input type="button" value="Sei un&#39;impresa &#63;" class="type-user " data-typeUser="business" />
-                    <span data-toggle="modal" data-target="#business-infos" id="impresa"><img
-                        src="img/Punto-Interrogativo.svg" class="question" alt="Punto_Interrogativo"></span>
-                  </div>
+                <div class="btn-type-user-wrap m-top-60">
+                  <input type="button" value="Sei un&#39;impresa &#63;" class="type-user btn-type-user"
+                    data-typeUser="business" />
+                  <span data-toggle="modal" data-target="#business-infos" id="impresa-info"><img
+                      src="img/Punto-Interrogativo.svg" class="question" alt="Punto_Interrogativo"></span>
+                </div>
               </div>
               <div class="scegli">
                 <img class="imageType img-responsive" src="img/Icona-persona- Fisica.svg" alt="immagine impresa">
-                <div class="btn-type-user-wrap">
-                  <input type="button" value="Sei una persona fisica &#63;" class="type-user" data-typeUser="person" />
-                  <span data-toggle="modal" data-target="#person-infos" id="personaFisica"><img class="question"
+                <div class="btn-type-user-wrap m-top-60">
+                  <input type="button" value="Sei una persona fisica &#63;" class="type-user btn-type-user"
+                    data-typeUser="person" />
+                  <span data-toggle="modal" data-target="#person-infos" id="personaFisica-info"><img class="question"
                       src="img/Punto-Interrogativo.svg" alt="Punto_Interrogativo"></span>
                 </div>
               </div>
@@ -109,7 +116,7 @@
                     </p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                    <button type="button" class="btn btn-next" data-dismiss="modal">OK</button>
                   </div>
                 </div>
               </div>
@@ -132,7 +139,7 @@
                     </p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                    <button type="button" class="btn btn-next" data-dismiss="modal">OK</button>
                   </div>
                 </div>
               </div>
@@ -148,7 +155,7 @@
                 <label for="name">Nome</label>
                 <input data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" type="search"
                   class="form-control input-control" id="name" name="name" data-receive-from="complete-name">
-                </div>
+              </div>
               <small class="error"></small>
             </div>
             <div class="form-group">
@@ -169,7 +176,7 @@
               <small class="error"></small>
             </div>
             <hr>
-            <div class="info-contatto">
+            <div class="info-contatto m-bottom-60">
               <small>informazioni di contatto</small>
             </div>
             <div class="form-group">
@@ -187,8 +194,8 @@
               <small class="error"></small>
             </div>
             <div class="bottoni">
-              <input type="button" name="previous" class="previous-reg btn" value="Previous" />
-              <input type="button" name="next" class="next btn" value="Next" />
+              <input type="button" name="previous" class="previous-reg btn-previous btn" value="Previous" />
+              <input type="button" name="next" class="next btn btn-next" value="Next" />
             </div>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -213,16 +220,16 @@
                         <label for="surname-popup" class="control-label">Cognome</label>
                         <input type="text" class="form-control  popup-control input-popup-control send-val-name"
                           id="surname-popup">
-                        </div>
+                      </div>
                       <small class="error"></small>
                     </div>
                     <input type="hidden" id="complete-name">
 
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                    <button type="button" class="btn btn-previous" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
-                    <button class="save-pop-up" type="button" class="btn btn-primary">Salva</button>
+                    <button class="save-pop-up btn-next" type="button" class="btn btn-primary">Salva</button>
                   </div>
                 </div>
               </div>
@@ -303,8 +310,8 @@
             </div>
 
             <div class="bottoni">
-              <input type="button" name="previous" class="previous-reg btn" value="Previous" />
-              <input type="button" name="next" class="next btn" value="Next" />
+              <input type="button" name="previous" class="previous-reg btn-previous btn" value="Previous" />
+              <input type="button" name="next" class="next btn btn-next" value="Next" />
             </div>
             <!--  popup ragione sociale -->
             <div class="modal fade" id="business-name" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -338,9 +345,9 @@
 
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                    <button type="button" class="btn btn-previous" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
-                    <button class="save-pop-up" type="button" class="btn btn-primary"
+                    <button class="save-pop-up btn-next" type="button" class="btn btn-primary"
                       data-dismiss="modal">Salva</button>
                   </div>
                 </div>
@@ -383,9 +390,9 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                    <button type="button" class="btn btn-previous" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
-                    <button class="save-pop-up" type="button" class="btn btn-primary"
+                    <button class="save-pop-up btn-next" type="button" class="btn btn-primary"
                       data-dismiss="modal">Salva</button>
                   </div>
                 </div>
@@ -423,9 +430,9 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                    <button type="button" class="btn btn-previous" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
-                    <button class=" save-pop-up" type="button" class="btn btn-primary"
+                    <button class=" save-pop-up btn-next" type="button" class="btn btn-primary"
                       data-dismiss="modal">Salva</button>
                   </div>
                 </div>
@@ -483,11 +490,11 @@
               <small class="error"></small>
             </div>
             <div class="form-group">
-              <div class="row-input" data-toggle="modal"
-              data-target="#winter-air-conditioning-popup">
+              <div class="row-input" data-toggle="modal" data-target="#winter-air-conditioning-popup">
                 <label for="
                 winter-air-conditioning">Climatizzazione Invernale</label>
-                <input class="form-control input-control" type="text" id="winter-air-conditioning"  data-receive-from="generation-heating-input">
+                <input class="form-control input-control" type="text" id="winter-air-conditioning"
+                  data-receive-from="generation-heating-input">
               </div>
               <small class="error"></small>
               <input type="hidden" data-receive-from="generator-type-input" class="">
@@ -524,8 +531,8 @@
               <small class="error"></small>
             </div>
             <div class="bottoni">
-              <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
-              <input type="button" name="next" class="next btn btn-info" value="Next" />
+              <input type="button" name="previous" class="previous btn-previous btn" value="Previous" />
+              <input type="button" name="next" class="next btn btn-next" value="Next" />
             </div>
             <!-- pop up climatizzazione invernale -->
             <div class="modal fade" id="winter-air-conditioning-popup" tabindex="-1" role="dialog"
@@ -575,9 +582,9 @@
                     <input type="hidden" class="popup-control" data-error="terminal-type" id="terminal-type-input">
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                    <button type="button" class="btn btn-previous" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
-                    <button class="save-pop-up" type="button" class="btn btn-primary">Salva</button>
+                    <button class="save-pop-up btn-next" type="button" class="btn btn-primary">Salva</button>
                   </div>
                 </div>
               </div>
@@ -612,9 +619,9 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                    <button type="button" class="btn btn-previous" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
-                    <button class="save-pop-up" type="button" class="btn btn-primary">Salva</button>
+                    <button class="save-pop-up btn-next" type="button" class="btn btn-primary">Salva</button>
                   </div>
                 </div>
               </div>
@@ -658,9 +665,9 @@
                   </div>
                   <input type="hidden" class="popup-control" data-error="glass-type" id="glass-type-input">
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                    <button type="button" class="btn btn-previous" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
-                    <button class="save-pop-up" type="button" class="btn btn-primary">Salva</button>
+                    <button class="save-pop-up btn-next" type="button" class="btn btn-primary">Salva</button>
                   </div>
                 </div>
               </div>
@@ -698,8 +705,8 @@
               </div>
             </div>
             <div class="bottoni">
-              <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
-              <input type="button" name="next" class="next btn btn-info" value="Next" disabled />
+              <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
+              <input type="button" name="next" class="next btn btn-next" value="Next" disabled />
             </div>
 
           </fieldset>
@@ -793,8 +800,8 @@
               </select>
             </div>
             <div class="bottoni">
-              <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
-              <input type="button" name="next" class="next btn btn-info" value="Next" disabled />
+              <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
+              <input type="button" name="next" class="next btn btn-next" value="Next" disabled />
             </div>
           </fieldset>
           <fieldset class="test" data-count-page="8">
@@ -803,8 +810,8 @@
             <p>Il beneficiario dell'intervento è una persona fisica che agisce in veste di privato e quindi estraneo ad
               attività imprenditoriale e/o professionale?</p>
             <div class="bottoni">
-              <input type="button" class="btn nope next btn-default" value="No">
-              <input type="button" class="btn next btn-success" value="Si">
+              <input type="button" class="btn nope next btn-previous btn-next" value="No">
+              <input type="button" class="btn next btn-next" value="Si">
             </div>
           </fieldset>
           <fieldset data-count-page="9">
@@ -842,8 +849,8 @@
               </div>
             </div>
             <div class="bottoni">
-              <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
-              <input type="button" name="next" class="next btn btn-info" value="Next" disabled />
+              <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
+              <input type="button" name="next" class="next btn btn-next" value="Next" disabled />
             </div>
           </fieldset>
           <fieldset class="intervantion-qualification" data-count-page="10">
@@ -873,8 +880,8 @@
               </div>
             </div>
             <div class="bottoni">
-              <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
-              <input type="button" name="next" class="next btn btn-success" value="Continua" disabled />
+              <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
+              <input type="button" name="next" class="next btn btn-next" value="Continua" disabled />
             </div>
           </fieldset>
           <fieldset data-count-page="11" class="sismic-intervention">
@@ -885,8 +892,8 @@
             <input type="search" id="sismic-intervention-search" placeholder="Search..." autocomplete="off">
             <div id="mapSismic"></div>
             <div class="bottoni">
-              <input type="button" name="previous" class="previous btn btn-default" value="Previous" />
-              <input type="button" name="next" class="next nope btn btn-success" value="Conferma" />
+              <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
+              <input type="button" name="next" class="next btn btn-next" value="Conferma" />
             </div>
           </fieldset>
           <fieldset data-count-page="12">
@@ -895,8 +902,8 @@
               dei beni culturali e del paesaggio o per effetto di regolamenti edilizi, urbanistici e ambientali e
               pertanto sugli stessi non possono essere realizzati interventi trainanti?</p>
             <div class="bottoni">
-              <input type="button" class="previous nope btn btn-default" value="No" />
-              <input type="button" class="next btn btn-success" value="Si" />
+              <input type="button" class="previous btn btn-previous" value="No" />
+              <input type="button" class="next btn btn-next" value="Si" />
             </div>
           </fieldset>
           <fieldset data-count-page="13">
@@ -905,12 +912,13 @@
               rientrano nel computo delle 2 unità immobiliari gli interventi effettuati sulle parti comuni del
               condominio)</p>
             <div class="bottoni">
-              <input type="button" class="previous nope btn btn-default" value="No" />
-              <input type="button" class="next btn btn-success" value="Si" />
+              <input type="button" class="previous btn btn-previous" value="No" />
+              <input type="button" class="next btn btn-next" value="Si" />
             </div>
           </fieldset>
           <fieldset data-count-page="14" class="text-center ">
-            <strong class="last-page-title text-uppercase">ci sono i presupposti normativi per usufruire del superbonus 110%</strong>
+            <strong class="last-page-title text-uppercase">ci sono i presupposti normativi per usufruire del superbonus
+              110%</strong>
             <div class="last-page-code">
               <span>HG123F</span>
             </div>
@@ -919,7 +927,9 @@
             <div class="qr-code">
               <img src="img/qr-code.png" alt="">
             </div>
-            <p class="last-page-paragraph">Nella tua casella e-mail abbiamo provato ad inviarti la relazione esplicativa dell'intervento proposto e i documenti di cui necessitiamo per le successive verifiche. rimaniamo atua disposizione per ogni chiarimento!</p>
+            <p class="last-page-paragraph">Nella tua casella e-mail abbiamo provato ad inviarti la relazione esplicativa
+              dell'intervento proposto e i documenti di cui necessitiamo per le successive verifiche. rimaniamo atua
+              disposizione per ogni chiarimento!</p>
             <div class="last-page-footer">
               <span class="text-center text-uppercase">Alla Prossima</span>
             </div>

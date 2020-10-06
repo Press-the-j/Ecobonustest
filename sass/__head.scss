@@ -1,0 +1,21 @@
+.head {
+    text-align: center;
+    position: relative;
+}
+
+.head img {
+    height: 130px;
+    width: 120px;
+    border-radius: 6px;
+    background: #f1f2f5;
+    box-shadow: 6px 6px 12px #cdced0, -6px -6px 12px #ffffff;
+}
+
+.head h1 {
+    color: #2c3036;
+    font-size: 22px;
+    letter-spacing: 1;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}

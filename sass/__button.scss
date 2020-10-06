@@ -1,0 +1,45 @@
+.btn-next {
+    @include button-style($primary-color, #fff);
+}
+
+.btn-type-user-wrap {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.btn-type-user {
+    @include button-style($primary-color, #fff);
+    margin: 0 auto;
+    margin-right: 10px;
+    text-transform: none !important;
+    width: 230px;
+}
+
+.btn-type-user:hover,
+.btn-next:hover {
+    background: linear-gradient(145deg, #3fd699, #4bffb6);
+    color: #fff;
+}
+
+.btn-previous {
+    @include button-style(#edeef2, black);
+}
+
+.btn-previous:hover {
+    color: #333;
+    background-color: #e3e4e7;
+    border-color: #adadad;
+}
+
+.bottoni input {
+    margin-right: 1.5rem;
+    position: relative;
+}
+
+.bottoni {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
