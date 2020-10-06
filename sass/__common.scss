@@ -1,0 +1,75 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    color: #2c3036;
+    background-color: #ebecf0;
+    font-size: 16px;
+}
+
+@font-face {
+    font-family: "fontClock";
+    src: url("../fonts/TickingTimebombBB.ttf");
+}
+
+/* mappa sede legale */
+#map-registered-office {
+    height: 300px;
+    z-index: 10;
+}
+
+.m-top-60 {
+    margin-top: 60px;
+}
+
+.m-bottom-60 {
+    margin-bottom: 60px;
+}
+
+.m-bottom-30 {
+    margin-bottom: 30px;
+}
+
+#formComp fieldset:not(:first-of-type) {
+    display: none;
+}
+
+.ap-input-icon {
+    display: none;
+}
+
+.container {
+    margin-top: 100px;
+}
+
+a {
+    color: #2c3036;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #2c3036;
+}
+
+.info-contatto {
+    text-align: center;
+    color: #2c3036;
+}
+
+hr {
+    height: 2px;
+    border: 0;
+    width: 33%;
+    margin: auto;
+    border-radius: 2px;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+.error {
+    color: red;
+}

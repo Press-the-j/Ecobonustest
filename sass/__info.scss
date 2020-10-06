@@ -1,0 +1,25 @@
+.glyphicon {
+    font-size: 22px;
+    cursor: pointer;
+    margin-left: 6px;
+}
+
+.question {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+}
+
+#impresa-info,
+#personaFisica-info {
+    display: inline-block;
+    border-radius: 50%;
+    background: #f1f2f5;
+    box-shadow: inset 2px 2px 6px #d4d5d8, inset -5px -10px 7px #ffffff;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: -25px;
+}
