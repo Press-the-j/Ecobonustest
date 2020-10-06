@@ -73,23 +73,15 @@ $(document).ready(function(){
             $(".progress").css("display", "block");
             //setClock();
             $(".error").text("");
-        }
+        //}
     });
 
     $(".previous").on("click", function () {
         current_step = $(this).closest("fieldset");
         next_step = $(this).closest("fieldset").prev();
         next_step.show();
-<<<<<<< HEAD
         current_step.hide();
         setProgressBar(--current);
-=======
-        setProgressBar(++current);
-        $(".progress").css("display","block");
-        //setClock();
-        $('.error').text('')
-      //}
->>>>>>> 5972e09e5b907fc5ee2d94abd3c513124ed831f2
     });
 
     $(".previous-reg").on("click", function () {
@@ -105,17 +97,6 @@ $(document).ready(function(){
         });
         clone_step = "";
     });
-<<<<<<< HEAD
-    setProgressBar(current);
-
-    // barra di progresso, cambio percentuale
-
-    function setProgressBar(curStep) {
-        var percentuale = parseFloat(100 / steps) * curStep;
-        percentuale = percentuale.toFixed();
-        $(".progress-bar").css("width", percentuale + "%");
-        // .html(percentuale+"%");
-=======
     
     $(".previous-reg").on('click', function(){
     
@@ -163,7 +144,6 @@ $(document).ready(function(){
         }
         
       }, 1000)
->>>>>>> 5972e09e5b907fc5ee2d94abd3c513124ed831f2
     }
 
     // da richiamare quando metteremo il timer
@@ -218,9 +198,6 @@ $(document).ready(function(){
     });
 
     //! questa è una funzione provvisoria per nascondere o mostrare il fieldset 10 in base alla scelta dell'utente nella precedente checkbox
-<<<<<<< HEAD
-    //* se l'utente checca l'input con classe sismic- intervention-check, la pagina si deve vedere
-=======
       //* se l'utente checca l'input con classe sismic- intervention-check, la pagina si deve vedere
 
        function checkSismic(currentStep){
@@ -240,7 +217,6 @@ $(document).ready(function(){
           $('.sismic-intervention').remove()         
         }
       }
->>>>>>> 5972e09e5b907fc5ee2d94abd3c513124ed831f2
 
     function checkSismic(currentStep) {
         if ($(".sismic-intervention-check").is(":checked")) {
@@ -321,7 +297,6 @@ $(document).ready(function(){
     });
 
     //! funzione di controllo per validare gli input e le select in pagina
-<<<<<<< HEAD
       //todo dare classe input-control agli input che devono essere controllati, e classe select-control alle select che devono essere controllate
 
       //todo l'errorBox deve essere fratello di row-input, il label figlio diretto di row-input
@@ -362,40 +337,6 @@ $(document).ready(function(){
             let dateArr=$('#date').val().split('-');
             if(dateArr[0]<1900 || dateArr[0]>thisYear){
               emptyInput=true
-=======
-    //todo dare classe input-control agli input che devono essere controllati, e classe select-control alle select che devono essere controllate
-
-    //todo controllare che gli input abbiano come fratello direttamente successivo uno elemento con classe error, per inserire il messaggio di errore, ed il label come fratello direttamente precedente per poter usare il contenuto, come variabile da inserire nel messaggio di errore
-
-    //todo per dirgli che c'è un errore impostare la variabile emptyInput a true
-    //!! la funzione ritorna falso, se c'è qualcosa che non va con gli input, e true se è tutto apposto
-    function controlInput(countPage) {
-        //? seleziono il fieldset padre tramite il countPage passato
-        let inputs = $(
-            `fieldset[data-count-page=${countPage}] .input-control`
-        ).get();
-        let select = $(
-            `fieldset[data-count-page=${countPage}] .select-control`
-        ).get();
-        let emptyInput = false;
-        //? controllo gli input all'interno del fieldset
-        inputs.forEach((element) => {
-            if (element.classList.contains("ap-input")) {
-                var errorBox = element.parentNode.parentNode.parentNode.querySelector(
-                    ".error"
-                );
-                console.log(errorBox);
-                var label = element.parentNode.parentNode.parentNode.querySelector(
-                    "label"
-                ).innerHTML;
-            } else {
-                var errorBox = element.parentNode.parentNode.querySelector(
-                    ".error"
-                );
-                console.log(errorBox);
-                var label = element.parentNode.parentNode.querySelector("label")
-                    .innerHTML;
->>>>>>> c233c70b8af7db460a78c782900f9fff319db4c5
             }
             //? una serie di filtri in cui deve passare l'input
             //* controlla se è vuoto
@@ -428,7 +369,6 @@ $(document).ready(function(){
                     errorBox.innerHTML = "";
                 }
             }
-<<<<<<< HEAD
           } */
         })
         select.forEach(element => {
@@ -438,16 +378,6 @@ $(document).ready(function(){
             let label=element.previousElementSibling.innerHTML
             errorBox.innerHTML=`${label} deve essere compilato `;
           }
-=======
-        });
-        select.forEach((element) => {
-            if (element.value == "none") {
-                emptyInput = true;
-                let errorBox = element.nextElementSibling;
-                let label = element.previousElementSibling.innerHTML;
-                errorBox.innerHTML = `${label} deve essere compilato `;
-            }
->>>>>>> c233c70b8af7db460a78c782900f9fff319db4c5
         });
         if (emptyInput) {
             return false;
@@ -455,7 +385,6 @@ $(document).ready(function(){
         return true;
     }
 
-<<<<<<< HEAD
     
      //! funzione di controllo dei pop-up, che blocca il salvataggio dei dati negli input se non viene selezionato tutto
         //? dare classe popup-control agli input che devono essere controllati all'interno del popup
@@ -480,37 +409,9 @@ $(document).ready(function(){
         return false
       }
       return true
-=======
-    /* test */
-    var stocaiz;
-    //! funzione di controllo dei pop-up, che blocca il salvataggio dei dati negli input se non viene selezionato tutto
-    //? dare classe popup-control agli input che devono essere controllati all'interno del popup
-
-    function controlPopup(popupId) {
-        let inputs = $(`#${popupId} .popup-control`).get();
-        let emptyInput = false;
-        inputs.forEach((element) => {
-            if (element.value.length == 0) {
-                if (element.classList.contains("input-popup-control")) {
-                    var dataError = element.getAttribute("id");
-                } else {
-                    var dataError = element.getAttribute("data-error");
-                }
-                emptyInput = true;
-                let errorBox = $(`#${dataError}`).siblings(".error");
-                let label = $(`#${dataError}`).siblings("label").text();
-                errorBox.text(`${label} deve essere compilato `);
-            }
-        });
-        if (emptyInput) {
-            return false;
-        }
-        return true;
->>>>>>> c233c70b8af7db460a78c782900f9fff319db4c5
     }
 
     //!funzione per inserire automaticamente i dati dei pop up negli input
-<<<<<<< HEAD
       //? dare classe save-pop-up al bottone salva
       //? settare negli input in pagina il data-receive-from uguale all'id dell'input nel pop up di cui salvare i dati
     $(".save-pop-up").on('click', function(e){
@@ -537,46 +438,8 @@ $(document).ready(function(){
             //? pulissco l'errorBox al riempimento dei dati da popup
             $(`input[data-receive-from=${id_pop_up_input}`).closest('.row-input').siblings('.error').text('')
           }
-=======
-    //? dare classe save-pop-up al bottone salva
-    //? settare negli input in pagina il data-receive-from uguale all'id dell'input nel pop up di cui salvare i dati
-    $(".save-pop-up").on("click", function (e) {
-        let pop_up = $(this).closest(".modal").attr("id");
-        let control = controlPopup(pop_up);
-        console.log(control);
-        if (!control) {
-            e.preventDefault();
-        } else {
-            $(this).closest(".modal").find(".close").click();
-            let fieldset_count_page = $(this)
-                .closest("fieldset")
-                .attr("data-count-page");
-            let pop_up_input = $(this).closest(".modal").find("input").get();
-            console.log(pop_up_input);
-
-            for (let i = 0; i < pop_up_input.length; i++) {
-                let id_pop_up_input = pop_up_input[i].getAttribute("id");
-                console.log(id_pop_up_input);
-                if (
-                    $(
-                        `fieldset[data-count-page=${fieldset_count_page}] input[data-receive-from=${id_pop_up_input}]`
-                    ).length
-                ) {
-                    console.log(pop_up_input[i].value);
-                    let inputText = pop_up_input[i].value;
-                    console.log(inputText);
-                    console.log(id_pop_up_input);
-                    $(`input[data-receive-from=${id_pop_up_input}`).val(
-                        inputText
-                    );
-                    $(`input[data-receive-from=${id_pop_up_input}`)
-                        .closest(".row-input")
-                        .siblings(".error")
-                        .text("");
-                }
-            }
->>>>>>> c233c70b8af7db460a78c782900f9fff319db4c5
         }
+      }
     });
 
     //! funzione che scrive il valore della option selezionata all'interno dei pop-up, in input nascosti su cui poi fare i dovuti controlli
@@ -619,7 +482,6 @@ $(document).ready(function(){
         }
     });
 
-<<<<<<< HEAD
    
 
       //? al change delle input che non si riempiono tramite popup, vadoa cancellare il messaggio di errore
@@ -629,30 +491,6 @@ $(document).ready(function(){
         errorBox.text('')
       }
     })
-=======
-    //? validazione dell'input di tipo date
-    $("#date").on("change", function () {
-        let date = new Date();
-        let thisYear = date.getFullYear();
-        let errorBox = $(this).siblings(".error");
-        let dateArr = $("#date").val().split("-");
-        if (dateArr[0] < 1900 || dateArr[0] > thisYear) {
-            errorBox.text("Data di nascita non valida");
-        } else {
-            errorBox.text("");
-        }
-    });
-
-    //? alchange delle input che non si riempiono tramite popup, vadoa cancellare il messaggio di errore
-    $(".input-control")
-        .not('[type="date"]')
-        .on("change", function () {
-            var errorBox = $(this).siblings(".error");
-            if (errorBox.text().length != 0) {
-                errorBox.text("");
-            }
-        });
->>>>>>> c233c70b8af7db460a78c782900f9fff319db4c5
 
     //! validazione dell'input di tipo date
     $('#date').on('change', function(){
@@ -668,7 +506,6 @@ $(document).ready(function(){
   })
 
     //! chiamata ad Algolia per la mappa della sede legale
-<<<<<<< HEAD
       //? autocompletamento dell'input di ricerca
       var placesAutocomplete = places({
         appId: 'pl7QEUHBIWGV',
@@ -696,14 +533,6 @@ $(document).ready(function(){
         document.querySelector('#postal-code-registered-office').value = e.suggestion.postcode || '';
       })
 
-=======
-    //? autocompletamento dell'input di ricerca
-    var placesAutocomplete = places({
-        appId: "pl7QEUHBIWGV",
-        apiKey: "bc57f2fb92b40eb8a458abd86c2b3402",
-        container: document.querySelector("#address-registered-office "),
-    });
->>>>>>> c233c70b8af7db460a78c782900f9fff319db4c5
 
     var placesAutocompleteSismic = places({
         appId: "pl7QEUHBIWGV",
@@ -730,7 +559,6 @@ $(document).ready(function(){
         renderMap(placesAutocomplete, map);
     });
 
-<<<<<<< HEAD
     
     function renderMap(autocomplete, mapToSet){
       //!timeout settato per fixare il caricamento della mappa
@@ -741,49 +569,6 @@ $(document).ready(function(){
         scrollWheelZoom:false,
         zoomControl: false
       });
-=======
-    function renderMap(autocomplete, mapToSet) {
-        setTimeout(function () {
-            //?renderizzo la mappa
-            var map = L.map(mapToSet, {
-                scrollWheelZoom: false,
-                zoomControl: false,
-            });
-
-            var osmLayer = new L.TileLayer(
-                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                {
-                    minZoom: 1,
-                    maxZoom: 13,
-                    attribution:
-                        'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
-                }
-            );
-
-            var markers = [];
-
-            map.invalidateSize();
-            map.setView(new L.LatLng(0, 0), 1);
-            map.addLayer(osmLayer);
-
-            autocomplete.on("suggestions", handleOnSuggestions);
-            autocomplete.on("cursorchanged", handleOnCursorchanged);
-            autocomplete.on("change", handleOnChange);
-            autocomplete.on("clear", handleOnClear);
-
-            function handleOnSuggestions(e) {
-                markers.forEach(removeMarker);
-                markers = [];
-
-                if (e.suggestions.length === 0) {
-                    map.setView(new L.LatLng(0, 0), 1);
-                    return;
-                }
-
-                e.suggestions.forEach(addMarker);
-                findBestZoom();
-            }
->>>>>>> c233c70b8af7db460a78c782900f9fff319db4c5
 
             function handleOnChange(e) {
                 markers.forEach(function (marker, markerIndex) {
@@ -832,7 +617,6 @@ $(document).ready(function(){
             }
         }, 1000);
     }
-<<<<<<< HEAD
   
     function setInputFilter(textbox, inputFilter) {
       ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
@@ -862,6 +646,3 @@ $(document).ready(function(){
 
 
   });
-=======
-});
->>>>>>> c233c70b8af7db460a78c782900f9fff319db4c5
