@@ -3,14 +3,22 @@
 $(document).ready(function(){
   
   var next_step;
+  var current_step;
+
+  //! variabile a cui assegnare il tipo di utente
   var type_user; 
+
+  //! timer della paggina a cui assegno un setInterval
   var myTimer;
+
+  //! variabile in cui salvo le pagine clonate
   var clone_step;
   var sismicIntervention={};
+
   //! variabili delle progress bar
   var steps
   var current = 1;
-  var current_step;
+  
 
   $('input').attr('autocomplete', 'off');
   
@@ -18,14 +26,22 @@ $(document).ready(function(){
 
 
     
-
-    $("#privacy").on("change", function(){
-      if ($(this).is(':checked')){
-        $(".continua").prop("disabled", false);
-      } else if ($(this).not(':checked')){
-        $(".continua").prop("disabled", true);
-      }
-    });
+  //todo bisogna assegnare un errore nel caso l'utente prova ad andare avanti senza accettare la privacy
+  $("#privacy").on("change", function () {
+    if ($(this).is(":checked")) {
+        let btn_next = $(this)
+            .closest(".form-group")
+            .siblings(".bottoni")
+            .children(".next");
+        btn_next.prop("disabled", false);
+    } else if ($(this).not(":checked")) {
+        let btn_next = $(this)
+            .closest(".form-group")
+            .siblings(".bottoni")
+            .children(".next");
+        btn_next.prop("disabled", true);
+    }
+});
 
     
     
@@ -35,7 +51,7 @@ $(document).ready(function(){
       let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
       let control=controlInput(fieldset_count_page);
       //if(control){
-        console.log('passo i controlli');
+        
         
         if(fieldset_count_page==10){
           checkSismic(fieldset_count_page)
@@ -217,7 +233,7 @@ $(document).ready(function(){
     //! funzione di controllo per validare gli input e le select in pagina
       //todo dare classe input-control agli input che devono essere controllati, e classe select-control alle select che devono essere controllate
 
-      //todo controllare che gli input abbiano come fratello direttamente successivo uno elemento con classe error, per inserire il messaggio di errore, ed il label come fratello direttamente precedente per poter usare il contenuto, come variabile da inserire nel messaggio di errore
+      //todo l'errorBox deve essere fratello di row-input, il label figlio diretto di row-input
 
       //todo per dirgli che c'è un errore impostare la variabile emptyInput a true
               //!! la funzione ritorna falso, se c'è qualcosa che non va con gli input, e true se è tutto apposto
@@ -228,24 +244,27 @@ $(document).ready(function(){
         let emptyInput=false
         //? controllo gli input all'interno del fieldset 
         inputs.forEach(element => {
-          if(element.classList.contains('ap-input')){ 
-            var errorBox=element.parentNode.parentNode.parentNode.querySelector('.error')
-            console.log(errorBox);
-            var label=element.parentNode.parentNode.parentNode.querySelector('label').innerHTML
-            
-          } else {
-            var errorBox=element.parentNode.parentNode.querySelector('.error')
-            console.log(errorBox);
-            var label=element.parentNode.parentNode.querySelector('label').innerHTML;
-          } 
+          var nodePar=element;
+          
+          while(!nodePar.classList.contains("form-group")){
+            nodePar=nodePar.parentNode
+            console.log(nodePar);
+          }
+          let errorBox=nodePar.querySelector('.error');
+          let label=nodePar.querySelector('.row-input').querySelector('label').innerHTML;
           //? una serie di filtri in cui deve passare l'input
             //* controlla se è vuoto
-            console.log(element); 
           if(element.value.length==0){
             emptyInput=true
             errorBox.innerHTML=`${label} deve essere compilato `;
             //* controlla se è di tipo date 
-          } else if(element.getAttribute('type')=="date") {
+          }  else{
+
+          }
+          
+          
+         /*  
+          else if(element.getAttribute('type')=="date") {
             //* controlla che la data sia minore di quella attuale
             let date = new Date();
             let thisYear = date.getFullYear();
@@ -262,13 +281,7 @@ $(document).ready(function(){
               emptyInput=true;
               errorBox.innerHTML='Formato email non valido'
             }
-          }else {
-            //* se gli input sono stati riempiti dai pop up, il messaggio di errore viene cancellato
-            
-            if(errorBox.innerHTML.length!=0){
-              errorBox.innerHTML=''
-            }
-          }
+          } */
         })
         select.forEach(element => {
           if(element.value=="none"){
@@ -284,8 +297,7 @@ $(document).ready(function(){
         return true
       }
 
-    /* test */
-    var stocaiz
+    
      //! funzione di controllo dei pop-up, che blocca il salvataggio dei dati negli input se non viene selezionato tutto
         //? dare classe popup-control agli input che devono essere controllati all'interno del popup
       
@@ -329,13 +341,13 @@ $(document).ready(function(){
         
         for(let i=0; i<pop_up_input.length; i++){
           let id_pop_up_input=pop_up_input[i].getAttribute('id');
-          console.log(id_pop_up_input);
+          
           if($(`fieldset[data-count-page=${fieldset_count_page}] input[data-receive-from=${id_pop_up_input}]`).length){
-            console.log(pop_up_input[i].value);
+            
             let inputText=pop_up_input[i].value;
-            console.log(inputText);
-            console.log(id_pop_up_input);
+            
             $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
+            //? pulissco l'errorBox al riempimento dei dati da popup
             $(`input[data-receive-from=${id_pop_up_input}`).closest('.row-input').siblings('.error').text('')
           }
         }
@@ -378,26 +390,28 @@ $(document).ready(function(){
       }
     })
 
-      //? validazione dell'input di tipo date
-    $('#date').on('change', function(){
-      let date = new Date();
-      let thisYear = date.getFullYear();
-      let errorBox = $(this).siblings('.error');
-      let dateArr=$('#date').val().split('-');
-      if(dateArr[0]<1900 || dateArr[0]>thisYear){
-        errorBox.text('Data di nascita non valida')
-      } else {
-        errorBox.text('')
-      }
-    })
+   
 
-      //? alchange delle input che non si riempiono tramite popup, vadoa cancellare il messaggio di errore
+      //? al change delle input che non si riempiono tramite popup, vadoa cancellare il messaggio di errore
     $('.input-control').not('[type="date"]').on('change', function(){
       var errorBox=$(this).siblings('.error')
       if (errorBox.text().length !=0){
         errorBox.text('')
       }
     })
+
+    //! validazione dell'input di tipo date
+    $('#date').on('change', function(){
+    let date = new Date();
+    let thisYear = date.getFullYear();
+    let errorBox = $(this).siblings('.error');
+    let dateArr=$('#date').val().split('-');
+    if(dateArr[0]<1900 || dateArr[0]>thisYear){
+      errorBox.text('Data di nascita non valida')
+    } else {
+      errorBox.text('')
+    }
+  })
 
     //! chiamata ad Algolia per la mappa della sede legale
       //? autocompletamento dell'input di ricerca
@@ -420,6 +434,7 @@ $(document).ready(function(){
         apiKey: 'bc57f2fb92b40eb8a458abd86c2b3402',
         container: document.querySelector('#sismic-intervention-search')
       });
+
       //? autocompleto input della citta e del CAP
       placesAutocomplete.on('change', function resultSelected(e) {
         document.querySelector('#city-registered-office').value = e.suggestion.city || '';
@@ -437,6 +452,7 @@ $(document).ready(function(){
 
     
     function renderMap(autocomplete, mapToSet){
+      //!timeout settato per fixare il caricamento della mappa
       setTimeout(function(){
         
         //?renderizzo la mappa
@@ -530,4 +546,31 @@ $(document).ready(function(){
     }, 1000)
     }
   
+    function setInputFilter(textbox, inputFilter) {
+      ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
+        if(textbox){
+          textbox.addEventListener(event, function () {
+            if (inputFilter(this.value)) {
+                this.oldValue = this.value;
+                this.oldSelectionStart = this.selectionStart;
+                this.oldSelectionEnd = this.selectionEnd;
+            } else if (this.hasOwnProperty("oldValue")) {
+                this.value = this.oldValue;
+                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+            } else {
+                this.value = "";
+            }
+          });
+        }  
+      });
+    }
+
+
+
+
+
+
+
+
+
   });
