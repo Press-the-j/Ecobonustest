@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 
 $(document).ready(function(){
@@ -62,59 +61,6 @@ $(document).ready(function(){
         } else if(fieldset_count_page==5){
           sismicIntervention["address"]=$("#dove").val()
         } /* else if(fieldset_count_page==13 ) {
-=======
-$(document).ready(function () {
-    var current = 1;
-    var current_step;
-    var next_step;
-    var type_user;
-    var myTimer;
-    var clone_step;
-    var sismicIntervention = {};
-
-    var steps = $("fieldset").length - 2;
-    $("input").attr("autocomplete", "off");
-
-    $("#privacy").on("change", function () {
-        if ($(this).is(":checked")) {
-            let btn_next = $(this)
-                .closest(".form-group")
-                .siblings(".bottoni")
-                .children(".next");
-            btn_next.prop("disabled", false);
-        } else if ($(this).not(":checked")) {
-            let btn_next = $(this)
-                .closest(".form-group")
-                .siblings(".bottoni")
-                .children(".next");
-            btn_next.prop("disabled", true);
-        }
-    });
-
-    $(".next").on("click", function (e) {
-        current_step = $(this).closest("fieldset");
-        console.log(current_step);
-        let fieldset_count_page = $(this)
-            .closest("fieldset")
-            .attr("data-count-page");
-        let control = controlInput(fieldset_count_page);
-        if (control) {
-            console.log("passo i controlli");
-
-            if (fieldset_count_page == 10) {
-                checkSismic(fieldset_count_page);
-                let map = "mapSismic";
-                //renderMap(placesAutocompleteSismic, map)
-
-                setTimeout(function () {
-                    $("#sismic-intervention-search")
-                        .val(sismicIntervention.address + " ")
-                        .keypress();
-                }, 2000);
-            } else if (fieldset_count_page == 5) {
-                sismicIntervention["address"] = $("#dove").val();
-            } /* else if(fieldset_count_page==13 ) {
->>>>>>> c233c70b8af7db460a78c782900f9fff319db4c5
           console.log('ciao');
           $('.clock').css('display' , 'none');
           clearInterval(myTimer);
