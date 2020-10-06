@@ -68,8 +68,16 @@ $(document).ready(function () {
         current_step = $(this).closest("fieldset");
         next_step = $(this).closest("fieldset").prev();
         next_step.show();
+<<<<<<< HEAD
         current_step.hide();
         setProgressBar(--current);
+=======
+        setProgressBar(++current);
+        $(".progress").css("display","block");
+        //setClock();
+        $('.error').text('')
+      //}
+>>>>>>> 5972e09e5b907fc5ee2d94abd3c513124ed831f2
     });
 
     $(".previous-reg").on("click", function () {
@@ -85,6 +93,7 @@ $(document).ready(function () {
         });
         clone_step = "";
     });
+<<<<<<< HEAD
     setProgressBar(current);
 
     // barra di progresso, cambio percentuale
@@ -94,6 +103,55 @@ $(document).ready(function () {
         percentuale = percentuale.toFixed();
         $(".progress-bar").css("width", percentuale + "%");
         // .html(percentuale+"%");
+=======
+    
+    $(".previous-reg").on('click', function(){
+    
+      current_step = $(this).closest('fieldset');
+      next_step = $(this).closest('fieldset').prev();
+      next_step.show();
+      current_step.hide();
+      setProgressBar(--current);
+      console.log(next_step);
+      clone_step.forEach(element => {
+        let el_page=element.getAttribute("data-count-page") -1;
+        ($("fieldset[data-count-page='"+ el_page + "']")).after(element)
+      });
+      clone_step=''
+     
+    })
+    
+  
+    function setProgressBar(curStep){
+      steps=$("fieldset").length; 
+      var percentuale = parseFloat(100 / steps) * curStep;
+      percentuale = percentuale.toFixed();
+      $(".progress-bar")
+        .css("width",percentuale+"%")
+        // .html(percentuale+"%");   
+    }
+
+    //! funzione che setta timer
+    function setClock(){
+      clearInterval(myTimer)
+      $(".clock").css("display", "block")
+      let timer = 30;
+      let clock=$(".clock_second");
+      clock.text(timer);
+
+      myTimer=setInterval(function(event){
+        timer--;
+        if(timer<=9){
+          timer = "0" + timer;
+        } 
+        clock.text(timer)    
+        if(timer==0){
+          clearInterval(myTimer);
+          location.reload();
+        }
+        
+      }, 1000)
+>>>>>>> 5972e09e5b907fc5ee2d94abd3c513124ed831f2
     }
 
     // da richiamare quando metteremo il timer
@@ -148,7 +206,29 @@ $(document).ready(function () {
     });
 
     //! questa è una funzione provvisoria per nascondere o mostrare il fieldset 10 in base alla scelta dell'utente nella precedente checkbox
+<<<<<<< HEAD
     //* se l'utente checca l'input con classe sismic- intervention-check, la pagina si deve vedere
+=======
+      //* se l'utente checca l'input con classe sismic- intervention-check, la pagina si deve vedere
+
+       function checkSismic(currentStep){
+        if($('.sismic-intervention-check').is(':checked')) {
+         if(sismicIntervention["removed"]){
+          let clone_step=sismicIntervention["clone"]
+          console.log(currentStep);
+          
+          $(`fieldset[data-count-page=${currentStep}]`).after(clone_step);
+         }
+         
+        } else {
+          sismicIntervention["removed"]=true
+          let remove_step=$('.sismic-intervention').clone(true).get()
+          sismicIntervention["clone"]=remove_step[0];
+          console.log(sismicIntervention.clone)
+          $('.sismic-intervention').remove()         
+        }
+      }
+>>>>>>> 5972e09e5b907fc5ee2d94abd3c513124ed831f2
 
     function checkSismic(currentStep) {
         if ($(".sismic-intervention-check").is(":checked")) {
