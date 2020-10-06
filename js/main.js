@@ -1,15 +1,17 @@
 
 
 $(document).ready(function(){
-  var current = 1;
-  var current_step;
+  
   var next_step;
   var type_user; 
   var myTimer;
   var clone_step;
   var sismicIntervention={};
+  //! variabili delle progress bar
+  var steps
+  var current = 1;
+  var current_step;
 
-  var steps=$("fieldset").length -2; 
   $('input').attr('autocomplete', 'off');
   
    
@@ -32,22 +34,16 @@ $(document).ready(function(){
       current_step = $(this).closest('fieldset');
       let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
       let control=controlInput(fieldset_count_page);
-      if(control){
+      //if(control){
         console.log('passo i controlli');
         
         if(fieldset_count_page==10){
           checkSismic(fieldset_count_page)
-          let map = 'mapSismic'
+          //let map = 'mapSismic'
           //renderMap(placesAutocompleteSismic, map)
-          
-          setTimeout(function(){
-           
-            $('#sismic-intervention-search').val(sismicIntervention.address + " ").keypress()
-           
-          },2000)
+          $('#sismic-intervention-search').val(sismicIntervention.address)
         } else if(fieldset_count_page==5){
           sismicIntervention["address"]=$("#dove").val()
-          
         } /* else if(fieldset_count_page==13 ) {
           console.log('ciao');
           $('.clock').css('display' , 'none');
@@ -62,7 +58,7 @@ $(document).ready(function(){
         $(".progress").css("display","block");
         //setClock();
         $('.error').text('')
-      }
+      //}
     });
   
     $(".previous").on('click',function(){
@@ -88,11 +84,10 @@ $(document).ready(function(){
       clone_step=''
      
     })
-    setProgressBar(current);
-  
-    // barra di progresso, cambio percentuale
+    
   
     function setProgressBar(curStep){
+      steps=$("fieldset").length; 
       var percentuale = parseFloat(100 / steps) * curStep;
       percentuale = percentuale.toFixed();
       $(".progress-bar")
@@ -100,7 +95,7 @@ $(document).ready(function(){
         // .html(percentuale+"%");   
     }
 
-// da richiamare quando metteremo il timer
+    //! funzione che setta timer
     function setClock(){
       clearInterval(myTimer)
       $(".clock").css("display", "block")
@@ -113,8 +108,7 @@ $(document).ready(function(){
         if(timer<=9){
           timer = "0" + timer;
         } 
-        clock.text(timer)
-               
+        clock.text(timer)    
         if(timer==0){
           clearInterval(myTimer);
           location.reload();
@@ -165,7 +159,6 @@ $(document).ready(function(){
          if(sismicIntervention["removed"]){
           let clone_step=sismicIntervention["clone"]
           console.log(currentStep);
-         
           
           $(`fieldset[data-count-page=${currentStep}]`).after(clone_step);
          }
