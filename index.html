@@ -466,15 +466,15 @@
 
             <div class="form-group condominium ">
               <div class="row-input">
-                <label for="piani">numero di piani</label>
-                <input type="number" class="form-control " name="piani" id="piani">
+                <label for="condominium-floors">numero di piani</label>
+                <input type="number" class="form-control toggle-control " name="condominium_floors" id="condominium-floors">
               </div>
               <small class="error"></small>
             </div>
-            <div class="form-group condomnium">
+            <div class="form-group condominium">
               <div class="row-input">
-              <label for="unita">numero di unità immobiliari</label>
-              <input type="number" class="form-control " name="unita" id="unita">
+              <label for="residential-units">numero di unità immobiliari</label>
+              <input type="number" class="form-control toggle-control " name="residential_units" id="residential-units">
             </div>
             <small class="error"></small>
           </div>
@@ -482,7 +482,7 @@
 
             <div class="form-group">
               <label for="square-meters">Superficie</label>
-              <select name="square-meters" id="square-meters" class="form-control select-control">
+              <select name="square_meters" id="square-meters" class="form-control select-control" >
                 <option style="display:none" value="none">Dimensione superficie</option>
                 <option>fino a 50mq</option>
                 <option>50-90mq</option>
@@ -493,8 +493,8 @@
               <small class="error"></small>
             </div>
             <div class="form-group">
-              <label for="stato">Stato Immobile</label>
-              <select name="stato" id="stato" class="form-control select-control">
+              <label for="state-real-estate">Stato Immobile</label>
+              <select name="state_real_estate" id="state-real-estate" class="form-control select-control">
                 <option style="display:none" value="none">Stato immobile</option>
                 <option>Nuovo/In Costruzione</option>
                 <option>Buono/Abitabile</option>
@@ -506,7 +506,7 @@
               <div class="row-input" data-toggle="modal" data-target="#winter-air-conditioning-popup">
                 <label for="
                 winter-air-conditioning">Climatizzazione Invernale</label>
-                <input class="form-control input-control" type="text" id="winter-air-conditioning"
+                <input class="form-control input-control" type="text" id="winter-air-conditioning" name="winter_air_conditioning"
                   data-receive-from="generation-heating-input">
               </div>
               <small class="error"></small>
@@ -517,7 +517,7 @@
             <div class="form-group">
               <div class="row-input">
                 <label for="opaque-casing">Involucro opaco</label>
-                <input type="text" class="form-control input-control" name="clima" id="opaque-casing"
+                <input type="text" class="form-control input-control" name="opaque_casing" id="opaque-casing"
                   data-toggle="modal" data-target="#opaque-casing-popup" data-whatever="@mdo"
                   data-receive-from="external-walls-input">
               </div>
@@ -526,7 +526,7 @@
             <div class="form-group">
               <div class="row-input">
                 <label for="transparent-casing">Involucro trasparente</label>
-                <input type="text" class="form-control input-control" name="transparent-casing" id="transparent-casing"
+                <input type="text" class="form-control input-control" name="transparent_casing" id="transparent-casing"
                   data-toggle="modal" data-target="#transparent-casing-popup" data-whatever="@mdo"
                   data-receive-from="frame-type-input">
               </div>
@@ -535,7 +535,7 @@
             </div>
             <div class="form-group">
               <label for="energy-efficiency">Efficienza Energetica</label>
-              <select name="energy-efficiency" id="energy-efficiency" class="form-control select-control">
+              <select name="energy_efficiency" id="energy-efficiency" class="form-control select-control">
                 <option style="display:none" value="none">Efficienza energetica</option>
                 <option>A,A+,A1-A4</option>
                 <option>B,C,D</option>
@@ -559,40 +559,40 @@
                   <div class="modal-body">
                     <div class="form-group">
                       <label for="generation-heating" class="control-label">Tipologia generazione riscaldamento</label>
-                      <select class="form-control select-control send-val" name="" id="generation-heating">
-                        <option style="display:none">Tipologia generazione riscaldamento</option>
-                        <option value="">Impianto autonomo</option>
-                        <option value="">Impianto centralizzato</option>
+                      <select class="form-control select-control send-val" name="generation_heating" id="generation-heating">
+                        <option style="display:none" value="none">Tipologia generazione riscaldamento</option>
+                        <option value="1">Impianto autonomo</option>
+                        <option value="2">Impianto centralizzato</option>
                       </select>
                       <small class="error"></small>
                     </div>
-                    <input type="hidden" class="popup-control" data-error="generation-heating"
+                    <input type="hidden" class="" data-error="generation-heating"
                       id="generation-heating-input">
                     <div class="form-group">
                       <label for="generator-type" class="control-label">Tipologia generatore</label>
-                      <select class="form-control select-control send-val" name="" id="generator-type">
-                        <option style="display:none">Tipologia generatore</option>
-                        <option value="">Caldaie tradizionali</option>
-                        <option value="">Caldaie a condensazione</option>
-                        <option value="">Caldaie a legna</option>
-                        <option value="">Caldaie a biomassa</option>
-                        <option value="">Caldaie a pompa di calore</option>
+                      <select class="form-control select-control send-val" name="generator_type" id="generator-type">
+                        <option style="display:none" value="none">Tipologia generatore</option>
+                        <option value="1">Caldaie tradizionali</option>
+                        <option value="2">Caldaie a condensazione</option>
+                        <option value="3">Caldaie a legna</option>
+                        <option value="4">Caldaie a biomassa</option>
+                        <option value="5">Caldaie a pompa di calore</option>
                       </select>
                       <small class="error"></small>
                     </div>
-                    <input data-error="generator-type" class="popup-control" type="hidden" id="generator-type-input">
+                    <input data-error="generator-type" class="" type="hidden" id="generator-type-input">
                     <div class="form-group">
                       <label for="terminal-type" class="control-label">Tipologia terminale emissione</label>
-                      <select class="form-control select-control send-val" name="" id="terminal-type">
-                        <option style="display:none">Tipologia terminale emissione</option>
-                        <option value="">Radiatore</option>
-                        <option value="">Ventilconvettore</option>
-                        <option value="">Sistema radiante ad area -pavimento o soffitto-</option>
-                        <option value="">Unità per il condizionamento dell'aria(Split)</option>
+                      <select class="form-control select-control send-val" name="terminal_type" id="terminal-type">
+                        <option style="display:none" value="none">Tipologia terminale emissione</option>
+                        <option value="1">Radiatore</option>
+                        <option value="2">Ventilconvettore</option>
+                        <option value="3">Sistema radiante ad area -pavimento o soffitto-</option>
+                        <option value="4">Unità per il condizionamento dell'aria(Split)</option>
                       </select>
                       <small class="error"></small>
                     </div>
-                    <input type="hidden" class="popup-control" data-error="terminal-type" id="terminal-type-input">
+                    <input type="hidden" class="" data-error="terminal-type" id="terminal-type-input">
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-previous" data-dismiss="modal"
@@ -615,13 +615,13 @@
 
                     <div class="form-group">
                       <label for="external-walls" class="control-label">Pareti verso l'esterno</label>
-                      <select class="form-control select-control send-val" name="" id="external-walls">
-                        <option style="display:none">Tipo di parete verso l'esterno</option>
-                        <option value="">Muratura di mattoni pieni intonacati sulle due facce</option>
-                        <option value="">Muratura di mattoni semipieni o tufo</option>
-                        <option value="">Pannelli prefabbricati in calcestruzzo</option>
-                        <option value="">Parete a cassa vuota con mattoni forati</option>
-                        <option value="">Altro</option>
+                      <select class="form-control select-control send-val" name="external_walls" id="external-walls">
+                        <option style="display:none" value="none">Tipo di parete verso l'esterno</option>
+                        <option value="1">Muratura di mattoni pieni intonacati sulle due facce</option>
+                        <option value="2">Muratura di mattoni semipieni o tufo</option>
+                        <option value="3">Pannelli prefabbricati in calcestruzzo</option>
+                        <option value="4">Parete a cassa vuota con mattoni forati</option>
+                        <option value="5">Altro</option>
                       </select>
                       <small class="error"></small>
                     </div>
@@ -652,26 +652,26 @@
 
                     <div class="form-group">
                       <label for="frame-type" class="control-label">Tipologia telaio infisso</label>
-                      <select class="form-control send-val" name="" id="frame-type">
-                        <option style="display:none">Tipologia telaio</option>
-                        <option value="">Telaio in legno</option>
-                        <option value="">Telaio in PVC</option>
-                        <option value="">Telaio in alluminio a taglio termico</option>
-                        <option value="">Telaio in alluminio + legno</option>
-                        <option value="">Telaio in alluminio a giunto aperto</option>
+                      <select class="form-control select-control send-val" name="frame_type" id="frame-type">
+                        <option style="display:none" value="none">Tipologia telaio</option>
+                        <option value="1">Telaio in legno</option>
+                        <option value="2">Telaio in PVC</option>
+                        <option value="3">Telaio in alluminio a taglio termico</option>
+                        <option value="4">Telaio in alluminio + legno</option>
+                        <option value="5">Telaio in alluminio a giunto aperto</option>
                       </select>
                       <small class="error"></small>
                     </div>
-                    <input type="hidden" class="popup-control" data-error="frame-type" id="frame-type-input">
+                    <input type="hidden" class="popup-control" data-error="frame-type"  id="frame-type-input">
                     <div class="form-group">
                       <label for="glass-type" class="control-label">Tipologia vetro infisso</label>
-                      <select class="form-control send-val" name="" id="glass-type">
-                        <option style="display:none">Tipologia vetro</option>
-                        <option value="">Vetro Singolo</option>
-                        <option value="">Vetrocamera</option>
-                        <option value="">Vetrocamera basso-emissivo</option>
-                        <option value="">Triplo vetro</option>
-                        <option value="">Triplo vetro basso-emissivo</option>
+                      <select class="form-control select-control send-val" name="glass_type" id="glass-type">
+                        <option style="display:none" value="none">Tipologia vetro</option>
+                        <option value="1">Vetro Singolo</option>
+                        <option value="2">Vetrocamera</option>
+                        <option value="3">Vetrocamera basso-emissivo</option>
+                        <option value="4">Triplo vetro</option>
+                        <option value="5">Triplo vetro basso-emissivo</option>
                       </select>
                       <small class="error"></small>
                     </div>
