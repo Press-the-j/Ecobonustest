@@ -449,33 +449,44 @@
             </div>
             <div class="form-group">
               <label for="tipo">Tipologia</label>
-              <select name="tipo" id="tipo" class="form-control select-control">
+              <select name="tipo" id="tipo" class="form-control select-control tipoCasa">
                 <option style="display:none" value="none">Tipologia immobile</option>
-                <option>Villa unifamiliare</option>
-                <option>Villa plurifamiliare</option>
-                <option>Villetta a schiera</option>
+                <option value="uni">Villa unifamiliare</option>
+                <option value="pluri">Villa plurifamiliare</option>
+                <option value="schiera">Villetta a schiera</option>
+                <option value="condo">Condominio, Appartamento all'interno di un condominio</option>
               </select>
               <small class="error"></small>
             </div>
+
+            <!-- form che appare solamente se si sceglie condominio -->
+
+            <div class="form-group sceltaCondominio">
+              <div class="row-input">
+                <label for="piani">numero di piani</label>
+                <input type="number" class="form-control input-control" name="piani" id="piani">
+              </div>
+              <small class="error"></small>
+            </div>
+            <div class="form-group sceltaCondominio">
+              <div class="row-input">
+              <label for="unita">numero di unità immobiliari</label>
+              <input type="number" class="form-control input-control" name="unita" id="unita">
+            </div>
+            <small class="error"></small>
+          </div>
+            <!--  -->
+
             <div class="form-group">
               <label for="square-meters">Superficie</label>
               <select name="square-meters" id="square-meters" class="form-control select-control">
                 <option style="display:none" value="none">Dimensione superficie</option>
-                <option>30-50mq</option>
-                <option>50-70mq</option>
-                <option>70-90mq</option>
+                <option>fino a 50mq</option>
+                <option>50-90mq</option>
                 <option>90-120mq</option>
-                <option>120-150mq</option>
-                <option>150-180mq</option>
-                <option>180-210mq</option>
+                <option>120-180mq</option>
+                <option>oltre 180mq</option>
               </select>
-              <small class="error"></small>
-            </div>
-            <div class="form-group">
-              <div class="row-input">
-                <label for="locals">Locali</label>
-                <input type="text" class="form-control input-control" name="locals" id="locals">
-              </div>
               <small class="error"></small>
             </div>
             <div class="form-group">

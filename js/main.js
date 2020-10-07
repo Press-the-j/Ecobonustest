@@ -8,7 +8,7 @@ $(document).ready(function(){
   //! variabile a cui assegnare il tipo di utente
   var type_user; 
 
-  //! timer della paggina a cui assegno un setInterval
+  //! timer della pagina a cui assegno un setInterval
   var myTimer;
 
   //! variabile in cui salvo le pagine clonate
@@ -82,20 +82,6 @@ $(document).ready(function(){
         next_step.show();
         current_step.hide();
         setProgressBar(--current);
-    });
-
-    $(".previous-reg").on("click", function () {
-        current_step = $(this).closest("fieldset");
-        next_step = $(this).closest("fieldset").prev();
-        next_step.show();
-        current_step.hide();
-        setProgressBar(--current);
-        console.log(next_step);
-        clone_step.forEach((element) => {
-            let el_page = element.getAttribute("data-count-page") - 1;
-            $("fieldset[data-count-page='" + el_page + "']").after(element);
-        });
-        clone_step = "";
     });
     
     $(".previous-reg").on('click', function(){
@@ -638,11 +624,15 @@ $(document).ready(function(){
     }
 
 
-
-
-
-
-
-
+    // mostra scelta condominio
+    $('.tipoCasa').change(function() {
+      console.log($('option').val())
+        if ($(this).val() == 'condo') {
+          $('.sceltaCondominio').show();
+        } else {
+          $('.sceltaCondominio').hide();
+        }
+      });
+      
 
   });

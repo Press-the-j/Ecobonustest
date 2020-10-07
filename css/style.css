@@ -413,6 +413,29 @@ input:-webkit-autofill {
           box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.15), inset -3px -3px 6px #ffffff;
 }
 
+/* scelta condominio */
+.sceltaCondominio {
+  display: none;
+}
+
+.hidden-input {
+  border-radius: 20px;
+  padding: 0px 20px;
+  background: #f5f5f5;
+  -webkit-box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.15), inset -3px -3px 6px #ffffff;
+          box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.15), inset -3px -3px 6px #ffffff;
+}
+
+.hidden-input label {
+  color: #2ad590;
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 0 !important;
+  font-weight: 700;
+  width: 35%;
+  margin-right: 30px;
+}
+
 /* Select per categoria immobile */
 .category-real-estate {
   display: none;
