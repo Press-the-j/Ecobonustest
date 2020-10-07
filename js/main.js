@@ -690,7 +690,7 @@ $(document).ready(function(){
     }
   })
 
-    //! chiamata ad Algolia per la mappa della sede legale
+  /*   //! chiamata ad Algolia per la mappa della sede legale
       //? autocompletamento dell'input di ricerca
       var placesAutocomplete = places({
         appId: 'pl7QEUHBIWGV',
@@ -801,35 +801,20 @@ $(document).ready(function(){
                 });
             }
         }, 1000);
-    }
+    } */
   
-    function setInputFilter(textbox, inputFilter) {
-      ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
-        if(textbox){
-          textbox.addEventListener(event, function () {
-            if (inputFilter(this.value)) {
-                this.oldValue = this.value;
-                this.oldSelectionStart = this.selectionStart;
-                this.oldSelectionEnd = this.selectionEnd;
-            } else if (this.hasOwnProperty("oldValue")) {
-                this.value = this.oldValue;
-                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-            } else {
-                this.value = "";
-            }
-          });
-        }  
-      });
-    }
+    
 
 
     // mostra scelta condominio
-    $('.tipoCasa').change(function() {
+    $('#type-real-estate').change(function() {
       console.log($('option').val())
         if ($(this).val() == 'condo') {
-          $('.sceltaCondominio').show();
+          $('.condominium').show();
+          let input= $('.condominium').find('.form-control').get();
+          console.log(input);
         } else {
-          $('.sceltaCondominio').hide();
+          $('.condominium').hide();
         }
       });
 
