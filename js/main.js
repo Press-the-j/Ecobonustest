@@ -46,6 +46,12 @@ $(document).ready(function(){
     return value == '' || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
   
    }, "Formato mail non valido");
+
+  $.validator.addMethod('regAddress' , function(value, element){
+
+  return value == '' ||/^[a-zA-Z0-9\s,'-.]*$/.test(value)
+
+  }, "Formato mail non valido");
   
   $.validator.addMethod('emptySel' , function(value, element, arg){
 
@@ -132,8 +138,13 @@ $(document).ready(function(){
         number:true,
         maxlength:11
       },
-      dove:{
-        
+      address_real_estate:{
+        required:true,
+        regAddress:true
+      },
+      type_real_estate{
+        required:true,
+        emptySel:none
       }
       
      },
@@ -213,6 +224,14 @@ $(document).ready(function(){
         required:'Campo richiesto',
         number:'Il numero di telefono può contenere solo numeri',
         maxlenght:'Il numero di telefono può contenere al massimo 11 cifre'
+      },
+      address_real_estate:{
+        required:'Campo richiesto',
+        regAddress:'Non sono ammessi caratteri speciali'
+      },
+      type_real_estate:{
+        required:'Campo richiesto',
+        emptySel:'Scegli un opzione'
       }
      },
      errorPlacement: function(error, element) {
