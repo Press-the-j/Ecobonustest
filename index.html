@@ -19,6 +19,8 @@
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"
     integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
     crossorigin="anonymous"></script>
+  <!-- jquery validator -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
   <!-- algolia places -->
   <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
   <!-- leaflet -->
@@ -29,6 +31,7 @@
     integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
     crossorigin="anonymous"></script>
   <!-- custom js -->
+  <script src="js/validation.js"></script>
   <script src="js/main.js" charset="utf-8"></script>
 
   <main class="container">
@@ -165,8 +168,8 @@
               <small class="error"></small>
             </div>
             <div class="form-group">
-              <label for="genere">Sesso</label>
-              <select class="form-control select-control" name="genere" id="genere">
+              <label for="genre">Sesso</label>
+              <select class="form-control select-control" name="genre" id="genre">
                 <option value="none" style="display:none;">Genere</option>
                 <option value="">Maschio</option>
                 <option value="">Femmina</option>
@@ -187,8 +190,8 @@
             </div>
             <div class="form-group">
               <div class="row-input">
-                <label for="tel">Telefono</label>
-                <input type="tel" class="form-control input-control" id="tel" name="tel">
+                <label for="tel-number">Telefono</label>
+                <input type="number" class="form-control input-control" id="tel-number" name="tel_number">
               </div>
               <small class="error"></small>
             </div>
@@ -210,7 +213,7 @@
                       <div class="row-input">
                         <label for="name-popup" class="control-label">Nome</label>
                         <input type="text" class="form-control  popup-control input-popup-control send-val-name"
-                          id="name-popup">
+                          id="name-popup" name="name_popup">
                       </div>
                       <small class="error"></small>
                     </div>
@@ -218,7 +221,7 @@
                       <div class="row-input">
                         <label for="surname-popup" class="control-label">Cognome</label>
                         <input type="text" class="form-control  popup-control input-popup-control send-val-name"
-                          id="surname-popup">
+                        name="surname_popup"  id="surname-popup">
                       </div>
                       <small class="error"></small>
                     </div>
@@ -238,17 +241,17 @@
             <h2>Registrazione impresa</h2>
             <div class="form-group">
               <div class="row-input">
-                <label for="rag">Ragione sociale</label>
-                <input type="text" class="form-control fieldset-input input-control" id="rag" name="rag"
+                <label for="company-name">Ragione sociale</label>
+                <input type="text" class="form-control fieldset-input input-control" id="company-name" name="company_name"
                   data-toggle="modal" data-target="#business-name" data-whatever="@mdo"
-                  data-receive-from="company-name">
+                  data-receive-from="company-name-popup">
               </div>
               <small class="error"></small>
             </div>
             <div class="form-group">
               <div class="row-input">
-                <label for="pi">Partita iva</label>
-                <input type="number" class="form-control fieldset-input input-control" id="pi" name="pi"
+                <label for="pIva">Partita iva</label>
+                <input type="number" class="form-control fieldset-input input-control" id="pIva" name="pIva"
                   data-toggle="modal" data-target="#business-name" data-whatever="@mdo" data-receive-from="p-iva">
               </div>
               <small class="error"></small>
@@ -268,37 +271,36 @@
             </div>
             <div class="form-group">
               <div class="row-input">
-                <label for="sede">Referente</label>
+                <label for="referent-name-registration">Referente</label>
                 <input data-toggle="modal" data-target="#referent-registration" type="text"
-                  class="form-control fieldset-input input-control" id="referente" name="referente"
+                  class="form-control fieldset-input input-control" id="referent-name-registration" name="referent_name_registration"
                   data-receive-from="name-referent-registration">
               </div>
               <small class="error"></small>
             </div>
             <div class="form-group">
               <div class="row-input">
-                <label for="email">Email</label>
+                <label for="referent-mail-registration">Email</label>
                 <input data-toggle="modal" data-target="#referent-registration" type="email"
-                  class="form-control fieldset-input input-control" id="email" name="email"
+                  class="form-control fieldset-input input-control" id="referent-mail-registration" name="referent_mail_registration"
                   data-receive-from="email-referent-registration">
               </div>
               <small class="error"></small>
             </div>
             <div class="form-group">
               <div class="row-input">
-                <label for="tel">Telefono</label>
+                <label for="referent-tel-registration">Telefono</label>
                 <input data-toggle="modal" data-target="#referent-registration" type="tel"
-                  class="form-control fieldset-input input-control" id="tel" name="tel"
+                  class="form-control fieldset-input input-control" id="referent-tel-registration" name="referent_tel_registration"
                   data-receive-from="number-referent-registration">
               </div>
               <small class="error"></small>
             </div>
 
             <div class="form-group">
-              <label for="" style="display: none;">occupazione</label>
-
-              <select name="" id="aziendale" class="form-control select-control">
-                <option style="display:none" value="none">DI COSA VI OCCUPATE?</option>
+              <label for="company_occupation" style="display: none;">occupazione</label>
+              <select name="company_occupation" id="company_occupation" class="form-control select-control">
+                <option value="none" style="display:none" >DI COSA VI OCCUPATE?</option>
                 <option>Impianti idraulici</option>
                 <option>Impianti elettrici</option>
                 <option>Impianti aeraulici</option>
@@ -323,8 +325,8 @@
                   <div class="modal-body">
                     <div class="form-group">
                       <div class="row-input">
-                        <label for="company-name" class="control-label">Ragione Sociale</label>
-                        <input type="text" class="form-control popup-control" id="company-name">
+                        <label for="company-name-popup" class="control-label">Ragione Sociale</label>
+                        <input type="text" class="form-control popup-control" id="company-name-popup" name="company_name_popup" >
                       </div>
                       <small class="error"></small>
                     </div>
@@ -337,7 +339,7 @@
                     <div class="form-group">
                       <div class="row-input">
                         <label for="p-iva" class="control-label">Partita iva</label>
-                        <input type="text" class="form-control" id="p-iva">
+                        <input type="text" class="form-control popup-control" id="p-iva" name="pIva_popup">
                       </div>
                       <small class="error"></small>
                     </div>
@@ -346,8 +348,7 @@
                   <div class="modal-footer">
                     <button type="button" class="btn btn-previous" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
-                    <button class="save-pop-up btn-next" type="button" class="btn btn-primary"
-                      data-dismiss="modal">Salva</button>
+                    <button class="save-pop-up btn-next" type="button" class="btn btn-primary">Salva</button>
                   </div>
                 </div>
               </div>
@@ -408,22 +409,24 @@
                   <div class="modal-body">
                     <div class="form-group">
                       <div class="row-input">
-                        <label for="address-registered-office" class="control-label">Referente</label>
-                        <input type="text" class="form-control popoup-control" id="name-referent-registration">
+                        <label for="name-referent-registration" class="control-label">Referente</label>
+                        <input type="text" class="form-control popup-control" id="name-referent-registration" name="referent_name_registration_popup">
                       </div>
                       <small class="error"></small>
                     </div>
                     <div class="form-group">
                       <div class="row-input">
-                        <label for="street-registered-office" class="control-label">Email</label>
-                        <input type="text" class="form-control popup-control" id="email-referent-registration">
+                        <label for="email-referent-registration" class="control-label">Email</label>
+                        <input type="text" class="form-control popup-control" id="email-referent-registration"
+                        name="referent_mail_registration_popup">
                       </div>
                       <small class="error"></small>
                     </div>
                     <div class="form-group">
                       <div class="row-input">
-                        <label for="postal-code-registered-office" class="control-label">Telefono</label>
-                        <input type="text" class="form-control popup-control" id="number-referent-registration">
+                        <label for="number-referent-registration" class="control-label">Telefono</label>
+                        <input type="text" class="form-control popup-control" id="number-referent-registration"
+                        name="referent_tel_registration_popup">
                       </div>
                       <small class="error"></small>
                     </div>
@@ -432,7 +435,7 @@
                     <button type="button" class="btn btn-previous" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
                     <button class=" save-pop-up btn-next" type="button" class="btn btn-primary"
-                      data-dismiss="modal">Salva</button>
+                      >Salva</button>
                   </div>
                 </div>
               </div>

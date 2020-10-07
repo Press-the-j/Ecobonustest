@@ -22,6 +22,207 @@ $(document).ready(function(){
 
   $('input').attr('autocomplete', 'off');
   
+  $.validator.addMethod('regName' , function(value, element){
+
+    return value == '' || /^[a-zA-Z'-. ]+$/.test(value)
+  
+   }, "Non sono ammessi caratteri speciali o numeri");
+  
+   $.validator.addMethod("birth", function (value, element) {
+    var dateArr = value.split('-');
+    let date = new Date();
+    
+    let thisYear = date.getFullYear();
+    console.log(thisYear);
+    console.log(dateArr[0]);
+    if (dateArr[0] < 1900 || dateArr[0] > thisYear )
+        return false;
+    else
+        return true;
+  });
+  
+  $.validator.addMethod('regMail' , function(value, element){
+
+    return value == '' || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
+  
+   }, "Formato mail non valido");
+  
+  $.validator.addMethod('emptySel' , function(value, element, arg){
+
+    return arg !== value
+  
+  }, "Scegli un opzione");
+
+  let validator = $('#formComp').validate({
+    rules: {
+      name:{
+        required:true,
+        regName:true
+      },
+      date:{
+        required:true,
+        birth:true
+      },
+      genre:{
+        emptySel:'none'
+      },
+      email:{
+        required:true,
+        regMail:true
+      },
+      tel_number:{
+        required:true,
+        number:true,
+        minlength:6
+      },
+      name_popup: {
+        required:true,
+        regName:true
+      },
+      surname_popup: {
+        required:true,
+        regName:true
+      },
+      company_name:{
+        required:true,
+        minlength:4,
+      },
+      pIva:{
+        required:true,
+        number:true,
+        minlength: 11,
+        maxlength: 11
+      },
+      company_name_popup:{
+        required:true,
+        minlength:4,
+      },
+      pIva_popup:{
+        required:true,
+        number:true,
+        minlength: 11,
+        maxlength: 11
+      },
+      referent_name_registration:{
+        required:true,
+        regName:true,
+      },
+      referent_mail_registration:{
+        required:true,
+        regMail:true,
+      },
+      referent_tel_registration:{
+        required:true,
+        number:true,
+        maxlength:11
+      },
+      company_occupation:{
+        emptySel:'none'
+      },
+      referent_name_registration_popup:{
+        required:true,
+        regName:true,
+      },
+      referent_mail_registration_popup:{
+        required:true,
+        regMail:true,
+      },
+      referent_tel_registration_popup:{
+        required:true,
+        number:true,
+        maxlength:11
+      },
+      dove:{
+        
+      }
+      
+     },
+     messages:{
+       name:{
+         required:'Campo richiesto',
+         regName:'Non sono ammessi caratteri speciali o numeri'
+       },
+       date:{
+        required:'Campo richiesto',
+        birth:'Data di nascite non valida'
+       },
+       genre: {
+         emptySel:'Scegli un opzione'
+       },
+       email:{
+        required:'Campo richiesto',
+        regMail:'Formato Mail non valido'
+       },
+       tel_number:{
+        required:'Campo richiesto',
+        number:'Numero di telefono non valido',
+        minlength:'Il numerodi telefono deve avere almeno 6 cifre'
+       },
+       name_popup:{
+         required:'Campo richiesto',
+         regName:'Non sono ammessi caratteri speciali o numeri'
+       },
+       surname_popup: {
+        required:'Campo richiesto',
+        regName:'Non sono ammessi caratteri speciali o numeri'
+       },
+       company_name:{
+         required:'campo richiesto',
+         minlength:'La ragione sociale deve contenere almeno 4 lettere'
+       },
+       pIva:{
+        required:'campo richiesto',
+        number:'La partita iva deve essere composta solo da numeri',
+        minlength: 'La partita iva deve contenere 11 cifre',
+        maxlength: 'La partita iva deve contenere 11 cifre'
+      },
+      company_name_popup:{
+        required:'campo richiesto',
+        minlength:'La ragione sociale deve contenere almeno 4 lettere'
+      },
+      pIva_popup:{
+        required:'campo richiesto',
+        number:'La partita iva deve essere composta solo da numeri',
+        minlength: 'La partita iva deve contenere 11 cifre',
+        maxlength: 'La partita iva deve contenere 11 cifre'
+      },
+      referent_name_registration:{
+        required:'Campo richiesto',
+        regName:'Non sono ammessi caratteri speciali o numeri'
+      },
+      referent_mail_registration:{
+        required:'Campo richiesto',
+        regMail:'Formato Mail non valido'
+      },
+      referent_tel_registration:{
+        required:'Campo richiesto',
+        number:'Il numero di telefono può contenere al massimo 11 cifre'
+      },
+      comapny_occupation:{
+        emptySel:'Scegli un opzione'
+      },
+      referent_name_registration_popup:{
+        required:'Campo richiesto',
+        regName:'Non sono ammessi caratteri speciali o numeri'
+      },
+      referent_mail_registration_popup:{
+        required:'Campo richiesto',
+        regMail:'Formato Mail non valido'
+      },
+      referent_tel_registration_popup:{
+        required:'Campo richiesto',
+        number:'Il numero di telefono può contenere solo numeri',
+        maxlenght:'Il numero di telefono può contenere al massimo 11 cifre'
+      }
+     },
+     errorPlacement: function(error, element) {
+       if(element.is('input')){
+         error.insertAfter(element.parents('.row-input'));
+       } else if(element.is('select')){
+         error.insertAfter(element)
+       }
+     }
+   })
    
 
 
@@ -50,6 +251,7 @@ $(document).ready(function(){
       current_step = $(this).closest('fieldset');
       let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
       let control=controlInput(fieldset_count_page);
+      console.log(control);
       if(control){
         
         
@@ -95,24 +297,11 @@ $(document).ready(function(){
             let el_page = element.getAttribute("data-count-page") - 1;
             $("fieldset[data-count-page='" + el_page + "']").after(element);
         });
+        
         clone_step = "";
     });
     
-    $(".previous-reg").on('click', function(){
     
-      current_step = $(this).closest('fieldset');
-      next_step = $(this).closest('fieldset').prev();
-      next_step.show();
-      current_step.hide();
-      setProgressBar(--current);
-      console.log(next_step);
-      clone_step.forEach(element => {
-        let el_page=element.getAttribute("data-count-page") -1;
-        ($("fieldset[data-count-page='"+ el_page + "']")).after(element)
-      });
-      clone_step=''
-     
-    })
     
   
     function setProgressBar(curStep){
@@ -310,74 +499,23 @@ $(document).ready(function(){
         let emptyInput=false
         //? controllo gli input all'interno del fieldset 
         inputs.forEach(element => {
-          var nodePar=element;
+          let inputId=element.getAttribute('id')
+          let validate=validator.element(`#${inputId}`)
           
-          while(!nodePar.classList.contains("form-group")){
-            nodePar=nodePar.parentNode
-            console.log(nodePar);
-          }
-          let errorBox=nodePar.querySelector('.error');
-          //let label=nodePar.querySelector('.row-input').querySelector('label').innerHTML;
-          //? una serie di filtri in cui deve passare l'input
-            //* controlla se è vuoto
-          if(element.value.length==0){
+          if (!validate){
+            
             emptyInput=true
-            errorBox.innerHTML=`Il campo deve essere compilato `;
-            //* controlla se è di tipo date 
-          }  else{
-            let pattern = element.getAttribute('data-error')
           }
-          
-          
-         /*  
-          else if(element.getAttribute('type')=="date") {
-            //* controlla che la data sia minore di quella attuale
-            let date = new Date();
-            let thisYear = date.getFullYear();
-            let dateArr=$('#date').val().split('-');
-            if(dateArr[0]<1900 || dateArr[0]>thisYear){
-              emptyInput=true
-            }
-            //? una serie di filtri in cui deve passare l'input
-            //* controlla se è vuoto
-            console.log(element);
-            if (element.value.length == 0) {
-                emptyInput = true;
-                errorBox.innerHTML = `${label} deve essere compilato `;
-                //* controlla se è di tipo date
-            } else if (element.getAttribute("type") == "date") {
-                //* controlla che la data sia minore di quella attuale
-                let date = new Date();
-                let thisYear = date.getFullYear();
-                let dateArr = $("#date").val().split("-");
-                if (dateArr[0] < 1900 || dateArr[0] > thisYear) {
-                    emptyInput = true;
-                }
-                //* controlla se è di tipo email
-            } else if (element.getAttribute("type") == "email") {
-                //* validazione della mail
-                var regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                console.log(element.value);
-                if (!regEmail.test(element.value)) {
-                    emptyInput = true;
-                    errorBox.innerHTML = "Formato email non valido";
-                }
-            } else {
-                //* se gli input sono stati riempiti dai pop up, il messaggio di errore viene cancellato
-
-                if (errorBox.innerHTML.length != 0) {
-                    errorBox.innerHTML = "";
-                }
-            }
-          } */
         })
         select.forEach(element => {
-          if(element.value=="none"){
+          let selectId=element.getAttribute('id')
+          console.log(selectId);
+          let validate = validator.element(`#${selectId}`)
+          
+          if(!validate){
             emptyInput=true
-            let errorBox=element.nextElementSibling
-            /* let label=element.previousElementSibling.innerHTML */
-            errorBox.innerHTML=`Il campo  deve essere compilato `;
           }
+         
         });
         if (emptyInput) {
             return false;
@@ -389,7 +527,7 @@ $(document).ready(function(){
      //! funzione di controllo dei pop-up, che blocca il salvataggio dei dati negli input se non viene selezionato tutto
         //? dare classe popup-control agli input che devono essere controllati all'interno del popup
       
-    function controlPopup(popupId){
+   /*  function controlPopup(popupId){
       let inputs=$(`#${popupId} .popup-control`).get();
       let emptyInput=false;
       inputs.forEach(element => {
@@ -409,18 +547,46 @@ $(document).ready(function(){
         return false
       }
       return true
-    }
+    } */
 
     //!funzione per inserire automaticamente i dati dei pop up negli input
       //? dare classe save-pop-up al bottone salva
       //? settare negli input in pagina il data-receive-from uguale all'id dell'input nel pop up di cui salvare i dati
     $(".save-pop-up").on('click', function(e){
       let pop_up=$(this).closest('.modal').attr('id');
-      let control=controlPopup(pop_up);
-      console.log(control);
-      if(!control){
+      let inputs=$(this).closest('.modal').find('.popup-control').get()
+      let select
+      let emptyInput=false
+      inputs.forEach(element => {
+        let inputId=element.getAttribute('id')
+        let validate=validator.element(`#${inputId}`)
+        console.log(element);
+        if(!validate){
+          console.log(element + 'flase');
+          emptyInput=true
+        }
+      })
+
+      if(!emptyInput){
+        $(this).closest('.modal').find('.close').click()
+        let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
+        let pop_up_input =$(this).closest('.modal').find('input').get();
+        for(let i=0; i<pop_up_input.length; i++){
+          let id_pop_up_input=pop_up_input[i].getAttribute('id');
+          
+          if($(`fieldset[data-count-page=${fieldset_count_page}] input[data-receive-from=${id_pop_up_input}]`).length){
+            
+            let inputText=pop_up_input[i].value;
+            
+            $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
+            //? pulissco l'errorBox al riempimento dei dati da popup
+           
+          }
+        }
+      }
+      /* 
         e.preventDefault()
-      } else {
+      //} else {
         $(this).closest('.modal').find('.close').click()
         let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
         let pop_up_input =$(this).closest('.modal').find('input').get();
@@ -438,8 +604,8 @@ $(document).ready(function(){
             //? pulissco l'errorBox al riempimento dei dati da popup
             $(`input[data-receive-from=${id_pop_up_input}`).closest('.row-input').siblings('.error').text('')
           }
-        }
-      }
+        } */
+      //}
     });
 
     //! funzione che scrive il valore della option selezionata all'interno dei pop-up, in input nascosti su cui poi fare i dovuti controlli
