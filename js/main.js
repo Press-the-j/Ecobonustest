@@ -142,10 +142,10 @@ $(document).ready(function(){
         required:true,
         regAddress:true
       },
-      type_real_estate{
+      type_real_estate:{
         required:true,
-        emptySel:none
-      }
+        emptySel:'none'
+      },
       
      },
      messages:{
@@ -701,7 +701,7 @@ $(document).ready(function(){
       var placesAutocompleteSismic = places({
         appId: 'pl7QEUHBIWGV',
         apiKey: 'bc57f2fb92b40eb8a458abd86c2b3402',
-        container: document.querySelector('#dove')
+        container: document.querySelector('#address-real-estate')
       });
 
       
@@ -722,7 +722,7 @@ $(document).ready(function(){
     var placesAutocompleteSismic = places({
         appId: "pl7QEUHBIWGV",
         apiKey: "bc57f2fb92b40eb8a458abd86c2b3402",
-        container: document.querySelector("#dove"),
+        container: document.querySelector("#address-real-estate"),
     });
 
     var placesAutocompleteSismic = places({
