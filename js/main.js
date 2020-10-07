@@ -146,6 +146,67 @@ $(document).ready(function(){
         required:true,
         emptySel:'none'
       },
+      condominium_floors:{
+        required:true,
+        min:1,
+        max:99
+      },
+      residential_units:{
+        required:true,
+        min:1,
+        max:99
+      },
+      square_meters:{
+        required:true,
+        emptySel:'none'
+      },
+      state_real_estate:{
+        required:true,
+        emptySel:'none'
+      },
+      winter_air_conditioning:{
+        required: true,
+      },
+      opaque_casing: {
+        required:true,
+      },
+      transparent_casing: {
+        required:true,
+      },
+      energy_efficiency:{
+        required:true,
+        emptySel:'none'
+      },
+      generation_heating:{
+        required:true,
+        emptySel:'none'
+      },
+      generator_type:{
+        required:true,
+        emptySel:'none'
+      },
+      terminal_type:{
+        required:true,
+        emptySel:'none'
+      },
+      external_walls:{
+        required:true,
+        emptySel:'none'
+      },
+      frame_walls:{
+        required:true,
+        emptySel:'none'
+      },
+      frame_type:{
+        required:true,
+        emptySel:'none'
+      },
+      glass_type:{
+        required:true,
+        emptySel:'none'
+      },
+      
+
       
      },
      messages:{
@@ -232,7 +293,66 @@ $(document).ready(function(){
       type_real_estate:{
         required:'Campo richiesto',
         emptySel:'Scegli un opzione'
-      }
+      },
+      condominium_floors:{
+        required:'Campo richiesto',
+        min:'Inserire un numero valido',
+        max:'Inserire un numero valido'
+      },
+      residential_units:{
+        required:'Campo richiesto',
+        min:'Inserire un numero valido',
+        max:'Inserire un numero valido'
+      },
+      square_meters:{
+        required:'Campo richiesto',
+        emptySel:'Scegli un opzione'
+      },
+      tate_real_estate:{
+        required:'Campo richiesto',
+        emptySel:'Scegli un opzione'
+      },
+      winter_air_conditioning:{
+        required:'Campo richiesto',
+      },
+      opaque_casing: {
+        required:'Campo richiesto',
+      },
+      transparent_casing: {
+        required:'Campo richiesto',
+      },
+      energy_efficiency:{
+        required:'Campo richiesto',
+        emptySel:'Scegli un opzione'
+      },
+      generation_heating:{
+        required:'Campo richiesto',
+        emptySel:'Scegli un opzione'
+      },
+      generator_type:{
+        required:'Campo richiesto',
+        emptySel:'Scegli un opzione'
+      },
+      terminal_type:{
+        required:'Campo richiesto',
+        emptySel:'Scegli un opzione'
+      },
+      external_walls:{
+        required:'Campo richiesto',
+        emptySel:'Scegli un opzione'
+      },
+      frame_walls:{
+        required:'Campo richiesto',
+        emptySel:'Scegli un opzione'
+      },
+      frame_type:{
+        required:'Campo richiesto',
+        emptySel:'Scegli un opzione'
+      },
+      glass_type:{
+        required:'Campo richiesto',
+        emptySel:'Scegli un opzione'
+      },
      },
      errorPlacement: function(error, element) {
        if(element.is('input')){
@@ -574,7 +694,7 @@ $(document).ready(function(){
     $(".save-pop-up").on('click', function(e){
       let pop_up=$(this).closest('.modal').attr('id');
       let inputs=$(this).closest('.modal').find('.popup-control').get()
-      let select
+      let selects=$(this).closest('.modal').find('.select-control').get()
       let emptyInput=false
       inputs.forEach(element => {
         let inputId=element.getAttribute('id')
@@ -582,6 +702,16 @@ $(document).ready(function(){
         console.log(element);
         if(!validate){
           console.log(element + 'flase');
+          emptyInput=true
+        }
+      })
+      selects.forEach(element=>{
+        let selectId=element.getAttribute('id')
+        console.log(selectId);
+        let validate = validator.element(`#${selectId}`)
+        console.log(validate);
+        if(!validate){
+          console.log($(`#${selectId}`).val());
           emptyInput=true
         }
       })
@@ -811,10 +941,11 @@ $(document).ready(function(){
       console.log($('option').val())
         if ($(this).val() == 'condo') {
           $('.condominium').show();
-          let input= $('.condominium').find('.form-control').get();
-          console.log(input);
+          $('.toggle-control').addClass('input-control');
+          
         } else {
           $('.condominium').hide();
+          $('.toggle-control').addClass('input-control');
         }
       });
 
