@@ -317,15 +317,15 @@ $(document).ready(function(){
             console.log(nodePar);
           }
           let errorBox=nodePar.querySelector('.error');
-          let label=nodePar.querySelector('.row-input').querySelector('label').innerHTML;
+          //let label=nodePar.querySelector('.row-input').querySelector('label').innerHTML;
           //? una serie di filtri in cui deve passare l'input
             //* controlla se è vuoto
           if(element.value.length==0){
             emptyInput=true
-            errorBox.innerHTML=`${label} deve essere compilato `;
+            errorBox.innerHTML=`Il campo deve essere compilato `;
             //* controlla se è di tipo date 
           }  else{
-
+            let pattern = element.getAttribute('data-error')
           }
           
           
@@ -375,8 +375,8 @@ $(document).ready(function(){
           if(element.value=="none"){
             emptyInput=true
             let errorBox=element.nextElementSibling
-            let label=element.previousElementSibling.innerHTML
-            errorBox.innerHTML=`${label} deve essere compilato `;
+            /* let label=element.previousElementSibling.innerHTML */
+            errorBox.innerHTML=`Il campo  deve essere compilato `;
           }
         });
         if (emptyInput) {
