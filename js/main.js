@@ -50,7 +50,7 @@ $(document).ready(function(){
       current_step = $(this).closest('fieldset');
       let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
       let control=controlInput(fieldset_count_page);
-      //if(control){
+      if(control){
         
         
         if(fieldset_count_page==10){
@@ -73,7 +73,7 @@ $(document).ready(function(){
             $(".progress").css("display", "block");
             //setClock();
             $(".error").text("");
-        //}
+        }
     });
 
     $(".previous").on("click", function () {
