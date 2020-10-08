@@ -80,6 +80,10 @@ hr {
   margin-bottom: 20px;
 }
 
+.pac-container {
+  z-index: 3000;
+}
+
 .error {
   color: red;
 }
@@ -351,12 +355,6 @@ button.close {
   width: 20px;
   -webkit-box-shadow: 2px 2px 6px 1px black;
   box-shadow: 2px 2px 6px 1px black;
-}
-
-.modal {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
 }
 
 input.form-control {

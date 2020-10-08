@@ -22,7 +22,7 @@ $(document).ready(function(){
   var current = 1;
   
 
-  $('input').attr('autocomplete', 'off');
+  
   
   $.getScript( "js/validation.js", function( data ) {
   });
@@ -437,7 +437,11 @@ $(document).ready(function(){
   $('.open-modal').on('click', function(){
     let modal = $(this).data('modal');
     $(`#${modal}`).modal('show');
-    
+    $('body').css('overflow','hidden')
+  })
+
+  $('.close').on('click' , function () {
+    $('body').css('overflow','auto')
   })
     
 
@@ -457,14 +461,66 @@ $(document).ready(function(){
 
       let map;
 
-function initMap() {
-  map = new google.maps.Map(document.getElementById("map-registered-office"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8,
-  });
-}
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map-registered-office"), {
+        center: { lat: 	0, lng: 0},
+        zoom: 1,
+      });
+    }
+    const componentForm = {
+      street_number: "short_name",
+      route: "long_name",
+      locality: "long_name",
+      //administrative_area_level_1: "short_name",
+      //country: "long_name",
+      postal_code: "short_name",
+    };
+    
+
+    var inputGoogle=document.getElementById('address-registered-office');
+    function initAutocomplete(){
+      autocomplete = new google.maps.places.Autocomplete(inputGoogle, {types:["geocode"]});
+      autocomplete.setFields(["address_components"]);
+      autocomplete.addListener("place_changed", fillInAddress);
+    }
+
+    function fillInAddress() {
+      // Get the place details from the autocomplete object.
+      const place = autocomplete.getPlace();
+      console.log(place);
+    
+      for (const component in componentForm) {
+        document.getElementById(component).value = "";
+        document.getElementById(component).disabled = false;
+      }
+      for (const component of place.address_components) {
+        const addressType = component.types[0];
+    
+        if (componentForm[addressType]) {
+          const val = component[componentForm[addressType]];
+          document.getElementById(addressType).value = val;
+        }
+      }
+    }  
+    function geolocate() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const geolocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          const circle = new google.maps.Circle({
+            center: geolocation,
+            radius: position.coords.accuracy,
+          });
+          autocomplete.setBounds(circle.getBounds());
+        });
+      }
+    }
 
 
+    initMap()
+    initAutocomplete()
   });
 
   // google maps autocomplete

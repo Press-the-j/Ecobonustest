@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <html lang="it">
 
 <head>
@@ -12,12 +14,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="img/Favicon.png" type="image/png" sizes="48x48">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-</head>
 
-<body>
-  <!-- Google Maps Api Key -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNKMa3uLQoAjKasK7GaB7MWLe1q3KC43Q&callback=initMap"
-  type="text/javascript"></script>
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"
     integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
@@ -29,12 +26,15 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
     integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
     crossorigin="anonymous"></script>
-  <!-- google maps -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=&v=weekly"
-  defer></script>
   <!-- custom js -->
   <script src="js/validation.js"></script>
   <script src="js/main.js" charset="utf-8"></script>
+  <!-- Google Maps Api Key -->
+  <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6ElNLOL1BWAp5GUCvkrOEM9vEbPxxceI&libraries=places&v=weekly"></script>
+</head>
+
+<body>
+ 
 
 
   <main class="container">
@@ -262,8 +262,8 @@
             <div class="form-group">
               <div class="row-input">
                 <label for="sede">Sede legale</label>
-                <input type="text" class="form-control fieldset-input input-control open-modal" id="sede" name="sede"
-                  data-toggle="modal" data-modal="registered-office" data-whatever="@mdo"
+                <input type="text" class="form-control fieldset-input input-control open-modal" autocomplete id="sede" name="sede"
+                  data-toggle="modal" data-modal="registered_office" data-whatever="@mdo"
                   data-receive-from="address-registered-office">
               </div>
               <small class="error"></small>
@@ -357,7 +357,7 @@
               </div>
             </div>
             <!-- popup sede legale -->
-            <div class="modal fade" id="registered-office" tabindex="-1" role="dialog"
+            <div class="modal fade" id="registered_office" tabindex="-1" role="dialog"
               aria-labelledby="exampleModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -368,7 +368,7 @@
                   <div class="modal-body">
                     <div class="form-group">
                       <div class="row-input">
-                        <label for="address-registered-office" class="control-label">Indirizzo</label>
+                        <label for="address-registered-office" class="control-label">Cerca</label>
                         <input type="search" class="form-control popup-control" id="address-registered-office" required
                           autocorrect="off" spellcheck="false" autocomplete="off">
                       </div>
@@ -376,15 +376,29 @@
                     </div>
                     <div class="form-group">
                       <div class="row-input">
-                        <label for="postal-code-registered-office" class="control-label">CAP</label>
-                        <input type="text" class="form-control popup-control" id="postal-code-registered-office">
+                        <label for="postal_code_registered_office" class="control-label">CAP</label>
+                        <input type="text" class="form-control popup-control" id="postal_code">
                       </div>
                       <small class="error"></small>
                     </div>
                     <div class="form-group">
                       <div class="row-input">
-                        <label for="city-registered-office" class="control-label">Città</label>
-                        <input type="text" class="form-control popup-control" id="city-registered-office">
+                        <label for="locality" class="control-label">Città</label>
+                        <input type="text" class="form-control popup-control" id="locality">
+                      </div>
+                      <small class="error"></small>
+                    </div>
+                    <div class="form-group">
+                      <div class="row-input">
+                        <label for="street_number" class="control-label">Numero</label>
+                        <input type="text" class="form-control popup-control" id="street_number">
+                      </div>
+                      <small class="error"></small>
+                    </div>
+                    <div class="form-group">
+                      <div class="row-input">
+                        <label for="route" class="control-label">Indirizzo</label>
+                        <input type="text" class="form-control popup-control" id="route">
                       </div>
                       <small class="error"></small>
                     </div>
@@ -449,7 +463,7 @@
             <div class="form-group">
               <div class="row-input">
                 <label for="address-real-estate">Dove si trova?</label>
-                <input type="text" class="form-control input-control" name="address_real_estate" id="address-real-estate">
+                <input type="search" autocomplete class="form-control input-control" name="address_real_estate" id="address-real-estate">
               </div>
               <small class="error"></small>
             </div>
