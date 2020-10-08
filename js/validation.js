@@ -89,6 +89,21 @@ window.validator = $('#formComp').validate({
       minlength: 11,
       maxlength: 11
     },
+    postal_code:{
+      required:true,
+      number:true,
+      maxlength:5,
+    },
+    locality:{
+      required:true,
+    },
+    street_number:{
+      required:true,
+    },
+    route:{
+      required:true,
+      regAddress:true
+    },
     referent_name_registration:{
       required:true,
       regName:true,
@@ -237,6 +252,21 @@ window.validator = $('#formComp').validate({
       number:'La partita iva deve essere composta solo da numeri',
       minlength: 'La partita iva deve contenere 11 cifre',
       maxlength: 'La partita iva deve contenere 11 cifre'
+    },
+    postal_code:{
+      required:'campo richiesto',
+      number:'La partita iva deve essere composta solo da numeri',
+      minlength: 'Il codice postale può contenere al massimo 5 cifre',
+    },
+    locality:{
+      required:'campo richiesto',
+    },
+    street_number:{
+      required:'campo richiesto',
+    },
+    route:{
+      required:'campo richiesto',
+      regAddress:"L'indirizzo non può contenere caratteri speciali"
     },
     referent_name_registration:{
       required:'Campo richiesto',

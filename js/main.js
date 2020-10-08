@@ -373,6 +373,14 @@ $(document).ready(function(){
       }
     })
 
+    $('.save-address').on('click',function(){
+      let address=$('#route').val();
+      let streetNumber=$('#street_number').val();
+      let city=$('#locality').val();
+      let postal_code=$('#postal_code').val();
+      console.log(`${address} ${streetNumber} ${city} ${postal_code} `);
+      $('#sede').val(`${address} ${streetNumber} ${city} ${postal_code} `)
+    })
     //! funzione che scrive il valore della option selezionata all'interno dei pop-up, in input nascosti su cui poi fare i dovuti controlli
     //?dare classe send-val alla select
     //? dare lo stesso id delle select all'input, aggiungendo "-input"

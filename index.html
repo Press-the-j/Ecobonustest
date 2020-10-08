@@ -263,8 +263,7 @@
               <div class="row-input">
                 <label for="sede">Sede legale</label>
                 <input type="text" class="form-control fieldset-input input-control open-modal" autocomplete id="sede" name="sede"
-                  data-toggle="modal" data-modal="registered_office" data-whatever="@mdo"
-                  data-receive-from="address-registered-office">
+                  data-toggle="modal" data-modal="registered_office" data-whatever="@mdo">
               </div>
               <small class="error"></small>
             </div>
@@ -369,7 +368,7 @@
                     <div class="form-group">
                       <div class="row-input">
                         <label for="address-registered-office" class="control-label">Cerca</label>
-                        <input type="search" class="form-control popup-control" id="address-registered-office" required
+                        <input type="search" class="form-control" id="address-registered-office" required
                           autocorrect="off" spellcheck="false" autocomplete="off">
                       </div>
                       <small class="error"></small>
@@ -377,28 +376,28 @@
                     <div class="form-group">
                       <div class="row-input">
                         <label for="postal_code_registered_office" class="control-label">CAP</label>
-                        <input type="text" class="form-control popup-control" id="postal_code">
+                        <input type="text" class="form-control popup-control" name="postal_code" id="postal_code">
                       </div>
                       <small class="error"></small>
                     </div>
                     <div class="form-group">
                       <div class="row-input">
                         <label for="locality" class="control-label">Città</label>
-                        <input type="text" class="form-control popup-control" id="locality">
+                        <input type="text" class="form-control popup-control" name="locality" id="locality">
                       </div>
                       <small class="error"></small>
                     </div>
                     <div class="form-group">
                       <div class="row-input">
                         <label for="street_number" class="control-label">Numero</label>
-                        <input type="text" class="form-control popup-control" id="street_number">
+                        <input type="text" class="form-control popup-control" name="street_number" id="street_number">
                       </div>
                       <small class="error"></small>
                     </div>
                     <div class="form-group">
                       <div class="row-input">
                         <label for="route" class="control-label">Indirizzo</label>
-                        <input type="text" class="form-control popup-control" id="route">
+                        <input type="text" class="form-control popup-control" name="route" id="route">
                       </div>
                       <small class="error"></small>
                     </div>
@@ -409,8 +408,8 @@
                   <div class="modal-footer">
                     <button type="button" class="btn btn-previous" data-dismiss="modal"
                       data-dismiss="modal">Annulla</button>
-                    <button class="save-pop-up btn-next" type="button" class="btn btn-primary"
-                      data-dismiss="modal">Salva</button>
+                    <button class="save-pop-up btn-next save-address" type="button" class="btn btn-primary"
+                      >Salva</button>
                   </div>
                 </div>
               </div>
