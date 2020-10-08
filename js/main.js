@@ -1,6 +1,8 @@
 
 
+
 $(document).ready(function(){
+ 
   
   var next_step;
   var current_step;
@@ -22,346 +24,8 @@ $(document).ready(function(){
 
   $('input').attr('autocomplete', 'off');
   
-  $.validator.addMethod('regName' , function(value, element){
-
-    return value == '' || /^[a-zA-Z'-. ]+$/.test(value)
-  
-   }, "Non sono ammessi caratteri speciali o numeri");
-  
-   $.validator.addMethod("birth", function (value, element) {
-    var dateArr = value.split('-');
-    let date = new Date();
-    
-    let thisYear = date.getFullYear();
-    console.log(thisYear);
-    console.log(dateArr[0]);
-    if (dateArr[0] < 1900 || dateArr[0] > thisYear )
-        return false;
-    else
-        return true;
+  $.getScript( "js/validation.js", function( data ) {
   });
-  
-  $.validator.addMethod('regMail' , function(value, element){
-
-    return value == '' || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
-  
-   }, "Formato mail non valido");
-
-  $.validator.addMethod('regAddress' , function(value, element){
-
-  return value == '' ||/^[a-zA-Z0-9\s,'-.]*$/.test(value)
-
-  }, "Formato mail non valido");
-  
-  $.validator.addMethod('emptySel' , function(value, element, arg){
-
-    return arg !== value
-  
-  }, "Scegli un opzione");
-
-  let validator = $('#formComp').validate({
-    rules: {
-      name:{
-        required:true,
-        regName:true
-      },
-      date:{
-        required:true,
-        birth:true
-      },
-      genre:{
-        emptySel:'none'
-      },
-      email:{
-        required:true,
-        regMail:true
-      },
-      tel_number:{
-        required:true,
-        number:true,
-        minlength:6
-      },
-      name_popup: {
-        required:true,
-        regName:true
-      },
-      surname_popup: {
-        required:true,
-        regName:true
-      },
-      company_name:{
-        required:true,
-        minlength:4,
-      },
-      pIva:{
-        required:true,
-        number:true,
-        minlength: 11,
-        maxlength: 11
-      },
-      company_name_popup:{
-        required:true,
-        minlength:4,
-      },
-      pIva_popup:{
-        required:true,
-        number:true,
-        minlength: 11,
-        maxlength: 11
-      },
-      referent_name_registration:{
-        required:true,
-        regName:true,
-      },
-      referent_mail_registration:{
-        required:true,
-        regMail:true,
-      },
-      referent_tel_registration:{
-        required:true,
-        number:true,
-        maxlength:11
-      },
-      company_occupation:{
-        emptySel:'none'
-      },
-      referent_name_registration_popup:{
-        required:true,
-        regName:true,
-      },
-      referent_mail_registration_popup:{
-        required:true,
-        regMail:true,
-      },
-      referent_tel_registration_popup:{
-        required:true,
-        number:true,
-        maxlength:11
-      },
-      address_real_estate:{
-        required:true,
-        regAddress:true
-      },
-      type_real_estate:{
-        required:true,
-        emptySel:'none'
-      },
-      condominium_floors:{
-        required:true,
-        min:1,
-        max:99
-      },
-      residential_units:{
-        required:true,
-        min:1,
-        max:99
-      },
-      square_meters:{
-        required:true,
-        emptySel:'none'
-      },
-      state_real_estate:{
-        required:true,
-        emptySel:'none'
-      },
-      winter_air_conditioning:{
-        required: true,
-      },
-      opaque_casing: {
-        required:true,
-      },
-      transparent_casing: {
-        required:true,
-      },
-      energy_efficiency:{
-        required:true,
-        emptySel:'none'
-      },
-      generation_heating:{
-        required:true,
-        emptySel:'none'
-      },
-      generator_type:{
-        required:true,
-        emptySel:'none'
-      },
-      terminal_type:{
-        required:true,
-        emptySel:'none'
-      },
-      external_walls:{
-        required:true,
-        emptySel:'none'
-      },
-      frame_walls:{
-        required:true,
-        emptySel:'none'
-      },
-      frame_type:{
-        required:true,
-        emptySel:'none'
-      },
-      glass_type:{
-        required:true,
-        emptySel:'none'
-      },
-      
-
-      
-     },
-     messages:{
-       name:{
-         required:'Campo richiesto',
-         regName:'Non sono ammessi caratteri speciali o numeri'
-       },
-       date:{
-        required:'Campo richiesto',
-        birth:'Data di nascite non valida'
-       },
-       genre: {
-         emptySel:'Scegli un opzione'
-       },
-       email:{
-        required:'Campo richiesto',
-        regMail:'Formato Mail non valido'
-       },
-       tel_number:{
-        required:'Campo richiesto',
-        number:'Numero di telefono non valido',
-        minlength:'Il numerodi telefono deve avere almeno 6 cifre'
-       },
-       name_popup:{
-         required:'Campo richiesto',
-         regName:'Non sono ammessi caratteri speciali o numeri'
-       },
-       surname_popup: {
-        required:'Campo richiesto',
-        regName:'Non sono ammessi caratteri speciali o numeri'
-       },
-       company_name:{
-         required:'campo richiesto',
-         minlength:'La ragione sociale deve contenere almeno 4 lettere'
-       },
-       pIva:{
-        required:'campo richiesto',
-        number:'La partita iva deve essere composta solo da numeri',
-        minlength: 'La partita iva deve contenere 11 cifre',
-        maxlength: 'La partita iva deve contenere 11 cifre'
-      },
-      company_name_popup:{
-        required:'campo richiesto',
-        minlength:'La ragione sociale deve contenere almeno 4 lettere'
-      },
-      pIva_popup:{
-        required:'campo richiesto',
-        number:'La partita iva deve essere composta solo da numeri',
-        minlength: 'La partita iva deve contenere 11 cifre',
-        maxlength: 'La partita iva deve contenere 11 cifre'
-      },
-      referent_name_registration:{
-        required:'Campo richiesto',
-        regName:'Non sono ammessi caratteri speciali o numeri'
-      },
-      referent_mail_registration:{
-        required:'Campo richiesto',
-        regMail:'Formato Mail non valido'
-      },
-      referent_tel_registration:{
-        required:'Campo richiesto',
-        number:'Il numero di telefono può contenere al massimo 11 cifre'
-      },
-      comapny_occupation:{
-        emptySel:'Scegli un opzione'
-      },
-      referent_name_registration_popup:{
-        required:'Campo richiesto',
-        regName:'Non sono ammessi caratteri speciali o numeri'
-      },
-      referent_mail_registration_popup:{
-        required:'Campo richiesto',
-        regMail:'Formato Mail non valido'
-      },
-      referent_tel_registration_popup:{
-        required:'Campo richiesto',
-        number:'Il numero di telefono può contenere solo numeri',
-        maxlenght:'Il numero di telefono può contenere al massimo 11 cifre'
-      },
-      address_real_estate:{
-        required:'Campo richiesto',
-        regAddress:'Non sono ammessi caratteri speciali'
-      },
-      type_real_estate:{
-        required:'Campo richiesto',
-        emptySel:'Scegli un opzione'
-      },
-      condominium_floors:{
-        required:'Campo richiesto',
-        min:'Inserire un numero valido',
-        max:'Inserire un numero valido'
-      },
-      residential_units:{
-        required:'Campo richiesto',
-        min:'Inserire un numero valido',
-        max:'Inserire un numero valido'
-      },
-      square_meters:{
-        required:'Campo richiesto',
-        emptySel:'Scegli un opzione'
-      },
-      tate_real_estate:{
-        required:'Campo richiesto',
-        emptySel:'Scegli un opzione'
-      },
-      winter_air_conditioning:{
-        required:'Campo richiesto',
-      },
-      opaque_casing: {
-        required:'Campo richiesto',
-      },
-      transparent_casing: {
-        required:'Campo richiesto',
-      },
-      energy_efficiency:{
-        required:'Campo richiesto',
-        emptySel:'Scegli un opzione'
-      },
-      generation_heating:{
-        required:'Campo richiesto',
-        emptySel:'Scegli un opzione'
-      },
-      generator_type:{
-        required:'Campo richiesto',
-        emptySel:'Scegli un opzione'
-      },
-      terminal_type:{
-        required:'Campo richiesto',
-        emptySel:'Scegli un opzione'
-      },
-      external_walls:{
-        required:'Campo richiesto',
-        emptySel:'Scegli un opzione'
-      },
-      frame_walls:{
-        required:'Campo richiesto',
-        emptySel:'Scegli un opzione'
-      },
-      frame_type:{
-        required:'Campo richiesto',
-        emptySel:'Scegli un opzione'
-      },
-      glass_type:{
-        required:'Campo richiesto',
-        emptySel:'Scegli un opzione'
-      },
-     },
-     errorPlacement: function(error, element) {
-       if(element.is('input')){
-         error.insertAfter(element.parents('.row-input'));
-       } else if(element.is('select')){
-         error.insertAfter(element)
-       }
-     }
-   })
    
 
 
@@ -396,8 +60,6 @@ $(document).ready(function(){
         
         if(fieldset_count_page==10){
           checkSismic(fieldset_count_page)
-          //let map = 'mapSismic'
-          //renderMap(placesAutocompleteSismic, map)
           $('#sismic-intervention-search').val(sismicIntervention.address)
         } else if(fieldset_count_page==5){
           sismicIntervention["address"]=$("#dove").val()
@@ -412,7 +74,6 @@ $(document).ready(function(){
             next_step.show();
             setProgressBar(++current);
             $(".progress").css("display", "block");
-            //setClock();
             $(".error").text("");
         }
     });
@@ -449,7 +110,7 @@ $(document).ready(function(){
       percentuale = percentuale.toFixed();
       $(".progress-bar")
         .css("width",percentuale+"%")
-        // .html(percentuale+"%");   
+
     }
 
     //! funzione che setta timer
@@ -663,30 +324,7 @@ $(document).ready(function(){
     }
 
     
-     //! funzione di controllo dei pop-up, che blocca il salvataggio dei dati negli input se non viene selezionato tutto
-        //? dare classe popup-control agli input che devono essere controllati all'interno del popup
-      
-   /*  function controlPopup(popupId){
-      let inputs=$(`#${popupId} .popup-control`).get();
-      let emptyInput=false;
-      inputs.forEach(element => {
-        if(element.value.length==0){
-          if(element.classList.contains('input-popup-control')){
-            var dataError=element.getAttribute('id')
-          } else {
-            var dataError=element.getAttribute('data-error');
-          }
-          emptyInput=true
-          let errorBox=$(`#${dataError}`).siblings('.error')
-          let label=$(`#${dataError}`).siblings('label').text()
-          errorBox.text(`${label} deve essere compilato `);
-        } 
-        })
-      if(emptyInput){
-        return false
-      }
-      return true
-    } */
+ 
 
     //!funzione per inserire automaticamente i dati dei pop up negli input
       //? dare classe save-pop-up al bottone salva
@@ -733,29 +371,7 @@ $(document).ready(function(){
           }
         }
       }
-      /* 
-        e.preventDefault()
-      //} else {
-        $(this).closest('.modal').find('.close').click()
-        let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
-        let pop_up_input =$(this).closest('.modal').find('input').get();
-        console.log(pop_up_input);
-        
-        
-        for(let i=0; i<pop_up_input.length; i++){
-          let id_pop_up_input=pop_up_input[i].getAttribute('id');
-          
-          if($(`fieldset[data-count-page=${fieldset_count_page}] input[data-receive-from=${id_pop_up_input}]`).length){
-            
-            let inputText=pop_up_input[i].value;
-            
-            $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
-            //? pulissco l'errorBox al riempimento dei dati da popup
-            $(`input[data-receive-from=${id_pop_up_input}`).closest('.row-input').siblings('.error').text('')
-          }
-        } */
-      //}
-    });
+    })
 
     //! funzione che scrive il valore della option selezionata all'interno dei pop-up, in input nascosti su cui poi fare i dovuti controlli
     //?dare classe send-val alla select
@@ -766,16 +382,12 @@ $(document).ready(function(){
         let idSelect = $(this).attr("id");
         let hiddenInput = $(`#${idSelect}-input`).get();
         hiddenInput[0].value = valSelect;
-        console.log(hiddenInput[0].value);
-        //hiddenInput.val(valSelect)
     });
 
     //! funzione per inserire e pulire input del nome
     $(".send-val-name").on("keyup", function () {
         let valName = $("#name-popup").val();
         let valSurname = $("#surname-popup").val();
-        //let valNameArr=valName.split(' ');
-        //let valSurnameArr=valSurname.split(' ');
         let name = valName
             .split(" ")
             .filter((i) => i)
@@ -820,119 +432,13 @@ $(document).ready(function(){
     }
   })
 
-  /*   //! chiamata ad Algolia per la mappa della sede legale
-      //? autocompletamento dell'input di ricerca
-      var placesAutocomplete = places({
-        appId: 'pl7QEUHBIWGV',
-        apiKey: 'bc57f2fb92b40eb8a458abd86c2b3402',
-        container: document.querySelector('#address-registered-office ')
-      });
+  //! fix per i modal su iphone
 
-      var placesAutocompleteSismic = places({
-        appId: 'pl7QEUHBIWGV',
-        apiKey: 'bc57f2fb92b40eb8a458abd86c2b3402',
-        container: document.querySelector('#address-real-estate')
-      });
-
-      
-
-      var placesAutocompleteSismic = places({
-        appId: 'pl7QEUHBIWGV',
-        apiKey: 'bc57f2fb92b40eb8a458abd86c2b3402',
-        container: document.querySelector('#sismic-intervention-search')
-      });
-
-      //? autocompleto input della citta e del CAP
-      placesAutocomplete.on('change', function resultSelected(e) {
-        document.querySelector('#city-registered-office').value = e.suggestion.city || '';
-        document.querySelector('#postal-code-registered-office').value = e.suggestion.postcode || '';
-      })
-
-
-    var placesAutocompleteSismic = places({
-        appId: "pl7QEUHBIWGV",
-        apiKey: "bc57f2fb92b40eb8a458abd86c2b3402",
-        container: document.querySelector("#address-real-estate"),
-    });
-
-    var placesAutocompleteSismic = places({
-        appId: "pl7QEUHBIWGV",
-        apiKey: "bc57f2fb92b40eb8a458abd86c2b3402",
-        container: document.querySelector("#sismic-intervention-search"),
-    });
-    //? autocompleto input della citta e del CAP
-    placesAutocomplete.on("change", function resultSelected(e) {
-        document.querySelector("#city-registered-office").value =
-            e.suggestion.city || "";
-        document.querySelector("#postal-code-registered-office").value =
-            e.suggestion.postcode || "";
-    });
-
-    //? all'apertura del pop up della sede legale renderizzo la mappa
-    $("#sede").on("click", function () {
-        let map = "map-registered-office";
-        renderMap(placesAutocomplete, map);
-    });
-
+  $('.open-modal').on('click', function(){
+    let modal = $(this).data('modal');
+    $(`#${modal}`).modal('show');
     
-    function renderMap(autocomplete, mapToSet){
-      //!timeout settato per fixare il caricamento della mappa
-      setTimeout(function(){
-        
-        //?renderizzo la mappa
-      var map = L.map(mapToSet, {
-        scrollWheelZoom:false,
-        zoomControl: false
-      });
-
-            function handleOnChange(e) {
-                markers.forEach(function (marker, markerIndex) {
-                    if (markerIndex === e.suggestionIndex) {
-                        markers = [marker];
-                        marker.setOpacity(1);
-                        findBestZoom();
-                    } else {
-                        removeMarker(marker);
-                    }
-                });
-            }
-
-            function handleOnClear() {
-                map.setView(new L.LatLng(0, 0), 1);
-                markers.forEach(removeMarker);
-            }
-
-            function handleOnCursorchanged(e) {
-                markers.forEach(function (marker, markerIndex) {
-                    if (markerIndex === e.suggestionIndex) {
-                        marker.setOpacity(1);
-                        marker.setZIndexOffset(1000);
-                    } else {
-                        marker.setZIndexOffset(0);
-                        marker.setOpacity(0.5);
-                    }
-                });
-            }
-
-            function addMarker(suggestion) {
-                var marker = L.marker(suggestion.latlng, { opacity: 0.4 });
-                marker.addTo(map);
-                markers.push(marker);
-            }
-
-            function removeMarker(marker) {
-                map.removeLayer(marker);
-            }
-
-            function findBestZoom() {
-                var featureGroup = L.featureGroup(markers);
-                map.fitBounds(featureGroup.getBounds().pad(0.5), {
-                    animate: false,
-                });
-            }
-        }, 1000);
-    } */
-  
+  })
     
 
 

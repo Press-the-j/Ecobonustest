@@ -86,7 +86,7 @@
                 <div class="btn-type-user-wrap m-top-60">
                   <input type="button" value="Sei un&#39;impresa &#63;" class="type-user btn-type-user"
                     data-typeUser="business" />
-                  <span data-toggle="modal" data-target="#business-infos" id="impresa-info"><img
+                  <span data-toggle="modal" data-modal="business-infos" id="impresa-info" class="open-modal"><img
                       src="img/Punto-Interrogativo.svg" class="question" alt="Punto_Interrogativo"></span>
                 </div>
               </div>
@@ -94,8 +94,8 @@
                 <img class="imageType img-responsive" src="img/Icona-persona- Fisica.svg" alt="immagine impresa">
                 <div class="btn-type-user-wrap m-top-60">
                   <input type="button" value="Sei una persona fisica &#63;" class="type-user btn-type-user"
-                    data-typeUser="person" />
-                  <span data-toggle="modal" data-target="#person-infos" id="personaFisica-info"><img class="question"
+                    data-typeUser="person"  />
+                  <span data-toggle="modal" data-modal="person-infos" id="personaFisica-info" class="open-modal"><img class="question"
                       src="img/Punto-Interrogativo.svg" alt="Punto_Interrogativo"></span>
                 </div>
               </div>
@@ -155,8 +155,8 @@
             <div class="form-group">
               <div class="row-input">
                 <label for="name">Nome</label>
-                <input data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" type="search"
-                  class="form-control input-control" id="name" name="name" data-receive-from="complete-name">
+                <input data-toggle="modal" data-modal="nameModal" data-whatever="@mdo" type="search"
+                  class="form-control input-control open-modal" id="name" name="name" data-receive-from="complete-name">
               </div>
               <small class="error"></small>
             </div>
@@ -200,7 +200,7 @@
               <input type="button" name="next" class="next btn btn-next" value="Next" />
             </div>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -242,8 +242,8 @@
             <div class="form-group">
               <div class="row-input">
                 <label for="company-name">Ragione sociale</label>
-                <input type="text" class="form-control fieldset-input input-control" id="company-name" name="company_name"
-                  data-toggle="modal" data-target="#business-name" data-whatever="@mdo"
+                <input type="text" class="form-control fieldset-input input-control open-modal" id="company-name" name="company_name"
+                  data-toggle="modal" data-modal="business-name" data-whatever="@mdo"
                   data-receive-from="company-name-popup">
               </div>
               <small class="error"></small>
@@ -251,16 +251,16 @@
             <div class="form-group">
               <div class="row-input">
                 <label for="pIva">Partita iva</label>
-                <input type="number" class="form-control fieldset-input input-control" id="pIva" name="pIva"
-                  data-toggle="modal" data-target="#business-name" data-whatever="@mdo" data-receive-from="p-iva">
+                <input type="number" class="form-control fieldset-input input-control open-modal" id="pIva" name="pIva"
+                  data-toggle="modal" data-modal="business-name" data-whatever="@mdo" data-receive-from="p-iva">
               </div>
               <small class="error"></small>
             </div>
             <div class="form-group">
               <div class="row-input">
                 <label for="sede">Sede legale</label>
-                <input type="text" class="form-control fieldset-input input-control" id="sede" name="sede"
-                  data-toggle="modal" data-target="#registered-office" data-whatever="@mdo"
+                <input type="text" class="form-control fieldset-input input-control open-modal" id="sede" name="sede"
+                  data-toggle="modal" data-modal="registered-office" data-whatever="@mdo"
                   data-receive-from="address-registered-office">
               </div>
               <small class="error"></small>
@@ -272,8 +272,8 @@
             <div class="form-group">
               <div class="row-input">
                 <label for="referent-name-registration">Referente</label>
-                <input data-toggle="modal" data-target="#referent-registration" type="text"
-                  class="form-control fieldset-input input-control" id="referent-name-registration" name="referent_name_registration"
+                <input data-toggle="modal" data-modal="referent-registration" type="text"
+                  class="form-control fieldset-input input-control open-modal" id="referent-name-registration" name="referent_name_registration"
                   data-receive-from="name-referent-registration">
               </div>
               <small class="error"></small>
@@ -281,8 +281,8 @@
             <div class="form-group">
               <div class="row-input">
                 <label for="referent-mail-registration">Email</label>
-                <input data-toggle="modal" data-target="#referent-registration" type="email"
-                  class="form-control fieldset-input input-control" id="referent-mail-registration" name="referent_mail_registration"
+                <input data-toggle="modal" data-modal="referent-registration" type="email"
+                  class="form-control fieldset-input input-control open-modal" id="referent-mail-registration" name="referent_mail_registration"
                   data-receive-from="email-referent-registration">
               </div>
               <small class="error"></small>
@@ -290,8 +290,8 @@
             <div class="form-group">
               <div class="row-input">
                 <label for="referent-tel-registration">Telefono</label>
-                <input data-toggle="modal" data-target="#referent-registration" type="tel"
-                  class="form-control fieldset-input input-control" id="referent-tel-registration" name="referent_tel_registration"
+                <input data-toggle="modal" data-modal="#referent-registration" type="tel"
+                  class="form-control fieldset-input input-control open-modal" id="referent-tel-registration" name="referent_tel_registration"
                   data-receive-from="number-referent-registration">
               </div>
               <small class="error"></small>
@@ -504,10 +504,10 @@
               <small class="error"></small>
             </div>
             <div class="form-group">
-              <div class="row-input" data-toggle="modal" data-target="#winter-air-conditioning-popup">
+              <div class="row-input" data-toggle="modal" data-modal="#winter-air-conditioning-popup">
                 <label for="
                 winter-air-conditioning">Climatizzazione Invernale</label>
-                <input class="form-control input-control" type="text" id="winter-air-conditioning" name="winter_air_conditioning"
+                <input class="form-control input-control open-modal" type="text" id="winter-air-conditioning" name="winter_air_conditioning"
                   data-receive-from="generation-heating-input">
               </div>
               <small class="error"></small>
@@ -518,8 +518,8 @@
             <div class="form-group">
               <div class="row-input">
                 <label for="opaque-casing">Involucro opaco</label>
-                <input type="text" class="form-control input-control" name="opaque_casing" id="opaque-casing"
-                  data-toggle="modal" data-target="#opaque-casing-popup" data-whatever="@mdo"
+                <input type="text" class="form-control input-control open-modal" name="opaque_casing" id="opaque-casing"
+                  data-toggle="modal" data-modal="opaque-casing-popup" data-whatever="@mdo"
                   data-receive-from="external-walls-input">
               </div>
               <small class="error"></small>
@@ -527,8 +527,8 @@
             <div class="form-group">
               <div class="row-input">
                 <label for="transparent-casing">Involucro trasparente</label>
-                <input type="text" class="form-control input-control" name="transparent_casing" id="transparent-casing"
-                  data-toggle="modal" data-target="#transparent-casing-popup" data-whatever="@mdo"
+                <input type="text" class="form-control input-control open-modal" name="transparent_casing" id="transparent-casing"
+                  data-toggle="modal" data-modal="transparent-casing-popup" data-whatever="@mdo"
                   data-receive-from="frame-type-input">
               </div>
               <small class="error"></small>
