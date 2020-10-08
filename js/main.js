@@ -480,27 +480,51 @@ $(document).ready(function(){
     var inputGoogle=document.getElementById('address-registered-office');
     function initAutocomplete(){
       autocomplete = new google.maps.places.Autocomplete(inputGoogle, {types:["geocode"]});
-      autocomplete.setFields(["address_components"]);
-      autocomplete.addListener("place_changed", fillInAddress);
+      autocomplete.setFields(["address_components", "geometry"]);
+      autocomplete.bindTo("bounds", map);
+      autocomplete.addListener("place_changed", function(){
+        const place = autocomplete.getPlace();
+        const marker = new google.maps.Marker({
+          map,
+          anchorPoint: new google.maps.Point(0, -29),
+        });
+        console.log(place);
+      
+        for (const component in componentForm) {
+          document.getElementById(component).value = "";
+          document.getElementById(component).disabled = false;
+        }
+        for (const component of place.address_components) {
+          const addressType = component.types[0];
+      
+          if (componentForm[addressType]) {
+            const val = component[componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+          }
+        }
+
+        if (!place.geometry) {
+          // User entered the name of a Place that was not suggested and
+          // pressed the Enter key, or the Place Details request failed.
+          window.alert("No details available for input: '" + place.name + "'");
+          return;
+        }
+    
+        // If the place has a geometry, then present it on a map.
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+        } else {
+          map.setCenter(place.geometry.location);
+          map.setZoom(17); // Why 17? Because it looks good.
+        }
+        marker.setPosition(place.geometry.location);
+        marker.setVisible(true);
+      });
     }
 
     function fillInAddress() {
       // Get the place details from the autocomplete object.
-      const place = autocomplete.getPlace();
-      console.log(place);
-    
-      for (const component in componentForm) {
-        document.getElementById(component).value = "";
-        document.getElementById(component).disabled = false;
-      }
-      for (const component of place.address_components) {
-        const addressType = component.types[0];
-    
-        if (componentForm[addressType]) {
-          const val = component[componentForm[addressType]];
-          document.getElementById(addressType).value = val;
-        }
-      }
+     
     }  
     function geolocate() {
       if (navigator.geolocation) {
