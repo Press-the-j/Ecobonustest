@@ -457,3 +457,5 @@ $(document).ready(function(){
 
 
   });
+
+  // google maps autocomplete

@@ -32,4 +32,7 @@ button.close {
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
 }
