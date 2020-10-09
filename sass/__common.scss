@@ -29,7 +29,9 @@ body {
     height: 300px;
     z-index: 10;
 }
-
+.no-wrap{
+  white-space: nowrap;
+}
 .m-top-60 {
     margin-top: 60px;
 }

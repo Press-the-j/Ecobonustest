@@ -21,13 +21,48 @@ $(document).ready(function(){
   var steps
   var current = 1;
   
-
+  var seismicValutationObj;
+  var done =0
   
   
   $.getScript( "js/validation.js", function( data ) {
   });
    
+  $.ajax({
+    type: "GET",
+    url: "../data/classificazione-sismica-2020.csv",
+    
+    success: function (response) {
+      seismicValutationObj= $.csv.toObjects(response);
+      
+    }
+  });
 
+  $('.getValutation').on('click', function(){
+    let val=$(this).siblings('input').val()
+    let result= $('.result-valutation')
+    
+
+    
+    for (let el of seismicValutationObj){
+      
+      if(el.Denominazione.toLowerCase()===val.toLowerCase()){
+        var findIt=true
+        var valutation =el["Classificazione 2020"]
+        break
+      } else {
+        findIt=false
+        
+      }
+    }
+
+    if(findIt){
+      result.val(valutation)
+    } else {
+      span.val("non abbiamo trovato nessun risultato")
+    }
+    
+  })
 
     
   //todo bisogna assegnare un errore nel caso l'utente prova ad andare avanti senza accettare la privacy
@@ -55,19 +90,13 @@ $(document).ready(function(){
       let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
       let control=controlInput(fieldset_count_page);
       console.log(control);
-      if(control){
+      //if(control){
         
         
         if(fieldset_count_page==10){
           checkSismic(fieldset_count_page)
-          $('#sismic-intervention-search').val(sismicIntervention.address)
-        } else if(fieldset_count_page==5){
-          sismicIntervention["address"]=$("#dove").val()
-        } /* else if(fieldset_count_page==13 ) {
-          console.log('ciao');
-          $('.clock').css('display' , 'none');
-          clearInterval(myTimer);
-        } */
+          
+        }
 
             next_step = $(this).closest("fieldset").next();
             current_step.hide();
@@ -75,7 +104,7 @@ $(document).ready(function(){
             setProgressBar(++current);
             $(".progress").css("display", "block");
             $(".error").text("");
-        }
+        //}
     });
 
     $(".previous").on("click", function () {
@@ -207,22 +236,7 @@ $(document).ready(function(){
         }
       }
 
-    function checkSismic(currentStep) {
-        if ($(".sismic-intervention-check").is(":checked")) {
-            if (sismicIntervention["removed"]) {
-                let clone_step = sismicIntervention["clone"];
-                console.log(currentStep);
-
-                $(`fieldset[data-count-page=${currentStep}]`).after(clone_step);
-            }
-        } else {
-            sismicIntervention["removed"] = true;
-            let remove_step = $(".sismic-intervention").clone(true).get();
-            sismicIntervention["clone"] = remove_step[0];
-            console.log(sismicIntervention.clone);
-            $(".sismic-intervention").remove();
-        }
-    }
+    
 
     //!validazione select
     $(".choose-category").on("change", function () {
@@ -466,8 +480,8 @@ $(document).ready(function(){
           $('.toggle-control').addClass('input-control');
         }
       });
-
-      let map;
+/* 
+    let map;
 
     function initMap() {
       map = new google.maps.Map(document.getElementById("map-registered-office"), {
@@ -551,7 +565,7 @@ $(document).ready(function(){
 
 
     initMap()
-    initAutocomplete()
+    initAutocomplete() */
   });
 
   // google maps autocomplete

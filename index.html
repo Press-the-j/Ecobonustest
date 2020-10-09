@@ -21,7 +21,8 @@
     crossorigin="anonymous"></script>
   <!-- jquery validator -->
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
-  
+  <!-- jquery-csv -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
   <!-- Bootstrap Plugins -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
     integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
@@ -520,10 +521,10 @@
               <small class="error"></small>
             </div>
             <div class="form-group">
-              <div class="row-input" data-toggle="modal" data-modal="#winter-air-conditioning-popup">
+              <div class="row-input" data-toggle="modal">
                 <label for="
                 winter-air-conditioning">Climatizzazione Invernale</label>
-                <input class="form-control input-control open-modal" type="text" id="winter-air-conditioning" name="winter_air_conditioning"
+                <input class="form-control input-control open-modal" type="text" id="winter-air-conditioning" name="winter_air_conditioning" data-toggle="modal" data-modal="winter-air-conditioning-popup"
                   data-receive-from="generation-heating-input">
               </div>
               <small class="error"></small>
@@ -938,8 +939,19 @@
             <p>l'unità immobiliare su cui hai effettuato / effettuari l'intervento è situata nelle zone sismiche 1,2 e 3
               di cui all'ordinanza del Presidente del Consiglio dei ministri n.3274 del 20 marzo 2003?</p>
             <p>Confermi l'indirizzo dell'immobile?</p>
-            <input type="search" id="sismic-intervention-search" placeholder="Search..." autocomplete="off">
-            <div id="mapSismic"></div>
+            <div class="form-group">
+              <div class="seismic-valutation">
+                <input type="text" class="input-valutation" placeholder='inserisci un comune'>
+                <span class="btn-next getValutation">Valuta</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label  class="no-wrap" for="result-valutation-input">Valutazione sismica</label>
+              <div class="row-input m-bottom-60">
+                <input type="text" id="result-valutation-input"class="form-control result-valutation">
+              </div>
+            </div>
+            
             <div class="bottoni">
               <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
               <input type="button" name="next" class="next btn btn-next" value="Conferma" />
