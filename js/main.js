@@ -492,6 +492,7 @@ $(document).ready(function(){
       autocomplete.bindTo("bounds", map);
       autocomplete.addListener("place_changed", function(){
         const place = autocomplete.getPlace();
+        
         const marker = new google.maps.Marker({
           map,
           anchorPoint: new google.maps.Point(0, -29),
@@ -510,7 +511,8 @@ $(document).ready(function(){
             document.getElementById(addressType).value = val;
           }
         }
-
+        
+        markers = [];
         if (!place.geometry) {
           // User entered the name of a Place that was not suggested and
           // pressed the Enter key, or the Place Details request failed.
@@ -530,10 +532,7 @@ $(document).ready(function(){
       });
     }
 
-    function fillInAddress() {
-      // Get the place details from the autocomplete object.
-     
-    }  
+   
     function geolocate() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
