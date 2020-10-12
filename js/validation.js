@@ -69,7 +69,7 @@ window.validator = $('#formComp').validate({
       required:true,
       regName:true
     },
-    company_name:{
+    ragione_sociale:{
       required:true,
       minlength:4,
     },
@@ -104,10 +104,10 @@ window.validator = $('#formComp').validate({
       required:true,
       regAddress:true
     },
-    referent_name_registration:{
+    /* referent_name_registration:{
       required:true,
       regName:true,
-    },
+    }, */
     referent_mail_registration:{
       required:true,
       regMail:true,
@@ -233,7 +233,7 @@ window.validator = $('#formComp').validate({
       required:'Campo richiesto',
       regName:'Non sono ammessi caratteri speciali o numeri'
      },
-     company_name:{
+     ragione_sociale:{
        required:'campo richiesto',
        minlength:'La ragione sociale deve contenere almeno 4 lettere'
      },
@@ -267,18 +267,6 @@ window.validator = $('#formComp').validate({
     route:{
       required:'campo richiesto',
       regAddress:"L'indirizzo non può contenere caratteri speciali"
-    },
-    referent_name_registration:{
-      required:'Campo richiesto',
-      regName:'Non sono ammessi caratteri speciali o numeri'
-    },
-    referent_mail_registration:{
-      required:'Campo richiesto',
-      regMail:'Formato Mail non valido'
-    },
-    referent_tel_registration:{
-      required:'Campo richiesto',
-      number:'Il numero di telefono può contenere al massimo 11 cifre'
     },
     comapny_occupation:{
       emptySel:'Scegli un opzione'

@@ -22,8 +22,8 @@ $(document).ready(function(){
   var current = 1;
   
   var seismicValutationObj;
-  var done =0
   
+  var resultObj={}
   
   $.getScript( "js/validation.js", function( data ) {
   });
@@ -38,74 +38,129 @@ $(document).ready(function(){
     }
   });
 
-  $('.getValutation').on('click', function(){
-    let val=$(this).siblings('input').val()
-    let result= $('.result-valutation')
-    
+  function saveData(countPage){
+    let field=$(`fieldset[data-count-page=${countPage}] .save-data`).get();
+    var arr = [];
+    field.forEach((el)=>{
+      let type=el.getAttribute('type')
+      if(el.classList.contains('group-save')){
+        let groupKey=el.getAttribute('data-group-result');
+        
+        if(!arr.includes(groupKey)){
+          arr.push(groupKey)
+        }
+      } else if(el.classList.contains('select-control')){
+        console.log(el);
+        let name = el.getAttribute('name');
+        let val = el.options[el.selectedIndex].text;
+        console.log(name);
+        console.log(val);
+        resultObj[name]=val
 
-    
-    for (let el of seismicValutationObj){
+      } else if(type=='text' || type=='number' || type=='date') {
       
-      if(el.Denominazione.toLowerCase()===val.toLowerCase()){
-        var findIt=true
-        var valutation =el["Classificazione 2020"]
-        break
-      } else {
-        findIt=false
+        let name=el.getAttribute('name');
+        let val=el.value;
+        
+        resultObj[name]=val
+      } else if(type=='checkbox'){
+        if (el.checked){
+          let name = el.getAttribute('name');
+          resultObj[name]=true
+        } else {
+          let name = el.getAttribute('name');
+          resultObj[name]=false
+        }
+      } 
+
+    })
+    
+    if (arr.length){
+      for(let i=0; i<arr.length;i++){
+        let groupKey = arr[i];
+        var elements={};
+        
+
+        let inputs=$(`fieldset[data-count-page=${countPage}] .save-data[data-group-result=${groupKey}]`).get();
+
+        inputs.forEach((el)=>{
+          if (el.classList.contains('select-control')){
+            let name=el.getAttribute('name');
+            let val = el.options[el.selectedIndex].text;
+            elements[name]=val
+          } else {
+            let name=el.getAttribute('name');
+            let val=el.value;
+            elements[name]=val
+          }
+          
+        })
+        resultObj[groupKey]=elements
         
       }
     }
 
-    if(findIt){
-      result.val(valutation)
-    } else {
-      span.val("non abbiamo trovato nessun risultato")
-    }
+   
+  }
+
+  $('.getValutation').on('click', function(){
+    let val=$(this).siblings('input').val()
+    let result= $('.result-valutation')
     
+    for (let el of seismicValutationObj){
+      if(el.Denominazione.toLowerCase()===val.toLowerCase()){
+        result.val(el["Classificazione 2020"])
+        break
+      } else {
+        result.val("non abbiamo trovato nessun risultato")
+        
+      }
+    }
   })
 
-    
-  //todo bisogna assegnare un errore nel caso l'utente prova ad andare avanti senza accettare la privacy
-  $("#privacy").on("change", function () {
-    if ($(this).is(":checked")) {
-        let btn_next = $(this)
-            .closest(".form-group")
-            .siblings(".bottoni")
-            .children(".next");
-        btn_next.prop("disabled", false);
-    } else if ($(this).not(":checked")) {
-        let btn_next = $(this)
-            .closest(".form-group")
-            .siblings(".bottoni")
-            .children(".next");
-        btn_next.prop("disabled", true);
-    }
+  
+//todo bisogna assegnare un errore nel caso l'utente prova ad andare avanti senza accettare la privacy
+$("#privacy").on("change", function () {
+  if ($(this).is(":checked")) {
+      let btn_next = $(this)
+          .closest(".form-group")
+          .siblings(".bottoni")
+          .children(".next");
+      btn_next.prop("disabled", false);
+  } else if ($(this).not(":checked")) {
+      let btn_next = $(this)
+          .closest(".form-group")
+          .siblings(".bottoni")
+          .children(".next");
+      btn_next.prop("disabled", true);
+  }
 });
 
     
-    
   
-    $(".next").on('click',function(e){
-      current_step = $(this).closest('fieldset');
-      let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
-      let control=controlInput(fieldset_count_page);
-      console.log(control);
-      //if(control){
-        
-        
-        if(fieldset_count_page==10){
-          checkSismic(fieldset_count_page)
-          
-        }
-
-            next_step = $(this).closest("fieldset").next();
-            current_step.hide();
-            next_step.show();
-            setProgressBar(++current);
-            $(".progress").css("display", "block");
-            $(".error").text("");
-        //}
-    });
+$(".next").on('click',function(e){
+  current_step = $(this).closest('fieldset');
+  let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
+  let control=controlInput(fieldset_count_page);
+  
+  //if(control){
+    
+    
+    if(fieldset_count_page==10){
+      checkSismic(fieldset_count_page)
+      
+    }
+        saveData(fieldset_count_page)
+        let result = JSON.stringify(resultObj)
+        console.log(result);
+        next_step = $(this).closest("fieldset").next();
+        current_step.hide();
+        next_step.show();
+        setProgressBar(++current);
+        $(".progress").css("display", "block");
+        $(".error").text("");
+    //}
+});
 
     $(".previous").on("click", function () {
         current_step = $(this).closest("fieldset");
@@ -121,7 +176,6 @@ $(document).ready(function(){
         next_step.show();
         current_step.hide();
         setProgressBar(--current);
-        console.log(next_step);
         clone_step.forEach((element) => {
             let el_page = element.getAttribute("data-count-page") - 1;
             $("fieldset[data-count-page='" + el_page + "']").after(element);
@@ -209,6 +263,7 @@ $(document).ready(function(){
         remove_step.remove();
 
         //? applica la stessa logica del next, andando alla pagina successiva, settando il timer, aumentando la barra di progresso
+        resultObj['type_of_user']=type_user
         current_step.hide();
         current_step.next().show();
         //setClock();
@@ -317,13 +372,11 @@ $(document).ready(function(){
           let validate=validator.element(`#${inputId}`)
           
           if (!validate){
-            
             emptyInput=true
           }
         })
         select.forEach(element => {
           let selectId=element.getAttribute('id')
-          console.log(selectId);
           let validate = validator.element(`#${selectId}`)
           
           if(!validate){
@@ -337,6 +390,9 @@ $(document).ready(function(){
         return true;
     }
 
+    function saveInput(){
+
+    }
     
  
 
@@ -351,7 +407,7 @@ $(document).ready(function(){
       inputs.forEach(element => {
         let inputId=element.getAttribute('id')
         let validate=validator.element(`#${inputId}`)
-        console.log(element);
+        
         if(!validate){
           console.log(element + 'flase');
           emptyInput=true
@@ -380,20 +436,32 @@ $(document).ready(function(){
             let inputText=pop_up_input[i].value;
             
             $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
-            //? pulissco l'errorBox al riempimento dei dati da popup
+            
            
           }
         }
       }
     })
 
+    $('#coat').on('change', function(){
+      if ($(this).is(':checked')){
+        $('#coat_input').val('true')
+      } else {
+        $('#coat_input').val('false')
+      }
+
+      console.log($('#coat_input').val());
+    })
+
     $('.save-address').on('click',function(){
-      let address=$('#route').val();
-      let streetNumber=$('#street_number').val();
-      let city=$('#locality').val();
-      let postal_code=$('#postal_code').val();
-      console.log(`${address} ${streetNumber} ${city} ${postal_code} `);
-      $('#sede').val(`${address} ${streetNumber} ${city} ${postal_code} `)
+      
+        let selector = $(this).data('save');
+        let address=$(`#route_${selector}`).val();
+        let streetNumber=$(`#street_number_${selector} `).val();
+        let city=$(`#locality_${selector} `).val();
+        let postal_code=$(`#postal_code_${selector} `).val();
+      
+      $(`#address_${selector}`).val(`${address} ${streetNumber} ${city} ${postal_code} `)
     })
     //! funzione che scrive il valore della option selezionata all'interno dei pop-up, in input nascosti su cui poi fare i dovuti controlli
     //?dare classe send-val alla select
@@ -406,43 +474,23 @@ $(document).ready(function(){
         hiddenInput[0].value = valSelect;
     });
 
-    //! funzione per inserire e pulire input del nome
-    $(".send-val-name").on("keyup", function () {
-        let valName = $("#name-popup").val();
-        let valSurname = $("#surname-popup").val();
-        let name = valName
-            .split(" ")
-            .filter((i) => i)
-            .join(" ");
-        console.log(name);
-        let surname = valSurname
-            .split(" ")
-            .filter((i) => i)
-            .join(" ");
-        $("#complete-name").val(name + " " + surname);
-        console.log($("#complete-name").val());
-    });
-    //! pulisco gli errorBox quando i campi vengono compilati
-    //? quando la select cambia pulisco lo span di errore
-    $(".select-control").on("change", function () {
-        let errorBox = $(this).siblings(".error");
-        if (errorBox.length != 0) {
-            errorBox.text("");
-        }
-    });
+  //! funzione per inserire e pulire input del nome
+  $(".send-val-name").on("keyup", function () {
+    let valName = $("#name-popup").val();
+    let valSurname = $("#surname-popup").val();
+    let name = valName
+        .split(" ")
+        .filter((i) => i)
+        .join(" ");
+    let surname = valSurname
+        .split(" ")
+        .filter((i) => i)
+        .join(" ");
+    $("#complete-name").val(name + " " + surname);   
+  });
 
-   
-
-      //? al change delle input che non si riempiono tramite popup, vadoa cancellare il messaggio di errore
-    $('.input-control').not('[type="date"]').on('change', function(){
-      var errorBox=$(this).siblings('.error')
-      if (errorBox.text().length !=0){
-        errorBox.text('')
-      }
-    })
-
-    //! validazione dell'input di tipo date
-    $('#date').on('change', function(){
+  //! validazione dell'input di tipo date
+  $('#date').on('change', function(){
     let date = new Date();
     let thisYear = date.getFullYear();
     let errorBox = $(this).siblings('.error');
@@ -468,18 +516,18 @@ $(document).ready(function(){
     
 
 
-    // mostra scelta condominio
-    $('#type-real-estate').change(function() {
-      console.log($('option').val())
-        if ($(this).val() == 'condo') {
-          $('.condominium').show();
-          $('.toggle-control').addClass('input-control');
-          
-        } else {
-          $('.condominium').hide();
-          $('.toggle-control').addClass('input-control');
-        }
-      });
+  // mostra scelta condominio
+  $('#type-real-estate').change(function() {
+    console.log($('option').val())
+      if ($(this).val() == 'condo') {
+        $('.condominium').show();
+        $('.toggle-control').addClass('input-control save-data');
+        
+      } else {
+        $('.condominium').hide();
+        $('.toggle-control').removeClass('input-control save-data');
+      }
+    });
 /* 
     let map;
 
