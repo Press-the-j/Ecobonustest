@@ -38,7 +38,7 @@ $(document).ready(function(){
     }
   });
 
-  function saveData(countPage){
+ /*  function saveData(countPage){
     let field=$(`fieldset[data-count-page=${countPage}] .save-data`).get();
     var arr = [];
     field.forEach((el)=>{
@@ -99,8 +99,95 @@ $(document).ready(function(){
         
       }
     }
+  } */
+  function saveData(countPage){
+    let commonField=$(`fieldset[data-count-page=${countPage}] .save-data`).get();
+    let arrField=$(`fieldset[data-count-page=${countPage}] .save-data-array`).get();
+    let ecobonus = {}
+    var arr = [];
+    var arrModal={};
+    commonField.forEach((el)=>{
+      let type = el.getAttribute('type')
+      if(el.getAttribute('type')=='checkbox'){
+        let name=el.getAttribute('name');
+        let val= el.checked ? true : false 
+        resultObj[name]=val  
+      } else {
+        let name=el.getAttribute('name');
+        let val=el.value;
+        resultObj[name]=val;
+      }
+    })
+    
+    if(arrField.length){
+      arrField.forEach(el => {
+        if(el.classList.contains('select-control')){
+          let name = el.getAttribute('name');
+          let val = el.options[el.selectedIndex].text;
+          
+          
+          ecobonus[name]={ "name" : val}
+  
+        } else if(el.classList.contains('group-save')){
+          let name = el.getAttribute('name');
+          let groupKey=el.getAttribute('data-group');
+          if (el.classList.contains('from-select')){
+            var val = el.value;
+            var element={ [name]: {"name" : val} }
+          } else {
+            let val = el.value;
+            var element ={[name] : val}
+          }
 
+          if(typeof JSON.stringify(ecobonus[groupKey]) ==='undefined'){
+            ecobonus[groupKey]= element
+          } else {
+            $.extend(ecobonus[groupKey], element)
+          }       
+        
+          
+        } else if(el.classList.contains('group-save-select')){
+          let name=el.getAttribute('name');
+          let val=el.options[el.selectedIndex].text;
+          
+          let groupKey=el.getAttribute('data-group');
+
+          var element={ [name]: {"name" : val} }
+          if(typeof JSON.stringify(ecobonus[groupKey]) ==='undefined'){
+            ecobonus[groupKey]= element
+            console.log(ecobonus[groupKey]);
+          } else {
+            $.extend(ecobonus[groupKey], element)
+            console.log(ecobonus[groupKey]);
+          }   
+
+          
+        } else {
+        
+          let name=el.getAttribute('name');
+          let val=el.value;
+          
+          ecobonus[name]=val
+        }
+      });
+    }
    
+    if (isObjectDefined(ecobonus)){
+      if(typeof JSON.stringify(resultObj["bonus110"]) ==='undefined'){
+        arr.push(ecobonus);
+        resultObj["bonus110"]=arr;
+        console.log(ecobonus);
+      } else {
+        console.log(ecobonus);
+        let updateArr = resultObj["bonus110"][0];
+        console.log(updateArr);
+        $.extend(updateArr, ecobonus);
+        resultObj["bonus110"]=[updateArr]
+        
+      }
+
+      
+    }
   }
 
   $('.getValutation').on('click', function(){
@@ -263,7 +350,6 @@ $(".next").on('click',function(e){
         remove_step.remove();
 
         //? applica la stessa logica del next, andando alla pagina successiva, settando il timer, aumentando la barra di progresso
-        resultObj['type_of_user']=type_user
         current_step.hide();
         current_step.next().show();
         //setClock();
@@ -308,10 +394,11 @@ $(".next").on('click',function(e){
                 .prop("disabled", true);
         }
         $(".sub-category").removeClass("active");
-        $(".category-" + selectedCategory).addClass("active");
-        $(".category-real-estate-btn").addClass("active");
-    });
-
+        $(".sub-category select").removeClass("group-save-select save-data-array");
+        
+        $(".category-" + selectedCategory).addClass("active ");
+        $(".category-" + selectedCategory + " select").addClass("group-save-select save-data-array");
+    })    
     //! validazioni checkbox*/
     $(".owner-title input").on("click", function () {
         $(".owner-title input").prop("checked", false);
@@ -409,15 +496,12 @@ $(".next").on('click',function(e){
         let validate=validator.element(`#${inputId}`)
         
         if(!validate){
-          console.log(element + 'flase');
           emptyInput=true
         }
       })
       selects.forEach(element=>{
         let selectId=element.getAttribute('id')
-        console.log(selectId);
         let validate = validator.element(`#${selectId}`)
-        console.log(validate);
         if(!validate){
           console.log($(`#${selectId}`).val());
           emptyInput=true
@@ -434,8 +518,10 @@ $(".next").on('click',function(e){
           if($(`fieldset[data-count-page=${fieldset_count_page}] input[data-receive-from=${id_pop_up_input}]`).length){
             
             let inputText=pop_up_input[i].value;
+            let inputValue=pop_up_input[i].getAttribute('data-value-select')
             
             $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
+            $(`input[data-receive-from=${id_pop_up_input}`).attr('data-value-select', inputValue )
             
            
           }
@@ -468,10 +554,12 @@ $(".next").on('click',function(e){
     //? dare lo stesso id delle select all'input, aggiungendo "-input"
     $(".send-val").on("change", function () {
         $(this).siblings(".error").text("");
-        let valSelect = $(this).find("option:selected").text();
+        let textSelect = $(this).find("option:selected").text();
+        let valSelect = $(this).find("option:selected").val();
         let idSelect = $(this).attr("id");
         let hiddenInput = $(`#${idSelect}-input`).get();
-        hiddenInput[0].value = valSelect;
+        hiddenInput[0].value = textSelect;
+        hiddenInput[0].setAttribute('data-value-select', valSelect)
     });
 
   //! funzione per inserire e pulire input del nome
@@ -521,13 +609,32 @@ $(".next").on('click',function(e){
     console.log($('option').val())
       if ($(this).val() == 'condo') {
         $('.condominium').show();
-        $('.toggle-control').addClass('input-control save-data');
+        $('.condominium-hide').hide()
+        $('.toggle-reverse').removeClass('select-control save-data-array')
+        $('.toggle-control').addClass('input-control save-data-array');
         
       } else {
         $('.condominium').hide();
-        $('.toggle-control').removeClass('input-control save-data');
+        $('.condominium-hide').show()
+        $('.toggle-reverse').addClass('select-control save-data-array')
+        $('.toggle-control').removeClass('input-control save-data-array');
       }
     });
+
+    function isObjectDefined (Obj) {
+      if (Obj === null || typeof Obj !== 'object' ||
+        Object.prototype.toString.call(Obj) === '[object Array]') {
+        return false
+      } else {
+        for (var prop in Obj) {
+          if (Obj.hasOwnProperty(prop)) {
+            return true
+          }
+        }
+        return JSON.stringify(Obj) !== JSON.stringify({})
+      }
+    }
+
 /* 
     let map;
 
