@@ -45,15 +45,15 @@
         <div class="head">
           <!-- div id="map-registered-office"></div> -->
           <img src="img/Logo_Ectm_Trasp.svg" alt="immagine superbonus">
-          <h1>SUPERBONUS 110&#37;</h1>
+          <h1 class="dynamic-text">SUPERBONUS 110&#37;</h1>
           <!-- timer -->
           <div class="clock">
             00:<span class="zero"></span><span class="clock_second"></span>
           </div>
-        </div>
-        <!-- Barra di Progresso -->
-        <div class="progress">
-          <div class="progress-bar progress-bar active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+          <!-- Barra di Progresso -->
+          <div class="progress">
+            <div class="progress-bar progress-bar active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
         </div>
         <form id="formComp" class="" novalidate action="" method="post" autocomplete="off">
           <fieldset data-count-page="1">
@@ -67,14 +67,14 @@
               mollit anim id est laborum. Lorem. Lorem. Lorem. Lorem.</p>
             <div class="form-group switch-wrapper">
               <label class="switch" for="privacy">
-                <input type="checkbox" id="privacy">
+                <input type="checkbox" id="privacy" class="switch-check">
                 <span class="slider"></span>
               </label>
               <span>Accetta la nostra <a class="link" href="">Privacy policy</a></span>
             </div>
             <div class="form-group switch-wrapper">
               <label class="switch" for="marketing">
-                <input type="checkbox" id="marketing" name="marketing-check" class="save-data">
+                <input type="checkbox" id="marketing" name="marketing-check" class="save-data switch-check">
                 <span class="slider"></span>
               </label>
               <span>Rimani aggiornato sulle nostre offerte <a class="link" href="">Marketing</a></span>
@@ -85,18 +85,18 @@
           </fieldset>
           <fieldset data-count-page="2" class="scegliTipo">
             <section class="scelta">
-              <div class="m-bottom-30">
+              <div class=" choose-type-user m-bottom-30 ">
                 <img class="imageType img-responsive" src="img/Icona-Azienda.svg" alt="immagine impresa">
-                <div class="btn-type-user-wrap m-top-60">
+                <div class="btn-type-user-wrap m-top-30">
                   <input type="button" value="Sei un&#39;impresa &#63;" class="type-user btn-type-user"
                     data-typeUser="business" />
                   <span data-toggle="modal" data-modal="business-infos" id="impresa-info" class="open-modal"><img
                       src="img/Punto-Interrogativo.svg" class="question" alt="Punto_Interrogativo"></span>
                 </div>
               </div>
-              <div class="scegli">
+              <div class="choose-type-user m-bottom-30 ">
                 <img class="imageType img-responsive" src="img/Icona-persona- Fisica.svg" alt="immagine impresa">
-                <div class="btn-type-user-wrap m-top-60">
+                <div class="btn-type-user-wrap m-bottom-30 m-top-30">
                   <input type="button" value="Sei una persona fisica &#63;" class="type-user btn-type-user"
                     data-typeUser="person"  />
                   <span data-toggle="modal" data-modal="person-infos" id="personaFisica-info" class="open-modal"><img class="question"
@@ -156,23 +156,22 @@
           <fieldset data-count-page="3" class="person">
             <h2>Registrazione persona fisica</h2>
             <div class="form-group">
+              <label class="control-label" for="name">Nome</label>
               <div class="row-input">
-                <label for="name">Nome</label>
                 <input data-toggle="modal" data-modal="nameModal" data-whatever="@mdo" type="text"
-                  class="form-control input-control open-modal" id="name" name="name"   data-receive-from="complete-name">
+                  class="form-control input-control open-modal" id="name" name="nome"   data-receive-from="complete-name">
               </div>
-            <input type="hidden" class="save-data" name="nome" data-receive-from="name-popup">
+            <input type="hidden" class="save-data save-name" name="nome" data-receive-from="name-popup" >
             <input type="hidden" class="save-data" name="cognome"data-receive-from="surname-popup">
             </div>
             <div class="form-group">
+              <label class="control-label" for="date">Compleanno</label>
               <div class="row-input">
-                <label for="date">Compleanno</label>
                 <input type="date" class="form-control input-control save-data" id="date" name="data-nascita">
               </div>
-              <small class="error"></small>
             </div>
             <div class="form-group">
-              <label for="genre">Sesso</label>
+              <label class="control-label"  for="genre">Sesso</label>
               <select class="form-control select-control save-data"   name="sesso" id="genre">
                 <option value="none" style="display:none;">Genere</option>
                 <option value="">Maschio</option>
@@ -182,19 +181,18 @@
               <small class="error"></small>
             </div>
             <hr>
-            <div class="info-contatto m-bottom-60">
+            <div class="info-contatto m-bottom-30">
               <small>informazioni di contatto</small>
             </div>
             <div class="form-group">
+              <label class="control-label"  for="email">Email</label>
               <div class="row-input">
-                <label for="email">Email</label>
                 <input type="email" class="form-control input-control save-data" id="email" name="email">
               </div>
-              <small class="error"></small>
             </div>
             <div class="form-group">
+              <label class="control-label" for="tel-number">Telefono</label>
               <div class="row-input">
-                <label for="tel-number">Telefono</label>
                 <input type="number" class="form-control input-control save-data"  id="tel-number" name="cellulare">
               </div>
               <small class="error"></small>
@@ -214,20 +212,18 @@
                   <div class="modal-body">
 
                     <div class="form-group">
+                      <label for="name-popup" class="control-label">Nome</label>
                       <div class="row-input">
-                        <label for="name-popup" class="control-label">Nome</label>
-                        <input type="text" class="form-control  popup-control input-popup-control send-val-name"
+                        <input type="text" class="form-control  popup-control input-popup-control person send-val-name save-name"
                           id="name-popup" name="name_popup">
                       </div>
-                      <small class="error"></small>
                     </div>
                     <div class="form-group">
+                      <label for="surname-popup" class="control-label">Cognome</label>
                       <div class="row-input">
-                        <label for="surname-popup" class="control-label">Cognome</label>
-                        <input type="text" class="form-control  popup-control input-popup-control send-val-name"
+                        <input type="text" class="form-control  popup-control input-popup-control person send-val-name"
                         name="surname_popup"  id="surname-popup">
                       </div>
-                      <small class="error"></small>
                     </div>
                     <input type="hidden" id="complete-name">
 
@@ -244,25 +240,23 @@
           <fieldset data-count-page="4" class="business">
             <h2>Registrazione impresa</h2>
             <div class="form-group">
+              <label class="control-label"for="company-name">Ragione sociale</label>
               <div class="row-input">
-                <label for="company-name">Ragione sociale</label>
                 <input type="text" class="form-control fieldset-input input-control open-modal save-data" id="company-name" name="ragione_sociale"
                   data-toggle="modal" data-modal="business-name" data-whatever="@mdo"
                   data-receive-from="company-name-popup">
               </div>
-              <small class="error"></small>
             </div>
             <div class="form-group">
+              <label class="control-label" for="pIva">Partita iva</label>
               <div class="row-input">
-                <label for="pIva">Partita iva</label>
                 <input type="number" class="form-control fieldset-input input-control open-modal save-data" id="pIva" name="pIva"
                   data-toggle="modal" data-modal="business-name" data-whatever="@mdo" data-receive-from="p-iva">
               </div>
-              <small class="error"></small>
             </div>
             <div class="form-group">
+              <label class="control-label"  for="address_registered_office">Sede legale</label>
               <div class="row-input">
-                <label for="address_registered_office">Sede legale</label>
                 <input type="text" class="form-control fieldset-input input-control open-modal"  id="address_registered_office" name="sede"
                   data-toggle="modal" data-modal="registered_office" data-whatever="@mdo">
                 <input type="hidden" name="città" class=" save-data group-save" data-receive-from="locality_registered_office" data-group-result="sede-legale">
@@ -270,41 +264,38 @@
                 <input type="hidden" class="save-data  group-save" name="indirizzo"data-receive-from="route_registered_office" data-group-result="sede-legale">
                 <input type="hidden" name="numero" class="save-data  group-save" data-receive-from="street_number_registered_office" data-group-result="sede-legale">
               </div>
-              <small class="error"></small>
             </div>
             <hr>
             <div class="info-contatto">
               <small>informazioni di contatto aziendale</small>
             </div>
             <div class="form-group">
+              <label class="control-label"  for="referent-name-registration">Referente</label>
               <div class="row-input">
-                <label for="referent-name-registration">Referente</label>
                 <input data-toggle="modal" data-modal="referent-registration" type="text"
-                  class="form-control fieldset-input input-control open-modal save-data group-save" id="referent-name-registration"
-                  data-group-result="referente" name="name"
-                  data-receive-from="name-referent-registration">
+                  class="form-control fieldset-input input-control open-modal " id="referent-name-registration"
+                   name="name"
+                  data-receive-from="referent-complete-name">
+                  <input type="hidden" class="save-data" data-receive-from="name-referent-registration" name="nome">
+                  <input type="hidden" class="save-data" name="cognome" data-receive-from="surname-referent-registration">
               </div>
-              <small class="error"></small>
             </div>
             <div class="form-group">
+              <label class="control-label"  for="referent-mail-registration">Email</label>
               <div class="row-input">
-                <label for="referent-mail-registration">Email</label>
                 <input data-toggle="modal" data-modal="referent-registration" type="email"
                   class="form-control fieldset-input input-control open-modal save-data group-save" data-group-result="referente" id="referent-mail-registration" name="email"
                   data-receive-from="email-referent-registration">
               </div>
-              <small class="error"></small>
             </div>
             <div class="form-group">
+              <label class="control-label"  for="referent-tel-registration">Telefono</label>
               <div class="row-input">
-                <label for="referent-tel-registration">Telefono</label>
                 <input data-toggle="modal" data-modal="#referent-registration" type="tel"
                   class="form-control fieldset-input input-control open-modal save-data group-save" id="referent-tel-registration" data-group-result="referente" name="tel_number"
                   data-receive-from="number-referent-registration">
               </div>
-              <small class="error"></small>
             </div>
-
             <div class="form-group">
               <label for="company_occupation" style="display: none;">occupazione</label>
               <select name="company_occupation" id="company_occupation" class="form-control select-control save-data">
@@ -314,8 +305,6 @@
                 <option>Impianti aeraulici</option>
                 <option>Impianti antincendio</option>
               </select>
-
-              <small class="error"></small>
             </div>
 
             <div class="bottoni">
@@ -332,11 +321,10 @@
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
+                      <label class="control-label" for="company-name-popup">Ragione Sociale</label>
                       <div class="row-input">
-                        <label for="company-name-popup" class="control-label">Ragione Sociale</label>
                         <input type="text" class="form-control popup-control" id="company-name-popup" name="company_name_popup" >
                       </div>
-                      <small class="error"></small>
                     </div>
                     <p>
                       RICERCA LA TUA SOCIETA'
@@ -345,8 +333,8 @@
                       informazioni societarie per te.
                     </p>
                     <div class="form-group">
+                      <label class="control-label" for="p-iva" >Partita iva</label>
                       <div class="row-input">
-                        <label for="p-iva" class="control-label">Partita iva</label>
                         <input type="text" class="form-control popup-control" id="p-iva" name="pIva_popup">
                       </div>
                       <small class="error"></small>
@@ -372,40 +360,35 @@
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
+                      <label class="control-label" for="address-registered-office">Cerca</label>
                       <div class="row-input">
-                        <label for="address-registered-office" class="control-label">Cerca</label>
                         <input type="search" class="form-control" id="address-registered-office" required
                           autocorrect="off" spellcheck="false" autocomplete="off">
                       </div>
-                      <small class="error"></small>
                     </div>
                     <div class="form-group">
+                      <label class="control-label" for="postal_code_registered_office">CAP</label>
                       <div class="row-input">
-                        <label for="postal_code_registered_office" class="control-label">CAP</label>
                         <input type="text" class="form-control popup-control" name="postal_code" id="postal_code_registered_office">
                       </div>
-                      <small class="error"></small>
                     </div>
                     <div class="form-group">
+                      <label class="control-label" for="locality_registered_office">Città</label>
                       <div class="row-input">
-                        <label for="locality_registered_office" class="control-label">Città</label>
                         <input type="text" class="form-control popup-control" name="locality" id="locality_registered_office">
                       </div>
-                      <small class="error"></small>
                     </div>
                     <div class="form-group">
+                      <label class="control-label" for="street_number_registered_office">Numero</label>
                       <div class="row-input">
-                        <label for="street_number_registered_office" class="control-label">Numero</label>
                         <input type="text" class="form-control popup-control" name="street_number" id="street_number_registered_office">
                       </div>
-                      <small class="error"></small>
                     </div>
                     <div class="form-group">
+                      <label class="control-label" for="route_registered_office">Indirizzo</label>
                       <div class="row-input">
-                        <label for="route_registered_office" class="control-label">Indirizzo</label>
                         <input type="text" class="form-control popup-control" name="route" id="route_registered_office">
                       </div>
-                      <small class="error"></small>
                     </div>
                     <div>
                       <div id="map-registered-office"></div>
@@ -430,27 +413,31 @@
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
+                      <label for="name-referent-registration" class="control-label">Nome Referente</label>
                       <div class="row-input">
-                        <label for="name-referent-registration" class="control-label">Referente</label>
-                        <input type="text" class="form-control popup-control" id="name-referent-registration" name="referent_name_registration_popup">
+                        <input type="text" class="form-control popup-control send-val-name save-name" id="name-referent-registration" name="referent_name_registration_popup">
                       </div>
-                      <small class="error"></small>
                     </div>
                     <div class="form-group">
+                      <label for="surname-referent-registration" class="control-label">Cognome Referente</label>
                       <div class="row-input">
-                        <label for="email-referent-registration" class="control-label">Email</label>
+                        <input type="text" class="form-control popup-control send-val-name" id="surname-referent-registration" name="referent_surname_registration_popup">
+                      </div>
+                    </div>
+                    <input type="hidden" id="referent-complete-name">
+                    <div class="form-group">
+                      <label for="email-referent-registration" class="control-label">Email</label>
+                      <div class="row-input">
                         <input type="text" class="form-control popup-control" id="email-referent-registration"
                         name="referent_mail_registration_popup">
                       </div>
-                      <small class="error"></small>
                     </div>
                     <div class="form-group">
+                      <label for="number-referent-registration" class="control-label">Telefono</label>
                       <div class="row-input">
-                        <label for="number-referent-registration" class="control-label">Telefono</label>
                         <input type="text" class="form-control popup-control" id="number-referent-registration"
                         name="referent_tel_registration_popup">
                       </div>
-                      <small class="error"></small>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -466,8 +453,8 @@
           <fieldset data-count-page="5" class="">
             <h2>Raccolta dati immobile impresa</h2>
             <div class="form-group">
+              <label class="control-label" for="address_estate">Dove si trova?</label>
               <div class="row-input">
-                <label for="address_estate">Dove si trova?</label>
                 <input type="search" autocomplete class="form-control input-control open-modal" name="" data-toggle="modal" data-modal="address_real_estate_modal" data-whatever="@mdo" id="address_estate">
                 <input type="hidden" class="save-data-array"  name="indirizzo"data-receive-from="route_estate" >
                 <input type="hidden" name="numero" class="save-data-array" data-receive-from="street_number_estate">
@@ -477,7 +464,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="type-real-estate">Tipologia</label>
+              <label class="control-label" for="type-real-estate">Tipologia</label>
               <select name="tipologia" id="type-real-estate" class="form-control select-control save-data-array">
                 <option style="display:none" value="none">Tipologia immobile</option>
                 <!-- <option value="uni">Villa unifamiliare</option>
@@ -491,15 +478,15 @@
             <!-- form che appare solamente se si sceglie condominio -->
 
             <div class="form-group condominium">
+              <label class="control-label" for="condominium-floors">numero di piani</label>
               <div class="row-input">
-                <label for="condominium-floors">numero di piani</label>
                 <input type="number" class="form-control toggle-control " name="piani-condominio" id="condominium-floors">
               </div>
               <small class="error"></small>
             </div>
             <div class="form-group condominium">
+              <label class="control-label" for="residential-units">numero di unità immobiliari</label>
               <div class="row-input">
-                <label for="residential-units">numero di unità immobiliari</label>
                <input type="number" class="form-control toggle-control " name="unità-condominio" id="residential-units">
               </div>
             <small class="error"></small>
@@ -507,7 +494,7 @@
             <!--  -->
 
             <div class="form-group condominium-hide">
-              <label for="square-meters">Superficie</label>
+              <label class="control-label" for="square-meters">Superficie</label>
               <select name="superficie" id="square-meters" class="form-control select-control toggle-reverse save-data-array" >
                 <option style="display:none" value="none">Dimensione superficie</option>
                 <option>fino a 50mq</option>
@@ -518,7 +505,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="state-real-estate">Stato Immobile</label>
+              <label class="control-label" for="state-real-estate">Stato Immobile</label>
               <select name="statoImmobile" id="state-real-estate" class="form-control select-control save-data-array">
                 <option style="display:none" value="none">Stato immobile</option>
                 <option>Nuovo/In Costruzione</option>
@@ -528,9 +515,8 @@
               
             </div>
             <div class="form-group">
+              <label class="control-label" for="winter-air-conditioning">Climatizzazione Invernale</label>
               <div class="row-input">
-                <label for="
-                winter-air-conditioning">Climatizzazione Invernale</label>
                 <input class="form-control input-control open-modal save-data-array from-select group-save" type="text" id="winter-air-conditioning" name="tipoGenerazione"
                 data-group="climatizzazione" data-toggle="modal" data-modal="winter-air-conditioning-popup"
                 data-receive-from="generation-heating-input">
@@ -544,8 +530,8 @@
             </div>
 
             <div class="form-group">
+              <label class="control-label" for="opaque-casing">Involucro opaco</label>
               <div class="row-input">
-                <label for="opaque-casing">Involucro opaco</label>
                 <input type="text" class="form-control input-control open-modal save-data-array from-select group-save " name="paretiEsterne" id="opaque-casing" 
                 data-group="involucroOpaco"
                   data-toggle="modal" data-modal="opaque-casing-popup" data-whatever="@mdo"
@@ -555,8 +541,8 @@
               
             </div>
             <div class="form-group">
+              <label class="control-label" for="transparent-casing">Involucro trasparente</label>
               <div class="row-input">
-                <label for="transparent-casing">Involucro trasparente</label>
                 <input type="text" class="form-control input-control open-modal save-data-array from-select group-save" name="telaio" id="transparent-casing"
                 data-group="involucroTrasp"
                   data-toggle="modal" data-modal="transparent-casing-popup" data-whatever="@mdo"
@@ -566,7 +552,7 @@
               data-group="involucroTrasp"data-receive-from="glass-type-input" >
             </div>
             <div class="form-group">
-              <label for="efficienza_energetica">Efficienza Energetica</label>
+              <label class="control-label" for="efficienza_energetica">Efficienza Energetica</label>
               <select name="efficienza_energetica" id="energy-efficiency" class="form-control select-control save-data-array">
                 <option style="display:none" value="none">Efficienza energetica</option>
                 <option>A,A+,A1-A4</option>

@@ -36,6 +36,10 @@ body {
     margin-top: 60px;
 }
 
+.m-top-30 {
+    margin-top: 30px;
+}
+
 .m-bottom-60 {
     margin-bottom: 60px;
 }
@@ -43,6 +47,7 @@ body {
 .m-bottom-30 {
     margin-bottom: 30px;
 }
+
 
 #formComp fieldset:not(:first-of-type) {
     display: none;

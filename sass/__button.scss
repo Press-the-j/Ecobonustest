@@ -11,9 +11,10 @@
 .btn-type-user {
     @include button-style($primary-color, #fff);
     margin: 0 auto;
+    padding: 10px 35px;
     margin-right: 10px;
     text-transform: none !important;
-    width: 230px;
+    width: 250px;
 }
 
 .btn-type-user:hover,
