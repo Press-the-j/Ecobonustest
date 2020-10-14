@@ -38,68 +38,34 @@ $(document).ready(function(){
     }
   });
 
- /*  function saveData(countPage){
-    let field=$(`fieldset[data-count-page=${countPage}] .save-data`).get();
-    var arr = [];
-    field.forEach((el)=>{
-      let type=el.getAttribute('type')
-      if(el.classList.contains('group-save')){
-        let groupKey=el.getAttribute('data-group-result');
-        
-        if(!arr.includes(groupKey)){
-          arr.push(groupKey)
+  const ENDPOINTS =['tipologia']
+  const URLSELECT="http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/"
+  
+  function populateSelect(){
+    ENDPOINTS.forEach((el)=>{
+     /*  $.ajax({
+        type: "GET",
+        url: URLSELECT + el,
+        crossDomain:true,
+        contentType:'application/json',
+        dataType: 'json',
+        xhrFields: {
+          'withCredentials': true 
+        },
+        success: function (response) {
+          console.log(response);
         }
-      } else if(el.classList.contains('select-control')){
-        console.log(el);
-        let name = el.getAttribute('name');
-        let val = el.options[el.selectedIndex].text;
-        console.log(name);
-        console.log(val);
-        resultObj[name]=val
-
-      } else if(type=='text' || type=='number' || type=='date') {
-      
-        let name=el.getAttribute('name');
-        let val=el.value;
-        
-        resultObj[name]=val
-      } else if(type=='checkbox'){
-        if (el.checked){
-          let name = el.getAttribute('name');
-          resultObj[name]=true
-        } else {
-          let name = el.getAttribute('name');
-          resultObj[name]=false
-        }
-      } 
-
+      }); */
+      fetch(URLSELECT + el, ).then( response => response.json()).then(data => console.log(data))
     })
+  }
+  
+  populateSelect()
+
+  function createSelect(select, data){
     
-    if (arr.length){
-      for(let i=0; i<arr.length;i++){
-        let groupKey = arr[i];
-        var elements={};
-        
+  }
 
-        let inputs=$(`fieldset[data-count-page=${countPage}] .save-data[data-group-result=${groupKey}]`).get();
-
-        inputs.forEach((el)=>{
-          if (el.classList.contains('select-control')){
-            let name=el.getAttribute('name');
-            let val = el.options[el.selectedIndex].text;
-            elements[name]=val
-          } else {
-            let name=el.getAttribute('name');
-            let val=el.value;
-            elements[name]=val
-          }
-          
-        })
-        resultObj[groupKey]=elements
-        
-      }
-    }
-  } */
   function saveData(countPage){
     let commonField=$(`fieldset[data-count-page=${countPage}] .save-data`).get();
     let arrField=$(`fieldset[data-count-page=${countPage}] .save-data-array`).get();
