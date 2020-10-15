@@ -8,7 +8,7 @@
 body {
   font-family: "Lato", sans-serif;
   color: #2c3036;
-  background-color: #ebecf0;
+  background-color: #EBECF0;
   font-size: 18px;
 }
 
@@ -51,6 +51,14 @@ body {
   margin-bottom: 30px;
 }
 
+.m-right-10 {
+  margin-right: 10px !important;
+}
+
+.m-right-20 {
+  margin-right: 20px !important;
+}
+
 #formComp fieldset:not(:first-of-type) {
   display: none;
 }
@@ -64,8 +72,9 @@ body {
 }
 
 a {
-  color: #2c3036;
+  color: #0901F5;
   font-weight: bold;
+  text-decoration: underline;
 }
 
 a:hover {
@@ -99,13 +108,14 @@ hr {
 .head {
   text-align: center;
   position: relative;
+  margin-bottom: 40px;
 }
 
 .head img {
   height: 130px;
   width: 120px;
   border-radius: 6px;
-  background: #f1f2f5;
+  background: #F1F2F5;
   -webkit-box-shadow: 6px 6px 12px #cdced0, -6px -6px 12px #ffffff;
           box-shadow: 6px 6px 12px #cdced0, -6px -6px 12px #ffffff;
 }
@@ -113,10 +123,29 @@ hr {
 .head h1 {
   color: #2c3036;
   font-size: 22px;
+  text-transform: uppercase;
   letter-spacing: 1;
   font-weight: bold;
   margin-top: 40px;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
+}
+
+.head-small-text {
+  display: none;
+}
+
+.progress-bar {
+  background-color: #0901F5;
+  border-radius: 10px;
+}
+
+.progress {
+  max-width: 480px;
+  margin: 40px auto 10px auto;
+  height: 14px;
+  -webkit-box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
+  display: none;
 }
 
 .scelta {
@@ -128,7 +157,7 @@ hr {
   position: relative;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  padding: 0 40px;
+  padding: 0 10px;
 }
 
 .seismic-valutation {
@@ -183,7 +212,7 @@ hr {
   -webkit-box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.15), inset -3px -3px 6px #ffffff;
           box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.15), inset -3px -3px 6px #ffffff;
   padding: 30px;
-  color: #2ad590;
+  color: #0901F5;
   font-weight: bold;
 }
 
@@ -254,20 +283,6 @@ hr {
   }
 }
 
-.progress-bar {
-  background-color: #46eeaa;
-  border-radius: 10px;
-}
-
-.progress {
-  max-width: 535px;
-  margin: 40px auto;
-  height: 14px;
-  -webkit-box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
-  box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
-  display: none;
-}
-
 .clock {
   display: none;
 }
@@ -293,7 +308,7 @@ hr {
   -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.12);
   box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.12);
   cursor: pointer;
-  background-color: #2ad590;
+  background-color: #0901F5;
   color: #fff;
 }
 
@@ -317,10 +332,10 @@ hr {
   -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.12);
   box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.12);
   cursor: pointer;
-  background-color: #2ad590;
+  background-color: #0901F5;
   color: #fff;
   margin: 0 auto;
-  padding: 10px 35px;
+  padding: 10px 25px;
   margin-right: 10px;
   text-transform: none !important;
   width: 250px;
@@ -328,7 +343,7 @@ hr {
 
 .btn-type-user:hover,
 .btn-next:hover {
-  background: linear-gradient(145deg, #3fd699, #4bffb6);
+  background: linear-gradient(190deg, #0901F5, #014ef5);
   color: #fff;
 }
 
@@ -342,13 +357,14 @@ hr {
   -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.12);
   box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.12);
   cursor: pointer;
-  background-color: #edeef2;
+  background-color: #F2F3F6;
   color: black;
+  font-size: 18px;
 }
 
 .btn-previous:hover {
   color: #333;
-  background-color: #e3e4e7;
+  background-color: #E5E6EC;
   border-color: #adadad;
 }
 
@@ -368,6 +384,10 @@ hr {
       -ms-flex-pack: center;
           justify-content: center;
   margin-bottom: 20px;
+}
+
+.btn-home {
+  margin-right: 0 !important;
 }
 
 .modal-content {
@@ -418,6 +438,7 @@ input.form-control:focus {
   border-color: transparent !important;
 }
 
+/* fix per autofill di google */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -433,11 +454,21 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s !important;
 }
 
-@-webkit-keyframes autofill {
-  0%, 100% {
-    color: #666;
-    background: transparent;
-  }
+/* nascondo freccette degli input con typ number */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input.input-control, .select-control, .choose-category {
+  cursor: pointer !important;
 }
 
 select.form-control option {
@@ -450,13 +481,14 @@ select::-ms-expand {
 }
 
 .control-label {
-  color: #2ad590;
+  color: #0901F5;
   display: inline-block;
   max-width: 100%;
   margin-bottom: 0 !important;
   font-weight: 700;
   width: 35%;
   margin-right: 30px;
+  padding: 5px 10px;
 }
 
 .row-input {
@@ -473,6 +505,10 @@ select::-ms-expand {
   background: #f5f5f5;
   -webkit-box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.15), inset -3px -3px 6px #ffffff;
           box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.15), inset -3px -3px 6px #ffffff;
+}
+
+.row-input input {
+  padding-left: 20px;
 }
 
 /* scelta condominio */
@@ -496,6 +532,14 @@ select::-ms-expand {
   font-weight: 700;
   width: 35%;
   margin-right: 30px;
+}
+
+.coat-checkbox {
+  margin: 0 20px 0 0 !important;
+}
+
+.coat-label {
+  margin: 0 10px 0 0 !important;
 }
 
 /* Select per categoria immobile */
@@ -569,12 +613,12 @@ select::-ms-expand {
 }
 
 input:checked + .slider {
-  background-color: #46eeaa;
+  background-color: #0901F5;
 }
 
 input:focus + .slider {
-  -webkit-box-shadow: 0 0 1px #46eeaa;
-          box-shadow: 0 0 1px #46eeaa;
+  -webkit-box-shadow: 0 0 1px #0901F5;
+          box-shadow: 0 0 1px #0901F5;
 }
 
 input:checked + .slider:before {
@@ -624,13 +668,32 @@ label.switch {
 #personaFisica-info {
   display: inline-block;
   border-radius: 50%;
-  background: #f1f2f5;
+  background: #F1F2F5;
   -webkit-box-shadow: inset 2px 2px 6px #d4d5d8, inset -5px -10px 7px #ffffff;
           box-shadow: inset 2px 2px 6px #d4d5d8, inset -5px -10px 7px #ffffff;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   position: absolute;
-  right: -25px;
+  right: -35px;
+}
+
+.label-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.label-info-cursor {
+  border: none;
+  background-color: transparent;
+  /* position: absolute;
+  right:-20px;
+  top: 50%;
+  transform: translateY(-50%); */
+  cursor: pointer;
 }
 
 .check-wrap {

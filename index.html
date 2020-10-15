@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 
+
 <html lang="it">
 
 <head>
@@ -42,6 +43,7 @@
     <!-- Pagina accettazione -->
     <div class="row">
       <div class=" col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+        
         <div class="head">
           <!-- div id="map-registered-office"></div> -->
           <img src="img/Logo_Ectm_Trasp.svg" alt="immagine superbonus">
@@ -54,17 +56,21 @@
           <div class="progress">
             <div class="progress-bar progress-bar active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
+          <small class="head-small-text">(Non manca molto! Impiegheremo al massimo 5 minuti)</small>
         </div>
         <form id="formComp" class="" novalidate action="" method="post" autocomplete="off">
           <fieldset data-count-page="1">
-            <p class="m-bottom-60">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt
-              ut
-              labore et
-              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-              ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-              mollit anim id est laborum. Lorem. Lorem. Lorem. Lorem.</p>
+            <p class="m-bottom-60">
+              È il momento di migliorare la        sicurezza antisismica di casa? Stai pensando di aumentare l’efficienza energetica dei tuoi impianti? Potresti avere i requisiti per accedere al Superbonus 110%. 
+              <br>
+              <br>
+              Il Superbonus 110% è un’agevolazione prevista dal Decreto Rilancio. Con gli incentivi del Superbonus 110%, i beneficiari possono detrarre dall’imposta lorda il 110% delle spese sostenute tra il 1° luglio 2020 e il 31 dicembre 2021 per interventi antisismici o di efficientamento energetico. 
+              <br>
+              <br>
+              Noi possiamo aiutarti a capire se hai tutti i requisiti per accedere alle agevolazioni. Ti faremo alcune domande e alla fine ti rilasceremo una relazione completa. Vuoi fare una verifica e cogliere questa occasione?
+              <br>
+              <br>
+              OK! Verifichiamo se ho i requisiti per accedere al Superbonus 110%</p>
             <div class="form-group switch-wrapper">
               <label class="switch" for="privacy">
                 <input type="checkbox" id="privacy" class="switch-check">
@@ -80,7 +86,7 @@
               <span>Rimani aggiornato sulle nostre offerte <a class="link" href="">Marketing</a></span>
             </div>
             <div class="bottoni m-top-60">
-              <input type="button" name="continua" class="next btn-next" value="continua" disabled />
+              <input type="button" name="continua" class="next btn-next btn-home" value="continua" disabled />
             </div>
           </fieldset>
           <fieldset data-count-page="2" class="scegliTipo">
@@ -88,7 +94,7 @@
               <div class=" choose-type-user m-bottom-30 ">
                 <img class="imageType img-responsive" src="img/Icona-Azienda.svg" alt="immagine impresa">
                 <div class="btn-type-user-wrap m-top-30">
-                  <input type="button" value="Sei un&#39;impresa &#63;" class="type-user btn-type-user"
+                  <input type="button" value="Rappresento un&#39;impresa &#63;" class="type-user btn-type-user"
                     data-typeUser="business" />
                   <span data-toggle="modal" data-modal="business-infos" id="impresa-info" class="open-modal"><img
                       src="img/Punto-Interrogativo.svg" class="question" alt="Punto_Interrogativo"></span>
@@ -97,7 +103,7 @@
               <div class="choose-type-user m-bottom-30 ">
                 <img class="imageType img-responsive" src="img/Icona-persona- Fisica.svg" alt="immagine impresa">
                 <div class="btn-type-user-wrap m-bottom-30 m-top-30">
-                  <input type="button" value="Sei una persona fisica &#63;" class="type-user btn-type-user"
+                  <input type="button" value="Sono una persona fisica &#63;" class="type-user btn-type-user"
                     data-typeUser="person"  />
                   <span data-toggle="modal" data-modal="person-infos" id="personaFisica-info" class="open-modal"><img class="question"
                       src="img/Punto-Interrogativo.svg" alt="Punto_Interrogativo"></span>
@@ -115,14 +121,11 @@
                   </div>
                   <div class="modal-body">
                     <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor corporis molestiae distinctio
-                      debitis
-                      aperiam repellendus est, aliquam fugit reiciendis, quam dolorum? Eum earum facilis reiciendis eos
-                      omnis aspernatur consequuntur nulla.
+                      clicca su questo pulsante se vuoi registrarti a nome di una ditta individuale o di una società, se sei un libero professionista o un amministratore di condominio
                     </p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-next" data-dismiss="modal">OK</button>
+                    <button type="button" class="btn btn-next close-modal">OK</button>
                   </div>
                 </div>
               </div>
@@ -138,14 +141,11 @@
                   </div>
                   <div class="modal-body">
                     <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor corporis molestiae distinctio
-                      debitis
-                      aperiam repellendus est, aliquam fugit reiciendis, quam dolorum? Eum earum facilis reiciendis eos
-                      omnis aspernatur consequuntur nulla.
+                      clicca su questo pulsante se vuoi registrarti a titolo personale. Se ti registri come persona fisica, lo fai come privato cittadino: non ti stai registrando come libero professionista, né come ditta individuale o società
                     </p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-next" data-dismiss="modal">OK</button>
+                    <button type="button" class="btn btn-next close-modal" >OK</button>
                   </div>
                 </div>
               </div>
@@ -154,7 +154,6 @@
 
           <!--Registrazione persona fisica-->
           <fieldset data-count-page="3" class="person">
-            <h2>Registrazione persona fisica</h2>
             <div class="form-group">
               <label class="control-label" for="name">Nome</label>
               <div class="row-input">
@@ -229,8 +228,7 @@
 
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-previous" data-dismiss="modal"
-                      data-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-previous close-modal">Annulla</button>
                     <button class="save-pop-up btn-next" type="button" class="btn btn-primary">Salva</button>
                   </div>
                 </div>
@@ -238,7 +236,6 @@
             </div>
           </fieldset>
           <fieldset data-count-page="4" class="business">
-            <h2>Registrazione impresa</h2>
             <div class="form-group">
               <label class="control-label"for="company-name">Ragione sociale</label>
               <div class="row-input">
@@ -270,7 +267,7 @@
               <small>informazioni di contatto aziendale</small>
             </div>
             <div class="form-group">
-              <label class="control-label"  for="referent-name-registration">Referente</label>
+              <label class="control-label"  for="referent-name-registration">Nome del referente</label>
               <div class="row-input">
                 <input data-toggle="modal" data-modal="referent-registration" type="text"
                   class="form-control fieldset-input input-control open-modal " id="referent-name-registration"
@@ -291,7 +288,7 @@
             <div class="form-group">
               <label class="control-label"  for="referent-tel-registration">Telefono</label>
               <div class="row-input">
-                <input data-toggle="modal" data-modal="#referent-registration" type="tel"
+                <input data-toggle="modal" data-modal="referent-registration" type="tel"
                   class="form-control fieldset-input input-control open-modal save-data group-save" id="referent-tel-registration" data-group-result="referente" name="tel_number"
                   data-receive-from="number-referent-registration">
               </div>
@@ -327,10 +324,10 @@
                       </div>
                     </div>
                     <p>
-                      RICERCA LA TUA SOCIETA'
-                      Inserendo la partita iva all'interno del campo
-                      sottostante provvederemo a inserire parte delle
-                      informazioni societarie per te.
+                      Non ricordi la ragione sociale completa?
+                      <br>
+                      <br>
+                      Inserisci qui il numero di Partita IVA (le informazioni societarie compariranno in automatico)
                     </p>
                     <div class="form-group">
                       <label class="control-label" for="p-iva" >Partita iva</label>
@@ -342,8 +339,7 @@
 
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-previous" data-dismiss="modal"
-                      data-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
                     <button class="save-pop-up btn-next" type="button" class="btn btn-primary">Salva</button>
                   </div>
                 </div>
@@ -395,8 +391,7 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-previous" data-dismiss="modal"
-                      data-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
                     <button class="save-pop-up btn-next save-address" type="button" data-save="registered_office"class="btn btn-primary"
                       >Salva</button>
                   </div>
@@ -441,8 +436,7 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-previous" data-dismiss="modal"
-                      data-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
                     <button class=" save-pop-up btn-next" type="button" class="btn btn-primary"
                       >Salva</button>
                   </div>
@@ -451,7 +445,9 @@
             </div>
           </fieldset>
           <fieldset data-count-page="5" class="">
-            <h2>Raccolta dati immobile impresa</h2>
+            <p><strong>Raccontaci di più sul tuo immobile</strong><br>
+              Più dettagli ci darai e più precisa sarà la valutazione
+            </p>
             <div class="form-group">
               <label class="control-label" for="address_estate">Dove si trova?</label>
               <div class="row-input">
@@ -575,32 +571,32 @@
                   </div>
                   <div class="modal-body">
                       <div class="form-group">
+                        <label for="locality" class="control-label">Città</label>
                         <div class="row-input">
-                          <label for="locality" class="control-label">Città</label>
                           <input type="text" class="form-control popup-control" name="locality" id="locality_estate">
                         </div>
                       </div>
                       <div class="form-group">
+                        <label for="route" class="control-label">Indirizzo</label>
                         <div class="row-input">
-                          <label for="route" class="control-label">Indirizzo</label>
                           <input type="text" class="form-control popup-control" name="route" id="route_estate">
                         </div>
                       </div>
                       <div class="form-group">
+                        <label for="street_number" class="control-label">Numero</label>
                         <div class="row-input">
-                          <label for="street_number" class="control-label">Numero</label>
                           <input type="text" class="form-control popup-control" name="street_number" id="street_number_estate">
                         </div>
                       </div>
                       <div class="form-group">
+                        <label for="province" class="control-label">Provincia</label>
                         <div class="row-input">
-                          <label for="province" class="control-label">Provincia</label>
                           <input type="text" class="form-control popup-control" name="province" id="province_estate">
                         </div>
                       </div>
                       <div class="form-group">
+                        <label for="postal_code_estate" class="control-label">CAP</label>
                         <div class="row-input">
-                          <label for="postal_code_estate" class="control-label">CAP</label>
                           <input type="text" class="form-control popup-control" name="postal_code" id="postal_code_estate">
                         </div>
                       </div>
@@ -609,8 +605,7 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-previous" data-dismiss="modal"
-                      data-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
                     <button class="save-pop-up btn-next save-address " type="button" data-save="estate" class="btn btn-primary"
                       >Salva</button>
                   </div>
@@ -628,7 +623,11 @@
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
-                      <label for="generation-heating" class="control-label">Tipologia generazione riscaldamento</label>
+                      <div class="label-wrapper">
+                        <label for="generation-heating" class="control-label">Tipologia generazione riscaldamento</label>
+                        <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generazione riscaldamento" class="label-info-cursor" data-content="Abbiamo bisogno di sapere se l’impianto di riscaldamento è autonomo o centralizzato. Nell’impianto autonomo, il generatore termico serve solamente quell’immobile. Nell’impianto centralizzato c’è un unico generatore termico per più immobili"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+                      </div>
+                      
                       <select class="form-control select-control send-val" name="generation_heating" id="generation-heating">
                         <option style="display:none" value="none">Tipologia generazione riscaldamento</option>
                         <option value="1">Impianto autonomo</option>
@@ -638,7 +637,10 @@
                     <input type="hidden" class="" data-error="generation-heating"
                       id="generation-heating-input">
                     <div class="form-group">
-                      <label for="generator-type" class="control-label">Tipologia generatore</label>
+                      <div class="label-wrapper">
+                        <label for="generator-type" class="control-label">Tipologia generatore</label>
+                        <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generatore" class="label-info-cursor" data-content="Abbiamo bisogno di conoscere il tipo di generatore termico del tuo impianto di riscaldamento, cioè il tipo di apparecchio che genera il calore nel tuo impianto. Solitamente si tratta di una caldaia o di una pompa di calore, ma se sei indeciso ti consigliamo di consultare i documenti che ti ha lasciato l’installatore"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+                      </div>
                       <select class="form-control select-control send-val" name="generator_type" id="generator-type">
                         <option style="display:none" value="none">Tipologia generatore</option>
                         <option value="1">Caldaie tradizionali</option>
@@ -647,11 +649,13 @@
                         <option value="4">Caldaie a biomassa</option>
                         <option value="5">Caldaie a pompa di calore</option>
                       </select>
-                      <small class="error"></small>
                     </div>
                     <input data-error="generator-type" class="" type="hidden" id="generator-type-input">
                     <div class="form-group">
-                      <label for="terminal-type" class="control-label">Tipologia terminale emissione</label>
+                      <div class="label-wrapper">
+                        <label for="terminal-type" class="control-label">Tipologia terminale emissione</label>
+                        <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia terminale emissione" class="label-info-cursor" data-content="Abbiamo bisogno di sapere che tipo di terminali sono collegati al tuo impianto di riscaldamento. I terminali sono gli apparecchi che distribuiscono il calore negli ambienti dell’immobile. Per esempio, i terminali più comuni sono i termosifoni"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+                      </div>
                       <select class="form-control select-control send-val" name="terminal_type" id="terminal-type">
                         <option style="display:none" value="none">Tipologia terminale emissione</option>
                         <option value="1">Radiatore</option>
@@ -664,8 +668,7 @@
                     <input type="hidden" class="" data-error="terminal-type" id="terminal-type-input">
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-previous" data-dismiss="modal"
-                      data-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
                     <button class="save-pop-up btn-next" type="button" class="btn btn-primary">Salva</button>
                   </div>
                 </div>
@@ -683,7 +686,10 @@
                   <div class="modal-body">
 
                     <div class="form-group">
-                      <label for="external-walls" class="control-label">Pareti verso l'esterno</label>
+                      <div class="label-wrapper">
+                        <label for="external-walls" class="control-label">Pareti verso l'esterno</label>
+                        <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generazione riscaldamento" class="label-info-cursor" data-content="Abbiamo bisogno di sapere come sono state costruite le pareti più esterne dell’edificio in cui si trova l’immobile, quale sia la loro tipologia edilizia. Le pareti esterne corrispondono a tutti gli effetti alle facciate di una villa o del palazzo in cui si trova un appartamento"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+                      </div>
                       <select class="form-control select-control send-val" name="external_walls" id="external-walls">
                         <option style="display:none" value="none">Tipo di parete verso l'esterno</option>
                         <option value="1">Muratura di mattoni pieni intonacati sulle due facce</option>
@@ -696,15 +702,17 @@
                     </div>
                     <input type="hidden" class="popup-control" data-error="external-walls" id="external-walls-input">
                     <div class="form-group">
-                      <label for="coat">Le pareti sono gia state isolate mediante cappotto?</label>
-                      <input type="checkbox" id="coat">
+                      <div class="label-wrapper">
+                        <label for="coat" class="m-right-10 coat-label">Le pareti sono gia state isolate mediante cappotto?</label>
+                        <input type="checkbox" id="coat" class="coat-checkbox m-right-20">
+                        <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generazione riscaldamento" class="label-info-cursor" data-content="Il capotto termico è formato da elementi edilizi prefabbricati e crea un vero e proprio guscio protettivo e isolante per l’edificio. Il rivestimento del cappotto termico è invisibile all’esterno, ma ha il vantaggio di ridurre la dispersione termica con un conseguente risparmio di energia e risorse"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+                      </div>
                     </div>
                     <input type="hidden"
                       id="coat_input" value="false">
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-previous" data-dismiss="modal"
-                      data-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
                     <button class="save-pop-up btn-next" type="button" class="btn btn-primary">Salva</button>
                   </div>
                 </div>
@@ -749,8 +757,7 @@
                   </div>
                   <input type="hidden" class="popup-control" data-error="glass-type" id="glass-type-input">
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-previous" data-dismiss="modal"
-                      data-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
                     <button class="save-pop-up btn-next" type="button" class="btn btn-primary">Salva</button>
                   </div>
                 </div>

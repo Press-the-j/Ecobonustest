@@ -1,21 +1,42 @@
 .head {
     text-align: center;
     position: relative;
+    margin-bottom: 40px;
 }
 
 .head img {
     height: 130px;
     width: 120px;
     border-radius: 6px;
-    background: #f1f2f5;
+    background: $background-logo;
     box-shadow: 6px 6px 12px #cdced0, -6px -6px 12px #ffffff;
 }
 
 .head h1 {
     color: #2c3036;
     font-size: 22px;
+    text-transform: uppercase;
     letter-spacing: 1;
     font-weight: bold;
     margin-top: 40px;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
+}
+
+.head-small-text{
+  display:none;
+}
+
+.progress-bar {
+  background-color: $primary-color;
+  border-radius: 10px;
+}
+
+.progress {
+  max-width: 480px;
+  margin:40px auto 10px auto;
+  height: 14px;
+  -webkit-box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
+  display: none;
 }

@@ -43,18 +43,24 @@ $(document).ready(function(){
   const URLSELECT="http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/"
   
   function populateSelect(){
-  $.ajax({
-    type: "GET",
-    url: URLSELECT + 'tipologia',
-    
-    dataType: "application/json",
-    success: function (response) {
-      console.log(response);
-    }
-  });
-  } 
+    $.ajax({
+      type: "GET",
+      url: URLSELECT + 'tipologia',
+      success: function (response) {
+        console.log(response._embedded);
+      },
+      error: function(err){
+        console.log(err);
+      }
+    });
+  }
   
-  populateSelect()
+  
+  
+  $('.label-info-cursor').on('click', function(){
+    $(this).popover('toggle');
+  })
+  
 
   function createSelect(select, data){
     
@@ -130,12 +136,9 @@ $(document).ready(function(){
       if(typeof JSON.stringify(resultObj["bonus110"]) ==='undefined'){
         arr.push(ecobonus);
         resultObj["bonus110"]=arr;
-        console.log(ecobonus);
       } else {
       //? altrimenti, inserisco gli elementi nell'array
-        console.log(ecobonus);
         let updateArr = resultObj["bonus110"][0];
-        console.log(updateArr);
         $.extend(updateArr, ecobonus);
         resultObj["bonus110"]=[updateArr]
       }     
@@ -146,11 +149,9 @@ $(document).ready(function(){
   function setDynamicText(countPage){
     let fieldText = $('.dynamic-text');
     let count =countPage.toString()
-    
-    console.log(count);
     switch (count) {
       case '1' :
-        fieldText.text('Benvenuto!');
+        fieldText.text('Iniziamo!!');
         break;
       case '2' :
         fieldText.text('Piacere!');
@@ -218,6 +219,7 @@ $(document).ready(function(){
       next_step.show();
       setProgressBar(++current);
       $(".progress").css("display", "block");
+      $(".head-small-text").css("display", "block");
       $(".error").text("");
     //}
   });
@@ -250,12 +252,18 @@ $(document).ready(function(){
           clone_step = "";
       });
   
-  //? fix per il focus degli switch nella homepage
+  //? fix per il focus 
   $('.switch-check').on('focusin', function(){
     setTimeout(function(){
       document.activeElement.blur();
     }, 1)
   })    
+
+  $('input[data-modal]').on('focusin', function(){
+    setTimeout(function(){
+      document.activeElement.blur();
+    }, 1)
+  })
 
   function setProgressBar(curStep){
     steps=$("fieldset").length; 
@@ -562,6 +570,10 @@ $(document).ready(function(){
     let modal = $(this).data('modal');
     $(`#${modal}`).modal('show');
     $('body').css('overflow','hidden')
+  })
+
+  $('.close-modal').on('click', function(){
+    $('.close').click()
   })
 
   $('.close').on('click' , function () {

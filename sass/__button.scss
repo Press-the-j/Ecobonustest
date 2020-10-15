@@ -11,7 +11,7 @@
 .btn-type-user {
     @include button-style($primary-color, #fff);
     margin: 0 auto;
-    padding: 10px 35px;
+    padding: 10px 25px;
     margin-right: 10px;
     text-transform: none !important;
     width: 250px;
@@ -19,17 +19,18 @@
 
 .btn-type-user:hover,
 .btn-next:hover {
-    background: linear-gradient(145deg, #3fd699, #4bffb6);
+    background: linear-gradient(190deg, $primary-color, $secondary-color);
     color: #fff;
 }
 
 .btn-previous {
-    @include button-style(#edeef2, black);
+    @include button-style($previous-btn, black);
+    font-size: 18px;
 }
 
 .btn-previous:hover {
     color: #333;
-    background-color: #e3e4e7;
+    background-color: $previous-btn-hover;
     border-color: #adadad;
 }
 
@@ -43,4 +44,8 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+}
+
+.btn-home{
+  margin-right: 0 !important;
 }

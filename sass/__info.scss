@@ -10,16 +10,31 @@
     top: 50%;
     right: 50%;
     transform: translate(50%, -50%);
+   
 }
 
 #impresa-info,
 #personaFisica-info {
     display: inline-block;
     border-radius: 50%;
-    background: #f1f2f5;
+    background: $background-logo;
     box-shadow: inset 2px 2px 6px #d4d5d8, inset -5px -10px 7px #ffffff;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     position: absolute;
-    right: -25px;
+    right: -35px;
+}
+
+.label-wrapper{
+  display: flex;
+  align-items: center;
+}
+.label-info-cursor{
+  border:none;
+  background-color: transparent;
+  /* position: absolute;
+  right:-20px;
+  top: 50%;
+  transform: translateY(-50%); */
+  cursor: pointer;
 }

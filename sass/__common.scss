@@ -7,7 +7,7 @@
 body {
     font-family: "Lato", sans-serif;
     color: #2c3036;
-    background-color: #ebecf0;
+    background-color: $background;
     font-size: 18px;
 }
 
@@ -29,6 +29,7 @@ body {
     height: 300px;
     z-index: 10;
 }
+
 .no-wrap{
   white-space: nowrap;
 }
@@ -48,6 +49,13 @@ body {
     margin-bottom: 30px;
 }
 
+.m-right-10 {
+  margin-right: 10px !important;
+}
+.m-right-20 {
+  margin-right: 20px !important;
+}
+
 
 #formComp fieldset:not(:first-of-type) {
     display: none;
@@ -62,8 +70,9 @@ body {
 }
 
 a {
-    color: #2c3036;
+    color: $primary-color;
     font-weight: bold;
+    text-decoration: underline;
 }
 
 a:hover {
