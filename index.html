@@ -461,13 +461,8 @@
             </div>
             <div class="form-group">
               <label class="control-label" for="type-real-estate">Tipologia</label>
-              <select name="tipologia" id="type-real-estate" class="form-control select-control save-data-array">
+              <select data-select="tipologia"name="tipologia" id="type-real-estate" class="form-control select-control save-data-array">
                 <option style="display:none" value="none">Tipologia immobile</option>
-                <!-- <option value="uni">Villa unifamiliare</option>
-                <option value="pluri">Villa plurifamiliare</option>
-                <option value="schiera">Villetta a schiera</option>
-                <option value="appart">Appartamento all'interno di un condominio</option>
-                <option value="condo">Stabile condominiale</option> -->
               </select>
             </div>
 
@@ -502,11 +497,9 @@
             </div>
             <div class="form-group">
               <label class="control-label" for="state-real-estate">Stato Immobile</label>
-              <select name="statoImmobile" id="state-real-estate" class="form-control select-control save-data-array">
+              <select data-select="stato-immobile"name="statoImmobile" id="state-real-estate" class="form-control select-control save-data-array">
                 <option style="display:none" value="none">Stato immobile</option>
-                <option>Nuovo/In Costruzione</option>
-                <option>Buono/Abitabile</option>
-                <option>Da ristrutturare</option>
+                
               </select>
               
             </div>
@@ -628,10 +621,9 @@
                         <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generazione riscaldamento" class="label-info-cursor" data-content="Abbiamo bisogno di sapere se l’impianto di riscaldamento è autonomo o centralizzato. Nell’impianto autonomo, il generatore termico serve solamente quell’immobile. Nell’impianto centralizzato c’è un unico generatore termico per più immobili"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
                       </div>
                       
-                      <select class="form-control select-control send-val" name="generation_heating" id="generation-heating">
+                      <select data-select="tipo-generazione" class="form-control select-control send-val" name="generation_heating" id="generation-heating">
                         <option style="display:none" value="none">Tipologia generazione riscaldamento</option>
-                        <option value="1">Impianto autonomo</option>
-                        <option value="2">Impianto centralizzato</option>
+                        
                       </select>
                     </div>
                     <input type="hidden" class="" data-error="generation-heating"
@@ -641,13 +633,9 @@
                         <label for="generator-type" class="control-label">Tipologia generatore</label>
                         <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generatore" class="label-info-cursor" data-content="Abbiamo bisogno di conoscere il tipo di generatore termico del tuo impianto di riscaldamento, cioè il tipo di apparecchio che genera il calore nel tuo impianto. Solitamente si tratta di una caldaia o di una pompa di calore, ma se sei indeciso ti consigliamo di consultare i documenti che ti ha lasciato l’installatore"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
                       </div>
-                      <select class="form-control select-control send-val" name="generator_type" id="generator-type">
+                      <select data-select="tipo-generatore"class="form-control select-control send-val" name="generator_type" id="generator-type">
                         <option style="display:none" value="none">Tipologia generatore</option>
-                        <option value="1">Caldaie tradizionali</option>
-                        <option value="2">Caldaie a condensazione</option>
-                        <option value="3">Caldaie a legna</option>
-                        <option value="4">Caldaie a biomassa</option>
-                        <option value="5">Caldaie a pompa di calore</option>
+                        
                       </select>
                     </div>
                     <input data-error="generator-type" class="" type="hidden" id="generator-type-input">
@@ -656,14 +644,10 @@
                         <label for="terminal-type" class="control-label">Tipologia terminale emissione</label>
                         <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia terminale emissione" class="label-info-cursor" data-content="Abbiamo bisogno di sapere che tipo di terminali sono collegati al tuo impianto di riscaldamento. I terminali sono gli apparecchi che distribuiscono il calore negli ambienti dell’immobile. Per esempio, i terminali più comuni sono i termosifoni"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
                       </div>
-                      <select class="form-control select-control send-val" name="terminal_type" id="terminal-type">
+                      <select data-select="radiatore" class="form-control select-control send-val" name="terminal_type" id="terminal-type">
                         <option style="display:none" value="none">Tipologia terminale emissione</option>
-                        <option value="1">Radiatore</option>
-                        <option value="2">Ventilconvettore</option>
-                        <option value="3">Sistema radiante ad area -pavimento o soffitto-</option>
-                        <option value="4">Unità per il condizionamento dell'aria(Split)</option>
+                        
                       </select>
-                      <small class="error"></small>
                     </div>
                     <input type="hidden" class="" data-error="terminal-type" id="terminal-type-input">
                   </div>
@@ -690,15 +674,10 @@
                         <label for="external-walls" class="control-label">Pareti verso l'esterno</label>
                         <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generazione riscaldamento" class="label-info-cursor" data-content="Abbiamo bisogno di sapere come sono state costruite le pareti più esterne dell’edificio in cui si trova l’immobile, quale sia la loro tipologia edilizia. Le pareti esterne corrispondono a tutti gli effetti alle facciate di una villa o del palazzo in cui si trova un appartamento"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
                       </div>
-                      <select class="form-control select-control send-val" name="external_walls" id="external-walls">
+                      <select data-select="pareti-esterne" class="form-control select-control send-val" name="external_walls" id="external-walls">
                         <option style="display:none" value="none">Tipo di parete verso l'esterno</option>
-                        <option value="1">Muratura di mattoni pieni intonacati sulle due facce</option>
-                        <option value="2">Muratura di mattoni semipieni o tufo</option>
-                        <option value="3">Pannelli prefabbricati in calcestruzzo</option>
-                        <option value="4">Parete a cassa vuota con mattoni forati</option>
-                        <option value="5">Altro</option>
+                        
                       </select>
-                      <small class="error"></small>
                     </div>
                     <input type="hidden" class="popup-control" data-error="external-walls" id="external-walls-input">
                     <div class="form-group">
@@ -731,26 +710,18 @@
 
                     <div class="form-group">
                       <label for="frame-type" class="control-label">Tipologia telaio infisso</label>
-                      <select class="form-control select-control send-val" name="frame_type" id="frame-type">
+                      <select data-select="telaio" class="form-control select-control send-val" name="frame_type" id="frame-type">
                         <option style="display:none" value="none">Tipologia telaio</option>
-                        <option value="1">Telaio in legno</option>
-                        <option value="2">Telaio in PVC</option>
-                        <option value="3">Telaio in alluminio a taglio termico</option>
-                        <option value="4">Telaio in alluminio + legno</option>
-                        <option value="5">Telaio in alluminio a giunto aperto</option>
+                        
                       </select>
                       <small class="error"></small>
                     </div>
                     <input type="hidden" class="popup-control" data-error="frame-type"  id="frame-type-input">
                     <div class="form-group">
                       <label for="glass-type" class="control-label">Tipologia vetro infisso</label>
-                      <select class="form-control select-control send-val" name="glass_type" id="glass-type">
+                      <select data-select="vetro" class="form-control select-control send-val" name="glass_type" id="glass-type">
                         <option style="display:none" value="none">Tipologia vetro</option>
-                        <option value="1">Vetro Singolo</option>
-                        <option value="2">Vetrocamera</option>
-                        <option value="3">Vetrocamera basso-emissivo</option>
-                        <option value="4">Triplo vetro</option>
-                        <option value="5">Triplo vetro basso-emissivo</option>
+                        
                       </select>
                       <small class="error"></small>
                     </div>

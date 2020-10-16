@@ -39,22 +39,32 @@ $(document).ready(function(){
     }
   });
 
-  const ENDPOINTS =['tipologia']
+  const ENDPOINTSC =['tipologia', 'stato-immobile', 'vetro', 'radiatore', 'tipo-generatore', 'tipo-generazione', 'pareti-esterne', 'telaio']
+  const ENDPOINTS =['tipologia', 'stato-immobile','tipo-generazione','tipo-generatore','radiatore','pareti-esterne','telaio', 'vetro']
   const URLSELECT="http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/"
   
+  
   function populateSelect(){
-    $.ajax({
-      type: "GET",
-      url: URLSELECT + 'tipologia',
-      success: function (response) {
-        console.log(response._embedded);
-      },
-      error: function(err){
-        console.log(err);
-      }
-    });
+    ENDPOINTS.forEach((el)=>{
+      $.ajax({
+        type: "GET",
+        url: URLSELECT + el,
+        success: function (response) {
+          let key;
+          for (var k in response._embedded) {
+            key=k;
+            break
+          }
+          createSelect(response._embedded[key], el)          
+        },
+        error: function(err){
+          console.log(err);
+        }
+      });
+    })
   }
   
+  populateSelect()
   
   
   $('.label-info-cursor').on('click', function(){
@@ -62,8 +72,15 @@ $(document).ready(function(){
   })
   
 
-  function createSelect(select, data){
+  function createSelect(options, select){
     
+    options.forEach((el)=>{
+      let text = el.name;
+      let option = document.createElement('option');
+          option.setAttribute('value', text);
+          option.textContent = text
+      document.querySelector(`[data-select=${select}]`).appendChild(option);
+    })
   }
 
   function saveData(countPage){
@@ -583,9 +600,10 @@ $(document).ready(function(){
 
 
     // mostra scelta condominio
-  $('#type-real-estate').change(function() {
-    console.log($('option').val())
-    if ($(this).val() == 'condo') {
+  $('#type-real-estate').on('change',function() {
+    console.log($(this).val())
+    if ($(this).val() === 'Stabile condominiale') {
+      console.log('eccolo');
       $('.condominium').show();
       $('.condominium-hide').hide()
       $('.toggle-reverse').removeClass('select-control save-data-array')
