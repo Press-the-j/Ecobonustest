@@ -145,6 +145,26 @@ $(document).ready(function(){
             $.extend(ecobonus[groupKey], element)
           }
           //? se sono input normali, semplicemente prendo il valore e lo salvo        
+        } else if(el.classList.contains('save-checkbox')) {
+          if(el.checked && !el.classList.contains('multiple-check')){
+            let val=el.parentNode.querySelector('span').innerHTML;
+            ecobonus[name]=val;
+          } else if(el.checked && el.classList.contains('multiple-check')){
+            let val=el.parentNode.querySelector('span').innerHTML;
+            
+
+            if(typeof JSON.stringify(ecobonus[name]) ==='undefined'){
+               
+              let element={ ['opzione-1'] : val }
+              ecobonus[name]= element
+
+            } else {
+              let count=Object.keys(ecobonus[name]).length + 1;
+              let element={ ['opzione-' + count] : val }
+              $.extend(ecobonus[name], element)
+            }
+            
+          }
         } else {
           let val=el.value;
           ecobonus[name]=val
@@ -261,8 +281,6 @@ $(document).ready(function(){
 
   function checkPage(countPage) {
     let count = countPage.toString();
- 
-    
    
     switch(count) {
       case '7' :
