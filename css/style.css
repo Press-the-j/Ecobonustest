@@ -134,18 +134,34 @@ hr {
   display: none;
 }
 
+.progress-wrap {
+  max-width: 480px;
+  margin: auto;
+  display: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 20px;
+}
+
 .progress-bar {
   background-color: #0901F5;
   border-radius: 10px;
 }
 
 .progress {
-  max-width: 480px;
-  margin: 40px auto 10px auto;
+  width: 100%;
   height: 14px;
+  margin-bottom: 0 !important;
   -webkit-box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
   box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
-  display: none;
+}
+
+.glyphicon-flag {
+  color: #0901F5;
 }
 
 .scelta {
@@ -158,6 +174,10 @@ hr {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   padding: 0 10px;
+}
+
+.title-select strong {
+  margin-right: 30px;
 }
 
 .seismic-valutation {

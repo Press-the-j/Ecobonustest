@@ -53,10 +53,13 @@
             00:<span class="zero"></span><span class="clock_second"></span>
           </div>
           <!-- Barra di Progresso -->
-          <div class="progress">
-            <div class="progress-bar progress-bar active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="progress-wrap">
+            <div class="progress">
+              <div class="progress-bar progress-bar active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <span class="glyphicon glyphicon-flag"></span>
           </div>
-          <small class="head-small-text">(Non manca molto! Impiegheremo al massimo 5 minuti)</small>
+          <small class="head-small-text"></small>
         </div>
         <form id="formComp" class="" novalidate action="" method="post" autocomplete="off">
           <fieldset data-count-page="1">
@@ -779,8 +782,9 @@
           </fieldset>
           <fieldset data-count-page="7">
             <div class="title-select">
-              <strong>Categoria catastale dell'immobile</strong><span class="glyphicon glyphicon-question-sign"></span>
-              <p>qual'è la categoria catastale del tuo immobile?</p>
+              <strong>Categoria catastale dell'immobile</strong>
+              <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Categoria catastale dell’immobile" class="label-info-cursor" data-content="Ogni immobile è inserito in una categoria catastale. Grazie alle categorie catastali possiamo determinare la rendita di un immobile e le relative tasse da pagare per quella tipologia. Puoi leggere la categoria nella visura catastale del tuo immobile, oppure scegliere l’opzione che più rispecchia il tuo caso"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+              <p>Qual'è la categoria catastale del tuo immobile?</p>
             </div>
             <div class="form-group category-real-estate active">
               <select class="form-control choose-category save-data-array group-save-select" autocomplete="false" data-group="categoriaCatastale" name="categoria">
@@ -872,17 +876,18 @@
             </div>
           </fieldset>
           <fieldset class="test" data-count-page="8">
-            <strong>Estraneità all'attività imprenditoriale</strong><span
-              class="glyphicon glyphicon-question-sign"></span>
-            <p>Il beneficiario dell'intervento è una persona fisica che agisce in veste di privato e quindi estraneo ad
-              attività imprenditoriale e/o professionale?</p>
+            <div class="title-select">
+              <strong>Estraneità all'attività imprenditoriale</strong><a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Requisiti del beneficiario" class="label-info-cursor" data-content="una/un imprenditrice/imprenditore o una libera/libero professionista esercitano attività economiche organizzate che hanno come scopo la produzione e/o lo scambio di beni o servizi"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+              <p>Il beneficiario dell'intervento è una persona fisica che agisce in veste di privato e quindi estraneo ad
+                attività imprenditoriale e/o professionale?</p>
+            </div>
             <div class="bottoni">
               <input type="button" class="btn nope next btn-previous btn-next" value="No">
               <input type="button" class="btn next btn-next" value="Si">
             </div>
           </fieldset>
           <fieldset data-count-page="9">
-            <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
+            <strong>Qualificazione dell'intervento</strong>
             <p>Rientri all'interno di quale delle seguenti categorie?</p>
             <div class="form-group category-user">
               <div class="checkbox check-wrap">
@@ -928,7 +933,7 @@
             </div>
           </fieldset>
           <fieldset class="intervantion-qualification" data-count-page="10">
-            <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
+            <strong>Qualificazione dell'intervento</strong>
             <p>Nel periodo tra il 1 luglio 2020 e il 31 dicembre 2021 hai sostenuto/sosterrai una spesa relativa ad uno
               dei seguenti interventi trainanti?(sono possibili più risposte)</p>
             <div class="form-group intervention-trainant">
@@ -939,25 +944,25 @@
                 <span>INTERVENTI ANTISISMICI di cui
                   ai commi da 1-bis a 1-septies dell'articolo 16 del decreto-legge n. 63 del 2013, anche comprensivo di
                   interventi di DEMOLIZIONE E RICOSTRUZIONE di cui all'articolo 3. Co. 1 lett. d) del DPR
-                  380/2001</span><span class="glyphicon glyphicon-question-sign"></span>
+                  380/2001</span>
               </div>
               <div class="checkbox check-wrap">
                 <input type="checkbox" value="" id="check14">
                 <label for="check14"></label>
                 <span>RIQUALIFICAZIONE ENERGETICA: sostituzione degli IMPIANTI DI
                   CLIMATIZZAZIONE INVERNALE ESISTENTI con impianti per il riscaldamento, il raffrescamento o la
-                  fornitura di acqua</span><span class="glyphicon glyphicon-question-sign"></span>
+                  fornitura di acqua</span>
               </div>
               <div class="checkbox check-wrap">
                 <input type="checkbox" value="" id="check15">
                 <label for="check15"></label>
-                <span>INTERVENTI c.d TRAINATI</span><span class="glyphicon glyphicon-question-sign"></span>
+                <span>INTERVENTI c.d TRAINATI</span>
               </div>
               <div class="checkbox check-wrap">
                 <input type="checkbox" class="none-check" id="check16">
                 <label for="check16"></label>
                 <span>nessuna delle precedentinessuna delle precedenti</span>
-                <span class="glyphicon glyphicon-question-sign"></span>
+                
               </div>
             </div>
             <div class="bottoni">
@@ -966,7 +971,7 @@
             </div>
           </fieldset>
           <fieldset data-count-page="11" class="sismic-intervention">
-            <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
+            <strong>Qualificazione dell'intervento</strong>
             <p>l'unità immobiliare su cui hai effettuato / effettuari l'intervento è situata nelle zone sismiche 1,2 e 3
               di cui all'ordinanza del Presidente del Consiglio dei ministri n.3274 del 20 marzo 2003?</p>
             <p>Confermi l'indirizzo dell'immobile?</p>
@@ -989,7 +994,7 @@
             </div>
           </fieldset>
           <fieldset data-count-page="12">
-            <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
+            <strong>Qualificazione dell'intervento</strong>
             <p>Gli immobili su cui effettuare l'intervento trainato sono sottoposti alla tutela disciplinatadal codice
               dei beni culturali e del paesaggio o per effetto di regolamenti edilizi, urbanistici e ambientali e
               pertanto sugli stessi non possono essere realizzati interventi trainanti?</p>
@@ -999,7 +1004,7 @@
             </div>
           </fieldset>
           <fieldset data-count-page="13">
-            <strong>Qualificazione dell'intervento</strong><span class="glyphicon glyphicon-question-sign"></span>
+            <strong>Qualificazione dell'intervento</strong>
             <p>Hai gà usufruito di interventi per l'efficientamento energetico su almeno altre 2 unità immobiliari?(non
               rientrano nel computo delle 2 unità immobiliari gli interventi effettuati sulle parti comuni del
               condominio)</p>

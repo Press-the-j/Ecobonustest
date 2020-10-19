@@ -1,6 +1,4 @@
 
-
-
 $(document).ready(function(){
  
   
@@ -27,8 +25,8 @@ $(document).ready(function(){
   var nameUser;
 
   $.getScript( "js/validation.js", function( data ) {
-  });
-   
+  }); 
+
   $.ajax({
     type: "GET",
     url: "../data/classificazione-sismica-2020.csv",
@@ -39,7 +37,6 @@ $(document).ready(function(){
     }
   });
 
-  const ENDPOINTSC =['tipologia', 'stato-immobile', 'vetro', 'radiatore', 'tipo-generatore', 'tipo-generazione', 'pareti-esterne', 'telaio']
   const ENDPOINTS =['tipologia', 'stato-immobile','tipo-generazione','tipo-generatore','radiatore','pareti-esterne','telaio', 'vetro']
   const URLSELECT="http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/"
   
@@ -68,6 +65,11 @@ $(document).ready(function(){
   
   
   $('.label-info-cursor').on('click', function(){
+    if($(window).length < 480){
+      $(this).attr('data-placement', 'bottom');
+    } else {
+      $(this).attr('data-placement', 'right');
+    }
     $(this).popover('toggle');
   })
   
@@ -165,16 +167,28 @@ $(document).ready(function(){
 
   function setDynamicText(countPage){
     let fieldText = $('.dynamic-text');
-    let count =countPage.toString()
-    switch (count) {
-      case '1' :
-        fieldText.text('Iniziamo!!');
-        break;
+    let fieldSmallText = $('.head-small-text');
+    let count =parseInt(countPage) + 1
+    console.log(count);
+    switch (count.toString()) {
       case '2' :
+        fieldText.text('Iniziamo!!');
+        fieldSmallText.text('(Per la registrazione impiegheremo circa 5 minuti')
+        break;
+      case '3' :
+        fieldText.text('Piacere!');
+        fieldSmallText.text('(Proseguiamo, impiegheremo circa 5 minuti)');
+        break;
+      case '4' : 
         fieldText.text('Piacere!');
         break;
+      case '5' :
+        fieldSmallText.text('(Entriamo nel vivo della richiesta. impiegeheremo circa 5 minuti)');
+        fieldText.text('Ciao '+ nameUser +"!");
+        break;
       default:
-        fieldText.text('Ciao '+ nameUser +"!")
+        fieldSmallText.text('(Passiamo agli ultimi requisiti, impiegheremo 5 minuti)')
+        fieldText.text('Ciao '+ nameUser +"!");
         break  
     }
   }
@@ -235,7 +249,7 @@ $(document).ready(function(){
       current_step.hide();
       next_step.show();
       setProgressBar(++current);
-      $(".progress").css("display", "block");
+      $(".progress-wrap").css("display", "flex");
       $(".head-small-text").css("display", "block");
       $(".error").text("");
     //}
@@ -261,6 +275,11 @@ $(document).ready(function(){
           
           setDynamicText(fieldset_count_page - 1);
           setProgressBar(--current);
+          for (let key in resultObj) {
+            if (key !== 'marketing-check'){
+              delete resultObj[key]
+            }
+          }
           clone_step.forEach((element) => {
               let el_page = element.getAttribute("data-count-page") - 1;
               $("fieldset[data-count-page='" + el_page + "']").after(element);
