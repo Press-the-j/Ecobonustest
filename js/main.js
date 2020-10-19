@@ -26,6 +26,8 @@ $(document).ready(function(){
   var resultObj={}
   var nameUser;
 
+  var typo;
+  var arrayControlCheckbox=["stabile condominiale", "appartamento all’interno di un condominio", "villa plurifamiliare"]
   $.getScript( "js/validation.js", function( data ) {
   }); 
 
@@ -41,7 +43,8 @@ $(document).ready(function(){
 
   const ENDPOINTS =['tipologia', 'stato-immobile','tipo-generazione','tipo-generatore','radiatore','pareti-esterne','telaio', 'vetro']
   const URLSELECT="http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/"
-  
+
+  populateSelect()
   
   function populateSelect(){
     ENDPOINTS.forEach((el)=>{
@@ -61,10 +64,7 @@ $(document).ready(function(){
         }
       });
     })
-  }
-  
-  populateSelect()
-  
+  }  
   
   $('.label-info-cursor').on('click', function(){
     if($(window).length < 480){
@@ -240,9 +240,11 @@ $(document).ready(function(){
     let control=controlInput(fieldset_count_page);
     //if(control){
       
-      if(fieldset_count_page==10){
+      checkPage(fieldset_count_page)
+
+      /* if(fieldset_count_page==9){
         checkSismic(fieldset_count_page);
-      }
+      } */
       setDynamicText(fieldset_count_page);
       saveData(fieldset_count_page);
       let result = JSON.stringify(resultObj);
@@ -256,6 +258,37 @@ $(document).ready(function(){
       $(".error").text("");
     //}
   });
+
+  function checkPage(countPage) {
+    let count = countPage.toString();
+ 
+    
+   
+    switch(count) {
+      case '7' :
+        if(type_user==='person'){
+          console.log('entrato');
+          if (arrayControlCheckbox.includes(typo)){
+            let checkToDisable=[4,5,6,7];
+            disbaleCheck('check', checkToDisable);
+          } else {
+            let checkToDisable=[1,2,4,5,6,7];
+            disbaleCheck('check', checkToDisable)
+          }
+        }
+        break;
+      case '9' : 
+        checkSismic(countPage);
+        break;
+    }
+
+  }
+
+  function disbaleCheck(select, arrNumb) {
+    arrNumb.forEach((el)=>{
+      $(`#${select}-${el}`).closest('.check-wrap').css('display', 'none')
+    })
+  }
 
   $(".previous").on("click", function () {
           current_step = $(this).closest("fieldset");
@@ -622,7 +655,9 @@ $(document).ready(function(){
 
     // mostra scelta condominio
   $('#type-real-estate').on('change',function() {
-    console.log($(this).val())
+    typo = $(this).val().toLowerCase()
+    console.log(typo)
+    console.log(arrayControlCheckbox.includes(typo));
     if ($(this).val() === 'Stabile condominiale') {
       console.log('eccolo');
       $('.condominium').show();
