@@ -42,7 +42,7 @@ $(document).ready(function(){
   });
 
   const ENDPOINTS =['tipologia', 'stato-immobile','tipo-generazione','tipo-generatore','radiatore','pareti-esterne','telaio', 'vetro']
-  const URLSELECT="http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/"
+  const URLSELECT="https://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/"
 
   populateSelect()
   
@@ -283,7 +283,7 @@ $(document).ready(function(){
     let count = countPage.toString();
    
     switch(count) {
-      case '7' :
+      /* case '7' :
         if(type_user==='person'){
           console.log('entrato');
           if (arrayControlCheckbox.includes(typo)){
@@ -294,7 +294,7 @@ $(document).ready(function(){
             disbaleCheck('check', checkToDisable)
           }
         }
-        break;
+        break; */
       case '9' : 
         checkSismic(countPage);
         break;
