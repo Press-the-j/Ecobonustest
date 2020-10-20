@@ -42,7 +42,7 @@ $(document).ready(function(){
   });
 
   const ENDPOINTS =['tipologia', 'stato-immobile','tipo-generazione','tipo-generatore','radiatore','pareti-esterne','telaio', 'vetro']
-  const URLSELECT="https://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/"
+  const URLSELECT="http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/"
 
   populateSelect()
   
