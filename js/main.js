@@ -57,7 +57,8 @@ $(document).ready(function(){
             key=k;
             break
           }
-          createSelect(response._embedded[key], el)          
+          createSelect(response._embedded[key], el)
+          console.log(response)          
         },
         error: function(err){
           console.log(err);
