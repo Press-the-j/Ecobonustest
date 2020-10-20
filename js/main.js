@@ -9,25 +9,25 @@ $(document).ready(function(){
 
   //! variabile a cui assegnare il tipo di utente
   var type_user; 
-
   //! timer della pagina a cui assegno un setInterval
   var myTimer;
-
   //! variabile in cui salvo le pagine clonate
   var clone_step;
   var sismicIntervention={};
-
   //! variabili delle progress bar
   var steps
   var current = 1;
-  
+  //! variabile in cui salvo l'oggetto derivante dal csv della zona sismica
   var seismicValutationObj;
-  
+  //! oggetto di risposta che sara inviata al server
   var resultObj={}
   var nameUser;
-
+  //! variabile di appoggio pr la tipologiadell'appartamento, cosi da disabilitare poi le checkbox
   var typo;
   var arrayControlCheckbox=["stabile condominiale", "appartamento all’interno di un condominio", "villa plurifamiliare"]
+  //! array con le checkbox checckate nella pagina di qualificazione dell'intervento, miserviranno poi per gestire i vari ko/ok
+  var arrayIntervantion=[]
+
   $.getScript( "js/validation.js", function( data ) {
   }); 
 
@@ -97,22 +97,37 @@ $(document).ready(function(){
     var arrModal={};
 
     commonField.forEach((el)=>{
+      let name=el.getAttribute('name');
+      for (let key in resultObj) {
+        if(key == name){
+          delete resultObj[key];
+        }
+      }
       let type = el.getAttribute('type')
       if(el.getAttribute('type')=='checkbox'){
-        let name=el.getAttribute('name');
         let val= el.checked ? true : false 
         resultObj[name]=val  
       } else {
-        let name=el.getAttribute('name');
         let val=el.value;
         resultObj[name]=val;
       }
     })
     
     //? tutte le voci all'interno dell'array bonus110
+     //todo l'oggetto ecobonus rappresenta l'array bonus110, all'interno dell'oggetto resultObj
     if(arrField.length){
       arrField.forEach(el => {
         let name = el.getAttribute('name');
+       /*  if(typeof JSON.stringify(resultObj['bonus110']) !=='undefined'){
+          for (let key in resultObj['bonus110'][0]) {
+            if(key === name){
+              console.log(resultObj['bonus110'][0]);
+              resultObj['bonus110'][0][key] = undefined;
+              console.log(resultObj['bonus110'][0])
+              
+            }
+          }
+        } */
         //? salvo i dati nelle select in pagina
         if(el.classList.contains('select-control')){
           let val = el.options[el.selectedIndex].text;
@@ -124,10 +139,25 @@ $(document).ready(function(){
           //? poiche le select nei modal vengono salvate in input hidden,questi input li salvo come fossero select(per matchare ciò che si aspetta back-end)
           if (el.classList.contains('from-select')){
             var element={ [name]: {"name" : val} }
-          } else {
+          } else if (el.classList.contains('save-checkbox') && el.checked) {
+              
+              /* console.log(groupKey in resultObj['bonus110'][0]); */
+              if(!(groupKey in resultObj['bonus110'][0])){
+                console.log('qui creo la chiave');
+                var element={[name] : val}
+                ecobonus[groupKey]= element
+              //? altrimenti aggiungo le voci
+              } else {
+                console.log('qui aggiungo');
+                console.log(groupKey);
+                console.log(ecobonus[groupKey]);
+                resultObj['bonus110'][0][groupKey][name]=val
+              }       
+          } else if(el.classList.contains("modal-single-check")) {
             var element ={[name] : val}
           }
           //? se la chiave sotto cui vengono raggrupati i dati non esiste la creo
+          
           if(typeof JSON.stringify(ecobonus[groupKey]) ==='undefined'){
             ecobonus[groupKey]= element
           //? altrimenti aggiungo le voci
@@ -147,28 +177,34 @@ $(document).ready(function(){
           }
           //? se sono input normali, semplicemente prendo il valore e lo salvo        
         } else if(el.classList.contains('save-checkbox')) {
-          if(el.checked && !el.classList.contains('multiple-check')){
-            let val=el.parentNode.querySelector('span').innerHTML;
-            ecobonus[name]=val;
-          } else if(el.checked && el.classList.contains('multiple-check')){
-            let val=el.parentNode.querySelector('span').innerHTML;
-            
-
-            if(typeof JSON.stringify(ecobonus[name]) ==='undefined'){
-               
-              let element={ ['opzione-1'] : val }
-              ecobonus[name]= element
-
-            } else {
-              let count=Object.keys(ecobonus[name]).length + 1;
-              let element={ ['opzione-' + count] : val }
-              $.extend(ecobonus[name], element)
+          /* if(el.classList.contains('blank-check')){
+            if(el.checked){
+              arrayIntervantion.push(el.getAttribute('data-manage-blank'))
             }
-            
-          }
-        } else {
-          let val=el.value;
+            if(typeof ecobonus[name]=='undefined'){
+              let val = el.value;
+              ecobonus[name]=val;
+            }
+          } else {
+            if(el.checked){
+              let val=el.value
+             ecobonus[name]=val;
+            }
+          } */
+        } else if(el.classList.contains('clicked-answer')){
+          let val = el.getAttribute('data-response-answer');
           ecobonus[name]=val
+        } else if(el.classList.contains('result-valutation')) {
+          let val = el.value;
+          if (val!== 4) {
+            ecobonus[name]='ok'
+          } else {
+            if (arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length == 1)
+            ecobonus[name] = "ko"
+          }
+        } else if(el.classList.contains('common-save')) {
+          let val=el.value;
+          ecobonus[name]=val;
         }
       });
     }
@@ -186,13 +222,19 @@ $(document).ready(function(){
       }     
     }
     
+    manageBlank()
+  }
+
+  function manageBlank(){
+    if (arrayIntervantion.includes('trainati') && arrayIntervantion.length==1){
+      $('#d5_bis_no').attr('data-response-answer', 'ko')
+    }
   }
 
   function setDynamicText(countPage){
     let fieldText = $('.dynamic-text');
     let fieldSmallText = $('.head-small-text');
     let count =parseInt(countPage) + 1
-    console.log(count);
     switch (count.toString()) {
       case '2' :
         fieldText.text('Iniziamo!!');
@@ -258,6 +300,9 @@ $(document).ready(function(){
   $(".next").on('click',function(e){
     current_step = $(this).closest('fieldset');
     let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
+    if($(this).hasClass('save-data-array')){
+      $(this).addClass('clicked-answer')
+    }
     let control=controlInput(fieldset_count_page);
     //if(control){
       
@@ -284,7 +329,8 @@ $(document).ready(function(){
     let count = countPage.toString();
    
     switch(count) {
-      /* case '7' :
+      //! ho spostato le pagine controlla che i count sia giusto
+      /* case '6' :
         if(type_user==='person'){
           console.log('entrato');
           if (arrayControlCheckbox.includes(typo)){
@@ -310,6 +356,10 @@ $(document).ready(function(){
   }
 
   $(".previous").on("click", function () {
+          $('.save-data-array').removeClass('clicked-answer')
+          if(arrayIntervantion.length !== 0){
+            arrayIntervantion=[];
+          }
           current_step = $(this).closest("fieldset");
           let fieldset_count_page= current_step.attr("data-count-page")
           next_step = $(this).closest("fieldset").prev();
@@ -425,8 +475,6 @@ $(document).ready(function(){
     if($('.sismic-intervention-check').is(':checked')) {
       if(sismicIntervention["removed"]){
       let clone_step=sismicIntervention["clone"]
-      console.log(currentStep);
-      
       $(`fieldset[data-count-page=${currentStep}]`).after(clone_step);
       }
       

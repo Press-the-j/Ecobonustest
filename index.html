@@ -7,7 +7,6 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0">
-  <meta http-equiv="Content-Security-Policy" content="http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/">
   <title>Form Eco Bonus</title>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -453,11 +452,11 @@
               <label class="control-label" for="address_estate">Dove si trova?</label>
               <div class="row-input">
                 <input type="search" autocomplete class="form-control input-control open-modal" name="" data-toggle="modal" data-modal="address_real_estate_modal" data-whatever="@mdo" id="address_estate">
-                <input type="hidden" class="save-data-array"  name="indirizzo"data-receive-from="route_estate" >
-                <input type="hidden" name="numero" class="save-data-array" data-receive-from="street_number_estate">
-                <input type="hidden" name="città" class="save-data-array" data-receive-from="locality_estate" >
-                <input type="hidden" name="provincia" class="save-data-array" data-receive-from="province_estate" >
-                <input type="hidden" name="cap" class="save-data-array" data-receive-from="postal_code_estate" >
+                <input type="hidden" class="save-data-array common-save"  name="indirizzo"data-receive-from="route_estate" >
+                <input type="hidden" name="numero" class="save-data-array common-save" data-receive-from="street_number_estate">
+                <input type="hidden" name="città" class="save-data-array common-save" data-receive-from="locality_estate" >
+                <input type="hidden" name="provincia" class="save-data-array common-save" data-receive-from="province_estate" >
+                <input type="hidden" name="cap" class="save-data-array common-save" data-receive-from="postal_code_estate" >
               </div>
             </div>
             <div class="form-group">
@@ -527,7 +526,7 @@
                   data-toggle="modal" data-modal="opaque-casing-popup" data-whatever="@mdo"
                   data-receive-from="external-walls-input">
               </div>
-              <input type="hidden" class="save-data-array group-save"  name="cappotto "data-receive-from="coat_input" data-group="involucroOpaco">
+              <input type="hidden" class="save-data-array modal-single-check group-save"  name="cappotto "data-receive-from="coat_input" data-group="involucroOpaco">
               
             </div>
             <div class="form-group">
@@ -742,31 +741,31 @@
             <p>Domenico, con quale titolo possiedi o detieni l'immobile?</p>
             <div class="form-group owner-title">
               <div class="checkbox check-wrap">
-                <input type="checkbox" value="" class="save-checkbox save-data-array" name="domanda-1" id="check-d1-1">
+                <input type="checkbox" value="ok" class="group-save save-checkbox save-data-array" data-group="questionario" name="d1" id="check-d1-1">
                 <label for="check-d1-1"></label>
                 <span>Proprietario o nudo proprietario dell’immobile</span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox" value="" class="save-checkbox save-data-array" name="domanda-1" id="check-d1-2">
+                <input type="checkbox" value="ok" class="group-save save-checkbox save-data-array" data-group="questionario" name="d1" id="check-d1-2">
                 <label for="check-d1-2" ></label>
                 <span>Inquilino, locatario, comodatario dell’immobile e ha già
                   ricevuto autorizzazione dal Proprietario ad effettuare i
                   relativi interventi</span>
               </div>
               <div class="checkbox check-wrap">
-                <input check="false" type="checkbox"  class="save-checkbox save-data-array" name="domanda-1"value="" id="check-d1-3">
+                <input check="false" type="checkbox"  class="save-checkbox save-data-array group-save" name="d1" data-group="questionario" value="ok" id="check-d1-3">
                 <label for="check-d1-3"></label>
                 <span>Convivente di fatto di cui all’articolo 1, commi
                   36 e 37 della legge n. 76 del 2016<span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox" value="" class="save-checkbox save-data-array" name="domanda-1"id="check-d1-4">
+                <input type="checkbox" value="ok" class="group-save   save-checkbox save-data-array" data-group="questionario" name="d1"id="check-d1-4">
                 <label for="check-d1-4"></label>
                 <span>Coniuge separato assegnatario dell’immobile intestato
                   all’altro coniuge</span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox" value="" class="save-checkbox save-data-array" name="domanda-1" id="check-d1-5">
+                <input type="checkbox" value="ko" class="group-save save-checkbox save-data-array" data-group="questionario" name="d1" id="check-d1-5">
                 <label for="check-d1-5"></label>
                 <span>Nessuna delle precedente</span>
               </div>
@@ -777,59 +776,48 @@
             </div>
 
           </fieldset>
-          <fieldset  data-count-page="7">
-            <div class="title-select">
-              <strong>Estraneità all'attività imprenditoriale</strong><a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Requisiti del beneficiario" class="label-info-cursor" data-content="una/un imprenditrice/imprenditore o una libera/libero professionista esercitano attività economiche organizzate che hanno come scopo la produzione e/o lo scambio di beni o servizi"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
-              <p>Il beneficiario dell'intervento è una persona fisica che agisce in veste di privato e quindi estraneo ad
-                attività imprenditoriale e/o professionale?</p>
-            </div>
-            <div class="bottoni">
-              <input type="button" class="btn nope next btn-previous btn-next" value="No">
-              <input type="button" class="btn next btn-next" value="Si">
-            </div>
-          </fieldset>
-          <fieldset data-count-page="8">
+          <fieldset data-count-page="7">
             <strong>Qualificazione dell'intervento</strong>
             <p>Rientri all'interno di quale delle seguenti categorie?</p>
             <div class="form-group category-user">
               <div class="checkbox check-wrap">
-                <input type="checkbox" name="domanda-2" class="save-checkbox save-data-array" value="" id="check-1">
+                <input type="checkbox" value="ok" name="d2" data-group="questionario" class="save-checkbox group-save save-data-array" value="" id="check-1">
                 <label for="check-1"></label>
                 <span>condomini in possesso di una delibera assembleare valida che autorizza all'effettuazione dell'intervento</span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox" class="save-checkbox save-data-array" name="domanda-2" value="" id="check-2">
+                <input type="checkbox" value="ok" data-group="questionario" class="save-checkbox save-data-array" name="d2" id="check-2">
                 <label for="check-2"></label>
                 <span>condomini NON in possesso di una delibera assembleare valida che autorizza all'effettuazione dell'intervento</span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox"  name="domanda-2" class="save-checkbox save-data-array" value="" id="check-3">
+                <input type="checkbox" value="ok" name="d2" data-group="questionario" class="save-checkbox group-save save-data-array" value="" id="check-3">
                 <label for="check-3"></label>
                 <span>Persone fisiche, al di fuori dell'esercizio di attività di impresa, arti e professioni</span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox" class="save-checkbox save-data-array" name="domanda-2" value="" id="check-4">
+                <input type="checkbox" value="ok" class="save-checkbox group-save save-data-array" data-group="questionario" name="d2"  id="check-4">
                 <label for="check-4"></label>
                 <span>Istituti autonomi case popolari(IACP), comunque denominati, nonchè dagli enti aventi le stesse finalità sociali dei predetti Istituti, istituiti nella forma di società che rispondono ai rquisiti della legislazione europea in</span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox" class="save-checkbox save-data-array" name="domanda-2" value="" id="check-5">
+                <input type="checkbox" value="ok" class="save-checkbox save-data-array group-save" data-group="questionario" name="d2" value="" id="check-5">
                 <label for="check-5"></label>
                 <span>Cooperative di abitazione a proprietà indivisa. La detrazione spetta per interventi realizzati su immobili dalle stesse posseduti e assegnati in godimenti ai propri
                   soci</span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox" class="save-checkbox save-data-array" name="domanda-2" value="" id="check-6">
+                <input type="checkbox" value="ok" class="save-checkbox save-data-array group-save" name="d2" data-group="questionario" id="check-6">
                 <label for="check-6"></label>
                 <span>Enti del terzo Settore(Onlus, organizzazioni di volontariato, associazioni di promozione sociale)</span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox" name="domanda-2" class="save-checkbox save-data-array" value="" id="check-7">
+                <input type="checkbox" value="ok" name="d2" class="save-checkbox group-save save-data-array" value="" id="check-7" data-group="questionario">
                 <label for="check-7"></label>
                 <span>Associazioni e società sportive dilettantistiche, limitatamente ai lavori destinati ai soli immobili o parti di immobili adibiti a spogliatoi</span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox" class="save-checkbox save-data-array" name="domanda-2" value="" id="check-8">
+                <input type="checkbox" value="ko" class="save-checkbox save-data-array group-save" name="d2" value="" id="check-8">
                 <label for="check-8"></label>
                 <span>Nessuna delle precedenti<span>
               </div>
@@ -839,35 +827,47 @@
               <input type="button" name="next" class="next btn btn-next" value="Next" disabled />
             </div>
           </fieldset>
+          <fieldset  data-count-page="8">
+            <div class="title-select">
+              <strong>Estraneità all'attività imprenditoriale</strong><a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Requisiti del beneficiario" class="label-info-cursor" data-content="una/un imprenditrice/imprenditore o una libera/libero professionista esercitano attività economiche organizzate che hanno come scopo la produzione e/o lo scambio di beni o servizi"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+              <p>Il beneficiario dell'intervento è una persona fisica che agisce in veste di privato e quindi estraneo ad
+                attività imprenditoriale e/o professionale?</p>
+            </div>
+            <div class="bottoni">
+              
+              <input type="button" name="domanda-3" class="btn next  btn-previous save-data-array " data-response-answer="ko" value="No">
+              <input type="button" name="domanda-3" class="btn next btn-next  save-data-array " data-response-answer="ok" value="Si">
+            </div>
+          </fieldset>
           <fieldset class="intervantion-qualification" data-count-page="9">
             <strong>Qualificazione dell'intervento</strong>
             <p>Nel periodo tra il 1 luglio 2020 e il 31 dicembre 2021 hai sostenuto/sosterrai una spesa relativa ad uno
               dei seguenti interventi trainanti?(sono possibili più risposte)</p>
             <div class="form-group intervention-trainant">
               <div class="checkbox check-wrap">
-                <input class="sismic-intervention-check save-data-array save-checkbox multiple-check" name="domanda-3"type="checkbox" value="" id="check-d3-1">
-                <label for="check-d3-1"></label>
+                <input type="checkbox" data-manage-blank="interventi-sismici" value="blank" id="check-d4-1" class="sismic-intervention-check save-data-array save-checkbox blank-check" name="domanda-4">
+                <label for="check-d4-1"></label>
                 <span>INTERVENTI ANTISISMICI di cui
                   ai commi da 1-bis a 1-septies dell'articolo 16 del decreto-legge n. 63 del 2013, anche comprensivo di
                   interventi di DEMOLIZIONE E RICOSTRUZIONE di cui all'articolo 3. Co. 1 lett. d) del DPR
                   380/2001</span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox" value="" class="save-data-array save-checkbox multiple-check" name="domanda-3" id="check-d3-2">
-                <label for="check-d3-2"></label>
+                <input type="checkbox" data-manage-blank="riq-energetica"  class="save-data-array save-checkbox blank-check" name="domanda-4" id="check-d4-2" value="blank">
+                <label for="check-d4-2"></label>
                 <span>RIQUALIFICAZIONE ENERGETICA: sostituzione degli IMPIANTI DI
                   CLIMATIZZAZIONE INVERNALE ESISTENTI con impianti per il riscaldamento, il raffrescamento o la
                   fornitura di acqua</span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox" value="" name="domanda-3" class="save-data-array save-checkbox multiple-check" id="check-d3-3">
-                <label for="check-d3-3"></label>
+                <input type="checkbox" data-manage-blank="trainati"  name="domanda-4" class="save-data-array save-checkbox blank-check" id="check-d4-3" value="blank">
+                <label for="check-d4-3"></label>
                 <span>INTERVENTI c.d TRAINATI</span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox" class="none-check save-data-array save-checkbox multiple-check"  name="domanda-3" id="check-d3-4">
-                <label for="check-d3-4"></label>
-                <span>nessuna delle precedentinessuna delle precedenti</span>
+                <input type="checkbox" class="none-check save-data-array save-checkbox"  name="domanda-4" id="check-d4-4" value="ko">
+                <label for="check-d4-4"></label>
+                <span>nessuna delle precedenti</span>
                 
               </div>
             </div>
@@ -890,7 +890,7 @@
             <div class="form-group">
               <label  class="no-wrap" for="result-valutation-input">Valutazione sismica</label>
               <div class="row-input m-bottom-60">
-                <input type="text" id="result-valutation-input"class="form-control result-valutation">
+                <input type="text" id="result-valutation-input" name="domanda-5"class="form-control save-data-array result-valutation">
               </div>
             </div>
             
@@ -901,12 +901,12 @@
           </fieldset>
           <fieldset data-count-page="11">
             <strong>Qualificazione dell'intervento</strong>
-            <p>Gli immobili su cui effettuare l'intervento trainato sono sottoposti alla tutela disciplinatadal codice
+            <p>Gli immobili su cui effettuare l'intervento trainato sono sottoposti alla tutela disciplinata dal codice
               dei beni culturali e del paesaggio o per effetto di regolamenti edilizi, urbanistici e ambientali e
               pertanto sugli stessi non possono essere realizzati interventi trainanti?</p>
             <div class="bottoni">
-              <input type="button" class="btn btn-previous" value="No" />
-              <input type="button" class="next btn btn-next" value="Si" />
+              <input type="button" class="btn next btn-previous save-data-array" data-response-answer="ok" id="d5_bis_no" value="No" name="domanda-5bis" />
+              <input type="button" class="next btn btn-next save-data-array" data-response-answer="ok" value="Si" name="domanda-5bis"/>
             </div>
           </fieldset>
           <fieldset data-count-page="12">
@@ -915,8 +915,8 @@
               rientrano nel computo delle 2 unità immobiliari gli interventi effettuati sulle parti comuni del
               condominio)</p>
             <div class="bottoni">
-              <input type="button" class=" btn btn-previous" value="No" />
-              <input type="button" class="next btn btn-next" value="Si" />
+              <input type="button" name="domanda-6" class="save-data-array btn  next btn-previous" data-response-answer="ok" value="No" />
+              <input type="button" name='domanda-6' class="save-data-array next btn btn-next" data-response-answer="ko" value="Si" />
             </div>
           </fieldset>
           <fieldset data-count-page="13">
