@@ -9,10 +9,12 @@ body {
     color: #2c3036;
     background-color: $background;
     font-size: 18px;
+    padding-right: 0px !important
 }
 
-body {
-  padding-right: 0px !important
+body.modal-open {
+  overflow: hidden !important;
+  overflow-y: hidden !important;
 }
 
 .modal-open {

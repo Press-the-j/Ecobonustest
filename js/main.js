@@ -1,4 +1,17 @@
+/* 
+        $LEGGENDA 
 
+  ? commenti che spiegano a cosa serve la funzione/variabile/handler
+  
+  * per approfondimenti sull'uso della funzione/variabile/handler
+
+  ^ divisori dello script(vediamo se riusciamo ad usare webpack in futuro)
+
+  todo per le cose da fare in futuro, spunti o idee
+  
+  ! per segnalare errori, cose da canclerrare
+
+*/
 
 
 $(document).ready(function(){
@@ -7,30 +20,35 @@ $(document).ready(function(){
   var next_step;
   var current_step;
 
-  //! variabile a cui assegnare il tipo di utente
+  //? variabile a cui assegnare il tipo di utente
   var type_user; 
-  //! timer della pagina a cui assegno un setInterval
+  //? timer della pagina a cui assegno un setInterval
   var myTimer;
-  //! variabile in cui salvo le pagine clonate
+  //? variabile in cui salvo le pagine clonate
   var clone_step;
   var sismicIntervention={};
-  //! variabili delle progress bar
+  //? variabili delle progress bar
   var steps
   var current = 1;
-  //! variabile in cui salvo l'oggetto derivante dal csv della zona sismica
+  //? variabile in cui salvo l'oggetto derivante dal csv della zona sismica
   var seismicValutationObj;
-  //! oggetto di risposta che sara inviata al server
+  //? oggetto di risposta che sara inviata al server
   var resultObj={}
   var nameUser;
-  //! variabile di appoggio pr la tipologiadell'appartamento, cosi da disabilitare poi le checkbox
+  //? variabile di appoggio per la tipologia dell'appartamento, cosi da disabilitare poi le checkbox
   var typo;
   var arrayControlCheckbox=["stabile condominiale", "appartamento all’interno di un condominio", "villa plurifamiliare"]
-  //! array con le checkbox checckate nella pagina di qualificazione dell'intervento, miserviranno poi per gestire i vari ko/ok
+  //? array con le checkbox checckate nella pagina di qualificazione dell'intervento, serviranno poi per gestire i vari ko/ok
   var arrayIntervantion=[]
 
-  $.getScript( "js/validation.js", function( data ) {
-  }); 
+  //? URL e Endpoint per popolare le select
+  const ENDPOINTS =['tipologia', 'stato-immobile','tipo-generazione','tipo-generatore','radiatore','pareti-esterne','telaio', 'vetro']
+  const URLSELECT="http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/"
 
+  //^<-------------funzioni di build-------------->
+
+  $.getScript( "js/validation.js", function( data ) {
+  });
   $.ajax({
     type: "GET",
     url: "./data/classificazione-sismica-2020.csv",
@@ -39,13 +57,346 @@ $(document).ready(function(){
       seismicValutationObj= $.csv.toObjects(response);
       
     }
+  }); 
+  populateSelect()
+  //^<-------------------------------------------->
+
+  //^<--------------Handler---------------------->
+  //todo bisogna assegnare un errore nel caso l'utente prova ad andare avanti senza accettare la privacy
+
+
+  //? Fix per i popover al restringimento della pagina
+  $('.label-info-cursor').on('click', function(){
+    if($(window).length < 480){
+      $(this).attr('data-placement', 'bottom');
+    } else {
+      $(this).attr('data-placement', 'right');
+    }
+    $(this).popover('toggle');
+  })
+  
+  //? handler persalvare il nome dell'utente da mostrare
+  $('.save-name').on('keyup', function(){
+    nameUser = $(this).val()
+    console.log(nameUser);
+  })
+
+  //? L'utente può andare avanti solo se accetta privacy
+    //! sarà sostituito da validazione di jquery validation
+  $("#privacy").on("change", function () {
+    if ($(this).is(":checked")) {
+        let btn_next = $(this)
+            .closest(".form-group")
+            .siblings(".bottoni")
+            .children(".next");
+        btn_next.prop("disabled", false);
+    } else if ($(this).not(":checked")) {
+        let btn_next = $(this)
+            .closest(".form-group")
+            .siblings(".bottoni")
+            .children(".next");
+        btn_next.prop("disabled", true);
+    }
+  });    
+    
+  $(".next").on('click',function(){
+    current_step = $(this).closest('fieldset');
+    let fieldset_count_page=current_step.attr("data-count-page")
+
+    //* la classe clicked-answer serrvirà in fase di salvataggio dei dati
+    if($(this).hasClass('save-data-array')){
+      $(this).addClass('clicked-answer')
+    }
+    let control=controlInput(fieldset_count_page);
+    //if(control){
+      //* funzione per gestire gli eventi dinamici delle pagine
+      checkPage(fieldset_count_page)
+      
+      //* funzione di salvataggio dei dati in un ogetto
+      saveData(fieldset_count_page);
+
+      //! per test------------------------->
+      let result = JSON.stringify(resultObj);
+      console.log(result);
+      //!---------------------------------->
+
+      next();
+    //}
   });
 
-  const ENDPOINTS =['tipologia', 'stato-immobile','tipo-generazione','tipo-generatore','radiatore','pareti-esterne','telaio', 'vetro']
-  const URLSELECT="http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/"
+  $(".previous").on("click", function () {
+    current_step = $(this).closest("fieldset");
+    let fieldset_count_page= current_step.attr("data-count-page")
+    //* pulisco i bottoni SI/NO dalla classe clicked-answer
+      //! secondo me c'è spreco di iterazioni si può fare meglio
+    $('.save-data-array').removeClass('clicked-answer')
+    
+    cleanDataPrevious(fieldset_count_page)
+    
+    previous();
 
-  populateSelect()
+    if($(this).hasClass('reset')){
+      resetStatus()
+    }
+   
+    
+  });
+
+  //? funzione che cerca nell'oggetto seismicValutationObj e ritorna la valutazione in base al comune
+  $('.getValutation').on('click', function(){
+    let val=$(this).siblings('input').val()
+    let result= $('.result-valutation')
+    
+    for (let el of seismicValutationObj){
+      if(el.Denominazione.toLowerCase()===val.toLowerCase()){
+        result.val(el["Classificazione 2020"])
+        break
+      } else {
+        result.val("non abbiamo trovato nessun risultato")
+        
+      }
+    }
+  })
+
+  //? fix per il focus sugli switch e su gli input
+  $('.switch-check').on('focusin', function(){
+    setTimeout(function(){
+      document.activeElement.blur();
+    }, 1)
+  })    
   
+  $('input[data-modal]').on('focusin', function(){
+    setTimeout(function(){
+      document.activeElement.blur();
+    }, 1)
+  })
+  //?<----------------------------------------->
+  
+  //? funzione che nel fieldset 2 salva il tipo di user scelto, cancella le pagine che non devono essere viste e salva il tipo di user
+  $(".type-user").on("click", function () {
+    current_step=$(this).closest("fieldset");
+    let fieldset_count_page=current_step.attr('data-count-page')
+    let type = $(this).attr("data-typeUser");
+    //* setta la variabile globale type-user in base alla scelta dell'utente
+    type_user = type;
+
+    //* se l'utente è una persona salvo in una variabile i fieldset per i dati dell'impresa e viceversa
+    if (type_user === "person") {
+        var remove_step = current_step.siblings(".business");
+    } else if (type_user === "business") {
+        var remove_step = current_step.siblings(".person");
+    }
+    //* prima li clona con tutti gli handler, trasformando il risultato in un array di elementi, poi li rimuovo dalla pagina
+    //*nel caso l'utente torni indietro queste pagine verrano reinserite nel DOM
+    clone_step = remove_step.clone(true).get();
+    remove_step.remove();
+
+    next(fieldset_count_page)
+  
+  });
+  
+  //? validazione select
+  $(".choose-category").on("change", function () {
+    let selectedCategory = $(this).val();
+    if (selectedCategory !== "none") {
+        $(".category-real-estate")
+            .siblings(".bottoni")
+            .find(".next")
+            .prop("disabled", false);
+    } else {
+        $(".category-real-estate")
+            .siblings(".bottoni")
+            .find(".next")
+            .prop("disabled", true);
+    }
+    $(".sub-category").removeClass("active");
+    $(".sub-category select").removeClass("selected-category");
+    
+    $(".category-" + selectedCategory).addClass("active ");
+    $(".category-" + selectedCategory + " select").addClass("selected-category");
+  })    
+  //? validazioni checkbox
+  $(".validate-checkbox input").on("click", function () {
+      let parent=$(this).closest(".validate-checkbox")
+      parent.find("input").prop("checked", false);
+      $(this).prop("checked", true);
+      parent
+          .siblings(".bottoni")
+          .find(".next")
+          .prop("disabled", false);
+  });
+
+  $(".intervention-trainant input").on("click", function () {
+    if ($(".none-check").is(":checked") && $(this).hasClass("none-check")) {
+        $(".intervention-trainant input").prop("checked", false);
+        $(".none-check").prop("checked", true);
+    } else if (
+        $(".none-check").is(":checked") &&
+        !$(this).hasClass("none-check")
+    ) {
+        $(".none-check").prop("checked", false);
+    }
+    if ($(".intervention-trainant input:checked").length) {
+        $(".intervention-trainant")
+            .siblings(".bottoni")
+            .find(".next")
+            .prop("disabled", false);
+    } else {
+        $(".intervention-trainant")
+            .siblings(".bottoni")
+            .find(".next")
+            .prop("disabled", true);
+    }
+});
+
+  //? funzione per inserire automaticamente i dati dei modal negli input
+    //* dare classe save-pop-up al bottone salva
+    //* settare negli input in pagina il data-receive-from uguale all'id dell'input nel pop up di cui salvare i dati
+  $(".save-pop-up").on('click', function(e){
+    let pop_up=$(this).closest('.modal').attr('id');
+    let inputs=$(this).closest('.modal').find('.popup-control').get()
+    let selects=$(this).closest('.modal').find('.select-control').get()
+    let emptyInput=false
+    inputs.forEach(element => {
+      let inputId=element.getAttribute('id')
+      let validate=validator.element(`#${inputId}`)
+      if(!validate){
+        emptyInput=true
+      }
+    })
+    selects.forEach(element=>{
+      let selectId=element.getAttribute('id')
+      let validate = validator.element(`#${selectId}`)
+      if(!validate){
+        console.log($(`#${selectId}`).val());
+        emptyInput=true
+      }
+    })
+
+    if(!emptyInput){
+      $(this).closest('.modal').find('.close').click()
+      let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
+      let pop_up_input =$(this).closest('.modal').find('input').get();
+      for(let i=0; i<pop_up_input.length; i++){
+        let id_pop_up_input=pop_up_input[i].getAttribute('id');
+        
+        if($(`fieldset[data-count-page=${fieldset_count_page}] input[data-receive-from=${id_pop_up_input}]`).length){
+          
+          let inputText=pop_up_input[i].value;
+          let inputValue=pop_up_input[i].getAttribute('data-value-select')
+          
+          $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
+          $(`input[data-receive-from=${id_pop_up_input}`).attr('data-value-select', inputValue )
+          
+          
+        }
+      }
+    }
+  })
+
+  //? Cappotto termico(modal): se checked salva true su un input nascosto in pagina
+  $('#coat').on('change', function(){
+    if ($(this).is(':checked')){
+      $('#coat_input').val('true')
+    } else {
+      $('#coat_input').val('false')
+    }
+
+    console.log($('#coat_input').val());
+  })
+
+  //? funzione per prendere i vari input nel modal che si riferiscono all'indirizzo, e salvarli in una unica stringa
+  $('.save-address').on('click',function(){
+      let selector = $(this).data('save');
+      let address=$(`#route_${selector}`).val();
+      let streetNumber=$(`#street_number_${selector} `).val();
+      let city=$(`#locality_${selector} `).val();
+      let postal_code=$(`#postal_code_${selector} `).val();
+    
+    $(`#address_${selector}`).val(`${address} ${streetNumber} ${city} ${postal_code} `)
+  })
+
+  //? funzione che scrive il valore della option selezionata all'interno dei pop-up, in input nascosti su cui poi fare i dovuti controlli
+    //* dare classe send-val alla select
+    //* dare lo stesso id delle select all'input, aggiungendo "-input"
+  $(".send-val").on("change", function () {
+      $(this).siblings(".error").text("");
+      let textSelect = $(this).find("option:selected").text();
+      let valSelect = $(this).find("option:selected").val();
+      let idSelect = $(this).attr("id");
+      let hiddenInput = $(`#${idSelect}-input`).get();
+      hiddenInput[0].value = textSelect;
+      hiddenInput[0].setAttribute('data-value-select', valSelect)
+  });
+
+  //? funzione per inserire e pulire input del nome
+  $(".send-val-name").on("keyup", function () {
+    if($(this).hasClass('person')){
+      var valName = $("#name-popup").val();
+      var valSurname = $("#surname-popup").val();
+      var destination= '#complete-name'
+    } else {
+      var valName=$('#name-referent-registration').val();
+      var valSurname=$('#surname-referent-registration').val();
+      var destination='#referent-complete-name'
+    }
+    let name = valName
+        .split(" ")
+        .filter((i) => i)
+        .join(" ");
+    let surname = valSurname
+        .split(" ")
+        .filter((i) => i)
+        .join(" ");
+    $(destination).val(name + " " + surname);   
+  });
+
+  //? validazione dell'input di tipo date
+    //! sarà sostituita dalla validazione di jquery validation
+  $('#date').on('change', function(){
+    let date = new Date();
+    let thisYear = date.getFullYear();
+    let errorBox = $(this).siblings('.error');
+    let dateArr=$('#date').val().split('-');
+    if(dateArr[0]<1900 || dateArr[0]>thisYear){
+      errorBox.text('Data di nascita non valida')
+    } else {
+      errorBox.text('')
+    }
+  })
+
+  //? fix per i modal su iphone------------->
+  $('.open-modal').on('click', function(){
+    let modal = $(this).data('modal');
+    $(`#${modal}`).modal('show');
+    //$('body').css('overflow','hidden')
+  })
+
+  $('.close-modal').on('click', function(){
+    $('.close').click()
+  })
+  //?<--------------------------------------->
+  //? funzione che mostra nasconde degli input in base al tipo di immobile
+  $('#type-real-estate').on('change',function() {
+      if ($(this).val() === 'Stabile condominiale') {
+        $('.condominium').show();
+        $('.condominium-hide').hide()
+        $('.toggle-reverse').removeClass('select-control save-data-array')
+        $('.toggle-control').addClass('input-control save-data-array');
+        
+      } else {
+        $('.condominium').hide();
+        $('.condominium-hide').show()
+        $('.toggle-reverse').addClass('select-control save-data-array')
+        $('.toggle-control').removeClass('input-control save-data-array');
+      }
+    });
+  
+  //^<--------------------------------------------->
+
+  //^<---------------functions--------------------->
+  //todo bisogna pulire e sistemare la funzione di slavataggio data(operazione chirurgica)
+
   function populateSelect(){
     ENDPOINTS.forEach((el)=>{
       $.ajax({
@@ -57,8 +408,7 @@ $(document).ready(function(){
             key=k;
             break
           }
-          createSelect(response._embedded[key], el)
-          console.log(response)          
+          createSelect(response._embedded[key], el)         
         },
         error: function(err){
           console.log(err);
@@ -66,16 +416,6 @@ $(document).ready(function(){
       });
     })
   }  
-  
-  $('.label-info-cursor').on('click', function(){
-    if($(window).length < 480){
-      $(this).attr('data-placement', 'bottom');
-    } else {
-      $(this).attr('data-placement', 'right');
-    }
-    $(this).popover('toggle');
-  })
-  
 
   function createSelect(options, select){
     
@@ -88,21 +428,61 @@ $(document).ready(function(){
     })
   }
 
+  function next(){
+    next_step=current_step.next();
+    let countPage=next_step[0].getAttribute('data-count-page');
+    //* funzione per settare i testi dinamici
+    setDynamicText(parseInt(countPage));
+    current_step.hide();
+    next_step.show();
+    setProgressBar(++current);
+  }
+
+  function previous(fieldset_count_page){
+    next_step= current_step.prev();
+    let countPage=next_step[0].getAttribute('data-count-page');
+    setDynamicText(parseInt(countPage))
+    current_step.hide();
+    next_step.show();
+    setProgressBar(--current);
+  }
+
+  function resetStatus(){
+    for (let key in resultObj) {
+      if (key !== 'marketing-check'){
+        delete resultObj[key]
+      }
+    }
+    clone_step.forEach((element) => {
+        let el_page = element.getAttribute("data-count-page") - 1;
+        $("fieldset[data-count-page='" + el_page + "']").after(element);
+    });
+    
+    clone_step = "";
+  }
+  
+  function cleanDataPrevious(countPage){
+    let count=countPage.toString()
+
+    switch (count){
+      case '10' :
+      case '11' :
+        if(arrayIntervantion.length !== 0){
+          arrayIntervantion=[];
+          console.log(arrayIntervantion);
+        }
+    }
+  }
+
   function saveData(countPage){
     
     let commonField=$(`fieldset[data-count-page=${countPage}] .save-data`).get();
     let arrField=$(`fieldset[data-count-page=${countPage}] .save-data-array`).get();
     let ecobonus = {}
     var arr = [];
-    var arrModal={};
 
     commonField.forEach((el)=>{
       let name=el.getAttribute('name');
-      for (let key in resultObj) {
-        if(key == name){
-          delete resultObj[key];
-        }
-      }
       let type = el.getAttribute('type')
       if(el.getAttribute('type')=='checkbox'){
         let val= el.checked ? true : false 
@@ -114,25 +494,25 @@ $(document).ready(function(){
     })
     
     //? tutte le voci all'interno dell'array bonus110
-     //todo l'oggetto ecobonus rappresenta l'array bonus110, all'interno dell'oggetto resultObj
+     //* l'oggetto ecobonus rappresenta l'array bonus110, all'interno dell'oggetto resultObj
     if(arrField.length){
       arrField.forEach(el => {
         let name = el.getAttribute('name');
-        //? salvo i dati nelle select in pagina
+        //* salvo i dati nelle select in pagina
         if(el.classList.contains('select-control')){
           let val = el.options[el.selectedIndex].text;
           ecobonus[name]={ "name" : val}
-        //? salvo i dati raggruppandoli sotto una chiave definita nell'attribute 'data-group'; 
+        //* salvo i dati raggruppandoli sotto una chiave definita nell'attribute 'data-group'; 
         } else if(el.classList.contains('group-save')){
           let groupKey=el.getAttribute('data-group');
           var val = el.value;
-          //? poiche le select nei modal vengono salvate in input hidden,questi input li salvo come fossero select(per matchare ciò che si aspetta back-end)
+          //* poiche le select nei modal vengono salvate in input hidden,questi input li salvo come fossero select(per matchare ciò che si aspetta back-end)
           if (el.classList.contains('from-select')){
             var element={ [name]: {"name" : val} }
           } else if (el.classList.contains('save-checkbox') && el.checked) {
               if(!(groupKey in resultObj['bonus110'][0])){
                 var element={[name] : val}
-              //? altrimenti aggiungo le voci
+              //* altrimenti aggiungo le voci
               } else {
                 resultObj['bonus110'][0][groupKey][name]=val
               }       
@@ -163,15 +543,15 @@ $(document).ready(function(){
           } else if(el.classList.contains("modal-single-check")) {
             var element ={[name] : val}
           }
-          //? se la chiave sotto cui vengono raggrupati i dati non esiste la creo
+          //* se la chiave sotto cui vengono raggrupati i dati non esiste la creo
           
           if(typeof JSON.stringify(ecobonus[groupKey]) ==='undefined'){
             ecobonus[groupKey]= element
-          //? altrimenti aggiungo le voci
+          //* altrimenti aggiungo le voci
           } else {
             $.extend(ecobonus[groupKey], element)
           }       
-          //? come nel caso di categoria-catastale, mi salvo i dati di diverse selectsalvandoli sotto una key
+          //* come nel caso di categoria-catastale, mi salvo i dati di diverse selectsalvandoli sotto una key
         } else if(el.classList.contains('group-save-select')){
           let val=el.options[el.selectedIndex].text;
           let groupKey=el.getAttribute('data-group');
@@ -217,11 +597,13 @@ $(document).ready(function(){
     }
   }
 
+  //? funzione per settare il testo dinamicamente nell'head
   function setDynamicText(countPage){
     let fieldText = $('.dynamic-text');
     let fieldSmallText = $('.head-small-text');
-    let count =parseInt(countPage) + 1
-    switch (count.toString()) {
+    let count =countPage.toString()
+    console.log('numero-pagina: '+count);
+    switch (count) {
       case '2' :
         fieldText.text('Iniziamo!!');
         fieldSmallText.text('(Per la registrazione impiegheremo circa 5 minuti')
@@ -244,77 +626,14 @@ $(document).ready(function(){
     }
   }
 
-  $('.getValutation').on('click', function(){
-    let val=$(this).siblings('input').val()
-    let result= $('.result-valutation')
-    
-    for (let el of seismicValutationObj){
-      if(el.Denominazione.toLowerCase()===val.toLowerCase()){
-        result.val(el["Classificazione 2020"])
-        break
-      } else {
-        result.val("non abbiamo trovato nessun risultato")
-        
-      }
-    }
-  })
-  //? handler persalvare il nome dell'utente da mostrare poi nel messaggio dell'head
-  $('.save-name').on('keyup', function(){
-    nameUser = $(this).val()
-    console.log(nameUser);
-  })
- 
-  //todo bisogna assegnare un errore nel caso l'utente prova ad andare avanti senza accettare la privacy
-  $("#privacy").on("change", function () {
-    if ($(this).is(":checked")) {
-        let btn_next = $(this)
-            .closest(".form-group")
-            .siblings(".bottoni")
-            .children(".next");
-        btn_next.prop("disabled", false);
-    } else if ($(this).not(":checked")) {
-        let btn_next = $(this)
-            .closest(".form-group")
-            .siblings(".bottoni")
-            .children(".next");
-        btn_next.prop("disabled", true);
-    }
-  });
-
-       
-    
-  $(".next").on('click',function(e){
-    current_step = $(this).closest('fieldset');
-    let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
-    if($(this).hasClass('save-data-array')){
-      $(this).addClass('clicked-answer')
-    }
-    let control=controlInput(fieldset_count_page);
-    //if(control){
-      
-      checkPage(fieldset_count_page)
-
-      /* if(fieldset_count_page==9){
-        checkSismic(fieldset_count_page);
-      } */
-      setDynamicText(fieldset_count_page);
-      saveData(fieldset_count_page);
-      let result = JSON.stringify(resultObj);
-      console.log(result);
-      next_step = $(this).closest("fieldset").next();
-      current_step.hide();
-      next_step.show();
-      setProgressBar(++current);
-      $(".progress-wrap").css("display", "flex");
-      $(".head-small-text").css("display", "block");
-      $(".error").text("");
-    //}
-  });
-
   function checkPage(countPage) {
     let count = countPage.toString();
    
     switch(count) {
+      case '1' :
+        $(".progress-wrap").css("display", "flex");
+        $(".head-small-text").css("display", "block");
+        break;
       //! ho spostato le pagine controlla che i count sia giusto
       /* case '6' :
         if(type_user==='person'){
@@ -341,56 +660,6 @@ $(document).ready(function(){
     })
   }
 
-  $(".previous").on("click", function () {
-          $('.save-data-array').removeClass('clicked-answer')
-          if(arrayIntervantion.length !== 0){
-            arrayIntervantion=[];
-          }
-          current_step = $(this).closest("fieldset");
-          let fieldset_count_page= current_step.attr("data-count-page")
-          next_step = $(this).closest("fieldset").prev();
-          next_step.show();
-          current_step.hide();
-          setDynamicText(fieldset_count_page)
-          setProgressBar(--current);
-      });
-
-  $(".previous-reg").on("click", function () {
-          current_step = $(this).closest("fieldset");
-          
-          next_step = $(this).closest("fieldset").prev();
-          next_step.show();
-          current_step.hide();
-          let fieldset_count_page= next_step.attr("data-count-page")
-          
-          setDynamicText(fieldset_count_page - 1);
-          setProgressBar(--current);
-          for (let key in resultObj) {
-            if (key !== 'marketing-check'){
-              delete resultObj[key]
-            }
-          }
-          clone_step.forEach((element) => {
-              let el_page = element.getAttribute("data-count-page") - 1;
-              $("fieldset[data-count-page='" + el_page + "']").after(element);
-          });
-          
-          clone_step = "";
-      });
-  
-  //? fix per il focus 
-  $('.switch-check').on('focusin', function(){
-    setTimeout(function(){
-      document.activeElement.blur();
-    }, 1)
-  })    
-
-  $('input[data-modal]').on('focusin', function(){
-    setTimeout(function(){
-      document.activeElement.blur();
-    }, 1)
-  })
-
   function setProgressBar(curStep){
     steps=$("fieldset").length; 
     var percentuale = parseFloat(100 / steps) * curStep;
@@ -399,7 +668,7 @@ $(document).ready(function(){
       .css("width",percentuale+"%")
   }
 
-  //! funzione che setta timer
+  //? funzione che setta timer
   function setClock(){
     clearInterval(myTimer)
     $(".clock").css("display", "block")
@@ -421,40 +690,7 @@ $(document).ready(function(){
     }, 1000)
   }
 
-
-
-  //! siamo nel fieldset 2 al momento di scegliere se l'utente è un'impresa o una persona fisica.
-  //todo dare la classe type-user ai bottoni che devono essere cliccati dall'utente durante la scelta
-
-  //todo in caso si volesse poi reinserire le pagine rimosse dalla funzione, alla pagina successiva, al bottone per tornare indietro sostituire la classe previous con previous-reg
-
-  $(".type-user").on("click", function () {
-    let type = $(this).attr("data-typeUser");
-    let current_step = $(this).closest("fieldset");
-    let fieldset_count_page=current_step.attr('data-count-page')
-    //? setta la variabile globale type-user in base alla scelta dell'utente
-    type_user = type;
-
-    //? se l'utente è una persona salvo in una variabile i fieldset per i dati dell'impresa e viceversa
-    if (type_user === "person") {
-        var remove_step = current_step.siblings(".business");
-    } else if (type_user === "business") {
-        var remove_step = current_step.siblings(".person");
-    }
-    //? prima li clona con tutti gli handler, trasformando il risultato in un array di elementi, poi li rimuovo dalla pagina
-    //*nel caso l'utente torni indietro queste pagine verrano reinserite nel DOM, vedere l'handler legato al click sull'elemento con classe previous-reg
-    clone_step = remove_step.clone(true).get();
-    remove_step.remove();
-
-    //? applica la stessa logica del next, andando alla pagina successiva, settando il timer, aumentando la barra di progresso
-    setDynamicText(fieldset_count_page);
-    current_step.hide();
-    current_step.next().show();
-    //setClock();
-    setProgressBar(++current);
-  });
-
-  //! questa è una funzione provvisoria per nascondere o mostrare il fieldset 10 in base alla scelta dell'utente nella precedente checkbox
+  //? questa è una funzione provvisoria per nascondere o mostrare il fieldset 10 in base alla scelta dell'utente nella precedente checkbox
     //* se l'utente checca l'input con classe sismic- intervention-check, la pagina si deve vedere
 
   function checkSismic(currentStep){
@@ -473,77 +709,10 @@ $(document).ready(function(){
     }
   }
 
-      
+  //? funzione di controllo per validare gli input e le select in pagina
+    //* dare classe input-control agli input che devono essere controllati, e classe select-control alle select che devono essere controllate
+  //todo si potrebbe pensare di attuare il controllo direttamente nella funzione di salvataggio
 
-  //!validazione select
-  $(".choose-category").on("change", function () {
-      let selectedCategory = $(this).val();
-      if (selectedCategory !== "none") {
-          $(".category-real-estate")
-              .siblings(".bottoni")
-              .find(".next")
-              .prop("disabled", false);
-      } else {
-          $(".category-real-estate")
-              .siblings(".bottoni")
-              .find(".next")
-              .prop("disabled", true);
-      }
-      $(".sub-category").removeClass("active");
-      $(".sub-category select").removeClass("selected-category");
-      
-      $(".category-" + selectedCategory).addClass("active ");
-      $(".category-" + selectedCategory + " select").addClass("selected-category");
-  })    
-  //! validazioni checkbox*/
-  $(".owner-title input").on("click", function () {
-      $(".owner-title input").prop("checked", false);
-      $(this).prop("checked", true);
-      $(".owner-title")
-          .siblings(".bottoni")
-          .find(".next")
-          .prop("disabled", false);
-  });
-
-  $(".category-user input").on("click", function () {
-      $(".category-user input").prop("checked", false);
-      $(this).prop("checked", true);
-      $(".category-user")
-          .siblings(".bottoni")
-          .find(".next")
-          .prop("disabled", false);
-  });
-
-  $(".intervention-trainant input").on("click", function () {
-      if ($(".none-check").is(":checked") && $(this).hasClass("none-check")) {
-          $(".intervention-trainant input").prop("checked", false);
-          $(".none-check").prop("checked", true);
-      } else if (
-          $(".none-check").is(":checked") &&
-          !$(this).hasClass("none-check")
-      ) {
-          $(".none-check").prop("checked", false);
-      }
-      if ($(".intervention-trainant input:checked").length) {
-          $(".intervention-trainant")
-              .siblings(".bottoni")
-              .find(".next")
-              .prop("disabled", false);
-      } else {
-          $(".intervention-trainant")
-              .siblings(".bottoni")
-              .find(".next")
-              .prop("disabled", true);
-      }
-  });
-
-  //! funzione di controllo per validare gli input e le select in pagina
-  //todo dare classe input-control agli input che devono essere controllati, e classe select-control alle select che devono essere controllate
-
-  //todo l'errorBox deve essere fratello di row-input, il label figlio diretto di row-input
-
-  //todo per dirgli che c'è un errore impostare la variabile emptyInput a true
-    //!! la funzione ritorna falso, se c'è qualcosa che non va con gli input, e true se è tutto apposto
   function controlInput(countPage){
     //? seleziono il fieldset padre tramite il countPage passato 
     let inputs = $(`fieldset[data-count-page=${countPage}] .input-control`).get()
@@ -573,159 +742,6 @@ $(document).ready(function(){
     return true;
   }
 
-      
-  
-
-  //!funzione per inserire automaticamente i dati dei pop up negli input
-    //? dare classe save-pop-up al bottone salva
-    //? settare negli input in pagina il data-receive-from uguale all'id dell'input nel pop up di cui salvare i dati
-  $(".save-pop-up").on('click', function(e){
-    let pop_up=$(this).closest('.modal').attr('id');
-    let inputs=$(this).closest('.modal').find('.popup-control').get()
-    let selects=$(this).closest('.modal').find('.select-control').get()
-    let emptyInput=false
-    inputs.forEach(element => {
-      let inputId=element.getAttribute('id')
-      let validate=validator.element(`#${inputId}`)
-      if(!validate){
-        emptyInput=true
-      }
-    })
-    selects.forEach(element=>{
-      let selectId=element.getAttribute('id')
-      let validate = validator.element(`#${selectId}`)
-      if(!validate){
-        console.log($(`#${selectId}`).val());
-        emptyInput=true
-      }
-    })
-
-    if(!emptyInput){
-      $(this).closest('.modal').find('.close').click()
-      let fieldset_count_page=$(this).closest("fieldset").attr("data-count-page")
-      let pop_up_input =$(this).closest('.modal').find('input').get();
-      for(let i=0; i<pop_up_input.length; i++){
-        let id_pop_up_input=pop_up_input[i].getAttribute('id');
-        
-        if($(`fieldset[data-count-page=${fieldset_count_page}] input[data-receive-from=${id_pop_up_input}]`).length){
-          
-          let inputText=pop_up_input[i].value;
-          let inputValue=pop_up_input[i].getAttribute('data-value-select')
-          
-          $(`input[data-receive-from=${id_pop_up_input}`).val(inputText)
-          $(`input[data-receive-from=${id_pop_up_input}`).attr('data-value-select', inputValue )
-          
-          
-        }
-      }
-    }
-  })
-
-  $('#coat').on('change', function(){
-    if ($(this).is(':checked')){
-      $('#coat_input').val('true')
-    } else {
-      $('#coat_input').val('false')
-    }
-
-    console.log($('#coat_input').val());
-  })
-
-  $('.save-address').on('click',function(){
-    
-      let selector = $(this).data('save');
-      let address=$(`#route_${selector}`).val();
-      let streetNumber=$(`#street_number_${selector} `).val();
-      let city=$(`#locality_${selector} `).val();
-      let postal_code=$(`#postal_code_${selector} `).val();
-    
-    $(`#address_${selector}`).val(`${address} ${streetNumber} ${city} ${postal_code} `)
-  })
-  //! funzione che scrive il valore della option selezionata all'interno dei pop-up, in input nascosti su cui poi fare i dovuti controlli
-  //?dare classe send-val alla select
-  //? dare lo stesso id delle select all'input, aggiungendo "-input"
-  $(".send-val").on("change", function () {
-      $(this).siblings(".error").text("");
-      let textSelect = $(this).find("option:selected").text();
-      let valSelect = $(this).find("option:selected").val();
-      let idSelect = $(this).attr("id");
-      let hiddenInput = $(`#${idSelect}-input`).get();
-      hiddenInput[0].value = textSelect;
-      hiddenInput[0].setAttribute('data-value-select', valSelect)
-  });
-
-    //! funzione per inserire e pulire input del nome
-  $(".send-val-name").on("keyup", function () {
-    if($(this).hasClass('person')){
-      var valName = $("#name-popup").val();
-      var valSurname = $("#surname-popup").val();
-      var destination= '#complete-name'
-    } else {
-      var valName=$('#name-referent-registration').val();
-      var valSurname=$('#surname-referent-registration').val();
-      var destination='#referent-complete-name'
-    }
-    let name = valName
-        .split(" ")
-        .filter((i) => i)
-        .join(" ");
-    let surname = valSurname
-        .split(" ")
-        .filter((i) => i)
-        .join(" ");
-    $(destination).val(name + " " + surname);   
-  });
-
-  //! validazione dell'input di tipo date
-  $('#date').on('change', function(){
-    let date = new Date();
-    let thisYear = date.getFullYear();
-    let errorBox = $(this).siblings('.error');
-    let dateArr=$('#date').val().split('-');
-    if(dateArr[0]<1900 || dateArr[0]>thisYear){
-      errorBox.text('Data di nascita non valida')
-    } else {
-      errorBox.text('')
-    }
-  })
-
-  //! fix per i modal su iphone
-  $('.open-modal').on('click', function(){
-    let modal = $(this).data('modal');
-    $(`#${modal}`).modal('show');
-    $('body').css('overflow','hidden')
-  })
-
-  $('.close-modal').on('click', function(){
-    $('.close').click()
-  })
-
-  $('.close').on('click' , function () {
-    $('body').css('overflow','auto')
-  })
-      
-
-
-    // mostra scelta condominio
-  $('#type-real-estate').on('change',function() {
-    typo = $(this).val().toLowerCase()
-    console.log(typo)
-    console.log(arrayControlCheckbox.includes(typo));
-    if ($(this).val() === 'Stabile condominiale') {
-      console.log('eccolo');
-      $('.condominium').show();
-      $('.condominium-hide').hide()
-      $('.toggle-reverse').removeClass('select-control save-data-array')
-      $('.toggle-control').addClass('input-control save-data-array');
-      
-    } else {
-      $('.condominium').hide();
-      $('.condominium-hide').show()
-      $('.toggle-reverse').addClass('select-control save-data-array')
-      $('.toggle-control').removeClass('input-control save-data-array');
-    }
-  });
-
   function isObjectDefined (Obj) {
     if (Obj === null || typeof Obj !== 'object' ||
       Object.prototype.toString.call(Obj) === '[object Array]') {
@@ -740,6 +756,7 @@ $(document).ready(function(){
     }
   }
 
+  //^<---------------------------------------------->
 /* 
     let map;
 
