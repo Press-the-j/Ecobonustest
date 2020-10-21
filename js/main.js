@@ -33,7 +33,7 @@ $(document).ready(function(){
 
   $.ajax({
     type: "GET",
-    url: "../data/classificazione-sismica-2020.csv",
+    url: "./data/classificazione-sismica-2020.csv",
     
     success: function (response) {
       seismicValutationObj= $.csv.toObjects(response);
@@ -118,16 +118,6 @@ $(document).ready(function(){
     if(arrField.length){
       arrField.forEach(el => {
         let name = el.getAttribute('name');
-       /*  if(typeof JSON.stringify(resultObj['bonus110']) !=='undefined'){
-          for (let key in resultObj['bonus110'][0]) {
-            if(key === name){
-              console.log(resultObj['bonus110'][0]);
-              resultObj['bonus110'][0][key] = undefined;
-              console.log(resultObj['bonus110'][0])
-              
-            }
-          }
-        } */
         //? salvo i dati nelle select in pagina
         if(el.classList.contains('select-control')){
           let val = el.options[el.selectedIndex].text;
@@ -140,19 +130,36 @@ $(document).ready(function(){
           if (el.classList.contains('from-select')){
             var element={ [name]: {"name" : val} }
           } else if (el.classList.contains('save-checkbox') && el.checked) {
-              
-              /* console.log(groupKey in resultObj['bonus110'][0]); */
               if(!(groupKey in resultObj['bonus110'][0])){
-                console.log('qui creo la chiave');
                 var element={[name] : val}
-                ecobonus[groupKey]= element
               //? altrimenti aggiungo le voci
               } else {
-                console.log('qui aggiungo');
-                console.log(groupKey);
-                console.log(ecobonus[groupKey]);
                 resultObj['bonus110'][0][groupKey][name]=val
               }       
+          } else if(el.classList.contains('clicked-answer')) {
+            let val = el.getAttribute('data-response-answer');
+            resultObj['bonus110'][0][groupKey][name] = val;
+          } else if(el.classList.contains('blank-check')) {
+            if(el.checked){
+              arrayIntervantion.push(el.getAttribute('data-manage-blank'))
+              console.log(arrayIntervantion);
+              let val = el.value;;
+              resultObj['bonus110'][0][groupKey][name]=val
+            }
+          } else if(el.classList.contains('result-valutation')) {
+            let val = parseInt(el.value);
+            console.log(val);
+            if (val !== 4) {
+              resultObj['bonus110'][0][groupKey][name]= 'ok'
+            } else {
+              //! qui manca il caso in cui l'utente oltre ad interventi antisismici faccia acnhe altri interventi; sarebbe un ko parziale
+              if (arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length == 1){
+                resultObj['bonus110'][0][groupKey][name]= 'ko'
+              }
+            }
+          } else if(el.classList.contains('d7-valutation')) {
+            let val = el.getAttribute('data-response-answer');
+            resultObj['bonus110'][0][groupKey][name]=val
           } else if(el.classList.contains("modal-single-check")) {
             var element ={[name] : val}
           }
@@ -176,32 +183,7 @@ $(document).ready(function(){
             $.extend(ecobonus[groupKey], element)
           }
           //? se sono input normali, semplicemente prendo il valore e lo salvo        
-        } else if(el.classList.contains('save-checkbox')) {
-          /* if(el.classList.contains('blank-check')){
-            if(el.checked){
-              arrayIntervantion.push(el.getAttribute('data-manage-blank'))
-            }
-            if(typeof ecobonus[name]=='undefined'){
-              let val = el.value;
-              ecobonus[name]=val;
-            }
-          } else {
-            if(el.checked){
-              let val=el.value
-             ecobonus[name]=val;
-            }
-          } */
-        } else if(el.classList.contains('clicked-answer')){
-          let val = el.getAttribute('data-response-answer');
-          ecobonus[name]=val
-        } else if(el.classList.contains('result-valutation')) {
-          let val = el.value;
-          if (val!== 4) {
-            ecobonus[name]='ok'
-          } else {
-            if (arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length == 1)
-            ecobonus[name] = "ko"
-          }
+        
         } else if(el.classList.contains('common-save')) {
           let val=el.value;
           ecobonus[name]=val;
@@ -222,12 +204,16 @@ $(document).ready(function(){
       }     
     }
     
-    manageBlank()
+    manageKo()
   }
 
-  function manageBlank(){
+  function manageKo(){
+    let categoryRealEstateKO=['a/1','a/8','a/9'];
+    let subCategoryVal= $('sub-category select.selected-category').val()
     if (arrayIntervantion.includes('trainati') && arrayIntervantion.length==1){
       $('#d5_bis_no').attr('data-response-answer', 'ko')
+    } else if($('.choose-category').val() !== 'a' && !(categoryRealEstateKO.includes(subCategoryVal))) {
+      $('#d7_si').attr('data-response-answer', 'ko');
     }
   }
 
@@ -504,10 +490,10 @@ $(document).ready(function(){
               .prop("disabled", true);
       }
       $(".sub-category").removeClass("active");
-      $(".sub-category select").removeClass("group-save-select save-data-array");
+      $(".sub-category select").removeClass("selected-category");
       
       $(".category-" + selectedCategory).addClass("active ");
-      $(".category-" + selectedCategory + " select").addClass("group-save-select save-data-array");
+      $(".category-" + selectedCategory + " select").addClass("selected-category");
   })    
   //! validazioni checkbox*/
   $(".owner-title input").on("click", function () {

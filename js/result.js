@@ -17,3 +17,19 @@ if(el.checked && !el.classList.contains('multiple-check')){
   }
   
 }
+
+
+if(el.classList.contains('blank-check')){
+            if(el.checked){
+              arrayIntervantion.push(el.getAttribute('data-manage-blank'))
+            }
+            if(typeof ecobonus[name]=='undefined'){
+              let val = el.value;
+              ecobonus[name]=val;
+            }
+          } else {
+            if(el.checked){
+              let val=el.value
+             ecobonus[name]=val;
+            }
+          }
