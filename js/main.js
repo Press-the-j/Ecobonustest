@@ -83,7 +83,7 @@ $(document).ready(function(){
 
   //? L'utente può andare avanti solo se accetta privacy
     //! sarà sostituito da validazione di jquery validation
-  $("#privacy").on("change", function () {
+ /*  $("#privacy").on("change", function () {
     if ($(this).is(":checked")) {
         let btn_next = $(this)
             .closest(".form-group")
@@ -97,7 +97,7 @@ $(document).ready(function(){
             .children(".next");
         btn_next.prop("disabled", true);
     }
-  });    
+  });   */  
     
   $(".next").on('click',function(){
     current_step = $(this).closest('fieldset');
@@ -108,7 +108,7 @@ $(document).ready(function(){
       $(this).addClass('clicked-answer')
     }
     let control=controlInput(fieldset_count_page);
-    //if(control){
+    if(control){
       //* funzione per gestire gli eventi dinamici delle pagine
       checkPage(fieldset_count_page)
       
@@ -121,7 +121,7 @@ $(document).ready(function(){
       //!---------------------------------->
 
       next();
-    //}
+    }
   });
 
   $(".previous").on("click", function () {
@@ -716,10 +716,11 @@ $(document).ready(function(){
   function controlInput(countPage){
     //? seleziono il fieldset padre tramite il countPage passato 
     let inputs = $(`fieldset[data-count-page=${countPage}] .input-control`).get()
-    let select=$(`fieldset[data-count-page=${countPage}] .select-control`).get()
+    let selects=$(`fieldset[data-count-page=${countPage}] .select-control`).get()
+    let checkboxes= $(`fieldset[data-count-page=${countPage}] .checkbox-control`).get()
     let emptyInput=false
     //? controllo gli input all'interno del fieldset 
-    inputs.forEach(element => {
+    inputs.forEach((element) => {
       let inputId=element.getAttribute('id')
       let validate=validator.element(`#${inputId}`)
       
@@ -727,7 +728,7 @@ $(document).ready(function(){
         emptyInput=true
       }
     })
-    select.forEach(element => {
+    selects.forEach((element) => {
       let selectId=element.getAttribute('id')
       let validate = validator.element(`#${selectId}`)
       
@@ -736,6 +737,14 @@ $(document).ready(function(){
       }
       
     });
+    checkboxes.forEach((element)=> {
+      let checkboxId = element.getAttribute('id');
+      let validate = validator.element(`#${checkboxId}`);
+
+      if(!validate){
+        emptyInput=true
+      }
+    })
     if (emptyInput) {
         return false;
     }

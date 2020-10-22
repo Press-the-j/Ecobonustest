@@ -73,7 +73,7 @@
               OK! Verifichiamo se ho i requisiti per accedere al Superbonus 110%</p>
             <div class="form-group switch-wrapper">
               <label class="switch" for="privacy">
-                <input type="checkbox" id="privacy" class="switch-check">
+                <input type="checkbox" id="privacy" name="checkPrivacy" class="switch-check checkbox-control">
                 <span class="slider"></span>
               </label>
               <span>Accetta la nostra <a class="link" href="">Privacy policy</a></span>
@@ -86,7 +86,7 @@
               <span>Rimani aggiornato sulle nostre offerte <a class="link" href="">Marketing</a></span>
             </div>
             <div class="bottoni m-top-60">
-              <input type="button" name="continua" class="next btn-next btn-home" value="continua" disabled />
+              <input type="button" name="continua" class="next btn-next btn-home" value="continua"  />
             </div>
           </fieldset>
           <fieldset data-count-page="2" class="scegliTipo">
@@ -288,7 +288,7 @@
               <label class="control-label"  for="referent-tel-registration">Telefono</label>
               <div class="row-input">
                 <input data-toggle="modal" data-modal="referent-registration" type="tel"
-                  class="form-control fieldset-input input-control open-modal save-data group-save" id="referent-tel-registration" data-group-result="referente" name="tel_number"
+                  class="form-control fieldset-input input-control open-modal save-data group-save" id="referent-tel-registration" data-group-result="referente" name="cellulare"
                   data-receive-from="number-referent-registration">
               </div>
             </div>
@@ -450,7 +450,7 @@
             <div class="form-group">
               <label class="control-label" for="address_estate">Dove si trova?</label>
               <div class="row-input">
-                <input type="search" autocomplete class="form-control input-control open-modal" name="" data-toggle="modal" data-modal="address_real_estate_modal" data-whatever="@mdo" id="address_estate">
+                <input type="search" autocomplete class="form-control input-control open-modal" name="address_real_estate" data-toggle="modal" data-modal="address_real_estate_modal" data-whatever="@mdo" id="address_estate">
                 <input type="hidden" class="save-data-array common-save"  name="indirizzo"data-receive-from="route_estate" >
                 <input type="hidden" name="numero" class="save-data-array common-save" data-receive-from="street_number_estate">
                 <input type="hidden" name="città" class="save-data-array common-save" data-receive-from="locality_estate" >
