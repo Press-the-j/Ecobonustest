@@ -362,15 +362,15 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="control-label" for="postal_code_registered_office">CAP</label>
-                      <div class="row-input">
-                        <input type="text" class="form-control popup-control" name="postal_code" id="postal_code_registered_office">
-                      </div>
-                    </div>
-                    <div class="form-group">
                       <label class="control-label" for="locality_registered_office">Città</label>
                       <div class="row-input">
                         <input type="text" class="form-control popup-control" name="locality" id="locality_registered_office">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="route_registered_office">Indirizzo</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control" name="route" id="route_registered_office">
                       </div>
                     </div>
                     <div class="form-group">
@@ -380,9 +380,9 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="control-label" for="route_registered_office">Indirizzo</label>
+                      <label class="control-label" for="postal_code_registered_office">CAP</label>
                       <div class="row-input">
-                        <input type="text" class="form-control popup-control" name="route" id="route_registered_office">
+                        <input type="text" class="form-control popup-control" name="postal_code" id="postal_code_registered_office">
                       </div>
                     </div>
                     <div>
@@ -451,9 +451,9 @@
               <label class="control-label" for="address_estate">Dove si trova?</label>
               <div class="row-input">
                 <input type="search" autocomplete class="form-control input-control open-modal" name="address_real_estate" data-toggle="modal" data-modal="address_real_estate_modal" data-whatever="@mdo" id="address_estate">
-                <input type="hidden" class="save-data-array common-save"  name="indirizzo"data-receive-from="route_estate" >
+                <input type="hidden" class="save-data-array common-save " name="indirizzo"data-receive-from="route_estate" >
                 <input type="hidden" name="numero" class="save-data-array common-save" data-receive-from="street_number_estate">
-                <input type="hidden" name="città" class="save-data-array common-save" data-receive-from="locality_estate" >
+                <input type="hidden" name="città" class="save-data-array common-save save-city-valutation" id="city-estate" data-receive-from="locality_estate" >
                 <input type="hidden" name="provincia" class="save-data-array common-save" data-receive-from="province_estate" >
                 <input type="hidden" name="cap" class="save-data-array common-save" data-receive-from="postal_code_estate" >
               </div>
@@ -563,6 +563,13 @@
                   </div>
                   <div class="modal-body">
                       <div class="form-group">
+                        <label class="control-label" for="address-estate">Cerca</label>
+                        <div class="row-input">
+                          <input type="search" class="form-control" id="address-estate-search" required
+                            autocorrect="off" spellcheck="false" autocomplete="off">
+                        </div>
+                      </div>
+                      <div class="form-group">
                         <label for="locality" class="control-label">Città</label>
                         <div class="row-input">
                           <input type="text" class="form-control popup-control" name="locality" id="locality_estate">
@@ -593,7 +600,7 @@
                         </div>
                       </div>
                     <div>
-                      <div id="map-registered-office"></div>
+                      <div id="map-estate"></div>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -879,12 +886,19 @@
             <strong>Qualificazione dell'intervento</strong>
             <p>l'unità immobiliare su cui hai effettuato / effettuari l'intervento è situata nelle zone sismiche 1,2 e 3
               di cui all'ordinanza del Presidente del Consiglio dei ministri n.3274 del 20 marzo 2003?</p>
-            <p>Confermi l'indirizzo dell'immobile?</p>
             <div class="form-group">
               <div class="seismic-valutation">
-                <input type="text" class="input-valutation" placeholder='inserisci un comune'>
-                <span class="btn-next getValutation">Valuta</span>
+                <div class="seismic-valutation-wrap">
+                  <label for="address_estate_valutation"><strong  class="no-wrap">Confermi indirizzo dell'immobile</strong></label>
+                  <input type="text" class="input-valutation" id="address_estate_valutation">
+                </div>
+                <input type="hidden" id="city_estate_valutation" data-receive-from="locality_estate_valutation">
+                <span class="btn-next getValutation">Conferma</span>
+                <span class="btn-previous open-modal" data-toggle="modal" data-modal="address_real_estate_modal_valutation" data-whatever="@mdo">Cambia</span>
               </div>
+            </div>
+            <div>
+              <div id="map-valutation"></div>
             </div>
             <div class="form-group">
               <label  class="no-wrap" for="result-valutation-input">Valutazione sismica</label>
@@ -892,10 +906,65 @@
                 <input type="text" id="result-valutation-input" name="d5"class="form-control group-save save-data-array result-valutation" data-group="questionario">
               </div>
             </div>
-            
             <div class="bottoni">
               <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
               <input type="button" name="next" class="next btn btn-next" value="Conferma" />
+            </div>
+            <!-- popup per cambiare indirizzo -->
+            <div class="modal fade" id="address_real_estate_modal_valutation" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="form-group">
+                        <label class="control-label" for="address-estate-valutation">Cerca</label>
+                        <div class="row-input">
+                          <input type="search" class="form-control" id="address-estate-valutation" required
+                            autocorrect="off" spellcheck="false" autocomplete="off">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="locality_estate_valutation" class="control-label">Città</label>
+                        <div class="row-input">
+                          <input type="text" class="form-control popup-control" name="locality" id="locality_estate_valutation">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="route_estate_valutation" class="control-label">Indirizzo</label>
+                        <div class="row-input">
+                          <input type="text" class="form-control popup-control" name="route" id="route_estate_valutation">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="street_number_estate" class="control-label">Numero</label>
+                        <div class="row-input">
+                          <input type="text" class="form-control popup-control" name="street_number" id="street_number_estate_valutation">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="province_estate_valutation" class="control-label">Provincia</label>
+                        <div class="row-input">
+                          <input type="text" class="form-control popup-control" name="province" id="province_estate_valutation">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="postal_code_estate_valutation" class="control-label">CAP</label>
+                        <div class="row-input">
+                          <input type="text" class="form-control popup-control" name="postal_code" id="postal_code_estate_valutation">
+                        </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
+                    <button class="save-pop-up btn-next save-address " type="button" data-save="estate_valutation" class="btn btn-primary"
+                      >Salva</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </fieldset>
           <fieldset data-count-page="11">

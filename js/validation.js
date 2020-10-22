@@ -374,7 +374,6 @@ window.validator = $('#formComp').validate({
   },
   errorPlacement: function(error, element) {
     if(element.is('input')){
-      console.log(element);
       element.hasClass('checkbox-control') ?
         error.insertAfter(element.closest('.switch-wrapper')) :
         error.insertAfter(element.parents('.row-input'));

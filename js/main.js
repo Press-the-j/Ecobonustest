@@ -80,24 +80,6 @@ $(document).ready(function(){
     nameUser = $(this).val()
     console.log(nameUser);
   })
-
-  //? L'utente può andare avanti solo se accetta privacy
-    //! sarà sostituito da validazione di jquery validation
- /*  $("#privacy").on("change", function () {
-    if ($(this).is(":checked")) {
-        let btn_next = $(this)
-            .closest(".form-group")
-            .siblings(".bottoni")
-            .children(".next");
-        btn_next.prop("disabled", false);
-    } else if ($(this).not(":checked")) {
-        let btn_next = $(this)
-            .closest(".form-group")
-            .siblings(".bottoni")
-            .children(".next");
-        btn_next.prop("disabled", true);
-    }
-  });   */  
     
   $(".next").on('click',function(){
     current_step = $(this).closest('fieldset');
@@ -108,7 +90,7 @@ $(document).ready(function(){
       $(this).addClass('clicked-answer')
     }
     let control=controlInput(fieldset_count_page);
-    if(control){
+    //if(control){
       //* funzione per gestire gli eventi dinamici delle pagine
       checkPage(fieldset_count_page)
       
@@ -121,7 +103,7 @@ $(document).ready(function(){
       //!---------------------------------->
 
       next();
-    }
+    //}
   });
 
   $(".previous").on("click", function () {
@@ -144,8 +126,8 @@ $(document).ready(function(){
 
   //? funzione che cerca nell'oggetto seismicValutationObj e ritorna la valutazione in base al comune
   $('.getValutation').on('click', function(){
-    let val=$(this).siblings('input').val()
-    let result= $('.result-valutation')
+    let val=$(this).siblings('#city_estate_valutation').val()
+    let result= $('#result-valutation-input')
     
     for (let el of seismicValutationObj){
       if(el.Denominazione.toLowerCase()===val.toLowerCase()){
@@ -392,6 +374,26 @@ $(document).ready(function(){
       }
     });
   
+  $('#address_registered_office').on('click', function(){
+    let map;
+    let mapId ='map-registered-office';
+    let searchBox='address-registered-office';
+
+    initMap(mapId);
+    initAutocomplete('_registered_office', componentForm, searchBox);
+  })
+
+  $('#address_estate').on('click', function(){
+    let map;
+    let mapId = 'map-estate';
+    let mapValutationId = 'map-valutation'
+    let searchBox = 'address-estate-search';
+
+    initMap(mapId);
+    initAutocomplete('_estate', componentForm, searchBox);
+    //initMap(mapValutationId)
+
+  })
   //^<--------------------------------------------->
 
   //^<---------------functions--------------------->
@@ -647,8 +649,17 @@ $(document).ready(function(){
           }
         }
         break; */
+      case '5' :
+        let address= $('#address_estate').val();
+        console.log(address);
+        $('#address_estate_valutation').val(address)
+        let city =$('#city-estate').val()
+        console.log(city);
+        $('#city_estate_valutation').val(city)
+        break;
       case '9' : 
         checkSismic(countPage);
+        valutationMap()
         break;
     }
 
@@ -766,15 +777,7 @@ $(document).ready(function(){
   }
 
   //^<---------------------------------------------->
-/* 
-    let map;
-
-    function initMap() {
-      map = new google.maps.Map(document.getElementById("map-registered-office"), {
-        center: { lat: 	0, lng: 0},
-        zoom: 1,
-      });
-    }
+    
     const componentForm = {
       street_number: "short_name",
       route: "long_name",
@@ -783,11 +786,52 @@ $(document).ready(function(){
       //country: "long_name",
       postal_code: "short_name",
     };
-    
 
-    var inputGoogle=document.getElementById('address-registered-office');
-    function initAutocomplete(){
-      autocomplete = new google.maps.places.Autocomplete(inputGoogle, {types:["geocode"]});
+    function initMap(mapId) {
+        map = new google.maps.Map(document.getElementById(mapId), {
+        center: { lat: 	0, lng: 0},
+        zoom: 1,
+      });
+    }
+    
+    function valutationMap(){
+      console.log('ciao');
+      
+      let val = $("#address_estate_valutation").val();
+      initValutationMap(val);
+    }
+
+    let mapValutation;
+
+
+      function initValutationMap(val){
+        mapValutation = new google.maps.Map(document.getElementById("map-valutation"), {
+          center:  {lat: 	0, lng: 0},
+          zoom: 15,
+        });
+        const request = {
+          query: val,
+          fields: ["name", "geometry"],
+        };
+        const marker = new google.maps.Marker({
+          map: mapValutation,
+          visible: true,
+          anchorPoint: new google.maps.Point(0, -29),
+        });
+        service = new google.maps.places.PlacesService(mapValutation);
+        service.findPlaceFromQuery(request, (results, status) => {
+          console.log(results[0].geometry.location);
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            marker.setPosition(results[0].geometry.location)
+            //marker.setVisible(true)
+            mapValutation.setCenter(results[0].geometry.location);
+          }
+        });
+      }
+    
+    function initAutocomplete(selector, thisForm, inputId){
+      var inputGoogle=document.getElementById(inputId)
+      autocomplete = new google.maps.places.Autocomplete(inputGoogle, {types:["address"]});
       autocomplete.setFields(["address_components", "geometry"]);
       autocomplete.bindTo("bounds", map);
       autocomplete.addListener("place_changed", function(){
@@ -797,18 +841,20 @@ $(document).ready(function(){
           map,
           anchorPoint: new google.maps.Point(0, -29),
         });
-        console.log(place);
       
-        for (const component in componentForm) {
-          document.getElementById(component).value = "";
-          document.getElementById(component).disabled = false;
+      
+        for (const component in thisForm) {
+          document.getElementById(`${component}${selector}`).value = "";
+          document.getElementById(`${component}${selector}`).disabled = false;
         }
+        
         for (const component of place.address_components) {
           const addressType = component.types[0];
+          console.log(addressType);
       
-          if (componentForm[addressType]) {
-            const val = component[componentForm[addressType]];
-            document.getElementById(addressType).value = val;
+          if (thisForm[addressType]) {
+            const val = component[thisForm[addressType]];
+            document.getElementById(`${addressType}${selector}`).value = val;
           }
         }
         
@@ -850,8 +896,7 @@ $(document).ready(function(){
     }
 
 
-    initMap()
-    initAutocomplete() */
+    
   });
 
   // google maps autocomplete

@@ -12,10 +12,15 @@
 
 //!pagina di valutazione sismica
 .seismic-valutation{
-  margin: 40px;
   display: flex;
   align-items: center;
   
+  .seismic-valutation-wrap{
+    display: flex;
+    flex-direction: column;
+    width:50%
+  }
+
   .btn-next{
     font-size: 14px;
   }

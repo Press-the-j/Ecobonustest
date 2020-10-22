@@ -28,7 +28,7 @@ body.modal-open {
 }
 
 /* mappa sede legale */
-#map-registered-office {
+#map-registered-office, #map-estate, #map-valutation {
   height: 300px;
   z-index: 10;
 }
@@ -183,13 +183,23 @@ hr {
 }
 
 .seismic-valutation {
-  margin: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.seismic-valutation .seismic-valutation-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 50%;
 }
 
 .seismic-valutation .btn-next {
@@ -410,6 +420,10 @@ hr {
 
 .btn-home {
   margin-right: 0 !important;
+}
+
+.getValutation {
+  margin-right: 15px;
 }
 
 .modal-content {
