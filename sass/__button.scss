@@ -53,3 +53,16 @@
 .getValutation{
   margin-right: 15px;
 }
+
+.buttons-valutation{
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 680px) {
+
+  .buttons-valutation{
+    margin-top: 30px;
+  }
+
+}

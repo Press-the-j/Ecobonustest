@@ -41,7 +41,6 @@ $(document).ready(function(){
   //? array con le checkbox checckate nella pagina di qualificazione dell'intervento, serviranno poi per gestire i vari ko/ok
   var arrayIntervantion=[]
 
-  //? URL e Endpoint per popolare le select
   const ENDPOINTS =['tipologia', 'stato-immobile','tipo-generazione','tipo-generatore','radiatore','pareti-esterne','telaio', 'vetro']
   const URLSELECT="http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/"
 
@@ -128,9 +127,9 @@ $(document).ready(function(){
   $('.getValutation').on('click', function(){
     let val=$(this).siblings('#city_estate_valutation').val()
     let result= $('#result-valutation-input')
-    
+    console.log(val)
     for (let el of seismicValutationObj){
-      if(el.Denominazione.toLowerCase()===val.toLowerCase()){
+      if($.trim(el.Denominazione.toLowerCase())===val.toLowerCase()){
         result.val(el["Classificazione 2020"])
         break
       } else {
@@ -296,6 +295,11 @@ $(document).ready(function(){
       let postal_code=$(`#postal_code_${selector} `).val();
     
     $(`#address_${selector}`).val(`${address} ${streetNumber} ${city} ${postal_code} `)
+    if($(this).hasClass('save-address-valutation')){
+      setTimeout(function(){
+        $('.getValutation').click();
+      }, 1000)
+    }
   })
 
   //? funzione che scrive il valore della option selezionata all'interno dei pop-up, in input nascosti su cui poi fare i dovuti controlli
@@ -374,6 +378,7 @@ $(document).ready(function(){
       }
     });
   
+  //? funzioni che si occupano di creare gli input search di google maps e caaricare le mappe
   $('#address_registered_office').on('click', function(){
     let map;
     let mapId ='map-registered-office';
@@ -392,6 +397,9 @@ $(document).ready(function(){
     initMap(mapId);
     initAutocomplete('_estate', componentForm, searchBox);
     //initMap(mapValutationId)
+  })
+
+  $('#change-address').on('click', function(){
 
   })
   //^<--------------------------------------------->
@@ -658,8 +666,11 @@ $(document).ready(function(){
         $('#city_estate_valutation').val(city)
         break;
       case '9' : 
+        let mapValutation;
+        let searchBox = 'address-estate-valutation'
         checkSismic(countPage);
         valutationMap()
+        initValutationAutocomplete('_estate_valutation', componentForm, searchBox)
         break;
     }
 
@@ -777,126 +788,167 @@ $(document).ready(function(){
   }
 
   //^<---------------------------------------------->
+  //^<-----------GoogleMaps------------------------->  
+  const componentForm = {
+    street_number: "short_name",
+    route: "long_name",
+    locality: "long_name",
+    //administrative_area_level_1: "short_name",
+    //country: "long_name",
+    postal_code: "short_name",
+  };
+
+  function initMap(mapId) {
+      map = new google.maps.Map(document.getElementById(mapId), {
+      center: { lat: 	0, lng: 0},
+      zoom: 1,
+    });
+  }
     
-    const componentForm = {
-      street_number: "short_name",
-      route: "long_name",
-      locality: "long_name",
-      //administrative_area_level_1: "short_name",
-      //country: "long_name",
-      postal_code: "short_name",
+  function valutationMap(){
+    let val = $("#address_estate_valutation").val();
+    initValutationMap(val);
+  }
+
+  function initValutationMap(val){
+    mapValutation = new google.maps.Map(document.getElementById("map-valutation"), {
+      center:  {lat: 	0, lng: 0},
+      zoom: 15,
+    });
+    const request = {
+      query: val,
+      fields: ["name", "geometry"],
     };
-
-    function initMap(mapId) {
-        map = new google.maps.Map(document.getElementById(mapId), {
-        center: { lat: 	0, lng: 0},
-        zoom: 1,
-      });
-    }
-    
-    function valutationMap(){
-      console.log('ciao');
+    const marker = new google.maps.Marker({
+      map: mapValutation,
+      visible: true,
+      anchorPoint: new google.maps.Point(0, -29),
+    });
+    service = new google.maps.places.PlacesService(mapValutation);
+    service.findPlaceFromQuery(request, (results, status) => {
       
-      let val = $("#address_estate_valutation").val();
-      initValutationMap(val);
-    }
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        marker.setPosition(results[0].geometry.location)
+        //marker.setVisible(true)
+        mapValutation.setCenter(results[0].geometry.location);
+      }
+    });
+  }
+  
+  function initValutationAutocomplete(selector, thisForm, inputId){
+    var inputGoogle=document.getElementById(inputId)
+    autocomplete = new google.maps.places.Autocomplete(inputGoogle, {types:["address"]});
+    autocomplete.setFields(["address_components", "geometry"]);
+    autocomplete.bindTo("bounds", mapValutation);
+    autocomplete.addListener("place_changed", function(){
+      const place = autocomplete.getPlace();
+      
+      const marker = new google.maps.Marker({
+        map:mapValutation,
+        anchorPoint: new google.maps.Point(0, -29),
+      });
+    
+    
+      for (const component in thisForm) {
+        document.getElementById(`${component}${selector}`).value = "";
+        document.getElementById(`${component}${selector}`).disabled = false;
+      }
+      
+      for (const component of place.address_components) {
+        const addressType = component.types[0];
+        
+    
+        if (thisForm[addressType]) {
+          const val = component[thisForm[addressType]];
+          document.getElementById(`${addressType}${selector}`).value = val;
+        }
+      }
+      
+      markers = [];
+      if (!place.geometry) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        window.alert("No details available for input: '" + place.name + "'");
+        return;
+      }
+  
+      // If the place has a geometry, then present it on a map.
+      if (place.geometry.viewport) {
+        mapValutation.fitBounds(place.geometry.viewport);
+      } else {
+        mapValutation.setCenter(place.geometry.location);
+        mapValutation.setZoom(17); // Why 17? Because it looks good.
+      }
+      marker.setPosition(place.geometry.location);
+      marker.setVisible(true);
+    });
+  }
 
-    let mapValutation;
+  function initAutocomplete(selector, thisForm, inputId){
+    var inputGoogle=document.getElementById(inputId)
+    autocomplete = new google.maps.places.Autocomplete(inputGoogle, {types:["address"]});
+    autocomplete.setFields(["address_components", "geometry"]);
+    autocomplete.bindTo("bounds", map);
+    autocomplete.addListener("place_changed", function(){
+      const place = autocomplete.getPlace();
+      
+      const marker = new google.maps.Marker({
+        map,
+        anchorPoint: new google.maps.Point(0, -29),
+      });
+    
+    
+      for (const component in thisForm) {
+        document.getElementById(`${component}${selector}`).value = "";
+        document.getElementById(`${component}${selector}`).disabled = false;
+      }
+      
+      for (const component of place.address_components) {
+        const addressType = component.types[0];
+        
+    
+        if (thisForm[addressType]) {
+          const val = component[thisForm[addressType]];
+          document.getElementById(`${addressType}${selector}`).value = val;
+        }
+      }
+      
+      markers = [];
+      if (!place.geometry) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        window.alert("No details available for input: '" + place.name + "'");
+        return;
+      }
+  
+      // If the place has a geometry, then present it on a map.
+      if (place.geometry.viewport) {
+        map.fitBounds(place.geometry.viewport);
+      } else {
+        map.setCenter(place.geometry.location);
+        map.setZoom(17); // Why 17? Because it looks good.
+      }
+      marker.setPosition(place.geometry.location);
+      marker.setVisible(true);
+    });
+  }
 
-
-      function initValutationMap(val){
-        mapValutation = new google.maps.Map(document.getElementById("map-valutation"), {
-          center:  {lat: 	0, lng: 0},
-          zoom: 15,
-        });
-        const request = {
-          query: val,
-          fields: ["name", "geometry"],
+  function geolocate() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const geolocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
         };
-        const marker = new google.maps.Marker({
-          map: mapValutation,
-          visible: true,
-          anchorPoint: new google.maps.Point(0, -29),
+        const circle = new google.maps.Circle({
+          center: geolocation,
+          radius: position.coords.accuracy,
         });
-        service = new google.maps.places.PlacesService(mapValutation);
-        service.findPlaceFromQuery(request, (results, status) => {
-          console.log(results[0].geometry.location);
-          if (status === google.maps.places.PlacesServiceStatus.OK) {
-            marker.setPosition(results[0].geometry.location)
-            //marker.setVisible(true)
-            mapValutation.setCenter(results[0].geometry.location);
-          }
-        });
-      }
-    
-    function initAutocomplete(selector, thisForm, inputId){
-      var inputGoogle=document.getElementById(inputId)
-      autocomplete = new google.maps.places.Autocomplete(inputGoogle, {types:["address"]});
-      autocomplete.setFields(["address_components", "geometry"]);
-      autocomplete.bindTo("bounds", map);
-      autocomplete.addListener("place_changed", function(){
-        const place = autocomplete.getPlace();
-        
-        const marker = new google.maps.Marker({
-          map,
-          anchorPoint: new google.maps.Point(0, -29),
-        });
-      
-      
-        for (const component in thisForm) {
-          document.getElementById(`${component}${selector}`).value = "";
-          document.getElementById(`${component}${selector}`).disabled = false;
-        }
-        
-        for (const component of place.address_components) {
-          const addressType = component.types[0];
-          console.log(addressType);
-      
-          if (thisForm[addressType]) {
-            const val = component[thisForm[addressType]];
-            document.getElementById(`${addressType}${selector}`).value = val;
-          }
-        }
-        
-        markers = [];
-        if (!place.geometry) {
-          // User entered the name of a Place that was not suggested and
-          // pressed the Enter key, or the Place Details request failed.
-          window.alert("No details available for input: '" + place.name + "'");
-          return;
-        }
-    
-        // If the place has a geometry, then present it on a map.
-        if (place.geometry.viewport) {
-          map.fitBounds(place.geometry.viewport);
-        } else {
-          map.setCenter(place.geometry.location);
-          map.setZoom(17); // Why 17? Because it looks good.
-        }
-        marker.setPosition(place.geometry.location);
-        marker.setVisible(true);
+        autocomplete.setBounds(circle.getBounds());
       });
     }
+  }
+ 
+});
 
-   
-    function geolocate() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          const geolocation = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-          const circle = new google.maps.Circle({
-            center: geolocation,
-            radius: position.coords.accuracy,
-          });
-          autocomplete.setBounds(circle.getBounds());
-        });
-      }
-    }
-
-
-    
-  });
-
-  // google maps autocomplete
+  

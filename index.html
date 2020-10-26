@@ -32,13 +32,14 @@
   <script src="js/validation.js"></script>
   <script src="js/main.js" charset="utf-8"></script>
   <!-- Google Maps Api Key -->
-  <script defer src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&v=weekly"></script>
+  <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6ElNLOL1BWAp5GUCvkrOEM9vEbPxxceI&libraries=places&v=weekly"></script>
 </head>
 
 <body>
   <main class="container">
     <!-- Pagina accettazione -->
     <div class="row">
+      <div class="wrap-lazyload"></div>
       <div class=" col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
         
         <div class="head">
@@ -565,8 +566,8 @@
                       <div class="form-group">
                         <label class="control-label" for="address-estate">Cerca</label>
                         <div class="row-input">
-                          <input type="search" class="form-control" id="address-estate-search" required
-                            autocorrect="off" spellcheck="false" autocomplete="off">
+                          <input type="text" class="form-control" id="address-estate-search" required
+                            autocorrect="off" spellcheck="false" autocomplete="new-password">
                         </div>
                       </div>
                       <div class="form-group">
@@ -890,23 +891,25 @@
               <div class="seismic-valutation">
                 <div class="seismic-valutation-wrap">
                   <label for="address_estate_valutation"><strong  class="no-wrap">Confermi indirizzo dell'immobile</strong></label>
-                  <input type="text" class="input-valutation" id="address_estate_valutation">
+                  <input type="text" data-modal class="input-valutation" id="address_estate_valutation">
                 </div>
-                <input type="hidden" id="city_estate_valutation" data-receive-from="locality_estate_valutation">
-                <span class="btn-next getValutation">Conferma</span>
-                <span class="btn-previous open-modal" data-toggle="modal" data-modal="address_real_estate_modal_valutation" data-whatever="@mdo">Cambia</span>
+                <div class="buttons-valutation">
+                  <input type="hidden" id="city_estate_valutation" data-receive-from="locality_estate_valutation">
+                  <span class="btn-next getValutation">Conferma</span>
+                  <span class="btn-previous open-modal " id="change-address" data-toggle="modal" data-modal="address_real_estate_modal_valutation" data-whatever="@mdo">Cambia</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label  class="no-wrap" for="result-valutation-input">Valutazione sismica</label>
+              <div class="row-input m-bottom-60">
+                <input type="text" id="result-valutation-input" name="d5"class="form-control group-save save-data-array result-valutation" data-modal data-group="questionario">
               </div>
             </div>
             <div>
               <div id="map-valutation"></div>
             </div>
-            <div class="form-group">
-              <label  class="no-wrap" for="result-valutation-input">Valutazione sismica</label>
-              <div class="row-input m-bottom-60">
-                <input type="text" id="result-valutation-input" name="d5"class="form-control group-save save-data-array result-valutation" data-group="questionario">
-              </div>
-            </div>
-            <div class="bottoni">
+            <div class="bottoni m-top-30">
               <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
               <input type="button" name="next" class="next btn btn-next" value="Conferma" />
             </div>
@@ -960,7 +963,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-previous close-modal" >Annulla</button>
-                    <button class="save-pop-up btn-next save-address " type="button" data-save="estate_valutation" class="btn btn-primary"
+                    <button class="save-pop-up btn-next save-address save-address-valutation" type="button" data-save="estate_valutation" class="btn btn-primary"
                       >Salva</button>
                   </div>
                 </div>

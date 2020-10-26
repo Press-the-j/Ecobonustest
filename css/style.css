@@ -5,6 +5,10 @@
   margin: 0;
 }
 
+body, html, .container, .row {
+  height: 100%;
+}
+
 body {
   font-family: "Lato", sans-serif;
   color: #2c3036;
@@ -18,6 +22,10 @@ body.modal-open {
   overflow-y: hidden !important;
 }
 
+.container {
+  margin-top: 0 !important;
+}
+
 .modal-open {
   overflow-y: auto;
 }
@@ -27,6 +35,17 @@ body.modal-open {
   src: url("../fonts/TickingTimebombBB.ttf");
 }
 
+/* .wrap-lazyload{
+  height: auto;
+  margin: 0px auto;
+  padding: 0px auto;
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+  z-index: 855;
+  background-color: red;
+} */
 /* mappa sede legale */
 #map-registered-office, #map-estate, #map-valutation {
   height: 300px;
@@ -111,6 +130,7 @@ hr {
   text-align: center;
   position: relative;
   margin-bottom: 40px;
+  padding-top: 100px;
 }
 
 .head img {
@@ -313,6 +333,15 @@ hr {
         -ms-flex-align: center;
             align-items: center;
   }
+  .seismic-valutation {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .seismic-valutation .seismic-valutation-wrap {
+    width: 100%;
+  }
 }
 
 .clock {
@@ -424,6 +453,21 @@ hr {
 
 .getValutation {
   margin-right: 15px;
+}
+
+.buttons-valutation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media (max-width: 680px) {
+  .buttons-valutation {
+    margin-top: 30px;
+  }
 }
 
 .modal-content {
