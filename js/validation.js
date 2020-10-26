@@ -84,7 +84,7 @@ window.validator = $('#formComp').validate({
     },
     'sede':{
       required: true,
-      regName: true
+      regAddress: true
     },
     'company_name_popup':{
       required:true,
@@ -258,7 +258,7 @@ window.validator = $('#formComp').validate({
     },
     'sede':{
       required:'campo richiesto',
-      regName:'Non sono ammessi caratteri speciali o numeri'
+      regAddress:'Non sono ammessi caratteri speciali o numeri'
     },
     'company_name_popup':{
       required:'campo richiesto',

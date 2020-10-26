@@ -464,6 +464,16 @@ hr {
           align-items: center;
 }
 
+.search-address-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 15px;
+}
+
 @media (max-width: 680px) {
   .buttons-valutation {
     margin-top: 30px;

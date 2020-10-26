@@ -54,6 +54,7 @@ $(document).ready(function(){
     
     success: function (response) {
       seismicValutationObj= $.csv.toObjects(response);
+     
       
     }
   }); 
@@ -170,6 +171,7 @@ $(document).ready(function(){
     //* prima li clona con tutti gli handler, trasformando il risultato in un array di elementi, poi li rimuovo dalla pagina
     //*nel caso l'utente torni indietro queste pagine verrano reinserite nel DOM
     clone_step = remove_step.clone(true).get();
+    
     remove_step.remove();
 
     next(fieldset_count_page)
@@ -249,7 +251,6 @@ $(document).ready(function(){
       let selectId=element.getAttribute('id')
       let validate = validator.element(`#${selectId}`)
       if(!validate){
-        console.log($(`#${selectId}`).val());
         emptyInput=true
       }
     })
@@ -288,13 +289,21 @@ $(document).ready(function(){
 
   //? funzione per prendere i vari input nel modal che si riferiscono all'indirizzo, e salvarli in una unica stringa
   $('.save-address').on('click',function(){
-      let selector = $(this).data('save');
-      let address=$(`#route_${selector}`).val();
-      let streetNumber=$(`#street_number_${selector} `).val();
-      let city=$(`#locality_${selector} `).val();
-      let postal_code=$(`#postal_code_${selector} `).val();
-    
-    $(`#address_${selector}`).val(`${address} ${streetNumber} ${city} ${postal_code} `)
+    let selector = $(this).data('save');
+    let address=$(`#route_${selector}`).val();
+    let streetNumber=$(`#street_number_${selector} `).val();
+    let city=$(`#locality_${selector} `).val();
+    let postal_code=$(`#postal_code_${selector} `).val();
+    let completeAddress=`${address} ${streetNumber} ${city} ${postal_code} `
+    if($(this).hasClass('isModal')){
+      $(`#address_${selector}_modal`).val(completeAddress)
+    } else {
+      $(`#address_${selector}`).val(completeAddress)
+      if($(this).hasClass('change-valutation-map')){
+        setValutationMap(completeAddress)
+      }
+    }
+
     if($(this).hasClass('save-address-valutation')){
       setTimeout(function(){
         $('.getValutation').click();
@@ -355,7 +364,6 @@ $(document).ready(function(){
   $('.open-modal').on('click', function(){
     let modal = $(this).data('modal');
     $(`#${modal}`).modal('show');
-    //$('body').css('overflow','hidden')
   })
 
   $('.close-modal').on('click', function(){
@@ -397,6 +405,16 @@ $(document).ready(function(){
     initMap(mapId);
     initAutocomplete('_estate', componentForm, searchBox);
     //initMap(mapValutationId)
+  })
+
+  $('#search-address-registered-office').on('click', function (){
+    let val = $(this).siblings('input').val()
+    setRegisteredOfficeMap(val)
+  })
+
+  $('#search-address-estate').on('click', function(){
+    let val = $(this).siblings('input').val()
+    setEstateMap(val)
   })
 
   $('#change-address').on('click', function(){
@@ -493,7 +511,6 @@ $(document).ready(function(){
 
     commonField.forEach((el)=>{
       let name=el.getAttribute('name');
-      let type = el.getAttribute('type')
       if(el.getAttribute('type')=='checkbox'){
         let val= el.checked ? true : false 
         resultObj[name]=val  
@@ -669,8 +686,12 @@ $(document).ready(function(){
         let mapValutation;
         let searchBox = 'address-estate-valutation'
         checkSismic(countPage);
-        valutationMap()
-        initValutationAutocomplete('_estate_valutation', componentForm, searchBox)
+        if(!sismicIntervention['removed']){
+          let map;
+          let val = $("#address_estate_valutation").val();
+          initAutocomplete('_estate_valutation', componentForm, searchBox)
+          setValutationMap(val)
+        }
         break;
     }
 
@@ -736,6 +757,7 @@ $(document).ready(function(){
   //todo si potrebbe pensare di attuare il controllo direttamente nella funzione di salvataggio
 
   function controlInput(countPage){
+    
     //? seleziono il fieldset padre tramite il countPage passato 
     let inputs = $(`fieldset[data-count-page=${countPage}] .input-control`).get()
     let selects=$(`fieldset[data-count-page=${countPage}] .select-control`).get()
@@ -793,7 +815,7 @@ $(document).ready(function(){
     street_number: "short_name",
     route: "long_name",
     locality: "long_name",
-    //administrative_area_level_1: "short_name",
+    administrative_area_level_2: "short_name",
     //country: "long_name",
     postal_code: "short_name",
   };
@@ -805,13 +827,9 @@ $(document).ready(function(){
     });
   }
     
-  function valutationMap(){
-    let val = $("#address_estate_valutation").val();
-    initValutationMap(val);
-  }
 
-  function initValutationMap(val){
-    mapValutation = new google.maps.Map(document.getElementById("map-valutation"), {
+  function setValutationMap(val){
+    map = new google.maps.Map(document.getElementById("map-valutation"), {
       center:  {lat: 	0, lng: 0},
       zoom: 15,
     });
@@ -820,28 +838,113 @@ $(document).ready(function(){
       fields: ["name", "geometry"],
     };
     const marker = new google.maps.Marker({
-      map: mapValutation,
+      map: map,
       visible: true,
       anchorPoint: new google.maps.Point(0, -29),
     });
-    service = new google.maps.places.PlacesService(mapValutation);
+    service = new google.maps.places.PlacesService(map);
     service.findPlaceFromQuery(request, (results, status) => {
       
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         marker.setPosition(results[0].geometry.location)
         //marker.setVisible(true)
-        mapValutation.setCenter(results[0].geometry.location);
+        map.setCenter(results[0].geometry.location);
       }
     });
   }
   
-  function initValutationAutocomplete(selector, thisForm, inputId){
+  function setRegisteredOfficeMap(val){
+    map = new google.maps.Map(document.getElementById("map-registered-office"), {
+      center:  {lat: 	0, lng: 0},
+      zoom: 15,
+    });
+    const request = {
+      query: val,
+      fields: ["name", "geometry"],
+    };
+    const marker = new google.maps.Marker({
+      map: map,
+      visible: true,
+      anchorPoint: new google.maps.Point(0, -29),
+    });
+    service = new google.maps.places.PlacesService(map);
+    service.findPlaceFromQuery(request, (results, status) => {
+      
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        marker.setPosition(results[0].geometry.location)
+        //marker.setVisible(true)
+        map.setCenter(results[0].geometry.location);
+      } else {
+        
+      }
+    });
+  }
+
+  function setEstateMap(val){
+    map = new google.maps.Map(document.getElementById("map-estate"), {
+      center:  {lat: 	0, lng: 0},
+      zoom: 15,
+    });
+    const request = {
+      query: val,
+      fields: ["name", "geometry"],
+    };
+    const marker = new google.maps.Marker({
+      map: map,
+      visible: true,
+      anchorPoint: new google.maps.Point(0, -29),
+    });
+    service = new google.maps.places.PlacesService(map);
+    service.findPlaceFromQuery(request, (results, status) => {
+      
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        marker.setPosition(results[0].geometry.location)
+        //marker.setVisible(true)
+        map.setCenter(results[0].geometry.location);
+      } else {
+        
+      }
+    });
+  }
+
+  function initAutocomplete(selector, thisForm, inputId){
+    var inputGoogle=document.getElementById(inputId)
+    autocomplete = new google.maps.places.Autocomplete(inputGoogle, {types:["address"]});
+    autocomplete.setFields(["address_components",]);
+    autocomplete.addListener("place_changed", function(){
+      const place = autocomplete.getPlace();
+      console.log(place.address_components);
+    
+    
+      for (const component in thisForm) {
+        if (document.getElementById(`${component}${selector}`)) {
+          document.getElementById(`${component}${selector}`).value = "";
+          document.getElementById(`${component}${selector}`).disabled = false;
+        }
+      }
+      
+      for (const component of place.address_components) {
+        const addressType = component.types[0];
+        
+    
+        if (thisForm[addressType]) {
+          const val = component[thisForm[addressType]]
+          console.log(val);;
+          if (document.getElementById(`${addressType}${selector}`)) {
+            document.getElementById(`${addressType}${selector}`).value = val;
+          }
+        }
+      }
+    });
+  }
+  /* function initValutationAutocomplete(selector, thisForm, inputId){
     var inputGoogle=document.getElementById(inputId)
     autocomplete = new google.maps.places.Autocomplete(inputGoogle, {types:["address"]});
     autocomplete.setFields(["address_components", "geometry"]);
     autocomplete.bindTo("bounds", mapValutation);
     autocomplete.addListener("place_changed", function(){
       const place = autocomplete.getPlace();
+      console.log(place);
       
       const marker = new google.maps.Marker({
         map:mapValutation,
@@ -850,12 +953,14 @@ $(document).ready(function(){
     
     
       for (const component in thisForm) {
+        console.log(component);
         document.getElementById(`${component}${selector}`).value = "";
         document.getElementById(`${component}${selector}`).disabled = false;
       }
       
       for (const component of place.address_components) {
         const addressType = component.types[0];
+        console.log(addressType);
         
     
         if (thisForm[addressType]) {
@@ -882,72 +987,9 @@ $(document).ready(function(){
       marker.setPosition(place.geometry.location);
       marker.setVisible(true);
     });
-  }
+  } */
 
-  function initAutocomplete(selector, thisForm, inputId){
-    var inputGoogle=document.getElementById(inputId)
-    autocomplete = new google.maps.places.Autocomplete(inputGoogle, {types:["address"]});
-    autocomplete.setFields(["address_components", "geometry"]);
-    autocomplete.bindTo("bounds", map);
-    autocomplete.addListener("place_changed", function(){
-      const place = autocomplete.getPlace();
-      
-      const marker = new google.maps.Marker({
-        map,
-        anchorPoint: new google.maps.Point(0, -29),
-      });
-    
-    
-      for (const component in thisForm) {
-        document.getElementById(`${component}${selector}`).value = "";
-        document.getElementById(`${component}${selector}`).disabled = false;
-      }
-      
-      for (const component of place.address_components) {
-        const addressType = component.types[0];
-        
-    
-        if (thisForm[addressType]) {
-          const val = component[thisForm[addressType]];
-          document.getElementById(`${addressType}${selector}`).value = val;
-        }
-      }
-      
-      markers = [];
-      if (!place.geometry) {
-        // User entered the name of a Place that was not suggested and
-        // pressed the Enter key, or the Place Details request failed.
-        window.alert("No details available for input: '" + place.name + "'");
-        return;
-      }
   
-      // If the place has a geometry, then present it on a map.
-      if (place.geometry.viewport) {
-        map.fitBounds(place.geometry.viewport);
-      } else {
-        map.setCenter(place.geometry.location);
-        map.setZoom(17); // Why 17? Because it looks good.
-      }
-      marker.setPosition(place.geometry.location);
-      marker.setVisible(true);
-    });
-  }
-
-  function geolocate() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const geolocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
-        const circle = new google.maps.Circle({
-          center: geolocation,
-          radius: position.coords.accuracy,
-        });
-        autocomplete.setBounds(circle.getBounds());
-      });
-    }
-  }
  
 });
 
