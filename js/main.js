@@ -506,7 +506,7 @@ $(document).ready(function(){
     
     let commonField=$(`fieldset[data-count-page=${countPage}] .save-data`).get();
     let arrField=$(`fieldset[data-count-page=${countPage}] .save-data-array`).get();
-    let ecobonus = {}
+    let bonus110 = {}
     var arr = [];
 
     commonField.forEach((el)=>{
@@ -521,14 +521,14 @@ $(document).ready(function(){
     })
     
     //? tutte le voci all'interno dell'array bonus110
-     //* l'oggetto ecobonus rappresenta l'array bonus110, all'interno dell'oggetto resultObj
+     //* l'oggetto bonus110 rappresenta l'array bonus110, all'interno dell'oggetto resultObj
     if(arrField.length){
       arrField.forEach(el => {
         let name = el.getAttribute('name');
         //* salvo i dati nelle select in pagina
         if(el.classList.contains('select-control')){
           let val = el.options[el.selectedIndex].text;
-          ecobonus[name]={ "name" : val}
+          bonus110[name]={ "name" : val}
         //* salvo i dati raggruppandoli sotto una chiave definita nell'attribute 'data-group'; 
         } else if(el.classList.contains('group-save')){
           let groupKey=el.getAttribute('data-group');
@@ -572,11 +572,11 @@ $(document).ready(function(){
           }
           //* se la chiave sotto cui vengono raggrupati i dati non esiste la creo
           
-          if(typeof JSON.stringify(ecobonus[groupKey]) ==='undefined'){
-            ecobonus[groupKey]= element
+          if(typeof JSON.stringify(bonus110[groupKey]) ==='undefined'){
+            bonus110[groupKey]= element
           //* altrimenti aggiungo le voci
           } else {
-            $.extend(ecobonus[groupKey], element)
+            $.extend(bonus110[groupKey], element)
           }       
           //* come nel caso di categoria-catastale, mi salvo i dati di diverse selectsalvandoli sotto una key
         } else if(el.classList.contains('group-save-select')){
@@ -584,29 +584,29 @@ $(document).ready(function(){
           let groupKey=el.getAttribute('data-group');
           var element={ [name]: {"name" : val} }
 
-          if(typeof JSON.stringify(ecobonus[groupKey]) ==='undefined'){
-            ecobonus[groupKey]= element
+          if(typeof JSON.stringify(bonus110[groupKey]) ==='undefined'){
+            bonus110[groupKey]= element
           } else {
-            $.extend(ecobonus[groupKey], element)
+            $.extend(bonus110[groupKey], element)
           }
           //? se sono input normali, semplicemente prendo il valore e lo salvo        
         
         } else if(el.classList.contains('common-save')) {
           let val=el.value;
-          ecobonus[name]=val;
+          bonus110[name]=val;
         }
       });
     }
    
-    if (isObjectDefined(ecobonus)){
+    if (isObjectDefined(bonus110)){
       //? se la chiave bonus110 è vuote  inserisco l'array
       if(typeof JSON.stringify(resultObj["bonus110"]) ==='undefined'){
-        arr.push(ecobonus);
+        arr.push(bonus110);
         resultObj["bonus110"]=arr;
       } else {
       //? altrimenti, inserisco gli elementi nell'array
         let updateArr = resultObj["bonus110"][0];
-        $.extend(updateArr, ecobonus);
+        $.extend(updateArr, bonus110);
         resultObj["bonus110"]=[updateArr]
       }     
     }
