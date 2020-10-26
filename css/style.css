@@ -420,7 +420,6 @@ hr {
   cursor: pointer;
   background-color: #F2F3F6;
   color: black;
-  font-size: 18px;
 }
 
 .btn-previous:hover {
@@ -490,6 +489,10 @@ hr {
 
 .modal-footer {
   border-top: none !important;
+  padding: 10px !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .close span {
@@ -784,6 +787,24 @@ label.switch {
   top: 50%;
   transform: translateY(-50%); */
   cursor: pointer;
+}
+
+@media (max-width: 680px) {
+  #impresa-info,
+  #personaFisica-info {
+    position: relative;
+    right: 0;
+    margin: 0 0 10px 0;
+  }
+  .btn-type-user-wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column;
+            flex-flow: column;
+  }
 }
 
 .check-wrap {

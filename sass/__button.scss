@@ -25,7 +25,7 @@
 
 .btn-previous {
     @include button-style($previous-btn, black);
-    font-size: 18px;
+    // font-size: 18px;
 }
 
 .btn-previous:hover {
