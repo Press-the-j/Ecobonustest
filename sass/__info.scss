@@ -38,3 +38,19 @@
   transform: translateY(-50%); */
   cursor: pointer;
 }
+
+@media (max-width: 680px) {
+
+  #impresa-info,
+  #personaFisica-info {
+    position: relative;
+    right: 0;
+    margin: 0 0 10px 0;
+}
+  .btn-type-user-wrap {
+    display: flex;
+    flex-flow: column;
+
+  }
+
+}
