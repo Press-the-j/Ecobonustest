@@ -64,6 +64,23 @@ $(document).ready(function(){
   //^<--------------Handler---------------------->
   //todo bisogna assegnare un errore nel caso l'utente prova ad andare avanti senza accettare la privacy
 
+  $(document).on("keydown", function(e) {
+    
+    if(e.which==13 && $('body').hasClass('modal-open')){
+      console.log('ci sono')
+      e.preventDefault();
+      
+      $('.opened .save-pop-up').click();
+    }
+  })
+
+  /* $('.modal-open').on('keypress', function(e){
+    alert('clicckato')
+    if(e.which==13 && $('body').hasClass('open-modal')){
+      e.preventDefault();
+      $('.modal[style="display: block"] .save-pop-up').click();
+    } */
+  //})
 
   //? Fix per i popover al restringimento della pagina
   $('.label-info-cursor').on('click', function(){
@@ -363,10 +380,13 @@ $(document).ready(function(){
   $('.open-modal').on('click', function(){
     let modal = $(this).data('modal');
     $(`#${modal}`).modal('show');
+    $(`#${modal}`).addClass('opened')
+    
   })
 
   $('.close-modal').on('click', function(){
     $('.close').click()
+
   })
   //?<--------------------------------------->
   //? funzione che mostra nasconde degli input in base al tipo di immobile
