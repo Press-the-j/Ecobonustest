@@ -84,7 +84,6 @@ $(document).ready(function(){
   $(".next").on('click',function(){
     current_step = $(this).closest('fieldset');
     let fieldset_count_page=current_step.attr("data-count-page")
-
     //* la classe clicked-answer serrvirà in fase di salvataggio dei dati
     if($(this).hasClass('save-data-array')){
       $(this).addClass('clicked-answer')
@@ -549,7 +548,7 @@ $(document).ready(function(){
           } else if(el.classList.contains('blank-check')) {
             if(el.checked){
               arrayIntervantion.push(el.getAttribute('data-manage-blank'))
-              console.log(arrayIntervantion);
+              // console.log(arrayIntervantion);
               let val = el.value;;
               resultObj['bonus110'][0][groupKey][name]=val
             }
@@ -685,12 +684,13 @@ $(document).ready(function(){
       default:
         fieldSmallText.text('(Passiamo agli ultimi requisiti, impiegheremo 5 minuti)')
         fieldText.text('Ciao '+ nameUser +"!");
-        break  
+        break;  
     }
   }
 
   function checkPage(countPage) {
     let count = countPage.toString();
+    console.log('var count:' + count);
    
     switch(count) {
       case '1' :
@@ -729,8 +729,29 @@ $(document).ready(function(){
           setValutationMap(val)
         }
         break;
+
+      case '13' :
+        let fieldText = $('.checkResult');        
+        fieldText.text(setBonusResult());
     }
 
+  }
+
+  function setBonusResult() {
+    let res = getRandomIntInclusive(0, 1);
+    let text = 'Mi dispiace non ci sono i presupposti normativi per usufruire del superbonus 110%';
+    if(res == 1) {
+      text = 'Ci sono i presupposti normativi per usufruire del superbonus 110%';
+    }
+    return text;
+    
+  } 
+
+  //? funzione ottieni numero random usata per debug da setBonusResult
+  function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; //Il max è incluso e il min è incluso 
   }
 
   function disbaleCheck(select, arrNumb) {
@@ -783,7 +804,7 @@ $(document).ready(function(){
       sismicIntervention["removed"]=true
       let remove_step=$('.sismic-intervention').clone(true).get()
       sismicIntervention["clone"]=remove_step[0];
-      console.log(sismicIntervention.clone)
+      // console.log(sismicIntervention.clone)
       $('.sismic-intervention').remove()         
     }
   }
