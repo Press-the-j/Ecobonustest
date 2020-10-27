@@ -555,15 +555,21 @@ $(document).ready(function(){
             }
           } else if(el.classList.contains('result-valutation')) {
             let val = parseInt(el.value);
-            console.log(val);
-            if (val !== 4) {
-              resultObj['bonus110'][0][groupKey][name]= 'ok'
+            if(arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length==1){
+              if (val !== 4) {
+                resultObj['bonus110'][0][groupKey][name]= 'ok';
+              } else {
+                //! qui manca il caso in cui l'utente oltre ad interventi antisismici faccia acnhe altri interventi; sarebbe un ko parziale
+                resultObj['bonus110'][0][groupKey][name]= 'ko';
+              }
             } else {
-              //! qui manca il caso in cui l'utente oltre ad interventi antisismici faccia acnhe altri interventi; sarebbe un ko parziale
-              if (arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length == 1){
-                resultObj['bonus110'][0][groupKey][name]= 'ko'
+              if (val !== 4) {
+                resultObj['bonus110'][0][groupKey][name]= 'ok';
+              } else {
+                resultObj['bonus110'][0][groupKey][name]='blank';
               }
             }
+            
           } else if(el.classList.contains('d7-valutation')) {
             let val = el.getAttribute('data-response-answer');
             resultObj['bonus110'][0][groupKey][name]=val
@@ -619,9 +625,39 @@ $(document).ready(function(){
     let subCategoryVal= $('sub-category select.selected-category').val()
     if (arrayIntervantion.includes('trainati') && arrayIntervantion.length==1){
       $('#d5_bis_no').attr('data-response-answer', 'ko')
-    } else if($('.choose-category').val() !== 'a' && !(categoryRealEstateKO.includes(subCategoryVal))) {
-      $('#d7_si').attr('data-response-answer', 'ko');
     }
+    if($('.choose-category').val() !== 'a' && categoryRealEstateKO.includes(subCategoryVal)) {
+      $('#d7_si').attr('data-response-answer', 'ko');
+    } else {
+      if(arrayIntervantion.includes('trainati') && arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length ==2){
+        let ko = checkKo();
+        if(!ko && resultObj["bonus110"][0]["questionario"]["d5"]=="blank"){
+          $('#d7_si').attr('data-response-answer', 'TRAIN');
+        }
+      } else if(arrayIntervantion.includes('riq-energetica') && arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length ==2){
+        let ko = checkKo();
+        if(!ko && resultObj["bonus110"][0]["questionario"]["d5"]=="blank"){
+          $('#d7_si').attr('data-response-answer', 'RIQ');
+        }
+      } else if(arrayIntervantion.length == 3) {
+        let ko = checkKo();
+        if(!ko && resultObj["bonus110"][0]["questionario"]["d5"]=="blank"){
+          $('#d7_si').attr('data-response-answer', 'NOSISM');
+        }
+      }
+    }
+  }
+
+  function checkKo() {
+    let questions=resultObj["bonus110"][0]["questionario"]
+    let ko = false
+    for(question in questions){
+      if (question =="ko"){
+        ko = true
+      }
+    }
+
+    return ko
   }
 
   //? funzione per settare il testo dinamicamente nell'head
