@@ -668,9 +668,8 @@ $(document).ready(function(){
       $('#d5_bis_no').attr('data-myObj', 'ko')
     }
     if($('.choose-category').val() !== 'a' && categoryRealEstateKO.includes(subCategoryVal)) {
-      $('#d7_si').attr('data-myObj', 'ko');
-      let ko=checkKo();
-      !ko ? $('#d7_si').attr('data-result', 'ok') : 
+      answerObj['d7']='ko'
+      
     } else {
       if(arrayIntervantion.includes('trainati') && arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length ==2){
         let ko = checkKo();
