@@ -43,7 +43,8 @@ $(document).ready(function(){
     d5bis:'',
     d6:'',
     d7:''
-  }
+  };
+  var finalResult;
   var nameUser;
   //? variabile di appoggio per la tipologia dell'appartamento, cosi da disabilitare poi le checkbox
   var typo;
@@ -75,7 +76,6 @@ $(document).ready(function(){
   //todo bisogna assegnare un errore nel caso l'utente prova ad andare avanti senza accettare la privacy
 
   $(document).on("keydown", function(e) {
-    
     if(e.which==13 && $('body').hasClass('modal-open')){
       console.log('ci sono')
       e.preventDefault();
@@ -124,8 +124,8 @@ $(document).ready(function(){
       saveData(fieldset_count_page);
 
       //! per test------------------------->
-      let result = JSON.stringify(resultObj);
-      console.log(result);
+      let results = JSON.stringify(resultObj);
+      console.log(results);
       //!---------------------------------->
 
       next();
@@ -658,35 +658,57 @@ $(document).ready(function(){
     
     console.log(answerObj);
     manageKo()
-  }
+    if(parseInt(countPage)==13){
+      console.log(finalResult);
+      let updateObj = resultObj["bonus110"][0];
+      let element = {"esito" : finalResult}
+      $.extend(updateObj, element);
+      resultObj["bonus110"]=[updateObj]
 
+    }
+  }
+  
   //! da qui riparti chico
   function manageKo(){
     let categoryRealEstateKO=['a/1','a/8','a/9'];
     let subCategoryVal= $('sub-category select.selected-category').val()
     if (arrayIntervantion.includes('trainati') && arrayIntervantion.length==1){
-      $('#d5_bis_no').attr('data-myObj', 'ko')
-    }
-    if($('.choose-category').val() !== 'a' && categoryRealEstateKO.includes(subCategoryVal)) {
-      answerObj['d7']='ko'
-      
+      $('#d5_bis_no').attr('data-myObj', 'ko');
     } else {
       if(arrayIntervantion.includes('trainati') && arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length ==2){
         let ko = checkKo();
         if(!ko && answerObj["d5"]=="blank"){
-          $('#d7_si').attr('data-result', 'TRAIN');
+          finalResult = 'TRAIN';
+        } else if(ko) {
+          finalResult = 'ko'
+        } else {
+          finalResult= 'ok'
         }
+        console.log(finalResult);
       } else if(arrayIntervantion.includes('riq-energetica') && arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length ==2){
         let ko = checkKo();
         if(!ko && answerObj["d5"]=="blank"){
-          $('#d7_si').attr('data-result', 'RIQ');
+         finalResult= 'RIQ';
+        } else if(ko) {
+          finalResult = 'ko'
+        } else {
+          finalResult= 'ok'
         }
+        console.log(finalResult);
       } else if(arrayIntervantion.length == 3) {
         let ko = checkKo();
         if(!ko && answerObj["d5"]=="blank"){
-          $('#d7_si').attr('data-result', 'NOSISM');
+          finalResult= 'NOSISM';
+        } else if(ko) {
+          finalResult = 'ko'
+        } else {
+          finalResult= 'ok'
         }
+        console.log(finalResult);
       }
+    }
+    if($('.choose-category').val() !== 'a' || categoryRealEstateKO.includes(subCategoryVal)) {
+      answerObj['d7']='ko';  
     }
   }
 
@@ -707,7 +729,6 @@ $(document).ready(function(){
     let fieldText = $('.dynamic-text');
     let fieldSmallText = $('.head-small-text');
     let count =countPage.toString()
-    console.log('numero-pagina: '+count);
     switch (count) {
       case '2' :
         fieldText.text('Iniziamo!!');
@@ -733,7 +754,6 @@ $(document).ready(function(){
 
   function checkPage(countPage) {
     let count = countPage.toString();
-    console.log('var count:' + count);
    
     switch(count) {
       case '1' :
