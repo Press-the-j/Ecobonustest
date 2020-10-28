@@ -446,8 +446,8 @@ $(document).ready(function(){
     setEstateMap(val)
   })
 
-  $('#change-address').on('click', function(){
-
+  $('.sendData').on('click', function(){
+    manageResult()
   })
   //^<--------------------------------------------->
 
@@ -586,7 +586,11 @@ $(document).ready(function(){
               let myVal=el.getAttribute('data-myObj');
               answerObj[name]=myVal
               let val = el.value;
-              resultObj['bonus110'][0][groupKey][name]+=val
+              if(!(name in resultObj['bonus110'][0][groupKey])) {
+                resultObj['bonus110'][0][groupKey][name]=val
+              } else {
+                resultObj['bonus110'][0][groupKey][name]+= `, ${val}` 
+              }
             }
           } else if(el.classList.contains('result-valutation')) {
             let val = parseInt(el.value);
@@ -658,14 +662,6 @@ $(document).ready(function(){
     
     console.log(answerObj);
     manageKo()
-    if(parseInt(countPage)==13){
-      console.log(finalResult);
-      let updateObj = resultObj["bonus110"][0];
-      let element = {"esito" : finalResult}
-      $.extend(updateObj, element);
-      resultObj["bonus110"]=[updateObj]
-
-    }
   }
   
   //! da qui riparti chico
@@ -674,39 +670,7 @@ $(document).ready(function(){
     let subCategoryVal= $('sub-category select.selected-category').val()
     if (arrayIntervantion.includes('trainati') && arrayIntervantion.length==1){
       $('#d5_bis_no').attr('data-myObj', 'ko');
-    } else {
-      if(arrayIntervantion.includes('trainati') && arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length ==2){
-        let ko = checkKo();
-        if(!ko && answerObj["d5"]=="blank"){
-          finalResult = 'TRAIN';
-        } else if(ko) {
-          finalResult = 'ko'
-        } else {
-          finalResult= 'ok'
-        }
-        console.log(finalResult);
-      } else if(arrayIntervantion.includes('riq-energetica') && arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length ==2){
-        let ko = checkKo();
-        if(!ko && answerObj["d5"]=="blank"){
-         finalResult= 'RIQ';
-        } else if(ko) {
-          finalResult = 'ko'
-        } else {
-          finalResult= 'ok'
-        }
-        console.log(finalResult);
-      } else if(arrayIntervantion.length == 3) {
-        let ko = checkKo();
-        if(!ko && answerObj["d5"]=="blank"){
-          finalResult= 'NOSISM';
-        } else if(ko) {
-          finalResult = 'ko'
-        } else {
-          finalResult= 'ok'
-        }
-        console.log(finalResult);
-      }
-    }
+    } 
     if($('.choose-category').val() !== 'a' || categoryRealEstateKO.includes(subCategoryVal)) {
       answerObj['d7']='ko';  
     }
@@ -722,6 +686,52 @@ $(document).ready(function(){
     }
 
     return ko
+  }
+
+  function manageResult() {
+    let ko = checkKo();
+    if(arrayIntervantion.includes('trainati') && arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length ==2){
+      if(!ko && answerObj["d5"]=="blank"){
+        finalResult = 'TRAIN';
+      } else if(!ko) {
+        finalResult = 'ko'
+      } else {
+        finalResult= 'ok'
+      }
+      console.log(finalResult);
+    } else if(arrayIntervantion.includes('riq-energetica') && arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length ==2){
+      
+      if(!ko && answerObj["d5"]=="blank"){
+        finalResult= 'RIQ';
+      } else if(!ko) {
+        finalResult = 'ko'
+      } else {
+        finalResult= 'ok'
+      }
+      console.log(finalResult);
+    } else if(arrayIntervantion.length == 3) {
+      if(!ko && answerObj["d5"]=="blank"){
+        finalResult= 'NOSISM';
+      } else if(!ko) {
+        finalResult = 'ko'
+      } else {
+        finalResult= 'ok'
+      }
+      console.log(finalResult);
+    } else {
+      if(!ko) {
+        finalResult = 'ko'
+      } else {
+        finalResult= 'ok'
+      }
+    }
+
+    let updateObj = resultObj["bonus110"][0]
+    let element = {"esito": finalResult}
+    $.extend(updateObj, element);
+    console.log(updateObj);
+    resultObj["bonus110"]=[updateObj]
+    
   }
 
   //? funzione per settare il testo dinamicamente nell'head
