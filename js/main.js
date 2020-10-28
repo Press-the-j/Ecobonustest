@@ -42,7 +42,6 @@ $(document).ready(function(){
     d5:'',
     d5bis:'',
     d6:'',
-    d7:''
   };
   var finalResult;
   var nameUser;
@@ -124,8 +123,8 @@ $(document).ready(function(){
       saveData(fieldset_count_page);
 
       //! per test------------------------->
-      let results = JSON.stringify(resultObj);
-      console.log(results);
+      /* let results = JSON.stringify(resultObj);
+      console.log(results); */
       //!---------------------------------->
 
       next();
@@ -731,7 +730,10 @@ $(document).ready(function(){
     $.extend(updateObj, element);
     console.log(updateObj);
     resultObj["bonus110"]=[updateObj]
-    
+    //! TEST --------------------->
+    let results = JSON.stringify(resultObj);
+    console.log(results);
+    //! ------------------------------>
   }
 
   //? funzione per settare il testo dinamicamente nell'head
