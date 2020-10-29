@@ -34,6 +34,16 @@ $(document).ready(function(){
   var seismicValutationObj;
   //? oggetto di risposta che sara inviata al server
   var resultObj={}
+  var answerObj={
+    d1:'',
+    d2:'',
+    d3:'',
+    d4:'',
+    d5:'',
+    d5bis:'',
+    d6:'',
+  };
+  var finalResult;
   var nameUser;
   //? variabile di appoggio per la tipologia dell'appartamento, cosi da disabilitare poi le checkbox
   var typo;
@@ -65,7 +75,6 @@ $(document).ready(function(){
   //todo bisogna assegnare un errore nel caso l'utente prova ad andare avanti senza accettare la privacy
 
   $(document).on("keydown", function(e) {
-    
     if(e.which==13 && $('body').hasClass('modal-open')){
       console.log('ci sono')
       e.preventDefault();
@@ -114,8 +123,8 @@ $(document).ready(function(){
       saveData(fieldset_count_page);
 
       //! per test------------------------->
-      let result = JSON.stringify(resultObj);
-      console.log(result);
+      /* let results = JSON.stringify(resultObj);
+      console.log(results); */
       //!---------------------------------->
 
       next();
@@ -209,10 +218,10 @@ $(document).ready(function(){
             .prop("disabled", true);
     }
     $(".sub-category").removeClass("active");
-    $(".sub-category select").removeClass("selected-category");
+    $(".sub-category select").removeClass("selected-category save-data-array group-save modal-single-check");
     
-    $(".category-" + selectedCategory).addClass("active ");
-    $(".category-" + selectedCategory + " select").addClass("selected-category");
+    $(".category-" + selectedCategory).addClass("active");
+    $(".category-" + selectedCategory + " select").addClass("selected-category save-data-array group-save modal-single-check");
   })    
   //? validazioni checkbox
   $(".validate-checkbox input").on("click", function () {
@@ -436,8 +445,8 @@ $(document).ready(function(){
     setEstateMap(val)
   })
 
-  $('#change-address').on('click', function(){
-
+  $('.sendData').on('click', function(){
+    manageResult()
   })
   //^<--------------------------------------------->
 
@@ -556,6 +565,8 @@ $(document).ready(function(){
           if (el.classList.contains('from-select')){
             var element={ [name]: {"name" : val} }
           } else if (el.classList.contains('save-checkbox') && el.checked) {
+              let myVal=el.getAttribute('data-myObj');
+              answerObj[name]=myVal
               if(!(groupKey in resultObj['bonus110'][0])){
                 var element={[name] : val}
               //* altrimenti aggiungo le voci
@@ -564,34 +575,46 @@ $(document).ready(function(){
               }       
           } else if(el.classList.contains('clicked-answer')) {
             let val = el.getAttribute('data-response-answer');
+            let myVal=el.getAttribute('data-myObj');
+            answerObj[name]=myVal
             resultObj['bonus110'][0][groupKey][name] = val;
           } else if(el.classList.contains('blank-check')) {
             if(el.checked){
               arrayIntervantion.push(el.getAttribute('data-manage-blank'))
               // console.log(arrayIntervantion);
-              let val = el.value;;
-              resultObj['bonus110'][0][groupKey][name]=val
+              let myVal=el.getAttribute('data-myObj');
+              answerObj[name]=myVal
+              let val = el.value;
+              if(!(name in resultObj['bonus110'][0][groupKey])) {
+                resultObj['bonus110'][0][groupKey][name]=val
+              } else {
+                resultObj['bonus110'][0][groupKey][name]+= `, ${val}` 
+              }
             }
           } else if(el.classList.contains('result-valutation')) {
             let val = parseInt(el.value);
             if(arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length==1){
               if (val !== 4) {
-                resultObj['bonus110'][0][groupKey][name]= 'ok';
+                answerObj[name]= 'ok';
+                resultObj['bonus110'][0][groupKey][name]= val;
               } else {
                 //! qui manca il caso in cui l'utente oltre ad interventi antisismici faccia acnhe altri interventi; sarebbe un ko parziale
-                resultObj['bonus110'][0][groupKey][name]= 'ko';
+                answerObj[name]= 'ko';
+                resultObj['bonus110'][0][groupKey][name]= val;
               }
             } else {
               if (val !== 4) {
-                resultObj['bonus110'][0][groupKey][name]= 'ok';
+                answerObj[name]= 'ok';
+                resultObj['bonus110'][0][groupKey][name]= val;
               } else {
-                resultObj['bonus110'][0][groupKey][name]='blank';
+                answerObj[name]='blank';
+                resultObj['bonus110'][0][groupKey][name]=val;
               }
             }
             
           } else if(el.classList.contains('d7-valutation')) {
-            let val = el.getAttribute('data-response-answer');
-            resultObj['bonus110'][0][groupKey][name]=val
+            let val = el.getAttribute('data-myObj');
+            answerObj[name]=val
           } else if(el.classList.contains("modal-single-check")) {
             var element ={[name] : val}
           }
@@ -604,7 +627,7 @@ $(document).ready(function(){
             $.extend(bonus110[groupKey], element)
           }       
           //* come nel caso di categoria-catastale, mi salvo i dati di diverse selectsalvandoli sotto una key
-        } else if(el.classList.contains('group-save-select')){
+        /* } else if(el.classList.contains('group-save-select')){
           let val=el.options[el.selectedIndex].text;
           let groupKey=el.getAttribute('data-group');
           var element={ [name]: {"name" : val} }
@@ -613,7 +636,7 @@ $(document).ready(function(){
             bonus110[groupKey]= element
           } else {
             $.extend(bonus110[groupKey], element)
-          }
+          } */
           //? se sono input normali, semplicemente prendo il valore e lo salvo        
         
         } else if(el.classList.contains('common-save')) {
@@ -630,45 +653,30 @@ $(document).ready(function(){
         resultObj["bonus110"]=arr;
       } else {
       //? altrimenti, inserisco gli elementi nell'array
-        let updateArr = resultObj["bonus110"][0];
-        $.extend(updateArr, bonus110);
-        resultObj["bonus110"]=[updateArr]
+        let updateObj = resultObj["bonus110"][0];
+        $.extend(updateObj, bonus110);
+        resultObj["bonus110"]=[updateObj]
       }     
     }
     
+    console.log(answerObj);
     manageKo()
   }
-
+  
+  //! da qui riparti chico
   function manageKo(){
     let categoryRealEstateKO=['a/1','a/8','a/9'];
     let subCategoryVal= $('sub-category select.selected-category').val()
     if (arrayIntervantion.includes('trainati') && arrayIntervantion.length==1){
-      $('#d5_bis_no').attr('data-response-answer', 'ko')
-    }
-    if($('.choose-category').val() !== 'a' && categoryRealEstateKO.includes(subCategoryVal)) {
-      $('#d7_si').attr('data-response-answer', 'ko');
-    } else {
-      if(arrayIntervantion.includes('trainati') && arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length ==2){
-        let ko = checkKo();
-        if(!ko && resultObj["bonus110"][0]["questionario"]["d5"]=="blank"){
-          $('#d7_si').attr('data-response-answer', 'TRAIN');
-        }
-      } else if(arrayIntervantion.includes('riq-energetica') && arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length ==2){
-        let ko = checkKo();
-        if(!ko && resultObj["bonus110"][0]["questionario"]["d5"]=="blank"){
-          $('#d7_si').attr('data-response-answer', 'RIQ');
-        }
-      } else if(arrayIntervantion.length == 3) {
-        let ko = checkKo();
-        if(!ko && resultObj["bonus110"][0]["questionario"]["d5"]=="blank"){
-          $('#d7_si').attr('data-response-answer', 'NOSISM');
-        }
-      }
+      $('#d5_bis_no').attr('data-myObj', 'ko');
+    } 
+    if($('.choose-category').val() !== 'a' || categoryRealEstateKO.includes(subCategoryVal)) {
+      answerObj['d7']='ko';  
     }
   }
 
   function checkKo() {
-    let questions=resultObj["bonus110"][0]["questionario"]
+    let questions=answerObj
     let ko = false
     for(question in questions){
       if (question =="ko"){
@@ -679,12 +687,60 @@ $(document).ready(function(){
     return ko
   }
 
+  function manageResult() {
+    let ko = checkKo();
+    if(arrayIntervantion.includes('trainati') && arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length ==2){
+      if(!ko && answerObj["d5"]=="blank"){
+        finalResult = 'TRAIN';
+      } else if(!ko) {
+        finalResult = 'ko'
+      } else {
+        finalResult= 'ok'
+      }
+      console.log(finalResult);
+    } else if(arrayIntervantion.includes('riq-energetica') && arrayIntervantion.includes('interventi-sismici') && arrayIntervantion.length ==2){
+      
+      if(!ko && answerObj["d5"]=="blank"){
+        finalResult= 'RIQ';
+      } else if(!ko) {
+        finalResult = 'ko'
+      } else {
+        finalResult= 'ok'
+      }
+      console.log(finalResult);
+    } else if(arrayIntervantion.length == 3) {
+      if(!ko && answerObj["d5"]=="blank"){
+        finalResult= 'NOSISM';
+      } else if(!ko) {
+        finalResult = 'ko'
+      } else {
+        finalResult= 'ok'
+      }
+      console.log(finalResult);
+    } else {
+      if(!ko) {
+        finalResult = 'ko'
+      } else {
+        finalResult= 'ok'
+      }
+    }
+
+    let updateObj = resultObj["bonus110"][0]
+    let element = {"esito": finalResult}
+    $.extend(updateObj, element);
+    console.log(updateObj);
+    resultObj["bonus110"]=[updateObj]
+    //! TEST --------------------->
+    let results = JSON.stringify(resultObj);
+    console.log(results);
+    //! ------------------------------>
+  }
+
   //? funzione per settare il testo dinamicamente nell'head
   function setDynamicText(countPage){
     let fieldText = $('.dynamic-text');
     let fieldSmallText = $('.head-small-text');
     let count =countPage.toString()
-    console.log('numero-pagina: '+count);
     switch (count) {
       case '2' :
         fieldText.text('Iniziamo!!');
@@ -710,7 +766,6 @@ $(document).ready(function(){
 
   function checkPage(countPage) {
     let count = countPage.toString();
-    console.log('var count:' + count);
    
     switch(count) {
       case '1' :
