@@ -1,3 +1,7 @@
+.modal.fade {
+    background-color: rgba(255, 255, 255, 0.87);
+  }
+
 .modal-content {
     background-color: #ebecf0 !important;
 }
@@ -16,7 +20,9 @@
     position: absolute;
     top: 50%;
     right: 50%;
-    transform: translate(55%, -52%);
+    transform: translate(53%, -55%);
+    color: #000;
+    font-weight: 900;
 }
 
 button.close {

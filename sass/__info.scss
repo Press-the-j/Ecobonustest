@@ -30,13 +30,18 @@
   align-items: center;
 }
 .label-info-cursor{
-  border:none;
+  border: 1px solid #3C28D6;
+  border-radius: 100%;
   background-color: transparent;
-  /* position: absolute;
-  right:-20px;
-  top: 50%;
-  transform: translateY(-50%); */
+  display: flex;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
+
+  & img {
+    height: 15px;
+    margin: auto;
+  }
 }
 
 @media (max-width: 680px) {

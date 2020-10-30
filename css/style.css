@@ -92,7 +92,7 @@ body.modal-open {
 }
 
 a {
-  color: #0901F5;
+  color: #3C28D6;
   font-weight: bold;
   text-decoration: underline;
 }
@@ -114,6 +114,7 @@ hr {
   border-radius: 2px;
   box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
   margin-bottom: 20px;
+  margin-top: 36px;
 }
 
 .pac-container {
@@ -127,7 +128,6 @@ hr {
 .head {
   text-align: center;
   position: relative;
-  margin-bottom: 40px;
   padding-top: 100px;
 }
 
@@ -146,24 +146,24 @@ hr {
   letter-spacing: 1;
   font-weight: bold;
   margin-top: 40px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .head-small-text {
   display: none;
+  margin-bottom: 40px;
 }
 
 .progress-wrap {
-  max-width: 480px;
   margin: auto;
   display: none;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .progress-bar {
-  background-color: #0901F5;
+  background-color: #3C28D6;
   border-radius: 10px;
 }
 
@@ -175,7 +175,7 @@ hr {
 }
 
 .glyphicon-flag {
-  color: #0901F5;
+  color: #3C28D6;
 }
 
 fieldset {
@@ -184,7 +184,7 @@ fieldset {
 
 .scelta {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   position: relative;
   flex-wrap: wrap;
   padding: 0 10px;
@@ -196,7 +196,7 @@ fieldset {
 
 .seismic-valutation {
   display: flex;
-  align-items: center;
+  align-items: end;
 }
 
 .seismic-valutation .seismic-valutation-wrap {
@@ -245,7 +245,7 @@ fieldset {
   background: #f5f5f5;
   box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.15), inset -3px -3px 6px #ffffff;
   padding: 30px;
-  color: #0901F5;
+  color: #3C28D6;
   font-weight: bold;
 }
 
@@ -340,7 +340,7 @@ fieldset {
   font-weight: bold;
   box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.12);
   cursor: pointer;
-  background-color: #0901F5;
+  background-color: #3C28D6;
   color: #fff;
 }
 
@@ -359,7 +359,7 @@ fieldset {
   font-weight: bold;
   box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.12);
   cursor: pointer;
-  background-color: #0901F5;
+  background-color: #3C28D6;
   color: #fff;
   margin: 0 auto;
   padding: 10px 25px;
@@ -370,7 +370,7 @@ fieldset {
 
 .btn-type-user:hover,
 .btn-next:hover {
-  background: linear-gradient(190deg, #0901F5, #014ef5);
+  background: linear-gradient(190deg, #3C28D6, #014ef5);
   color: #fff;
 }
 
@@ -402,7 +402,7 @@ fieldset {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-top: 40px;
 }
 
 .btn-home {
@@ -430,6 +430,10 @@ fieldset {
   }
 }
 
+.modal.fade {
+  background-color: rgba(255, 255, 255, 0.87);
+}
+
 .modal-content {
   background-color: #ebecf0 !important;
 }
@@ -448,7 +452,9 @@ fieldset {
   position: absolute;
   top: 50%;
   right: 50%;
-  transform: translate(55%, -52%);
+  transform: translate(53%, -55%);
+  color: #000;
+  font-weight: 900;
 }
 
 button.close {
@@ -518,7 +524,7 @@ select::-ms-expand {
 }
 
 .control-label {
-  color: #0901F5;
+  color: #3C28D6;
   display: inline-block;
   max-width: 100%;
   margin-bottom: 0 !important;
@@ -638,11 +644,11 @@ select::-ms-expand {
 }
 
 input:checked + .slider {
-  background-color: #0901F5;
+  background-color: #3C28D6;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #0901F5;
+  box-shadow: 0 0 1px #3C28D6;
 }
 
 input:checked + .slider:before {
@@ -700,13 +706,18 @@ label.switch {
 }
 
 .label-info-cursor {
-  border: none;
+  border: 1px solid #3C28D6;
+  border-radius: 100%;
   background-color: transparent;
-  /* position: absolute;
-  right:-20px;
-  top: 50%;
-  transform: translateY(-50%); */
+  display: flex;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
+}
+
+.label-info-cursor img {
+  height: 15px;
+  margin: auto;
 }
 
 @media (max-width: 680px) {

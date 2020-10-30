@@ -808,6 +808,7 @@ $(document).ready(function(){
       case '13' :
         let fieldText = $('.checkResult');        
         fieldText.text(setBonusResult());
+        $("#flag-icon").toggleClass('hidden')
     }
 
   }
@@ -839,8 +840,7 @@ $(document).ready(function(){
     steps=$("fieldset").length; 
     var percentuale = parseFloat(100 / steps) * curStep;
     percentuale = percentuale.toFixed();
-    $(".progress-bar")
-      .css("width",percentuale+"%")
+    $(".progress-bar").css("width",percentuale+"%");    
   }
 
   //? funzione che setta timer
