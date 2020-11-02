@@ -1,6 +1,10 @@
+fieldset {
+  margin-bottom: 100px;
+}
+
 .scelta {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     position: relative;
     flex-wrap: wrap;
     padding: 0 10px;
@@ -13,7 +17,7 @@
 //!pagina di valutazione sismica
 .seismic-valutation{
   display: flex;
-  align-items: center;
+  align-items: end;
   
   .seismic-valutation-wrap{
     display: flex;
@@ -125,10 +129,10 @@
 }
 
 @media (max-width: 680px) {
-    .scelta {
+     .scelta {
         flex-direction: column;
         align-items: center;
-    }
+     }
 
     .seismic-valutation{
       flex-direction: column;
