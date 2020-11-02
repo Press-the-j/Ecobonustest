@@ -6,29 +6,20 @@
 
 .question {
     cursor: pointer;
-    position: absolute;
-    top: 50%;
-    right: 50%;
-    transform: translate(50%, -50%);
-   
-}
-
-#impresa-info,
-#personaFisica-info {
-    display: inline-block;
-    border-radius: 50%;
-    background: $background-logo;
-    box-shadow: inset 2px 2px 6px #d4d5d8, inset -5px -10px 7px #ffffff;
-    width: 35px;
-    height: 35px;
-    position: absolute;
-    right: -35px;
 }
 
 .label-wrapper{
   display: flex;
   align-items: center;
 }
+
+#impresa-info,
+#personaFisica-info {
+    a {
+      font-size: 11px;
+    }
+}
+
 .label-info-cursor{
   border: 1px solid #3C28D6;
   border-radius: 100%;
@@ -55,6 +46,8 @@
   .btn-type-user-wrap {
     display: flex;
     flex-flow: column;
+    align-items: center;
+    
 
   }
 
