@@ -1,7 +1,7 @@
 .head {
     text-align: center;
     position: relative;
-    padding-top: 100px;
+    padding-top: 50px;
 }
 
 .head img {
@@ -24,7 +24,9 @@
 
 .head-small-text{
   display:none;
-  margin-bottom: 40px;
+  margin-bottom: 75px;
+  letter-spacing: 1px !important;
+  font-weight: bold;
 }
 
 .progress-wrap{
